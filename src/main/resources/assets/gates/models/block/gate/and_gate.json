@@ -1,0 +1,6 @@
+{
+  "parent": "gates:block/gate/basic_gate",
+  "textures": {
+    "top": "gates:block/and_gate"
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "gates:block/gate/nor_gate", "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "gates:block/gate/nor_gate", "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "gates:block/gate/nor_gate", "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "gates:block/gate/nor_gate", "y": 270
+      }
+    },
+
+
+    {
+      "when": {
+        "AND": [
+          {"facing": "south"},
+          {"powered": true}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/output_torch_on", "y": 0
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "west"},
+          {"powered": true}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/output_torch_on", "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "north"},
+          {"powered": true}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/output_torch_on", "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "east"},
+          {"powered": true}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/output_torch_on", "y": 270
+      }
+    },
+
+
+    {
+      "when": {
+        "AND": [
+          {"facing": "south"},
+          {"powered": false}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/output_torch_off", "y": 0
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "west"},
+          {"powered": false}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/output_torch_off", "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "north"},
+          {"powered": false}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/output_torch_off", "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "east"},
+          {"powered": false}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/output_torch_off", "y": 270
+      }
+    },
+
+
+    {
+      "when": {
+        "AND": [
+          {"facing": "south"},
+          {"left": true}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/left_torch_on", "y": 0
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "west"},
+          {"left": true}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/left_torch_on", "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "north"},
+          {"left": true}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/left_torch_on", "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "east"},
+          {"left": true}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/left_torch_on", "y": 270
+      }
+    },
+
+
+    {
+      "when": {
+        "AND": [
+          {"facing": "south"},
+          {"left": false}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/left_torch_off", "y": 0
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "west"},
+          {"left": false}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/left_torch_off", "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "north"},
+          {"left": false}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/left_torch_off", "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "east"},
+          {"left": false}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/left_torch_off", "y": 270
+      }
+    },
+
+
+    {
+      "when": {
+        "AND": [
+          {"facing": "south"},
+          {"right": true}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/right_torch_on", "y": 0
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "west"},
+          {"right": true}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/right_torch_on", "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "north"},
+          {"right": true}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/right_torch_on", "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "east"},
+          {"right": true}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/right_torch_on", "y": 270
+      }
+    },
+
+
+    {
+      "when": {
+        "AND": [
+          {"facing": "south"},
+          {"right": false}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/right_torch_off", "y": 0
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "west"},
+          {"right": false}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/right_torch_off", "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "north"},
+          {"right": false}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/right_torch_off", "y": 180
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"facing": "east"},
+          {"right": false}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/right_torch_off", "y": 270
+      }
+    }
+  ]
+}
