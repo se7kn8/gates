@@ -6,5 +6,8 @@
   "block.gates.nand_gate": "Not-AND (NAND) Gate",
   "block.gates.nor_gate": "Not-OR (NOR) Gate",
   "block.gates.xor_gate": "eXclusive-OR (XOR) Gate",
-  "block.gates.xnor_gate": "eXclusive-Not-OR (XNOR) Gate"
+  "block.gates.xnor_gate": "eXclusive-Not-OR (XNOR) Gate",
+
+  "block.gates.slow_repeater": "Slow Repeater",
+  "block.gates.fast_repeater": "Fast Repeater"
 }

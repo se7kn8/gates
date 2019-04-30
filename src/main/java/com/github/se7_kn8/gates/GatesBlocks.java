@@ -1,5 +1,6 @@
 package com.github.se7_kn8.gates;
 
+import com.github.se7_kn8.gates.block.CustomRepeater;
 import com.github.se7_kn8.gates.block.TwoInputLogicGate;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -24,6 +25,9 @@ public class GatesBlocks {
 	public static final Block NOR_GATE = addBlock("nor_gate", new TwoInputLogicGate((x1, x2) -> !(x1 || x2)), Gates.GATES_ITEM_GROUP);
 	public static final Block XOR_GATE = addBlock("xor_gate", new TwoInputLogicGate((x1, x2) -> x1 ^ x2), Gates.GATES_ITEM_GROUP);
 	public static final Block XNOR_GATE = addBlock("xnor_gate", new TwoInputLogicGate((x1, x2) -> !(x1 ^ x2)), Gates.GATES_ITEM_GROUP);
+
+	public static final Block FAST_REPEATER = addBlock("fast_repeater", new CustomRepeater(1), Gates.GATES_ITEM_GROUP);
+	public static final Block SLOW_REPEATER = addBlock("slow_repeater", new CustomRepeater(4), Gates.GATES_ITEM_GROUP);
 
 	@SubscribeEvent
 	public static void onBlocksRegistry(RegistryEvent.Register<Block> blockRegistryEvent) {
