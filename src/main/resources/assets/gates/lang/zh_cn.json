@@ -1,0 +1,13 @@
+{
+  "itemGroup.gates": "逻辑门",
+
+  "block.gates.and_gate": "与门",
+  "block.gates.or_gate": "或门",
+  "block.gates.nand_gate": "与非门",
+  "block.gates.nor_gate": "或非门",
+  "block.gates.xor_gate": "异或门",
+  "block.gates.xnor_gate": "同或门",
+
+  "block.gates.slow_repeater": "慢速中继器",
+  "block.gates.fast_repeater": "快速中继器"
+}
