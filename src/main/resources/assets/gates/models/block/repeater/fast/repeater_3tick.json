@@ -2,7 +2,7 @@
     "ambientocclusion": false,
     "textures": {
         "particle": "gates:block/fast_repeater_off",
-        "slab": "block/stone_slab_top",
+        "slab": "block/smooth_stone",
         "top": "gates:block/fast_repeater_off",
         "unlit": "block/redstone_torch_off"
     },

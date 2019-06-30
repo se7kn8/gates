@@ -1,11 +1,10 @@
 package com.github.se7_kn8.gates;
 
 import com.github.se7_kn8.gates.block.CustomRepeater;
-import com.github.se7_kn8.gates.block.InstantRepeater;
 import com.github.se7_kn8.gates.block.TwoInputLogicGate;
 import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -43,7 +42,7 @@ public class GatesBlocks {
 
 	private static Block addBlock(String name, Block block, ItemGroup tab) {
 		GatesBlocks.BLOCKS.put(new ResourceLocation(Gates.MODID, name), block);
-		ItemBlock itemBlock = new ItemBlock(block, new Item.Properties().group(tab));
+		BlockItem itemBlock = new BlockItem(block, new Item.Properties().group(tab));
 		itemBlock.addToBlockToItemMap(Item.BLOCK_TO_ITEM, itemBlock);
 		GatesItems.ITEMS.put(new ResourceLocation(Gates.MODID, name), itemBlock);
 		return block;
