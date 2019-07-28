@@ -8,6 +8,8 @@
   "block.gates.xor_gate": "eXclusive-OR (XOR) Gate",
   "block.gates.xnor_gate": "eXclusive-Not-OR (XNOR) Gate",
 
+  "block.gates.rain_detector": "Rain Detector",
+
   "block.gates.slow_repeater": "Slow Repeater",
   "block.gates.fast_repeater": "Fast Repeater"
 }

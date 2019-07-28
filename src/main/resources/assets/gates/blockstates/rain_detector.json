@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "inverted=false": { "model": "gates:block/sensor/rain_detector" },
+    "inverted=true": { "model": "gates:block/sensor/rain_detector_inverted" }
+  }
+}
