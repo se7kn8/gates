@@ -45,9 +45,10 @@ public class GatesBlocks {
 
 	// TODO public static final Block INSTANT_REPEATER = addBlock("instant_repeater", new InstantRepeater(), Gates.GATES_ITEM_GROUP);
 
-	public static final Block RAIN_DETECTOR = addBlock("rain_detector", new RainDetector(), Gates.GATES_ITEM_GROUP);
+	public static final Block RAIN_DETECTOR = addBlock("rain_detector", new CustomDetector((blockState, world, blockPos) -> world.isRainingAt(blockPos.up(2)) ? 15 : 0), Gates.GATES_ITEM_GROUP);
+	public static final Block THUNDER_DETECTOR = addBlock("thunder_detector", new CustomDetector((blockState, world, blockPos) -> world.isThundering() ? 15 : 0), Gates.GATES_ITEM_GROUP);
 
-	public static final TileEntityType<?> RAIN_DETECTOR_TILE_ENTITY = addTileEntity("rain_detector", RainDetectorTile::new, RAIN_DETECTOR);
+	public static final TileEntityType<?> RAIN_DETECTOR_TILE_ENTITY = addTileEntity("rain_detector", CustomDetectorTile::new, RAIN_DETECTOR, THUNDER_DETECTOR);
 
 	@SubscribeEvent
 	public static void onTileEntityRegistry(RegistryEvent.Register<TileEntityType<?>> tileEntityTypeRegister) {
