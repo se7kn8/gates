@@ -1,18 +1,22 @@
 package com.github.se7_kn8.gates;
 
 import com.github.se7_kn8.gates.block.CustomRepeater;
-import com.github.se7_kn8.gates.block.RainDetector;
+import com.github.se7_kn8.gates.block.CustomDetector;
+import com.github.se7_kn8.gates.block.OneInputLogicGate;
 import com.github.se7_kn8.gates.block.TwoInputLogicGate;
-import com.github.se7_kn8.gates.tile.RainDetectorTile;
+import com.github.se7_kn8.gates.tile.CustomDetectorTile;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
@@ -33,6 +37,8 @@ public class GatesBlocks {
 	public static final Block NOR_GATE = addBlock("nor_gate", new TwoInputLogicGate((x1, x2) -> !(x1 || x2)), Gates.GATES_ITEM_GROUP);
 	public static final Block XOR_GATE = addBlock("xor_gate", new TwoInputLogicGate((x1, x2) -> x1 ^ x2), Gates.GATES_ITEM_GROUP);
 	public static final Block XNOR_GATE = addBlock("xnor_gate", new TwoInputLogicGate((x1, x2) -> !(x1 ^ x2)), Gates.GATES_ITEM_GROUP);
+
+	public static final Block NOT_GATE = addBlock("not_gate", new OneInputLogicGate(x1 -> !x1), Gates.GATES_ITEM_GROUP);
 
 	public static final Block FAST_REPEATER = addBlock("fast_repeater", new CustomRepeater(1), Gates.GATES_ITEM_GROUP);
 	public static final Block SLOW_REPEATER = addBlock("slow_repeater", new CustomRepeater(4), Gates.GATES_ITEM_GROUP);
