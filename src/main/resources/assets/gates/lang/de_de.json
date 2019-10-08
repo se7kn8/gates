@@ -1,0 +1,17 @@
+{
+  "itemGroup.gates": "Gates",
+
+  "block.gates.and_gate": "UND Gatter",
+  "block.gates.or_gate": "ODER Gatter",
+  "block.gates.not_gate": "NICHT Gatter",
+  "block.gates.nand_gate": "Nicht-Und (NAND) Gatter",
+  "block.gates.nor_gate": "Nicht-Oder (NOR) Gatter",
+  "block.gates.xor_gate": "Exklusives-Oder (XOR) Gatter",
+  "block.gates.xnor_gate": "Exklusives-Nicht-Oder (XNOR) Gatter",
+
+  "block.gates.rain_detector": "Regensensor",
+  "block.gates.thunder_detector": "Gewittersensor",
+
+  "block.gates.slow_repeater": "Langsamer Redstone-Verstärker",
+  "block.gates.fast_repeater": "Schneller Redstone-Verstärker"
+}
