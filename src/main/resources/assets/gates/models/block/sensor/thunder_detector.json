@@ -1,0 +1,6 @@
+{
+  "parent": "gates:block/sensor/basic_detector",
+  "textures": {
+    "top": "gates:block/thunder_detector_top"
+  }
+}

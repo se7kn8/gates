@@ -1,18 +1,24 @@
 package com.github.se7_kn8.gates;
 
 import com.github.se7_kn8.gates.block.CustomRepeater;
+import com.github.se7_kn8.gates.block.CustomDetector;
+import com.github.se7_kn8.gates.block.OneInputLogicGate;
 import com.github.se7_kn8.gates.block.TwoInputLogicGate;
 import com.github.se7_kn8.gates.block.wireless_redstone.ReceiverBlock;
 import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
+import com.github.se7_kn8.gates.tile.CustomDetectorTile;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
@@ -34,6 +40,8 @@ public class GatesBlocks {
 	public static final Block XOR_GATE = addBlock("xor_gate", new TwoInputLogicGate((x1, x2) -> x1 ^ x2), Gates.GATES_ITEM_GROUP);
 	public static final Block XNOR_GATE = addBlock("xnor_gate", new TwoInputLogicGate((x1, x2) -> !(x1 ^ x2)), Gates.GATES_ITEM_GROUP);
 
+	public static final Block NOT_GATE = addBlock("not_gate", new OneInputLogicGate(x1 -> !x1), Gates.GATES_ITEM_GROUP);
+
 	public static final Block FAST_REPEATER = addBlock("fast_repeater", new CustomRepeater(1), Gates.GATES_ITEM_GROUP);
 	public static final Block SLOW_REPEATER = addBlock("slow_repeater", new CustomRepeater(4), Gates.GATES_ITEM_GROUP);
 
@@ -41,11 +49,20 @@ public class GatesBlocks {
 
 	// TODO public static final Block INSTANT_REPEATER = addBlock("instant_repeater", new InstantRepeater(), Gates.GATES_ITEM_GROUP);
 
+	public static final Block RAIN_DETECTOR = addBlock("rain_detector", new CustomDetector((blockState, world, blockPos) -> world.isRainingAt(blockPos.up(2)) ? 15 : 0), Gates.GATES_ITEM_GROUP);
+	public static final Block THUNDER_DETECTOR = addBlock("thunder_detector", new CustomDetector((blockState, world, blockPos) -> world.isThundering() ? 15 : 0), Gates.GATES_ITEM_GROUP);
+
+	public static final TileEntityType<?> RAIN_DETECTOR_TILE_ENTITY = addTileEntity("rain_detector", CustomDetectorTile::new, RAIN_DETECTOR, THUNDER_DETECTOR);
+
+	@SubscribeEvent
+	public static void onTileEntityRegistry(RegistryEvent.Register<TileEntityType<?>> tileEntityTypeRegister) {
+		tileEntityTypeRegister.getRegistry().registerAll(TILE_ENTITIES.toArray(new TileEntityType[0]));
+	}
+
 	public static final TileEntityType<ReceiverTileEntity> RECEIVER_TILE_ENTITY_TYPE = addTileEntity("receiver", ReceiverTileEntity::new);
 
 
 	@SubscribeEvent
-
 	public static void onBlocksRegistry(RegistryEvent.Register<Block> blockRegistryEvent) {
 		for (ResourceLocation location : GatesBlocks.BLOCKS.keySet()) {
 			Block block = GatesBlocks.BLOCKS.get(location);
@@ -54,23 +71,19 @@ public class GatesBlocks {
 		}
 	}
 
-	@SubscribeEvent
-	public static void onTileEntityRegistry(RegistryEvent.Register<TileEntityType<?>> tileEntityTypeRegistryEvent) {
-		tileEntityTypeRegistryEvent.getRegistry().registerAll(TILE_ENTITIES.toArray(new TileEntityType[0]));
-	}
-
 	private static Block addBlock(String name, Block block, ItemGroup tab) {
 		GatesBlocks.BLOCKS.put(new ResourceLocation(Gates.MODID, name), block);
-		ItemBlock itemBlock = new ItemBlock(block, new Item.Properties().group(tab));
+		BlockItem itemBlock = new BlockItem(block, new Item.Properties().group(tab));
 		itemBlock.addToBlockToItemMap(Item.BLOCK_TO_ITEM, itemBlock);
 		GatesItems.ITEMS.put(new ResourceLocation(Gates.MODID, name), itemBlock);
 		return block;
 	}
 
-	private static <T extends TileEntity> TileEntityType<T> addTileEntity(String name, Supplier<T> tileEntitySupplier) {
-		TileEntityType<T> tileEntityType = TileEntityType.register(Gates.MODID + "_" + name, TileEntityType.Builder.create(tileEntitySupplier));
-		GatesBlocks.TILE_ENTITIES.add(tileEntityType);
-		return tileEntityType;
+	private static <T extends TileEntity> TileEntityType<T> addTileEntity(String name, Supplier<T> tileEntitySupplier, Block... validBlocks) {
+		TileEntityType<T> type = TileEntityType.Builder.create(tileEntitySupplier, validBlocks).build(null);
+		type.setRegistryName(name);
+		TILE_ENTITIES.add(type);
+		return type;
 	}
 
 }
