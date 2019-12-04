@@ -9,9 +9,16 @@
   "block.gates.xor_gate": "Exklusives-Oder (XOR) Gatter",
   "block.gates.xnor_gate": "Exklusives-Nicht-Oder (XNOR) Gatter",
 
+  "block.gates.receiver": "Redstone Empfänger",
+  "block.gates.transmitter": "Redstone Sender",
+
   "block.gates.rain_detector": "Regensensor",
   "block.gates.thunder_detector": "Gewittersensor",
 
   "block.gates.slow_repeater": "Langsamer Redstone-Verstärker",
-  "block.gates.fast_repeater": "Schneller Redstone-Verstärker"
+  "block.gates.fast_repeater": "Schneller Redstone-Verstärker",
+
+  "item.gates.redstone_torch_pearl": "Redstone-Ender Fackel",
+
+  "gui.gates.frequency": "Frequenz:"
 }

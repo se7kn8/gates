@@ -3,9 +3,9 @@ package com.github.se7_kn8.gates.tile;
 import com.github.se7_kn8.gates.GatesBlocks;
 import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import com.github.se7_kn8.gates.api.IWirelessNode;
-import com.github.se7_kn8.gates.block.wireless_redstone.ReceiverBlock;
+import com.github.se7_kn8.gates.block.wireless_redstone.TransmitterBlock;
 import com.github.se7_kn8.gates.container.FrequencyContainer;
-import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -23,30 +23,36 @@ import net.minecraftforge.common.util.LazyOptional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ReceiverTileEntity extends TileEntity implements INamedContainerProvider {
-
-	public ReceiverTileEntity() {
-		super(GatesBlocks.RECEIVER_TILE_ENTITY_TYPE);
-	}
+public class TransmitterTileEntity extends TileEntity implements INamedContainerProvider {
 
 	private LazyOptional<IWirelessNode> wireless = LazyOptional.of(this::createWireless);
 
+	public TransmitterTileEntity() {
+		super(GatesBlocks.TRANSMITTER_TILE_ENTITY_TYPE);
+	}
+
+	@Nonnull
 	private IWirelessNode createWireless() {
-		return new CapabilityWirelessNode.WirelessNodeImpl(1, IWirelessNode.Types.RECEIVER) {
+		return new CapabilityWirelessNode.WirelessNodeImpl(1, IWirelessNode.Types.TRANSMITTER) {
 			@Override
-			public void setFrequency(int newFrequency) {
-				super.setFrequency(newFrequency);
-				if (!world.isRemote) {
-					int newPower = RedstoneReceiverWorldSavedData.get((ServerWorld) world).getCurrentFrequencyValue(world, newFrequency);
-					setPower(newPower);
-				}
+			public void setPower(int newPower) {
+				super.setPower(newPower);
 				markDirty();
 			}
 
 			@Override
-			public void setPower(int newPower) {
-				super.setPower(newPower);
-				world.setBlockState(pos, world.getBlockState(pos).with(ReceiverBlock.POWER, newPower));
+			public void setFrequency(int newFrequency) {
+				int oldFrequency = this.getFrequency();
+				super.setFrequency(newFrequency);
+
+				if (!world.isRemote) {
+
+					Block block = world.getBlockState(pos).getBlock();
+					if (block instanceof TransmitterBlock) {
+						((TransmitterBlock) block).updateFrequency((ServerWorld) world, pos, oldFrequency);
+					}
+				}
+
 				markDirty();
 			}
 		};
@@ -78,13 +84,14 @@ public class ReceiverTileEntity extends TileEntity implements INamedContainerPro
 	}
 
 	@Override
+	@Nonnull
 	public ITextComponent getDisplayName() {
-		return new TranslationTextComponent("block.gates.receiver");
+		return new TranslationTextComponent("block.gates.transmitter");
 	}
 
 	@Nullable
 	@Override
-	public Container createMenu(int windowId, PlayerInventory inventory, PlayerEntity player) {
+	public Container createMenu(int windowId, @Nonnull PlayerInventory inventory, @Nonnull PlayerEntity player) {
 		return new FrequencyContainer(windowId, world, pos, inventory, player);
 	}
 }

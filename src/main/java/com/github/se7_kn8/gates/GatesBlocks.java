@@ -5,17 +5,18 @@ import com.github.se7_kn8.gates.block.CustomDetector;
 import com.github.se7_kn8.gates.block.OneInputLogicGate;
 import com.github.se7_kn8.gates.block.TwoInputLogicGate;
 import com.github.se7_kn8.gates.block.wireless_redstone.ReceiverBlock;
+import com.github.se7_kn8.gates.block.wireless_redstone.TransmitterBlock;
 import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
 import com.github.se7_kn8.gates.tile.CustomDetectorTile;
+import com.github.se7_kn8.gates.tile.TransmitterTileEntity;
+
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -46,20 +47,22 @@ public class GatesBlocks {
 	public static final Block SLOW_REPEATER = addBlock("slow_repeater", new CustomRepeater(4), Gates.GATES_ITEM_GROUP);
 
 	public static final Block WIRELESS_REDSTONE_RECEIVER = addBlock("receiver", new ReceiverBlock(), Gates.GATES_ITEM_GROUP);
+	public static final Block WIRELESS_REDSTONE_TRANSMITTER = addBlock("transmitter", new TransmitterBlock(), Gates.GATES_ITEM_GROUP);
 
 	// TODO public static final Block INSTANT_REPEATER = addBlock("instant_repeater", new InstantRepeater(), Gates.GATES_ITEM_GROUP);
 
 	public static final Block RAIN_DETECTOR = addBlock("rain_detector", new CustomDetector((blockState, world, blockPos) -> world.isRainingAt(blockPos.up(2)) ? 15 : 0), Gates.GATES_ITEM_GROUP);
 	public static final Block THUNDER_DETECTOR = addBlock("thunder_detector", new CustomDetector((blockState, world, blockPos) -> world.isThundering() ? 15 : 0), Gates.GATES_ITEM_GROUP);
 
-	public static final TileEntityType<?> RAIN_DETECTOR_TILE_ENTITY = addTileEntity("rain_detector", CustomDetectorTile::new, RAIN_DETECTOR, THUNDER_DETECTOR);
+	public static final TileEntityType<CustomDetectorTile> RAIN_DETECTOR_TILE_ENTITY = addTileEntity("rain_detector", CustomDetectorTile::new, RAIN_DETECTOR, THUNDER_DETECTOR);
+
+	public static final TileEntityType<ReceiverTileEntity> RECEIVER_TILE_ENTITY_TYPE = addTileEntity("receiver", ReceiverTileEntity::new, WIRELESS_REDSTONE_RECEIVER);
+	public static final TileEntityType<TransmitterTileEntity> TRANSMITTER_TILE_ENTITY_TYPE = addTileEntity("transmitter", TransmitterTileEntity::new, WIRELESS_REDSTONE_TRANSMITTER);
 
 	@SubscribeEvent
 	public static void onTileEntityRegistry(RegistryEvent.Register<TileEntityType<?>> tileEntityTypeRegister) {
 		tileEntityTypeRegister.getRegistry().registerAll(TILE_ENTITIES.toArray(new TileEntityType[0]));
 	}
-
-	public static final TileEntityType<ReceiverTileEntity> RECEIVER_TILE_ENTITY_TYPE = addTileEntity("receiver", ReceiverTileEntity::new);
 
 
 	@SubscribeEvent

@@ -9,9 +9,16 @@
   "block.gates.xor_gate": "eXclusive-OR (XOR) Gate",
   "block.gates.xnor_gate": "eXclusive-Not-OR (XNOR) Gate",
 
+  "block.gates.receiver": "Redstone Receiver",
+  "block.gates.transmitter": "Redstone Transmitter",
+
   "block.gates.rain_detector": "Rain Detector",
   "block.gates.thunder_detector": "Thunder Detector",
 
   "block.gates.slow_repeater": "Slow Redstone Repeater",
-  "block.gates.fast_repeater": "Fast Redstone Repeater"
+  "block.gates.fast_repeater": "Fast Redstone Repeater",
+
+  "item.gates.redstone_torch_pearl": "Redstone-Ender Torch",
+
+  "gui.gates.frequency": "Frequency:"
 }

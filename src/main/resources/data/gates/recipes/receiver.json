@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    " # ",
+    "#X#",
+    " # "
+  ],
+  "key": {
+    "X": {
+      "item": "gates:redstone_torch_pearl"
+    },
+    "#": {
+      "item": "minecraft:repeater"
+    }
+  },
+  "result": {
+    "item": "gates:receiver"
+  }
+}

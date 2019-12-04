@@ -4,13 +4,15 @@
     "particle": "#texture"
   },
   "elements": [
-    {   "from": [ 4, 7, 11 ],
+    {
+      "from": [ 4, 7, 11 ],
       "to": [ 6, 7, 13 ],
       "faces": {
         "up":   { "uv": [ 7, 6, 9, 8 ], "texture": "#texture" }
       }
     },
-    {   "from": [ 4, 2, 10 ],
+    {
+      "from": [ 4, 2, 10 ],
       "to": [ 6, 8, 14 ],
       "faces": {
         "west": { "uv": [ 6, 5, 10, 11 ], "texture": "#texture" },

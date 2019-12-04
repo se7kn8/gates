@@ -1,6 +1,9 @@
 package com.github.se7_kn8.gates;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,6 +17,8 @@ public class GatesItems {
 
 	public static final Map<ResourceLocation, Item> ITEMS = new HashMap<>();
 
+	public static final Item REDSTONE_TORCH_PEARL = addItem("redstone_torch_pearl", new Item(new Item.Properties().group(Gates.GATES_ITEM_GROUP)));
+
 	@SubscribeEvent
 	public static void onBlocksRegistry(RegistryEvent.Register<Item> itemRegistryEvent) {
 		for (ResourceLocation location : GatesItems.ITEMS.keySet()) {
@@ -21,6 +26,13 @@ public class GatesItems {
 			item.setRegistryName(location);
 			itemRegistryEvent.getRegistry().register(item);
 		}
+	}
+
+
+
+	private static Item addItem(String name, Item item) {
+		GatesItems.ITEMS.put(new ResourceLocation(Gates.MODID, name), item);
+		return item;
 	}
 
 }

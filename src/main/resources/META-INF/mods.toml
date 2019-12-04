@@ -29,7 +29,7 @@ credits="Thanks to Forge" #optional
 authors="SE7-KN8" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-A mod about redstone gates.
+A mod about redstone gates. And other redstone stuff.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.gates]] #optional

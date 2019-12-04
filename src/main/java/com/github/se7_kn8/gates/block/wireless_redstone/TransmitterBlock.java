@@ -2,7 +2,7 @@ package com.github.se7_kn8.gates.block.wireless_redstone;
 
 import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
-import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
+import com.github.se7_kn8.gates.tile.TransmitterTileEntity;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -31,22 +31,23 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ReceiverBlock extends ContainerBlock {
+public class TransmitterBlock extends ContainerBlock {
 
 	public static final VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.makeCuboidShape(7.0D, 0.0D, 7.0D, 9.0D, 10.0D, 9.0D));
 
 	public static IntegerProperty POWER = BlockStateProperties.POWER_0_15;
 
-	public ReceiverBlock() {
+	public TransmitterBlock() {
 		super(Properties.from(Blocks.REPEATER));
+
 		this.setDefaultState(this.stateContainer.getBaseState().with(POWER, 0));
 	}
 
 	@Override
-	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-		if (!world.isRemote) {
-			TileEntity entity = world.getTileEntity(pos);
-			if (entity instanceof ReceiverTileEntity) {
+	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (!worldIn.isRemote) {
+			TileEntity entity = worldIn.getTileEntity(pos);
+			if (entity instanceof TransmitterTileEntity) {
 				NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) entity, entity.getPos());
 			}
 		}
@@ -79,15 +80,9 @@ public class ReceiverBlock extends ContainerBlock {
 			RedstoneReceiverWorldSavedData data = RedstoneReceiverWorldSavedData.get((ServerWorld) worldIn);
 			data.addNode(worldIn, pos);
 
-			worldIn.getTileEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).ifPresent(c -> {
-				int value = data.getCurrentFrequencyValue(worldIn, c.getFrequency());
-				if (state.get(POWER) != value) {
-					worldIn.setBlockState(pos, state.with(POWER, value));
-				}
-			});
+			update(worldIn, pos, state);
 		}
 	}
-
 
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
@@ -100,27 +95,7 @@ public class ReceiverBlock extends ContainerBlock {
 	@Nullable
 	@Override
 	public TileEntity createNewTileEntity(IBlockReader worldIn) {
-		return new ReceiverTileEntity();
-	}
-
-	@Override
-	public boolean canProvidePower(BlockState state) {
-		return true;
-	}
-
-	@Override
-	public boolean canConnectRedstone(BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side) {
-		return true;
-	}
-
-	@Override
-	public int getStrongPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		return blockState.get(POWER);
-	}
-
-	@Override
-	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		return blockState.get(POWER);
+		return new TransmitterTileEntity();
 	}
 
 	@Override
@@ -136,6 +111,53 @@ public class ReceiverBlock extends ContainerBlock {
 			double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
 			worldIn.addParticle(RedstoneParticleData.REDSTONE_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
+	}
+
+	@Override
+	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+		update(worldIn, pos, state);
+	}
+
+	private void update(World worldIn, BlockPos pos, BlockState state) {
+		int power = findMaxPower(worldIn, pos);
+		updateFrequency((ServerWorld) worldIn, pos);
+		if (power != state.get(POWER)) {
+			worldIn.setBlockState(pos, worldIn.getBlockState(pos).with(POWER, power));
+		}
+	}
+
+	public void updateFrequency(ServerWorld world, BlockPos pos, int oldFrequency) {
+		RedstoneReceiverWorldSavedData.get(world).updateFrequency(world, oldFrequency);
+		updateFrequency(world, pos);
+	}
+
+	public void updateFrequency(ServerWorld world, BlockPos pos) {
+		int power = findMaxPower(world, pos);
+		TileEntity entity = world.getTileEntity(pos);
+		entity.getCapability(CapabilityWirelessNode.WIRELESS_NODE).ifPresent(node -> {
+			node.setPower(power);
+			int frequency = node.getFrequency();
+			RedstoneReceiverWorldSavedData.get(world).updateFrequency(world, frequency);
+		});
+	}
+
+	private int findMaxPower(World world, BlockPos pos) {
+		int currentMax = 0;
+
+		if (world.getRedstonePower(pos.north(), Direction.NORTH) > currentMax) {
+			currentMax = world.getRedstonePower(pos.north(), Direction.NORTH);
+		}
+		if (world.getRedstonePower(pos.east(), Direction.EAST) > currentMax) {
+			currentMax = world.getRedstonePower(pos.east(), Direction.EAST);
+		}
+		if (world.getRedstonePower(pos.south(), Direction.SOUTH) > currentMax) {
+			currentMax = world.getRedstonePower(pos.south(), Direction.SOUTH);
+		}
+		if (world.getRedstonePower(pos.west(), Direction.WEST) > currentMax) {
+			currentMax = world.getRedstonePower(pos.west(), Direction.WEST);
+		}
+
+		return currentMax;
 	}
 
 }
