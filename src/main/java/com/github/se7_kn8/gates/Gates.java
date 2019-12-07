@@ -46,13 +46,4 @@ public class Gates {
 		ScreenManager.registerFactory(GatesContainers.TRANSMITTER_CONTAINER_TYPE, FrequencyScreen::new);
 	}
 
-
-	@SubscribeEvent
-	public void onPlayer(ServerChatEvent event) {
-		System.out.println("Received message: " + event.getMessage());
-		if (event.getMessage().startsWith("freq:")) {
-			//RedstoneReceiverWorldSavedData.get(event.getPlayer().getServerWorld()).setFrequency(event.getPlayer().getServerWorld(), 1234, Integer.parseInt(event.getMessage().split(":")[1]));
-		}
-	}
-
 }

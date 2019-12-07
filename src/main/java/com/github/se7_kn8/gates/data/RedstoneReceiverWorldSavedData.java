@@ -1,6 +1,7 @@
 package com.github.se7_kn8.gates.data;
 
 import com.github.se7_kn8.gates.Gates;
+import com.github.se7_kn8.gates.api.CapabilityUtil;
 import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import com.github.se7_kn8.gates.api.IWirelessNode;
 import net.minecraft.nbt.CompoundNBT;
@@ -75,11 +76,7 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 	public int getCurrentFrequencyValue(World world, int frequency) {
 		return transmitters
 				.stream()
-				.map(pos -> {
-					TileEntity entity = world.getTileEntity(pos);
-					IWirelessNode node = entity.getCapability(CapabilityWirelessNode.WIRELESS_NODE).orElseThrow(IllegalStateException::new);
-					return node;
-				})
+				.map(pos -> world.getTileEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).orElseThrow(IllegalStateException::new))
 				.filter(node -> node.getFrequency() == frequency)
 				.map(IWirelessNode::getPower)
 				.max(Integer::compareTo)
@@ -104,7 +101,7 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 	}
 
 	public void addNode(World world, BlockPos pos) {
-		world.getTileEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).ifPresent(c -> {
+		CapabilityUtil.findWirelessCapability(world, pos, c -> {
 			switch (c.getType()) {
 				case RECEIVER:
 					addReceiver(pos);
@@ -120,14 +117,13 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 	 * Must be called before the tile entity is removed from the world
 	 */
 	public void removeNode(World world, BlockPos pos) {
-		world.getTileEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).ifPresent(c -> {
+		CapabilityUtil.findWirelessCapability(world, pos, c -> {
 			switch (c.getType()) {
 				case RECEIVER:
 					removeReceiver(pos);
 					break;
 				case TRANSMITTER:
 					removeTransmitter(pos);
-					updateFrequency(world, c.getFrequency());
 					break;
 			}
 		});

@@ -1,5 +1,6 @@
 package com.github.se7_kn8.gates.packages;
 
+import com.github.se7_kn8.gates.api.CapabilityUtil;
 import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
@@ -37,7 +38,7 @@ public class UpdateFrequencyPacket {
 		ctx.get().enqueueWork(() -> {
 			World world = ctx.get().getSender().world;
 			if (!world.isRemote) {
-				world.getTileEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).ifPresent(c -> {
+				CapabilityUtil.findWirelessCapability(world, pos, c->{
 					int newFrequency = this.frequency;
 
 					if (newFrequency < c.getMinFrequency()) {

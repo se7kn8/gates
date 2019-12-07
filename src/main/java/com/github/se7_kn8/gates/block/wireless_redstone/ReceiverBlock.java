@@ -1,5 +1,6 @@
 package com.github.se7_kn8.gates.block.wireless_redstone;
 
+import com.github.se7_kn8.gates.api.CapabilityUtil;
 import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
 import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
@@ -79,7 +80,7 @@ public class ReceiverBlock extends ContainerBlock {
 			RedstoneReceiverWorldSavedData data = RedstoneReceiverWorldSavedData.get((ServerWorld) worldIn);
 			data.addNode(worldIn, pos);
 
-			worldIn.getTileEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).ifPresent(c -> {
+			CapabilityUtil.findWirelessCapability(worldIn, pos, c->{
 				int value = data.getCurrentFrequencyValue(worldIn, c.getFrequency());
 				if (state.get(POWER) != value) {
 					worldIn.setBlockState(pos, state.with(POWER, value));

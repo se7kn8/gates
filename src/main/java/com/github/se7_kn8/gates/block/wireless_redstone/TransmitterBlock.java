@@ -1,5 +1,6 @@
 package com.github.se7_kn8.gates.block.wireless_redstone;
 
+import com.github.se7_kn8.gates.api.CapabilityUtil;
 import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
 import com.github.se7_kn8.gates.tile.TransmitterTileEntity;
@@ -76,18 +77,20 @@ public class TransmitterBlock extends ContainerBlock {
 	@Override
 	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
 		super.onBlockAdded(state, worldIn, pos, oldState, isMoving);
-		if (!worldIn.isRemote) {
+		if (!worldIn.isRemote && (state.getBlock() != oldState.getBlock())) {
 			RedstoneReceiverWorldSavedData data = RedstoneReceiverWorldSavedData.get((ServerWorld) worldIn);
 			data.addNode(worldIn, pos);
-
 			update(worldIn, pos, state);
 		}
 	}
 
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!worldIn.isRemote) {
+		if (!worldIn.isRemote && (newState.getBlock() != state.getBlock())) {
 			RedstoneReceiverWorldSavedData.get((ServerWorld) worldIn).removeNode(worldIn, pos);
+			CapabilityUtil.findWirelessCapability(worldIn, pos, c -> {
+				RedstoneReceiverWorldSavedData.get((ServerWorld) worldIn).updateFrequency(worldIn, c.getFrequency());
+			});
 		}
 		super.onReplaced(state, worldIn, pos, newState, isMoving);
 	}
@@ -115,6 +118,14 @@ public class TransmitterBlock extends ContainerBlock {
 
 	@Override
 	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+		if (!worldIn.getPendingBlockTicks().isTickScheduled(pos, this)) {
+			worldIn.getPendingBlockTicks().scheduleTick(pos, this, 5);
+		}
+		//update(worldIn, pos, state);
+	}
+
+	@Override
+	public void tick(BlockState state, World worldIn, BlockPos pos, Random p_196267_4_) {
 		update(worldIn, pos, state);
 	}
 
@@ -133,11 +144,9 @@ public class TransmitterBlock extends ContainerBlock {
 
 	public void updateFrequency(ServerWorld world, BlockPos pos) {
 		int power = findMaxPower(world, pos);
-		TileEntity entity = world.getTileEntity(pos);
-		entity.getCapability(CapabilityWirelessNode.WIRELESS_NODE).ifPresent(node -> {
-			node.setPower(power);
-			int frequency = node.getFrequency();
-			RedstoneReceiverWorldSavedData.get(world).updateFrequency(world, frequency);
+		CapabilityUtil.findWirelessCapability(world, pos, c -> {
+			c.setPower(power);
+			RedstoneReceiverWorldSavedData.get(world).updateFrequency(world, c.getFrequency());
 		});
 	}
 
