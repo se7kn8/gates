@@ -6,6 +6,7 @@ import com.github.se7_kn8.gates.block.OneInputLogicGate;
 import com.github.se7_kn8.gates.block.TwoInputLogicGate;
 import com.github.se7_kn8.gates.block.wireless_redstone.ReceiverBlock;
 import com.github.se7_kn8.gates.block.wireless_redstone.TransmitterBlock;
+import com.github.se7_kn8.gates.block.wireless_redstone.WirelessRedstoneLamp;
 import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
 import com.github.se7_kn8.gates.tile.CustomDetectorTile;
 import com.github.se7_kn8.gates.tile.TransmitterTileEntity;
@@ -49,6 +50,8 @@ public class GatesBlocks {
 	public static final Block WIRELESS_REDSTONE_RECEIVER = addBlock("receiver", new ReceiverBlock(), Gates.GATES_ITEM_GROUP);
 	public static final Block WIRELESS_REDSTONE_TRANSMITTER = addBlock("transmitter", new TransmitterBlock(), Gates.GATES_ITEM_GROUP);
 
+	public static final Block WIRELESS_REDSTONE_LAMP = addBlock("wireless_redstone_lamp", new WirelessRedstoneLamp(), Gates.GATES_ITEM_GROUP);
+
 	// TODO public static final Block INSTANT_REPEATER = addBlock("instant_repeater", new InstantRepeater(), Gates.GATES_ITEM_GROUP);
 
 	public static final Block RAIN_DETECTOR = addBlock("rain_detector", new CustomDetector((blockState, world, blockPos) -> world.isRainingAt(blockPos.up(2)) ? 15 : 0), Gates.GATES_ITEM_GROUP);
@@ -58,6 +61,8 @@ public class GatesBlocks {
 
 	public static final TileEntityType<ReceiverTileEntity> RECEIVER_TILE_ENTITY_TYPE = addTileEntity("receiver", ReceiverTileEntity::new, WIRELESS_REDSTONE_RECEIVER);
 	public static final TileEntityType<TransmitterTileEntity> TRANSMITTER_TILE_ENTITY_TYPE = addTileEntity("transmitter", TransmitterTileEntity::new, WIRELESS_REDSTONE_TRANSMITTER);
+
+
 
 	@SubscribeEvent
 	public static void onTileEntityRegistry(RegistryEvent.Register<TileEntityType<?>> tileEntityTypeRegister) {

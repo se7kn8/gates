@@ -121,7 +121,6 @@ public class TransmitterBlock extends ContainerBlock {
 		if (!worldIn.getPendingBlockTicks().isTickScheduled(pos, this)) {
 			worldIn.getPendingBlockTicks().scheduleTick(pos, this, 5);
 		}
-		//update(worldIn, pos, state);
 	}
 
 	@Override
