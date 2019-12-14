@@ -1,5 +1,6 @@
 package com.github.se7_kn8.gates;
 
+import com.github.se7_kn8.gates.item.FrequencyChangerItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -18,6 +19,8 @@ public class GatesItems {
 	public static final Map<ResourceLocation, Item> ITEMS = new HashMap<>();
 
 	public static final Item REDSTONE_TORCH_PEARL = addItem("redstone_torch_pearl", new Item(new Item.Properties().group(Gates.GATES_ITEM_GROUP)));
+
+	public static final Item FREQUENCY_CHANGER = addItem("frequency_changer", new FrequencyChangerItem());
 
 	@SubscribeEvent
 	public static void onBlocksRegistry(RegistryEvent.Register<Item> itemRegistryEvent) {

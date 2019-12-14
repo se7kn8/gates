@@ -3,6 +3,7 @@ package com.github.se7_kn8.gates.block.wireless_redstone;
 import com.github.se7_kn8.gates.api.CapabilityUtil;
 import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
+import com.github.se7_kn8.gates.item.FrequencyChangerItem;
 import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -51,6 +52,9 @@ public class ReceiverBlock extends ContainerBlock {
 
 	@Override
 	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+		if (player.getHeldItem(hand).getItem() instanceof FrequencyChangerItem && player.getHeldItem(hand).hasTag() && player.getHeldItem(hand).getTag().contains("frequency")) {
+			return false;
+		}
 		if (!world.isRemote) {
 			TileEntity entity = world.getTileEntity(pos);
 			if (entity instanceof ReceiverTileEntity) {

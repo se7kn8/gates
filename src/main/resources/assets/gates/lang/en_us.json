@@ -21,6 +21,12 @@
   "block.gates.wireless_redstone_lamp": "Wireless Redstone Lamp",
 
   "item.gates.redstone_torch_pearl": "Redstone-Ender Torch",
+  "item.gates.frequency_changer": "Frequency Tool",
 
-  "gui.gates.frequency": "Frequency:"
+  "gui.gates.frequency": "Frequency:",
+  "gui.gates.frequency_saved": "Saved Frequency!",
+  "gui.gates.current_frequency_stored": "Stored Frequency: {0}",
+  "gui.gates.usage.frequency_changer": "SHIFT-Right-Click on a wireless block to copy the frequency.\nRight-Click to applied the saved frequency to an wireless block.\nSHIFT-Right-Click in the air to clear the saved frequency.",
+  "gui.gates.frequency_cleared": "Cleared frequency!",
+  "gui.gates.frequency_set": "Set Frequency!"
 }

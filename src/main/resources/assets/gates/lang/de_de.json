@@ -21,6 +21,12 @@
   "block.gates.wireless_redstone_lamp": "Kabellose Redstone Lampe",
 
   "item.gates.redstone_torch_pearl": "Redstone-Ender Fackel",
+  "item.gates.frequency_changer": "Frequenz Werkzeug",
 
-  "gui.gates.frequency": "Frequenz:"
+  "gui.gates.frequency": "Frequenz:",
+  "gui.gates.frequency_saved": "Frequenz gespeichert!",
+  "gui.gates.current_frequency_stored": "Gespeicherte Frequenz: {0}",
+  "gui.gates.usage.frequency_changer": "UMSCHALT-Rechts-Klicke auf ein kabelloses Block, um die Frequenz zu kopieren.\nRechts-Klicke auf einen kabellosen Block, um die gespeicherte Frequenz anzunehmen.\nUMSCHALT-Rechts-Klicke in die Luft, um die Frequenz zu löschen.",
+  "gui.gates.frequency_cleared": "Frequency gelöscht!",
+  "gui.gates.frequency_set": "Frequenz gesetzt!"
 }
