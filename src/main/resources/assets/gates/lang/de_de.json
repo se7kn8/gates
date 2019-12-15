@@ -28,5 +28,6 @@
   "gui.gates.current_frequency_stored": "Gespeicherte Frequenz: {0}",
   "gui.gates.usage.frequency_changer": "UMSCHALT-Rechts-Klicke auf ein kabelloses Block, um die Frequenz zu kopieren.\nRechts-Klicke auf einen kabellosen Block, um die gespeicherte Frequenz anzunehmen.\nUMSCHALT-Rechts-Klicke in die Luft, um die Frequenz zu löschen.",
   "gui.gates.frequency_cleared": "Frequency gelöscht!",
-  "gui.gates.frequency_set": "Frequenz gesetzt!"
+  "gui.gates.frequency_set": "Frequenz gesetzt!",
+  "gui.gates.apply": "Anwenden"
 }

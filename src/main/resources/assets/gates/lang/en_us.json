@@ -26,7 +26,8 @@
   "gui.gates.frequency": "Frequency:",
   "gui.gates.frequency_saved": "Saved Frequency!",
   "gui.gates.current_frequency_stored": "Stored Frequency: {0}",
-  "gui.gates.usage.frequency_changer": "SHIFT-Right-Click on a wireless block to copy the frequency.\nRight-Click to applied the saved frequency to an wireless block.\nSHIFT-Right-Click in the air to clear the saved frequency.",
+  "gui.gates.usage.frequency_changer": "SHIFT-Right-Click on a wireless block to copy the frequency.\nRight-Click to apply the saved frequency on a wireless block.\nSHIFT-Right-Click in the air to clear the saved frequency.",
   "gui.gates.frequency_cleared": "Cleared frequency!",
-  "gui.gates.frequency_set": "Set Frequency!"
+  "gui.gates.frequency_set": "Set Frequency!",
+  "gui.gates.apply": "Apply"
 }

@@ -10,10 +10,6 @@ import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.IContainerListener;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -23,6 +19,7 @@ public class FrequencyScreen extends ContainerScreen<FrequencyContainer> {
 	private static final ResourceLocation BACKGROUND = new ResourceLocation(Gates.MODID, "textures/gui/container/empty_container.png");
 
 	private TextFieldWidget frequencyField;
+	private Button applyButton;
 	private Button decreaseButton;
 	private Button increaseButton;
 
@@ -45,9 +42,14 @@ public class FrequencyScreen extends ContainerScreen<FrequencyContainer> {
 			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(getContainer().entity.getPos(), getContainer().getFrequency() + 1, minecraft.player.dimension));
 		}));
 
+		applyButton = this.addButton(new Button(this.width / 2, this.height / 2 - 25, 80, 20, I18n.format("gui.gates.apply"), p_onPress_1_ -> {
+			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(getContainer().entity.getPos(), Integer.parseInt(this.frequencyField.getText()), minecraft.player.dimension));
+		}));
+
 		this.children.add(frequencyField);
 
 		this.setFocusedDefault(frequencyField);
+		this.applyButton.visible = false;
 	}
 
 	@Override
@@ -57,6 +59,13 @@ public class FrequencyScreen extends ContainerScreen<FrequencyContainer> {
 		if (freq != lastValue) {
 			lastValue = freq;
 			this.frequencyField.setText(String.valueOf(freq));
+		} else {
+			try {
+				this.applyButton.visible = freq != Integer.parseInt(this.frequencyField.getText());
+			} catch (NumberFormatException e) {
+				// field is empty
+				this.applyButton.visible = false;
+			}
 		}
 	}
 
