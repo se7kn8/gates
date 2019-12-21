@@ -9,7 +9,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IEnviromentBlockReader;
+import net.minecraft.world.ILightReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
@@ -48,7 +48,7 @@ public class WirelessRedstoneLamp extends ReceiverBlock {
 	}
 
 	@Override
-	public int getLightValue(BlockState state, IEnviromentBlockReader world, BlockPos pos) {
+	public int getLightValue(BlockState state, ILightReader world, BlockPos pos) {
 		return state.get(POWER) > 0 ? 15 : 0;
 	}
 

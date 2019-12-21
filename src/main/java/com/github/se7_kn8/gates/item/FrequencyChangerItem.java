@@ -46,15 +46,15 @@ public class FrequencyChangerItem extends Item {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack stack = playerIn.getHeldItem(handIn);
 
-		if (playerIn.isSneaking()) {
+		if (playerIn.func_226563_dT_()) { // TODO check
 			stack.setTag(new CompoundNBT());
 			if (worldIn.isRemote) {
 				playerIn.sendStatusMessage(new TranslationTextComponent("gui.gates.frequency_cleared"), true);
 			}
-			return ActionResult.newResult(ActionResultType.SUCCESS, stack);
+			return ActionResult.func_226248_a_(stack);
 		}
 
-		return ActionResult.newResult(ActionResultType.PASS, stack);
+		return ActionResult.func_226250_c_(stack);
 	}
 
 	@Override
@@ -69,8 +69,7 @@ public class FrequencyChangerItem extends Item {
 
 		CompoundNBT stackNBT = stack.getTag();
 
-
-		if (ctx.isPlacerSneaking()) {
+		if (ctx.func_225518_g_()) {
 			if (CapabilityUtil.findWirelessCapability(ctx.getWorld(), ctx.getPos(), c -> stackNBT.putInt("frequency", c.getFrequency()))) {
 				if (ctx.getWorld().isRemote) {
 					ctx.getPlayer().sendStatusMessage(new TranslationTextComponent("gui.gates.frequency_saved"), true);

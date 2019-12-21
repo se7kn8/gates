@@ -4,6 +4,8 @@ import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import com.github.se7_kn8.gates.client.screen.FrequencyScreen;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -44,6 +46,20 @@ public class Gates {
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		ScreenManager.registerFactory(GatesContainers.TRANSMITTER_CONTAINER_TYPE, FrequencyScreen::new);
+		RenderTypeLookup.setRenderLayer(GatesBlocks.AND_GATE, RenderType.func_228643_e_());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.OR_GATE, RenderType.func_228643_e_());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.XOR_GATE, RenderType.func_228643_e_());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.NAND_GATE, RenderType.func_228643_e_());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.NOR_GATE, RenderType.func_228643_e_());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.XNOR_GATE, RenderType.func_228643_e_());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.NOT_GATE, RenderType.func_228643_e_());
+
+		RenderTypeLookup.setRenderLayer(GatesBlocks.FAST_REPEATER, RenderType.func_228643_e_());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.SLOW_REPEATER, RenderType.func_228643_e_());
+
+		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_RECEIVER, RenderType.func_228643_e_());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER, RenderType.func_228643_e_());
+
 	}
 
 }

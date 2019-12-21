@@ -1,7 +1,6 @@
 package com.github.se7_kn8.gates.block.wireless_redstone;
 
 import com.github.se7_kn8.gates.api.CapabilityUtil;
-import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
 import com.github.se7_kn8.gates.item.FrequencyChangerItem;
 import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
@@ -14,7 +13,7 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -51,9 +50,9 @@ public class ReceiverBlock extends ContainerBlock {
 
 
 	@Override
-	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		if (player.getHeldItem(hand).getItem() instanceof FrequencyChangerItem && player.getHeldItem(hand).hasTag() && player.getHeldItem(hand).getTag().contains("frequency")) {
-			return false;
+			return ActionResultType.PASS;
 		}
 		if (!world.isRemote) {
 			TileEntity entity = world.getTileEntity(pos);
@@ -61,7 +60,7 @@ public class ReceiverBlock extends ContainerBlock {
 				NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) entity, entity.getPos());
 			}
 		}
-		return true;
+		return ActionResultType.SUCCESS;
 	}
 
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
@@ -77,12 +76,12 @@ public class ReceiverBlock extends ContainerBlock {
 	public BlockRenderType getRenderType(BlockState state) {
 		return BlockRenderType.MODEL;
 	}
-
+/*TODO
 	@Override
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
-
+*/
 	@Override
 	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
 		super.onBlockAdded(state, worldIn, pos, oldState, isMoving);
