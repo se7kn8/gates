@@ -1,16 +1,15 @@
 package com.github.se7_kn8.gates;
 
-import com.github.se7_kn8.gates.block.CustomRepeater;
 import com.github.se7_kn8.gates.block.CustomDetector;
+import com.github.se7_kn8.gates.block.CustomRepeater;
 import com.github.se7_kn8.gates.block.OneInputLogicGate;
 import com.github.se7_kn8.gates.block.TwoInputLogicGate;
 import com.github.se7_kn8.gates.block.wireless_redstone.ReceiverBlock;
 import com.github.se7_kn8.gates.block.wireless_redstone.TransmitterBlock;
 import com.github.se7_kn8.gates.block.wireless_redstone.WirelessRedstoneLamp;
-import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
 import com.github.se7_kn8.gates.tile.CustomDetectorTile;
+import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
 import com.github.se7_kn8.gates.tile.TransmitterTileEntity;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -20,17 +19,15 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = Gates.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GatesBlocks {
+
+	public static final Random rand = new Random(System.currentTimeMillis());
 
 	public static final Map<ResourceLocation, Block> BLOCKS = new HashMap<>();
 	public static final List<TileEntityType<? extends TileEntity>> TILE_ENTITIES = new ArrayList<>();
@@ -52,8 +49,6 @@ public class GatesBlocks {
 
 	public static final Block WIRELESS_REDSTONE_LAMP = addBlock("wireless_redstone_lamp", new WirelessRedstoneLamp(), Gates.GATES_ITEM_GROUP);
 
-	// TODO public static final Block INSTANT_REPEATER = addBlock("instant_repeater", new InstantRepeater(), Gates.GATES_ITEM_GROUP);
-
 	public static final Block RAIN_DETECTOR = addBlock("rain_detector", new CustomDetector((blockState, world, blockPos) -> world.isRainingAt(blockPos.up(2)) ? 15 : 0), Gates.GATES_ITEM_GROUP);
 	public static final Block THUNDER_DETECTOR = addBlock("thunder_detector", new CustomDetector((blockState, world, blockPos) -> world.isThundering() ? 15 : 0), Gates.GATES_ITEM_GROUP);
 
@@ -61,7 +56,6 @@ public class GatesBlocks {
 
 	public static final TileEntityType<ReceiverTileEntity> RECEIVER_TILE_ENTITY_TYPE = addTileEntity("receiver", ReceiverTileEntity::new, WIRELESS_REDSTONE_RECEIVER);
 	public static final TileEntityType<TransmitterTileEntity> TRANSMITTER_TILE_ENTITY_TYPE = addTileEntity("transmitter", TransmitterTileEntity::new, WIRELESS_REDSTONE_TRANSMITTER);
-
 
 
 	@SubscribeEvent

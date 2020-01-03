@@ -1,7 +1,5 @@
 package com.github.se7_kn8.gates.block.wireless_redstone;
 
-import com.github.se7_kn8.gates.api.CapabilityUtil;
-import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
 import com.github.se7_kn8.gates.item.FrequencyChangerItem;
 import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
@@ -44,7 +42,7 @@ public class ReceiverBlock extends ContainerBlock {
 		this.setDefaultState(this.stateContainer.getBaseState().with(POWER, 0));
 	}
 
-	public ReceiverBlock(Properties properties){
+	public ReceiverBlock(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(POWER, 0));
 	}
@@ -86,23 +84,16 @@ public class ReceiverBlock extends ContainerBlock {
 	@Override
 	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
 		super.onBlockAdded(state, worldIn, pos, oldState, isMoving);
-		if (!worldIn.isRemote) {
+		if (!worldIn.isRemote && (state.getBlock() != oldState.getBlock())) {
 			RedstoneReceiverWorldSavedData data = RedstoneReceiverWorldSavedData.get((ServerWorld) worldIn);
 			data.addNode(worldIn, pos);
-
-			CapabilityUtil.findWirelessCapability(worldIn, pos, c->{
-				int value = data.getCurrentFrequencyValue(worldIn, c.getFrequency());
-				if (state.get(POWER) != value) {
-					worldIn.setBlockState(pos, state.with(POWER, value));
-				}
-			});
 		}
 	}
 
 
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!worldIn.isRemote) {
+		if (!worldIn.isRemote && (newState.getBlock() != state.getBlock())) {
 			RedstoneReceiverWorldSavedData.get((ServerWorld) worldIn).removeNode(worldIn, pos);
 		}
 		super.onReplaced(state, worldIn, pos, newState, isMoving);
@@ -148,5 +139,4 @@ public class ReceiverBlock extends ContainerBlock {
 			worldIn.addParticle(RedstoneParticleData.REDSTONE_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
-
 }

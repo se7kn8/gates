@@ -6,14 +6,14 @@ import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import com.github.se7_kn8.gates.api.IWirelessNode;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.WorldSavedData;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 
@@ -83,9 +83,12 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 				.orElse(0);
 	}
 
-	public void updateFrequency(World world, int frequency) {
+	public void updateFrequency(World world, int frequency){
 		int power = getCurrentFrequencyValue(world, frequency);
+		updateFrequency(world, frequency, power);
+	}
 
+	public void updateFrequency(World world, int frequency, int power) {
 		/* TODO
 		 *
 		 * this is necessary because the receivers are changing their blockstates which result in adding/removing elements to the set
@@ -104,6 +107,7 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 		CapabilityUtil.findWirelessCapability(world, pos, c -> {
 			switch (c.getType()) {
 				case RECEIVER:
+					c.setPower(this.getCurrentFrequencyValue(world, c.getFrequency()));
 					addReceiver(pos);
 					break;
 				case TRANSMITTER:
