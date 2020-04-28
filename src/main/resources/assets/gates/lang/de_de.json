@@ -29,6 +29,7 @@
   "gui.gates.current_frequency_stored": "Gespeicherte Frequenz: {0}",
   "gui.gates.frequency_cleared": "Frequency gelöscht!",
   "gui.gates.frequency_set": "Frequenz gesetzt!",
+  "gui.gates.no_frequency": "Noch keine Frequenz eingestellt!",
   "gui.gates.apply": "Anwenden",
 
   "gui.gates.usage.portable_transmitter": "Recht-Klicke zum Aktivieren.\nUMSCHALT-Rechts-Klicke zum Konfigurieren.\nWarnung: Sender-Blöcke haben immer Vorrang auf einer Frequenz",

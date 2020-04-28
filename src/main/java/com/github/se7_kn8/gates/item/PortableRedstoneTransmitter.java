@@ -59,7 +59,7 @@ public class PortableRedstoneTransmitter extends Item {
 					}
 				});
 			}
-			return ActionResult.newResult(ActionResultType.SUCCESS, stack);
+			return ActionResult.resultSuccess(stack);
 		}
 
 		if (!stack.hasTag()) {
@@ -68,7 +68,7 @@ public class PortableRedstoneTransmitter extends Item {
 
 		if (!stack.getTag().contains("frequency")) {
 			playerIn.sendStatusMessage(new TranslationTextComponent("gui.gates.no_frequency"), true);
-			return ActionResult.newResult(ActionResultType.FAIL, stack);
+			return ActionResult.resultFail(stack);
 		}
 
 		int frequency = stack.getTag().getInt("frequency");
@@ -82,7 +82,7 @@ public class PortableRedstoneTransmitter extends Item {
 			update(worldIn, true, frequency);
 		}
 
-		return ActionResult.newResult(ActionResultType.SUCCESS, stack);
+		return ActionResult.resultSuccess(stack);
 	}
 
 	private void update(World world, boolean active, int frequency) {
