@@ -1,10 +1,8 @@
 package com.github.se7_kn8.gates;
 
 import com.github.se7_kn8.gates.item.FrequencyChangerItem;
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
+import com.github.se7_kn8.gates.item.PortableRedstoneTransmitter;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,6 +19,8 @@ public class GatesItems {
 	public static final Item REDSTONE_TORCH_PEARL = addItem("redstone_torch_pearl", new Item(new Item.Properties().group(Gates.GATES_ITEM_GROUP)));
 
 	public static final Item FREQUENCY_CHANGER = addItem("frequency_changer", new FrequencyChangerItem());
+
+	public static final Item PORTABLE_REDSTONE_TRANSMITTER = addItem("portable_redstone_transmitter", new PortableRedstoneTransmitter());
 
 	@SubscribeEvent
 	public static void onBlocksRegistry(RegistryEvent.Register<Item> itemRegistryEvent) {

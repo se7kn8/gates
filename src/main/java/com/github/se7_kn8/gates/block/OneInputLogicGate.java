@@ -46,7 +46,6 @@ public class OneInputLogicGate extends RedstoneDiodeBlock {
 		boolean firstInput = getPowerOnSide(world, pos.offset(facing), facing) > 0;
 
 		world.setBlockState(pos, state.with(INPUT, firstInput));
-
 		return calculateOutputFunction.apply(firstInput) ? 15 : 0;
 	}
 }

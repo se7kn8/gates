@@ -36,15 +36,15 @@ public class FrequencyScreen extends ContainerScreen<FrequencyContainer> {
 		frequencyField = new TextFieldWidget(this.font, this.width / 2 - 35, this.height / 2 - 50, 70, 20, I18n.format("gates.gui.transmitter"));
 		frequencyField.setValidator(s -> (s.matches("^[0-9]+$") || s.equals("")) && s.length() < 10);
 		decreaseButton = this.addButton(new Button(this.width / 2 - 75, this.height / 2 - 50, 40, 20, "<-", p_onPress_1_ -> {
-			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(getContainer().entity.getPos(), getContainer().getFrequency() - 1, minecraft.player.dimension));
+			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(getContainer().entity.getPos(), getContainer().getFrequency() - 1));
 		}));
 
 		increaseButton = this.addButton(new Button(this.width / 2 + 35, this.height / 2 - 50, 40, 20, "->", p_onPress_1_ -> {
-			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(getContainer().entity.getPos(), getContainer().getFrequency() + 1, minecraft.player.dimension));
+			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(getContainer().entity.getPos(), getContainer().getFrequency() + 1));
 		}));
 
 		applyButton = this.addButton(new Button(this.width / 2, this.height / 2 - 25, 80, 20, I18n.format("gui.gates.apply"), p_onPress_1_ -> {
-			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(getContainer().entity.getPos(), Integer.parseInt(this.frequencyField.getText()), minecraft.player.dimension));
+			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(getContainer().entity.getPos(), Integer.parseInt(this.frequencyField.getText())));
 		}));
 
 		this.children.add(frequencyField);
