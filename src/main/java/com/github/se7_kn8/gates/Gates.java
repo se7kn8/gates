@@ -46,19 +46,19 @@ public class Gates {
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		ScreenManager.registerFactory(GatesContainers.TRANSMITTER_CONTAINER_TYPE, FrequencyScreen::new);
-		RenderTypeLookup.setRenderLayer(GatesBlocks.AND_GATE, RenderType.func_228643_e_());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.OR_GATE, RenderType.func_228643_e_());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.XOR_GATE, RenderType.func_228643_e_());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.NAND_GATE, RenderType.func_228643_e_());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.NOR_GATE, RenderType.func_228643_e_());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.XNOR_GATE, RenderType.func_228643_e_());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.NOT_GATE, RenderType.func_228643_e_());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.AND_GATE, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.OR_GATE, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.XOR_GATE, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.NAND_GATE, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.NOR_GATE, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.XNOR_GATE, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.NOT_GATE, RenderType.getCutout());
 
-		RenderTypeLookup.setRenderLayer(GatesBlocks.FAST_REPEATER, RenderType.func_228643_e_());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.SLOW_REPEATER, RenderType.func_228643_e_());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.FAST_REPEATER, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.SLOW_REPEATER, RenderType.getCutout());
 
-		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_RECEIVER, RenderType.func_228643_e_());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER, RenderType.func_228643_e_());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_RECEIVER, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER, RenderType.getCutout());
 
 	}
 

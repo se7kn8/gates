@@ -47,10 +47,10 @@ public class WirelessRedstoneLamp extends ReceiverBlock {
 		// NOOP
 	}
 
-	@Override
+	/*@Override
 	public int getLightValue(BlockState state, ILightReader world, BlockPos pos) {
 		return state.get(POWER) > 0 ? 15 : 0;
-	}
+	}*/// FIXME
 
 	@Override
 	public int getLightValue(BlockState state) {

@@ -45,7 +45,7 @@ public class TransmitterBlock extends ContainerBlock {
 	}
 
 	@Override
-	public ActionResultType func_225533_a_(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if (player.getHeldItem(handIn).getItem() instanceof FrequencyChangerItem && player.getHeldItem(handIn).hasTag() && player.getHeldItem(handIn).getTag().contains("frequency")) {
 			return ActionResultType.PASS;
 		}
@@ -59,7 +59,7 @@ public class TransmitterBlock extends ContainerBlock {
 	}
 
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return func_220064_c(worldIn, pos.down());
+		return hasSolidSideOnTop(worldIn, pos.down());
 	}
 
 	@Override
@@ -128,7 +128,7 @@ public class TransmitterBlock extends ContainerBlock {
 	}
 
 	@Override
-	public void func_225534_a_(BlockState state, ServerWorld world, BlockPos pos, Random p_225534_4_) {
+	public void tick(BlockState state, ServerWorld world, BlockPos pos, Random p_225534_4_) {
 		update(world, pos, state);
 	}
 

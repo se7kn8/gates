@@ -42,11 +42,6 @@ public class CustomDetector extends ContainerBlock {
 	}
 
 	@Override
-	public boolean func_220074_n(BlockState p_220074_1_) {
-		return true;
-	}
-
-	@Override
 	public int getWeakPower(BlockState state, IBlockReader p_180656_2_, BlockPos p_180656_3_, Direction p_180656_4_) {
 		return state.get(POWER);
 	}
@@ -65,7 +60,7 @@ public class CustomDetector extends ContainerBlock {
 	}
 
 	@Override
-	public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand p_220051_5_, BlockRayTraceResult p_220051_6_) {
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand p_220051_5_, BlockRayTraceResult p_220051_6_) {
 		if (player.isAllowEdit()) {
 			if (!world.isRemote()) {
 				BlockState newState = state.cycle(INVERTED);

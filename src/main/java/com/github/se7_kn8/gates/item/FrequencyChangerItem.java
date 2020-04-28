@@ -51,10 +51,10 @@ public class FrequencyChangerItem extends Item {
 			if (worldIn.isRemote) {
 				playerIn.sendStatusMessage(new TranslationTextComponent("gui.gates.frequency_cleared"), true);
 			}
-			return ActionResult.func_226248_a_(stack);
+			return ActionResult.resultSuccess(stack);
 		}
 
-		return ActionResult.func_226250_c_(stack);
+		return ActionResult.resultPass(stack);
 	}
 
 	@Override
