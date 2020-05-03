@@ -33,5 +33,5 @@
   "gui.gates.apply": "Apply",
 
   "gui.gates.usage.portable_transmitter": "Right-Click to activate.\nSHIFT-Right-Click to config.\nWarning: Transmitter blocks will always have priority on a frequency.",
-  "gui.gates.usage.frequency_changer": "SHIFT-Right-Click on a wireless block to copy the frequency.\nRight-Click to apply the saved frequency on a wireless block.\nSHIFT-Right-Click in the air to clear the saved frequency.",
+  "gui.gates.usage.frequency_changer": "SHIFT-Right-Click on a wireless block to copy the frequency.\nRight-Click to apply the saved frequency on a wireless block.\nSHIFT-Right-Click in the air to clear the saved frequency."
 }
