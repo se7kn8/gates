@@ -9,6 +9,7 @@ If you find a bug or want suggest a feature just open a [Issue](https://github.c
 Current features:
 ===========
  - AND / OR / XOR / NAND / NOR / XNOR / NOT Gate
+ - Slow / Fast Repeater
  - Rain / Thunder Detector
  - Wireless Redstone:
    - Transmitter / Receiver
