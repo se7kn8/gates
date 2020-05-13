@@ -1,4 +1,4 @@
-gates [![](http://cf.way2muchnoise.eu/redstone-gates.svg)](https://www.curseforge.com/minecraft/mc-mods/redstone-gates) [![](http://cf.way2muchnoise.eu/versions/redstone-gates.svg)](https://www.curseforge.com/minecraft/mc-mods/redstone-gates/files)
+gates [![](https://cf.way2muchnoise.eu/redstone-gates.svg)](https://www.curseforge.com/minecraft/mc-mods/redstone-gates) [![](https://cf.way2muchnoise.eu/versions/redstone-gates.svg)](https://www.curseforge.com/minecraft/mc-mods/redstone-gates/files)
 ===========================
 A minecraft mod about redstone gates and other redstone stuff.
 
