@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    " T ",
+    "#X#",
+    "III"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:redstone"
+    },
+    "T": {
+      "item": "minecraft:redstone_torch"
+    },
+    "X": {
+      "item": "minecraft:quartz"
+    },
+    "I": {
+      "item": "minecraft:stone"
+    }
+  },
+  "result": {
+    "item": "gates:redstone_clock"
+  }
+}

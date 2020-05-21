@@ -2,6 +2,7 @@ package com.github.se7_kn8.gates;
 
 import com.github.se7_kn8.gates.packages.UpdateFrequencyPacket;
 import com.github.se7_kn8.gates.packages.UpdatePortableTransmitterPacket;
+import com.github.se7_kn8.gates.packages.UpdateRedstoneClockPacket;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -19,6 +20,7 @@ public class PacketHandler {
 		int index = 0;
 		MOD_CHANNEL.registerMessage(index++, UpdateFrequencyPacket.class, UpdateFrequencyPacket::encode, UpdateFrequencyPacket::new, UpdateFrequencyPacket::handle);
 		MOD_CHANNEL.registerMessage(index++, UpdatePortableTransmitterPacket.class, UpdatePortableTransmitterPacket::encode, UpdatePortableTransmitterPacket::new, UpdatePortableTransmitterPacket::handle);
+		MOD_CHANNEL.registerMessage(index++, UpdateRedstoneClockPacket.class, UpdateRedstoneClockPacket::encode, UpdateRedstoneClockPacket::new, UpdateRedstoneClockPacket::handle);
 	}
 
 }

@@ -4,6 +4,7 @@ import com.github.se7_kn8.gates.api.CapabilityUtil;
 import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
 import com.github.se7_kn8.gates.item.FrequencyChangerItem;
 import com.github.se7_kn8.gates.tile.TransmitterTileEntity;
+import com.github.se7_kn8.gates.util.Utils;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -34,7 +35,7 @@ import java.util.Random;
 
 public class TransmitterBlock extends ContainerBlock {
 
-	public static final VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.makeCuboidShape(7.0D, 0.0D, 7.0D, 9.0D, 10.0D, 9.0D));
+	public static final VoxelShape SHAPE = VoxelShapes.or(Utils.GATE_SHAPE, Block.makeCuboidShape(7.0D, 0.0D, 7.0D, 9.0D, 10.0D, 9.0D));
 
 	public static IntegerProperty POWER = BlockStateProperties.POWER_0_15;
 

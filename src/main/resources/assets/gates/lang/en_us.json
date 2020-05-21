@@ -20,6 +20,10 @@
 
   "block.gates.wireless_redstone_lamp": "Wireless Redstone Lamp",
 
+
+  "block.gates.redstone_clock": "Redstone Clock",
+  "block.gates.advanced_redstone_clock": "Advanced Redstone Clock",
+
   "item.gates.redstone_torch_pearl": "Redstone-Ender Torch",
   "item.gates.frequency_changer": "Frequency Tool",
   "item.gates.portable_redstone_transmitter": "Portable Redstone Transmitter",
@@ -31,7 +35,9 @@
   "gui.gates.frequency_set": "Set Frequency!",
   "gui.gates.no_frequency": "No frequency set!",
   "gui.gates.apply": "Apply",
+  "gui.gates.clock_time": "Time",
+  "gui.gates.clock_length": "Duration",
 
-  "gui.gates.usage.portable_transmitter": "Right-Click to activate.\nSHIFT-Right-Click to config.\nWarning: Transmitter blocks will always have priority on a frequency.",
+  "gui.gates.usage.portable_transmitter": "Right-Click to ac tivate.\nSHIFT-Right-Click to config.\nWarning: Transmitter blocks will always have priority on a frequency.",
   "gui.gates.usage.frequency_changer": "SHIFT-Right-Click on a wireless block to copy the frequency.\nRight-Click to apply the saved frequency on a wireless block.\nSHIFT-Right-Click in the air to clear the saved frequency."
 }

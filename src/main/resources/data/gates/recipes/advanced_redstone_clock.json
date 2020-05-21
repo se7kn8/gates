@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    " C ",
+    "CXC",
+    " C "
+  ],
+  "key": {
+    "#": {
+      "item": "gates:redstone_clock"
+    },
+    "T": {
+      "item": "minecraft:clock"
+    }
+  },
+  "result": {
+    "item": "gates:advanced_redstone_clock"
+  }
+}

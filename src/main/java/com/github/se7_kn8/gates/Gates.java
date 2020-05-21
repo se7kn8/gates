@@ -1,6 +1,7 @@
 package com.github.se7_kn8.gates;
 
 import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
+import com.github.se7_kn8.gates.client.screen.AdvancedRedstoneClockScreen;
 import com.github.se7_kn8.gates.client.screen.FrequencyScreen;
 import com.github.se7_kn8.gates.client.screen.PortableTransmitterScreen;
 import net.minecraft.client.gui.ScreenManager;
@@ -42,8 +43,9 @@ public class Gates {
 	}
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
-		ScreenManager.registerFactory(GatesContainers.TRANSMITTER_CONTAINER_TYPE, FrequencyScreen::new);
+		ScreenManager.registerFactory(GatesContainers.FREQUENCY_CONTAINER_TYPE, FrequencyScreen::new);
 		ScreenManager.registerFactory(GatesContainers.PORTABLE_TRANSMITTER_CONTAINER_TYPE, PortableTransmitterScreen::new);
+		ScreenManager.registerFactory(GatesContainers.ADVANCED_REDSTONE_CLOCK_CONTAINER_TYPE, AdvancedRedstoneClockScreen::new);
 		RenderTypeLookup.setRenderLayer(GatesBlocks.AND_GATE, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(GatesBlocks.OR_GATE, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(GatesBlocks.XOR_GATE, RenderType.getCutout());
@@ -57,6 +59,9 @@ public class Gates {
 
 		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_RECEIVER, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER, RenderType.getCutout());
+
+		RenderTypeLookup.setRenderLayer(GatesBlocks.REDSTONE_CLOCK, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.ADVANCED_REDSTONE_CLOCK, RenderType.getCutout());
 
 	}
 

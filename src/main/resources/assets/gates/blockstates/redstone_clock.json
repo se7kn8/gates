@@ -1,0 +1,119 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "gates:block/redstone_clock/redstone_clock"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"powered": false},
+          {"clock_speed": 1}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_1_off"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"powered": false},
+          {"clock_speed": 2}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_2_off"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"powered": false},
+          {"clock_speed": 3}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_3_off"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"powered": false},
+          {"clock_speed": 4}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_4_off"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"powered": false},
+          {"clock_speed": 5}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_5_off"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"powered": true},
+          {"clock_speed": 1}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_1_on"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"powered": true},
+          {"clock_speed": 2}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_2_on"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"powered": true},
+          {"clock_speed": 3}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_3_on"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"powered": true},
+          {"clock_speed": 4}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_4_on"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"powered": true},
+          {"clock_speed": 5}
+        ]
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_5_on"
+      }
+    }
+  ]
+}
