@@ -6,10 +6,10 @@
     " C "
   ],
   "key": {
-    "#": {
+    "X": {
       "item": "gates:redstone_clock"
     },
-    "T": {
+    "C": {
       "item": "minecraft:clock"
     }
   },
