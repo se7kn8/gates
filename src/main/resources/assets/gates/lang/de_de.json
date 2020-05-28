@@ -20,6 +20,8 @@
 
   "block.gates.wireless_redstone_lamp": "Kabellose Redstone Lampe",
 
+  "block.gates.rotary_switch": "Drehschalter",
+
   "block.gates.redstone_clock": "Redstone Uhr",
   "block.gates.advanced_redstone_clock": "Erweiterte Redstone Uhr",
 

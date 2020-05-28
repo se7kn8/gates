@@ -54,6 +54,8 @@ public class GatesBlocks {
 	public static final Block REDSTONE_CLOCK = addBlock("redstone_clock", new RedstoneClock(), Gates.GATES_ITEM_GROUP);
 	public static final Block ADVANCED_REDSTONE_CLOCK = addBlock("advanced_redstone_clock", new AdvancedRedstoneClock(), Gates.GATES_ITEM_GROUP);
 
+	public static final Block ROTARY_SWITCH = addBlock("rotary_switch", new RotarySwitch(), Gates.GATES_ITEM_GROUP);
+
 	public static final TileEntityType<CustomDetectorTile> RAIN_DETECTOR_TILE_ENTITY = addTileEntity("rain_detector", CustomDetectorTile::new, RAIN_DETECTOR, THUNDER_DETECTOR);
 
 	public static final TileEntityType<ReceiverTileEntity> RECEIVER_TILE_ENTITY_TYPE = addTileEntity("receiver", ReceiverTileEntity::new, WIRELESS_REDSTONE_RECEIVER);

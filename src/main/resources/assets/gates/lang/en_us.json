@@ -20,6 +20,7 @@
 
   "block.gates.wireless_redstone_lamp": "Wireless Redstone Lamp",
 
+  "block.gates.rotary_switch": "Rotary Switch",
 
   "block.gates.redstone_clock": "Redstone Clock",
   "block.gates.advanced_redstone_clock": "Advanced Redstone Clock",
