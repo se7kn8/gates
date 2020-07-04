@@ -9,6 +9,7 @@ import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
 import com.github.se7_kn8.gates.tile.RedstoneClockTileEntity;
 import com.github.se7_kn8.gates.tile.TransmitterTileEntity;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -30,6 +31,8 @@ public class GatesBlocks {
 
 	public static final Map<ResourceLocation, Block> BLOCKS = new HashMap<>();
 	public static final List<TileEntityType<? extends TileEntity>> TILE_ENTITIES = new ArrayList<>();
+
+	public static final Block REDSTONE_BLOCK_OFF = addBlock("redstone_block_off", new Block(Block.Properties.from(Blocks.REDSTONE_BLOCK)), Gates.GATES_ITEM_GROUP);
 
 	public static final Block AND_GATE = addBlock("and_gate", new TwoInputLogicGate((x1, x2) -> x1 && x2), Gates.GATES_ITEM_GROUP);
 	public static final Block OR_GATE = addBlock("or_gate", new TwoInputLogicGate((x1, x2) -> x1 || x2), Gates.GATES_ITEM_GROUP);
@@ -55,6 +58,11 @@ public class GatesBlocks {
 	public static final Block ADVANCED_REDSTONE_CLOCK = addBlock("advanced_redstone_clock", new AdvancedRedstoneClock(), Gates.GATES_ITEM_GROUP);
 
 	public static final Block ROTARY_SWITCH = addBlock("rotary_switch", new RotarySwitch(), Gates.GATES_ITEM_GROUP);
+
+	public static final Block RS_FLIP_FLOP = addBlock("rs_flip_flop", new RSFlipFlop(), Gates.GATES_ITEM_GROUP);
+
+	// TODO contains a log of bugs
+	//public static final Block D_FLIP_FLOP = addBlock("t_flip_flop", new TFlipFlop(), Gates.GATES_ITEM_GROUP);
 
 	public static final TileEntityType<CustomDetectorTile> RAIN_DETECTOR_TILE_ENTITY = addTileEntity("rain_detector", CustomDetectorTile::new, RAIN_DETECTOR, THUNDER_DETECTOR);
 

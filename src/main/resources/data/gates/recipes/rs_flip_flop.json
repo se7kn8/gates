@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    " # ",
+    "#X#",
+    "III"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:redstone_torch"
+    },
+    "X": {
+      "item": "gates:redstone_block_off"
+    },
+    "I": {
+      "item": "minecraft:stone"
+    }
+  },
+  "result": {
+    "item": "gates:rs_flip_flop"
+  }
+}

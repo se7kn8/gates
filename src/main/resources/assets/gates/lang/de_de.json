@@ -1,6 +1,8 @@
 {
   "itemGroup.gates": "Gates",
 
+  "block.gates.redstone_block_off": "Redstone Block (Aus)",
+
   "block.gates.and_gate": "UND Gatter",
   "block.gates.or_gate": "ODER Gatter",
   "block.gates.not_gate": "NICHT Gatter",
@@ -24,6 +26,8 @@
 
   "block.gates.redstone_clock": "Redstone Uhr",
   "block.gates.advanced_redstone_clock": "Erweiterte Redstone Uhr",
+
+  "block.gates.rs_flip_flop": "RS Flipflop",
 
   "item.gates.redstone_torch_pearl": "Redstone-Ender Fackel",
   "item.gates.frequency_changer": "Frequenz Werkzeug",

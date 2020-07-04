@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "gates:block/redstone_block/redstone_block_off" }
+  }
+}

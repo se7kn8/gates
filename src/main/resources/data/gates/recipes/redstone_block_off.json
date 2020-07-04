@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "B",
+    "T"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:redstone_block"
+    },
+    "T": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "result": {
+    "item": "gates:redstone_block_off"
+  }
+}

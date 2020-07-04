@@ -1,0 +1,6 @@
+{
+  "parent": "gates:block/redstone_block/small_redstone_block",
+  "textures": {
+    "block": "gates:block/redstone_block_off"
+  }
+}
