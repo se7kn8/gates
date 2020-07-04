@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.5.2'
+version = '1.6'
 group = 'com.github.se7_kn8.gates' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'gates'
 
@@ -104,7 +104,7 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.15.2-31.1.74'
 
 
-    compileOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.4:api")
+    // compileOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.4:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.4")
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
