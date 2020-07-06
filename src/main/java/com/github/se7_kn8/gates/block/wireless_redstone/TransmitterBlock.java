@@ -73,12 +73,6 @@ public class TransmitterBlock extends ContainerBlock {
 		return BlockRenderType.MODEL;
 	}
 
-	/* TODO
-	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
-	}*/
-
 	@Override
 	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
 		super.onBlockAdded(state, worldIn, pos, oldState, isMoving);

@@ -63,7 +63,7 @@ public class CustomDetector extends ContainerBlock {
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand p_220051_5_, BlockRayTraceResult p_220051_6_) {
 		if (player.isAllowEdit()) {
 			if (!world.isRemote()) {
-				BlockState newState = state.cycle(INVERTED);
+				BlockState newState = state.func_235896_a_(INVERTED);
 				world.setBlockState(pos, newState, 4);
 				updatePower(newState, world, pos);
 			}

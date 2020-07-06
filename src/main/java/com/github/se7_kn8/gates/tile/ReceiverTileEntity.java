@@ -6,6 +6,8 @@ import com.github.se7_kn8.gates.api.IWirelessNode;
 import com.github.se7_kn8.gates.block.wireless_redstone.ReceiverBlock;
 import com.github.se7_kn8.gates.container.FrequencyContainer;
 import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -13,8 +15,10 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -22,11 +26,23 @@ import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class ReceiverTileEntity extends TileEntity implements INamedContainerProvider {
 
+	public interface IWirelessReceiver {
+		void onPowerChange(World world, BlockPos pos, int newPower);
+	}
+
+	private String translationKey = "block.gates.receiver";
+
 	public ReceiverTileEntity() {
 		super(GatesBlocks.RECEIVER_TILE_ENTITY_TYPE);
+	}
+
+	public void setTranslationKey(String translationKey) {
+		this.translationKey = translationKey;
 	}
 
 	private LazyOptional<IWirelessNode> wireless = LazyOptional.of(this::createWireless);
@@ -46,7 +62,10 @@ public class ReceiverTileEntity extends TileEntity implements INamedContainerPro
 			@Override
 			public void setPower(int newPower) {
 				super.setPower(newPower);
-				world.setBlockState(pos, world.getBlockState(pos).with(ReceiverBlock.POWER, newPower));
+				Block block = world.getBlockState(pos).getBlock();
+				if (block instanceof IWirelessReceiver) {
+					((IWirelessReceiver) block).onPowerChange(world, pos, newPower);
+				}
 				markDirty();
 			}
 		};
@@ -62,10 +81,10 @@ public class ReceiverTileEntity extends TileEntity implements INamedContainerPro
 	}
 
 	@Override
-	public void read(CompoundNBT compound) {
+	public void func_230337_a_(BlockState state, CompoundNBT compound) {
+		super.func_230337_a_(state, compound);
 		CompoundNBT wirelessTag = compound.getCompound("wireless");
 		wireless.ifPresent(c -> ((INBTSerializable<CompoundNBT>) c).deserializeNBT(wirelessTag));
-		super.read(compound);
 	}
 
 	@Override
@@ -79,7 +98,7 @@ public class ReceiverTileEntity extends TileEntity implements INamedContainerPro
 
 	@Override
 	public ITextComponent getDisplayName() {
-		return new TranslationTextComponent("block.gates.receiver");
+		return new TranslationTextComponent(translationKey);
 	}
 
 	@Nullable

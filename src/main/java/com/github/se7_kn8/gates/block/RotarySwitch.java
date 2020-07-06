@@ -83,7 +83,7 @@ public class RotarySwitch extends HorizontalFaceBlock {
 				power -= 1;
 				newState = state.with(POWER, power);
 			} else {
-				newState = state.cycle(POWER);
+				newState = state.func_235896_a_(POWER);
 			}
 			worldIn.playSound(null, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 0.3F, 0.6f);
 			worldIn.setBlockState(pos, newState);

@@ -59,6 +59,8 @@ public class Gates {
 
 		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_RECEIVER, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_LAMP, RenderType.getCutout());
+
 
 		RenderTypeLookup.setRenderLayer(GatesBlocks.REDSTONE_CLOCK, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(GatesBlocks.ADVANCED_REDSTONE_CLOCK, RenderType.getCutout());

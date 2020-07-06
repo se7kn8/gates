@@ -6,6 +6,7 @@ import com.github.se7_kn8.gates.api.IWirelessNode;
 import com.github.se7_kn8.gates.block.wireless_redstone.TransmitterBlock;
 import com.github.se7_kn8.gates.container.FrequencyContainer;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -68,10 +69,10 @@ public class TransmitterTileEntity extends TileEntity implements INamedContainer
 	}
 
 	@Override
-	public void read(CompoundNBT compound) {
+	public void func_230337_a_(BlockState state, CompoundNBT compound) {
+		super.func_230337_a_(state, compound);
 		CompoundNBT wirelessTag = compound.getCompound("wireless");
 		wireless.ifPresent(c -> ((INBTSerializable<CompoundNBT>) c).deserializeNBT(wirelessTag));
-		super.read(compound);
 	}
 
 	@Override

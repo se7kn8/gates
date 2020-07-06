@@ -1,4 +1,4 @@
-package com.github.se7_kn8.gates.block;
+package com.github.se7_kn8.gates.block.redstone_clock;
 
 import com.github.se7_kn8.gates.block.redstone_clock.RedstoneClockBaseBlock;
 import com.github.se7_kn8.gates.tile.RedstoneClockTileEntity;

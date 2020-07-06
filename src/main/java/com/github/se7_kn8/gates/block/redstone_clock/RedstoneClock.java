@@ -1,4 +1,4 @@
-package com.github.se7_kn8.gates.block;
+package com.github.se7_kn8.gates.block.redstone_clock;
 
 import com.github.se7_kn8.gates.block.redstone_clock.RedstoneClockBaseBlock;
 import com.github.se7_kn8.gates.tile.RedstoneClockTileEntity;
@@ -25,7 +25,7 @@ public class RedstoneClock extends RedstoneClockBaseBlock {
 			if (worldIn.isRemote) {
 				return ActionResultType.SUCCESS;
 			} else {
-				BlockState newBlockState = state.cycle(CLOCK_SPEED);
+				BlockState newBlockState = state.func_235896_a_(CLOCK_SPEED);
 				worldIn.setBlockState(pos, newBlockState);
 				TileEntity entity = worldIn.getTileEntity(pos);
 				if (entity instanceof RedstoneClockTileEntity) {

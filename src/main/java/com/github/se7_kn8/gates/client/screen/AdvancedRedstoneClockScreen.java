@@ -4,12 +4,15 @@ import com.github.se7_kn8.gates.PacketHandler;
 import com.github.se7_kn8.gates.container.AdvancedRedstoneClockContainer;
 import com.github.se7_kn8.gates.packages.UpdateRedstoneClockPacket;
 import com.github.se7_kn8.gates.util.Utils;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+
+import javax.annotation.Nonnull;
 
 public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedstoneClockContainer> {
 
@@ -25,26 +28,33 @@ public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedst
 	}
 
 	@Override
-	protected void init() {
-		super.init();
+	// mappings: init
+	protected void func_231160_c_() {
+		super.func_231160_c_();
 
-		clockTimeField = new TextFieldWidget(this.font, this.width / 2 - 75, this.height / 2 - 50, 70, 20, I18n.format("gui.gates.clock_time"));
-		clockLengthField = new TextFieldWidget(this.font, this.width / 2 + 5, this.height / 2 - 50, 70, 20, I18n.format("gui.gates.clock_length"));
+		// mappings: font, width, height
+		clockTimeField = new TextFieldWidget(this.field_230712_o_, this.field_230708_k_ / 2 - 75, this.field_230709_l_ / 2 - 50, 70, 20, new TranslationTextComponent("gui.gates.clock_time"));
+		clockLengthField = new TextFieldWidget(this.field_230712_o_, this.field_230708_k_ / 2 + 5, this.field_230709_l_ / 2 - 50, 70, 20, new TranslationTextComponent("gui.gates.clock_length"));
 
 		clockTimeField.setValidator(Utils.NUMBER_STRING_9_CHARACTERS);
 		clockLengthField.setValidator(Utils.NUMBER_STRING_9_CHARACTERS);
-		applyButton = this.addButton(new Button(this.width / 2, this.height / 2 - 25, 80, 20, I18n.format("gui.gates.apply"), p_onPress_1_ -> {
+		// mappings: addButton, width, height
+		applyButton = this.func_230480_a_(new Button(this.field_230708_k_ / 2, this.field_230709_l_ / 2 - 25, 80, 20, new TranslationTextComponent("gui.gates.apply"), p_onPress_1_ -> {
 			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateRedstoneClockPacket(getTilePos(), Integer.parseInt(this.clockTimeField.getText()), Integer.parseInt(this.clockLengthField.getText())));
 		}));
 
-		this.children.add(clockTimeField);
-		this.children.add(clockLengthField);
-		this.applyButton.visible = false;
+		// mappings: children
+		this.field_230705_e_.add(clockTimeField);
+		this.field_230705_e_.add(clockLengthField);
+
+		// mappings: visible
+		this.applyButton.field_230694_p_ = false;
 	}
 
 	@Override
-	public void tick() {
-		super.tick();
+	// mappings: tick
+	public void func_231023_e_() {
+		super.func_231023_e_();
 		this.clockLengthField.tick();
 		this.clockTimeField.tick();
 
@@ -78,22 +88,28 @@ public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedst
 			}
 		}
 
-		this.applyButton.visible = change && enableButton;
+		// mappings: visible
+		this.applyButton.field_230694_p_ = change && enableButton;
 	}
 
 	@Override
-	public void render(int mouseX, int mouseY, float partialTicks) {
-		super.render(mouseX, mouseY, partialTicks);
+	// mappings: render
+	public void func_230450_a_(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
+		super.func_230450_a_(stack, partialTicks, mouseX, mouseY);
 
-		this.clockTimeField.render(mouseX, mouseY, partialTicks);
-		this.clockLengthField.render(mouseX, mouseY, partialTicks);
+		// mappings: render
+		this.clockTimeField.func_230430_a_(stack, mouseX, mouseY, partialTicks);
+		this.clockLengthField.func_230430_a_(stack, mouseX, mouseY, partialTicks);
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-		this.font.drawString(new TranslationTextComponent("gui.gates.clock_time").getFormattedText(), 13, 20, 4210752);
-		this.font.drawString(new TranslationTextComponent("gui.gates.clock_length").getFormattedText(), 94, 20, 4210752);
+	// mappings: drawGuiContainerForegroundLayer
+	protected void func_230451_b_(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
+		super.func_230451_b_(stack, mouseX, mouseY);
+
+		// mappings: this.font.drawString
+		this.field_230712_o_.func_238422_b_(stack, new TranslationTextComponent("gui.gates.clock_time"), 13, 20, 4210752);
+		this.field_230712_o_.func_238422_b_(stack, new TranslationTextComponent("gui.gates.clock_length"), 94, 20, 4210752);
 	}
 
 }

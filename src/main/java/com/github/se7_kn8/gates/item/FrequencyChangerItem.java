@@ -46,7 +46,7 @@ public class FrequencyChangerItem extends Item {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack stack = playerIn.getHeldItem(handIn);
 
-		if (playerIn.func_226563_dT_()) { // TODO check
+		if (playerIn.isSneaking()) {
 			stack.setTag(new CompoundNBT());
 			if (worldIn.isRemote) {
 				playerIn.sendStatusMessage(new TranslationTextComponent("gui.gates.frequency_cleared"), true);

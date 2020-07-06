@@ -2,6 +2,7 @@ package com.github.se7_kn8.gates.client.screen;
 
 import com.github.se7_kn8.gates.Gates;
 import com.github.se7_kn8.gates.container.BasicPlayerContainer;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
@@ -20,25 +21,25 @@ public abstract class BasicPlayerScreen<T extends BasicPlayerContainer> extends 
 	}
 
 	@Override
-	public void render(int mouseX, int mouseY, float ticks) {
-		this.renderBackground();
-		super.render(mouseX, mouseY, ticks);
-		this.renderHoveredToolTip(mouseX, mouseY);
+	// mappings: render
+	public void func_230430_a_(MatrixStack stack, int mouseX, int mouseY, float ticks) {
+		// mappings: renderBackground
+		this.func_230446_a_(stack);
+		super.func_230430_a_(stack, mouseX, mouseY, ticks);
+
+		// mappings: renderHoveredMouseTooltip
+		this.func_230459_a_(stack, mouseX, mouseY);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+	// mappings: drawGuiContainerBackgroundLayer
+	protected void func_230450_a_(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.minecraft.getTextureManager().bindTexture(background);
-		int i = (this.width - this.xSize) / 2;
-		int j = (this.height - this.ySize) / 2;
-		this.blit(i, j, 0, 0, this.xSize, this.ySize);
-	}
+		// mappings: this.minecraft
+		this.field_230706_i_.getTextureManager().bindTexture(background);
 
-	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		this.font.drawString(this.title.getFormattedText(), 8.0F, 4.0F, 4210752);
-		this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float) (this.ySize - 94), 4210752);
+		// mappings: this.blit
+		this.func_238474_b_(stack, this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 	}
 
 	public TileEntity getTile() {

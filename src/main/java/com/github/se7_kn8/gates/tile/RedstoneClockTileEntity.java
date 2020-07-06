@@ -1,8 +1,9 @@
 package com.github.se7_kn8.gates.tile;
 
 import com.github.se7_kn8.gates.GatesBlocks;
-import com.github.se7_kn8.gates.block.RedstoneClock;
+import com.github.se7_kn8.gates.block.redstone_clock.RedstoneClock;
 import com.github.se7_kn8.gates.container.AdvancedRedstoneClockContainer;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -13,6 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class RedstoneClockTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
@@ -31,8 +33,8 @@ public class RedstoneClockTileEntity extends TileEntity implements ITickableTile
 	}
 
 	@Override
-	public void read(CompoundNBT compound) {
-		super.read(compound);
+	public void func_230337_a_(@Nonnull BlockState state, @Nonnull CompoundNBT compound) {
+		super.func_230337_a_(state, compound);
 		remainingTicks = compound.getInt("remaining");
 		poweredTicks = compound.getInt("powered");
 		clockLength = compound.getInt("clockLength");

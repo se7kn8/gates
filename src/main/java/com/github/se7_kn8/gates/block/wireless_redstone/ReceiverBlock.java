@@ -1,13 +1,11 @@
 package com.github.se7_kn8.gates.block.wireless_redstone;
 
 import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
-import com.github.se7_kn8.gates.item.FrequencyChangerItem;
 import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
 import com.github.se7_kn8.gates.util.Utils;
+import com.github.se7_kn8.gates.util.WirelessRedstoneUtil;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
@@ -27,12 +25,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.network.NetworkHooks;
+import org.apache.http.impl.conn.Wire;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ReceiverBlock extends ContainerBlock {
+public class ReceiverBlock extends ContainerBlock implements ReceiverTileEntity.IWirelessReceiver {
 
 	public static final VoxelShape SHAPE = VoxelShapes.or(Utils.GATE_SHAPE, Block.makeCuboidShape(7.0D, 0.0D, 7.0D, 9.0D, 10.0D, 9.0D));
 
@@ -43,24 +41,10 @@ public class ReceiverBlock extends ContainerBlock {
 		this.setDefaultState(this.stateContainer.getBaseState().with(POWER, 0));
 	}
 
-	public ReceiverBlock(Properties properties) {
-		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(POWER, 0));
-	}
-
 
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-		if (player.getHeldItem(hand).getItem() instanceof FrequencyChangerItem && player.getHeldItem(hand).hasTag() && player.getHeldItem(hand).getTag().contains("frequency")) {
-			return ActionResultType.PASS;
-		}
-		if (!world.isRemote) {
-			TileEntity entity = world.getTileEntity(pos);
-			if (entity instanceof ReceiverTileEntity) {
-				NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) entity, entity.getPos());
-			}
-		}
-		return ActionResultType.SUCCESS;
+		return WirelessRedstoneUtil.onBlockActivated(world, pos, player, hand);
 	}
 
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
@@ -79,19 +63,14 @@ public class ReceiverBlock extends ContainerBlock {
 
 	@Override
 	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+		WirelessRedstoneUtil.onBlockAdded(state, worldIn, pos, oldState);
 		super.onBlockAdded(state, worldIn, pos, oldState, isMoving);
-		if (!worldIn.isRemote && (state.getBlock() != oldState.getBlock())) {
-			RedstoneReceiverWorldSavedData data = RedstoneReceiverWorldSavedData.get((ServerWorld) worldIn);
-			data.addNode(worldIn, pos);
-		}
 	}
 
 
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!worldIn.isRemote && (newState.getBlock() != state.getBlock())) {
-			RedstoneReceiverWorldSavedData.get((ServerWorld) worldIn).removeNode(worldIn, pos);
-		}
+		WirelessRedstoneUtil.onReplace(state, worldIn, pos, newState);
 		super.onReplaced(state, worldIn, pos, newState, isMoving);
 	}
 
@@ -134,5 +113,10 @@ public class ReceiverBlock extends ContainerBlock {
 			double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
 			worldIn.addParticle(RedstoneParticleData.REDSTONE_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
+	}
+
+	@Override
+	public void onPowerChange(World world, BlockPos pos, int newPower) {
+		world.setBlockState(pos, world.getBlockState(pos).with(ReceiverBlock.POWER, newPower));
 	}
 }

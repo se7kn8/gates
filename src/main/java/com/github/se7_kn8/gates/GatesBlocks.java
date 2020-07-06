@@ -1,6 +1,8 @@
 package com.github.se7_kn8.gates;
 
 import com.github.se7_kn8.gates.block.*;
+import com.github.se7_kn8.gates.block.redstone_clock.AdvancedRedstoneClock;
+import com.github.se7_kn8.gates.block.redstone_clock.RedstoneClock;
 import com.github.se7_kn8.gates.block.wireless_redstone.ReceiverBlock;
 import com.github.se7_kn8.gates.block.wireless_redstone.TransmitterBlock;
 import com.github.se7_kn8.gates.block.wireless_redstone.WirelessRedstoneLamp;
@@ -67,7 +69,7 @@ public class GatesBlocks {
 	public static final TileEntityType<CustomDetectorTile> RAIN_DETECTOR_TILE_ENTITY = addTileEntity("rain_detector", CustomDetectorTile::new, RAIN_DETECTOR, THUNDER_DETECTOR);
 
 	public static final TileEntityType<ReceiverTileEntity> RECEIVER_TILE_ENTITY_TYPE = addTileEntity("receiver", ReceiverTileEntity::new, WIRELESS_REDSTONE_RECEIVER);
-	public static final TileEntityType<TransmitterTileEntity> TRANSMITTER_TILE_ENTITY_TYPE = addTileEntity("transmitter", TransmitterTileEntity::new, WIRELESS_REDSTONE_TRANSMITTER);
+	public static final TileEntityType<TransmitterTileEntity> TRANSMITTER_TILE_ENTITY_TYPE = addTileEntity("transmitter", TransmitterTileEntity::new, WIRELESS_REDSTONE_TRANSMITTER, WIRELESS_REDSTONE_LAMP);
 	public static final TileEntityType<RedstoneClockTileEntity> REDSTONE_CLOCK_TILE_ENTITY_TYPE = addTileEntity("redstone_clock", RedstoneClockTileEntity::new, REDSTONE_CLOCK, ADVANCED_REDSTONE_CLOCK);
 
 
