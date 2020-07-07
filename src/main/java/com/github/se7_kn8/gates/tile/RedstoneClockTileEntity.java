@@ -33,8 +33,8 @@ public class RedstoneClockTileEntity extends TileEntity implements ITickableTile
 	}
 
 	@Override
-	public void func_230337_a_(@Nonnull BlockState state, @Nonnull CompoundNBT compound) {
-		super.func_230337_a_(state, compound);
+	public void read(@Nonnull BlockState state, @Nonnull CompoundNBT compound) {
+		super.read(state, compound);
 		remainingTicks = compound.getInt("remaining");
 		poweredTicks = compound.getInt("powered");
 		clockLength = compound.getInt("clockLength");

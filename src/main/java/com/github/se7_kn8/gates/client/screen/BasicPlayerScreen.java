@@ -11,6 +11,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 
+import javax.annotation.Nonnull;
+
 public abstract class BasicPlayerScreen<T extends BasicPlayerContainer> extends ContainerScreen<T> {
 
 	protected ResourceLocation background;
@@ -21,11 +23,9 @@ public abstract class BasicPlayerScreen<T extends BasicPlayerContainer> extends 
 	}
 
 	@Override
-	// mappings: render
-	public void func_230430_a_(MatrixStack stack, int mouseX, int mouseY, float ticks) {
-		// mappings: renderBackground
-		this.func_230446_a_(stack);
-		super.func_230430_a_(stack, mouseX, mouseY, ticks);
+	public void render(@Nonnull MatrixStack stack, int mouseX, int mouseY, float ticks) {
+		this.renderBackground(stack);
+		super.render(stack, mouseX, mouseY, ticks);
 
 		// mappings: renderHoveredMouseTooltip
 		this.func_230459_a_(stack, mouseX, mouseY);
@@ -33,20 +33,17 @@ public abstract class BasicPlayerScreen<T extends BasicPlayerContainer> extends 
 
 	@Override
 	// mappings: drawGuiContainerBackgroundLayer
-	protected void func_230450_a_(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
+	protected void func_230450_a_(@Nonnull MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-		// mappings: this.minecraft
-		this.field_230706_i_.getTextureManager().bindTexture(background);
-
-		// mappings: this.blit
-		this.func_238474_b_(stack, this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
+		this.minecraft.getTextureManager().bindTexture(background);
+		this.blit(stack, this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 	}
 
 	public TileEntity getTile() {
 		return getContainer().getTile();
 	}
 
-	public BlockPos getTilePos(){
+	public BlockPos getTilePos() {
 		return getTile().getPos();
 	}
 

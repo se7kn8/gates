@@ -27,19 +27,15 @@ public class PortableTransmitterScreen extends ContainerScreen<PortableRedstoneT
 	}
 
 	@Override
-	// mappings: init
-	protected void func_231160_c_() {
-		super.func_231160_c_();
+	protected void init() {
+		super.init();
 
-		// mappings: font, width, height
-		frequencyField = new TextFieldWidget(this.field_230712_o_, this.field_230708_k_ / 2 - 35, this.field_230709_l_ / 2 - 50, 70, 20, new TranslationTextComponent("gates.gui.transmitter"));
+		frequencyField = new TextFieldWidget(this.font, this.width / 2 - 35, this.height / 2 - 50, 70, 20, new TranslationTextComponent("gates.gui.transmitter"));
 		frequencyField.setValidator(s -> (s.matches("^[0-9]+$") || s.equals("")) && s.length() < 10);
 
-		// mappings: children
-		this.field_230705_e_.add(frequencyField);
+		this.children.add(frequencyField);
 
-		// mappings: addButton, width, height
-		this.func_230480_a_(new Button(this.field_230708_k_ / 2 - 40, this.field_230709_l_ / 2, 80, 20, new TranslationTextComponent("gui.gates.apply"), button -> {
+		this.addButton(new Button(this.width / 2 - 40, this.height / 2, 80, 20, new TranslationTextComponent("gui.gates.apply"), button -> {
 			if (!frequencyField.getText().trim().equals("")) {
 				Hand hand = Minecraft.getInstance().player.getHeldItem(Hand.MAIN_HAND).getItem() == GatesItems.PORTABLE_REDSTONE_TRANSMITTER ? Hand.MAIN_HAND : Hand.OFF_HAND;
 				PacketHandler.MOD_CHANNEL.sendToServer(new UpdatePortableTransmitterPacket(Integer.parseInt(frequencyField.getText()), hand));
@@ -52,22 +48,17 @@ public class PortableTransmitterScreen extends ContainerScreen<PortableRedstoneT
 	}
 
 	@Override
-	// mappings: tick
-	public void func_231023_e_() {
-		super.func_231023_e_();
+	public void tick() {
+		super.tick();
 		this.frequencyField.tick();
 	}
 
 	@Override
-	// mappings: render
-	public void func_230430_a_(MatrixStack stack, int mouseX, int mouseY, float partialTicks) {
-		// mappings: renderBackground
-		this.func_230446_a_(stack);
-		super.func_230430_a_(stack, mouseX, mouseY, partialTicks);
+	public void render(MatrixStack stack, int mouseX, int mouseY, float partialTicks) {
+		this.renderBackground(stack);
+		super.render(stack, mouseX, mouseY, partialTicks);
 
-		// mappings: render
-		this.frequencyField.func_230430_a_(stack, mouseX, mouseY, partialTicks);
-		// mappings: renderHoveredTooltip
+		this.frequencyField.render(stack, mouseX, mouseY, partialTicks);
 		this.func_230459_a_(stack, mouseX, mouseY);
 	}
 
@@ -81,7 +72,7 @@ public class PortableTransmitterScreen extends ContainerScreen<PortableRedstoneT
 	// mappings: drawGuiContainerForegroundLayer
 	protected void func_230451_b_(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
 		super.func_230451_b_(stack, mouseX, mouseY);
-		// mappings: this.font.drawString
-		this.field_230712_o_.func_238422_b_(stack, new TranslationTextComponent("gui.gates.frequency"), 40, 20, 14737632);
+		// mappings: drawString
+		this.font.func_238422_b_(stack, new TranslationTextComponent("gui.gates.frequency"), 40, 20, 14737632);
 	}
 }

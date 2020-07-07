@@ -27,42 +27,34 @@ public class FrequencyScreen extends BasicPlayerScreen<FrequencyContainer> {
 	}
 
 	@Override
-	// mappings: init
-	protected void func_231160_c_() {
-		super.func_231160_c_();
-		// mappings: font, width, height
-		frequencyField = new TextFieldWidget(this.field_230712_o_, this.field_230708_k_ / 2 - 35, this.field_230709_l_ / 2 - 50, 70, 20, new TranslationTextComponent("gui.gates.frequency"));
+	protected void init() {
+		super.init();
+		frequencyField = new TextFieldWidget(this.font, this.width / 2 - 35, this.height / 2 - 50, 70, 20, new TranslationTextComponent("gui.gates.frequency"));
 		frequencyField.setValidator(Utils.NUMBER_STRING_9_CHARACTERS);
 
-		// mappings: addButton, width, height
-		this.func_230480_a_(new Button(this.field_230708_k_ / 2 - 75, this.field_230709_l_ / 2 - 50, 40, 20, new StringTextComponent("<-"), p_onPress_1_ -> {
+		this.addButton(new Button(this.width / 2 - 75, this.height / 2 - 50, 40, 20, new StringTextComponent("<-"), p_onPress_1_ -> {
 			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(getTilePos(), getContainer().getFrequency() - 1));
 		}));
 
-		// mappings: addButton, width, height
-		this.func_230480_a_(new Button(this.field_230708_k_ / 2 + 35, this.field_230709_l_ / 2 - 50, 40, 20, new StringTextComponent("->"), p_onPress_1_ -> {
+		this.addButton(new Button(this.width / 2 + 35, this.height / 2 - 50, 40, 20, new StringTextComponent("->"), p_onPress_1_ -> {
 			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(getTilePos(), getContainer().getFrequency() + 1));
 		}));
 
-		// mappings: addButton, width, height
-		applyButton = this.func_230480_a_(new Button(this.field_230708_k_ / 2, this.field_230709_l_ / 2 - 25, 80, 20, new TranslationTextComponent("gui.gates.apply"), p_onPress_1_ -> {
+		applyButton = this.addButton(new Button(this.width / 2, this.height / 2 - 25, 80, 20, new TranslationTextComponent("gui.gates.apply"), p_onPress_1_ -> {
 			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(getTilePos(), Integer.parseInt(this.frequencyField.getText())));
 		}));
 
-		// mappings: getChildren
-		this.field_230705_e_.add(frequencyField);
+		this.children.add(frequencyField);
 
 		this.setFocusedDefault(frequencyField);
 
-		// mapping: visible
-		this.applyButton.field_230694_p_ = false;
+		this.applyButton.visible = false;
 	}
 
 
 	@Override
-	// mappings: tick
-	public void func_231023_e_() {
-		super.func_231023_e_();
+	public void tick() {
+		super.tick();
 		this.frequencyField.tick();
 		int freq = this.getContainer().getFrequency();
 		if (freq != lastValue) {
@@ -70,21 +62,19 @@ public class FrequencyScreen extends BasicPlayerScreen<FrequencyContainer> {
 			this.frequencyField.setText(String.valueOf(freq));
 		} else {
 			try {
-				this.applyButton.field_230694_p_ = freq != Integer.parseInt(this.frequencyField.getText());
+				this.applyButton.visible = freq != Integer.parseInt(this.frequencyField.getText());
 			} catch (NumberFormatException e) {
 				// field is empty
-				this.applyButton.field_230694_p_ = false;
+				this.applyButton.visible = false;
 			}
 		}
 	}
 
 	@Override
-	// mappings: render
-	protected void func_230450_a_(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
-		super.func_230450_a_(stack, partialTicks, mouseX, mouseY);
+	public void render(@Nonnull MatrixStack stack,int mouseX, int mouseY, float partialTicks) {
+		super.render(stack, mouseX, mouseY, partialTicks);
 
-		// mappings: render
-		this.frequencyField.func_230430_a_(stack, mouseX, mouseY, partialTicks);
+		this.frequencyField.render(stack, mouseX, mouseY, partialTicks);
 	}
 
 
@@ -92,8 +82,8 @@ public class FrequencyScreen extends BasicPlayerScreen<FrequencyContainer> {
 	// mappings: drawGuiContainerForegroundLayer
 	protected void func_230451_b_(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
 		super.func_230451_b_(stack, mouseX, mouseY);
-		// mappings: this.font.drawString
-		this.field_230712_o_.func_238422_b_(stack, new TranslationTextComponent("gui.gates.frequency"), 40, 20, 4210752);
+		// mappings: drawString
+		this.font.func_238422_b_(stack, new TranslationTextComponent("gui.gates.frequency"), 40, 20, 4210752);
 	}
 
 
