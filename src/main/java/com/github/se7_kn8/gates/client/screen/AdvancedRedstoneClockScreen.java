@@ -96,12 +96,12 @@ public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedst
 
 	@Override
 	// mappings: drawGuiContainerForegroundLayer
-	protected void func_230451_b_(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
-		super.func_230451_b_(stack, mouseX, mouseY);
+	protected void drawGuiContainerForegroundLayer(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
+		super.drawGuiContainerForegroundLayer(stack, mouseX, mouseY);
 
 		// mappings: drawString
-		this.font.func_238422_b_(stack, new TranslationTextComponent("gui.gates.clock_time"), 13, 20, 4210752);
-		this.font.func_238422_b_(stack, new TranslationTextComponent("gui.gates.clock_length"), 94, 20, 4210752);
+		this.font.func_243248_b(stack, new TranslationTextComponent("gui.gates.clock_time"), 13, 20, 4210752);
+		this.font.func_243248_b(stack, new TranslationTextComponent("gui.gates.clock_length"), 94, 20, 4210752);
 	}
 
 }

@@ -63,16 +63,14 @@ public class PortableTransmitterScreen extends ContainerScreen<PortableRedstoneT
 	}
 
 	@Override
-	// mappings: drawGuiContainerBackgroundLayer
-	protected void func_230450_a_(@Nonnull MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
+	protected void drawGuiContainerBackgroundLayer(@Nonnull MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
 		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	@Override
-	// mappings: drawGuiContainerForegroundLayer
-	protected void func_230451_b_(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
-		super.func_230451_b_(stack, mouseX, mouseY);
+	protected void drawGuiContainerForegroundLayer(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
+		super.drawGuiContainerForegroundLayer(stack, mouseX, mouseY);
 		// mappings: drawString
-		this.font.func_238422_b_(stack, new TranslationTextComponent("gui.gates.frequency"), 40, 20, 14737632);
+		this.font.func_243248_b(stack, new TranslationTextComponent("gui.gates.frequency"), 40, 20, 14737632);
 	}
 }

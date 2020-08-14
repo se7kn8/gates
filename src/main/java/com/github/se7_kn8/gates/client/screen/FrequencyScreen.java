@@ -71,7 +71,7 @@ public class FrequencyScreen extends BasicPlayerScreen<FrequencyContainer> {
 	}
 
 	@Override
-	public void render(@Nonnull MatrixStack stack,int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull MatrixStack stack, int mouseX, int mouseY, float partialTicks) {
 		super.render(stack, mouseX, mouseY, partialTicks);
 
 		this.frequencyField.render(stack, mouseX, mouseY, partialTicks);
@@ -79,11 +79,10 @@ public class FrequencyScreen extends BasicPlayerScreen<FrequencyContainer> {
 
 
 	@Override
-	// mappings: drawGuiContainerForegroundLayer
-	protected void func_230451_b_(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
-		super.func_230451_b_(stack, mouseX, mouseY);
+	protected void drawGuiContainerForegroundLayer(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
+		super.drawGuiContainerForegroundLayer(stack, mouseX, mouseY);
 		// mappings: drawString
-		this.font.func_238422_b_(stack, new TranslationTextComponent("gui.gates.frequency"), 40, 20, 4210752);
+		this.font.func_243248_b(stack, new TranslationTextComponent("gui.gates.frequency"), 40, 20, 4210752);
 	}
 
 
