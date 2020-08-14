@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.6.1'
+version = '1.6.2'
 group = 'com.github.se7_kn8.gates' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'gates'
 
