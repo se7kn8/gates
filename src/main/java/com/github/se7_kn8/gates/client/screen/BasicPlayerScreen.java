@@ -26,9 +26,7 @@ public abstract class BasicPlayerScreen<T extends BasicPlayerContainer> extends 
 	public void render(@Nonnull MatrixStack stack, int mouseX, int mouseY, float ticks) {
 		this.renderBackground(stack);
 		super.render(stack, mouseX, mouseY, ticks);
-
-		// mappings: renderHoveredMouseTooltip
-		this.func_230459_a_(stack, mouseX, mouseY);
+		this.renderHoveredTooltip(stack, mouseX, mouseY);
 	}
 
 

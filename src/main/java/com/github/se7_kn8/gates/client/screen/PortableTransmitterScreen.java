@@ -59,7 +59,7 @@ public class PortableTransmitterScreen extends ContainerScreen<PortableRedstoneT
 		super.render(stack, mouseX, mouseY, partialTicks);
 
 		this.frequencyField.render(stack, mouseX, mouseY, partialTicks);
-		this.func_230459_a_(stack, mouseX, mouseY);
+		this.renderHoveredTooltip(stack, mouseX, mouseY);
 	}
 
 	@Override

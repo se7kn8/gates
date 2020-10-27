@@ -69,7 +69,7 @@ public class FrequencyChangerItem extends Item {
 
 		CompoundNBT stackNBT = stack.getTag();
 
-		if (ctx.func_225518_g_()) {
+		if (ctx.hasSecondaryUseForPlayer()) {
 			if (CapabilityUtil.findWirelessCapability(ctx.getWorld(), ctx.getPos(), c -> stackNBT.putInt("frequency", c.getFrequency()))) {
 				if (ctx.getWorld().isRemote) {
 					ctx.getPlayer().sendStatusMessage(new TranslationTextComponent("gui.gates.frequency_saved"), true);
