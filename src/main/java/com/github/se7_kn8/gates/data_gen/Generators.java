@@ -17,6 +17,7 @@ public class Generators {
 		LootTables.register(lootGenerator);
 		generator.addProvider(lootGenerator);
 		generator.addProvider(new Recipes(generator));
+		generator.addProvider(new ItemModels(generator, event.getExistingFileHelper()));
 	}
 
 }

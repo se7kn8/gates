@@ -29,6 +29,7 @@ public class Gates {
 		public ItemStack createIcon() {
 			return new ItemStack(GatesBlocks.XNOR_GATE);
 		}
+
 	};
 
 	public Gates() {
