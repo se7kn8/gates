@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "gates:slow_repeater"
+    ]
+  },
+  "criteria": {
+    "has_repeater": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:repeater"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "gates:slow_repeater"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_repeater",
+      "has_the_recipe"
+    ]
+  ]
+}

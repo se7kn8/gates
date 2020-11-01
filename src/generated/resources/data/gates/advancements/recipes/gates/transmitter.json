@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "gates:transmitter"
+    ]
+  },
+  "criteria": {
+    "has_redstone_torch_pearl": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "gates:redstone_torch_pearl"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "gates:transmitter"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_redstone_torch_pearl",
+      "has_the_recipe"
+    ]
+  ]
+}

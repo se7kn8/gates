@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "gates:redstone_block_off"
+    ]
+  },
+  "criteria": {
+    "has_redstone_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:redstone_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "gates:redstone_block_off"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_redstone_block",
+      "has_the_recipe"
+    ]
+  ]
+}

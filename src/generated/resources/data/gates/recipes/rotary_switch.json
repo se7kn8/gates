@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "ABA",
+    " A "
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:rods/wooden"
+    },
+    "B": {
+      "item": "minecraft:lever"
+    }
+  },
+  "result": {
+    "item": "gates:rotary_switch"
+  }
+}

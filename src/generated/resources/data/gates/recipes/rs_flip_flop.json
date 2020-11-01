@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "ABA",
+    "CCC"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:redstone_torch"
+    },
+    "B": {
+      "item": "gates:redstone_block_off"
+    },
+    "C": {
+      "item": "minecraft:stone"
+    }
+  },
+  "result": {
+    "item": "gates:rs_flip_flop"
+  }
+}

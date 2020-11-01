@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "gates:advanced_redstone_clock"
+    ]
+  },
+  "criteria": {
+    "has_redstone_clock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "gates:redstone_clock"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "gates:advanced_redstone_clock"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_redstone_clock",
+      "has_the_recipe"
+    ]
+  ]
+}

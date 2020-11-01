@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "ABA",
+    " A "
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:comparator"
+    },
+    "B": {
+      "item": "gates:redstone_torch_pearl"
+    }
+  },
+  "result": {
+    "item": "gates:transmitter"
+  }
+}

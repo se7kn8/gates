@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "BCB",
+    "DDD"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:redstone_torch"
+    },
+    "B": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "tag": "forge:gems/quartz"
+    },
+    "D": {
+      "item": "minecraft:stone"
+    }
+  },
+  "result": {
+    "item": "gates:redstone_clock"
+  }
+}

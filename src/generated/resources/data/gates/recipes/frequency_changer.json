@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:slimeballs"
+    },
+    {
+      "item": "gates:redstone_torch_pearl"
+    },
+    {
+      "item": "minecraft:paper"
+    }
+  ],
+  "result": {
+    "item": "gates:frequency_changer"
+  }
+}

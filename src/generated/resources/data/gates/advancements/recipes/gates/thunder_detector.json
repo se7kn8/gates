@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "gates:thunder_detector"
+    ]
+  },
+  "criteria": {
+    "has_water_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:water_bucket"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "gates:thunder_detector"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_water_bucket",
+      "has_the_recipe"
+    ]
+  ]
+}

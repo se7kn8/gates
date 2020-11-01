@@ -28,3 +28,5 @@ forge*changelog.txt
 /CREDITS.txt
 /LICENSE.txt
 /README.txt
+/src/generated/resources/.cache/
+/logs
