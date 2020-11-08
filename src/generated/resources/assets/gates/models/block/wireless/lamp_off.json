@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "gates:block/wireless_redstone_lamp_off"
+  }
+}

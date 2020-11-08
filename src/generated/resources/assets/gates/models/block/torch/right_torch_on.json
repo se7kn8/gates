@@ -1,0 +1,6 @@
+{
+  "parent": "gates:block/torch/right_torch",
+  "textures": {
+    "texture": "minecraft:block/redstone_torch"
+  }
+}
