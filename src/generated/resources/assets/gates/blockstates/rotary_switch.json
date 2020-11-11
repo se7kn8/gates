@@ -1,0 +1,2321 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "north",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/rotary_switch_base",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "0",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_0",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "1",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_1",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "2",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_2",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "3",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_3",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "4",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_4",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "5",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_5",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "6",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_6",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "7",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_7",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "8",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_8",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "9",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_9",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "10",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_10",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "11",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_11",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "12",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_12",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "13",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_13",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "14",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_14",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "15",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_15",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/rotary_switch_base",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "0",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_0",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "1",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_1",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "2",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_2",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "3",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_3",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "4",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_4",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "5",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_5",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "6",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_6",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "7",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_7",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "8",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_8",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "9",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_9",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "10",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_10",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "11",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_11",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "12",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_12",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "13",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_13",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "14",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_14",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "15",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_15",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/rotary_switch_base",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "0",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_0",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "1",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_1",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "2",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_2",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "3",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_3",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "4",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_4",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "5",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_5",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "6",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_6",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "7",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_7",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "8",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_8",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "9",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_9",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "10",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_10",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "11",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_11",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "12",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_12",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "13",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_13",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "14",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_14",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "15",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_15",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/rotary_switch_base",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "0",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_0",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "1",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_1",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "2",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_2",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "3",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_3",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "4",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_4",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "5",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_5",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "6",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_6",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "7",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_7",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "8",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_8",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "9",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_9",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "10",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_10",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "11",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_11",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "12",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_12",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "13",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_13",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "14",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_14",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "15",
+        "face": "floor"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_15",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/rotary_switch_base",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "0",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_0",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "1",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "2",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "3",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "4",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_4",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "5",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_5",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "6",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_6",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "7",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_7",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "8",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_8",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "9",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_9",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "10",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_10",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "11",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_11",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "12",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_12",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "13",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_13",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "14",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_14",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "15",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_15",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/rotary_switch_base"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "0",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_0"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "1",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "2",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_2"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "3",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_3"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "4",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_4"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "5",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_5"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "6",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_6"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "7",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_7"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "8",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_8"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "9",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_9"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "10",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_10"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "11",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_11"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "12",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_12"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "13",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_13"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "14",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_14"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "15",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_15"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/rotary_switch_base",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "0",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_0",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "1",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "2",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "3",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "4",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_4",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "5",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_5",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "6",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_6",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "7",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_7",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "8",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_8",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "9",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_9",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "10",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_10",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "11",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_11",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "12",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_12",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "13",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_13",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "14",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_14",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "15",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_15",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/rotary_switch_base",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "0",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_0",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "1",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "2",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "3",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "4",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_4",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "5",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_5",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "6",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_6",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "7",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_7",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "8",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_8",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "9",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_9",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "10",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_10",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "11",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_11",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "12",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_12",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "13",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_13",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "14",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_14",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "15",
+        "face": "wall"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_15",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/rotary_switch_base",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "0",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_0",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "1",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_1",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "2",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_2",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "3",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_3",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "4",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_4",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "5",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_5",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "6",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_6",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "7",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_7",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "8",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_8",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "9",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_9",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "10",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_10",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "11",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_11",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "12",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_12",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "13",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_13",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "14",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_14",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "15",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_15",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/rotary_switch_base",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "0",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_0",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "1",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_1",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "2",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_2",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "3",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_3",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "4",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_4",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "5",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_5",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "6",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_6",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "7",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_7",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "8",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_8",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "9",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_9",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "10",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_10",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "11",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_11",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "12",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_12",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "13",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_13",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "14",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_14",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "15",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_15",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/rotary_switch_base",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "0",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_0",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "1",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_1",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "2",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_2",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "3",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_3",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "4",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_4",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "5",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_5",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "6",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_6",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "7",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_7",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "8",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_8",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "9",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_9",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "10",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_10",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "11",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_11",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "12",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_12",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "13",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_13",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "14",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_14",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "15",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_15",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/rotary_switch_base",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "0",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_0",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "1",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_1",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "2",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_2",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "3",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_3",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "4",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_4",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "5",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_5",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "6",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_6",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "7",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_7",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "8",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_8",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "9",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_9",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "10",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_10",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "11",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_11",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "12",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_12",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "13",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_13",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "14",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_14",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "15",
+        "face": "ceiling"
+      },
+      "apply": {
+        "model": "gates:block/rotary_switch/switch_15",
+        "x": 270,
+        "y": 270
+      }
+    }
+  ]
+}

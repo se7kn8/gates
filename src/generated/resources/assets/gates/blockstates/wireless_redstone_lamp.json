@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "gates:block/wireless_redstone_lamp_off"
+    },
+    "lit=true": {
+      "model": "gates:block/wireless_redstone_lamp_on"
+    }
+  }
+}

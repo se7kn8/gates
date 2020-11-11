@@ -12,7 +12,7 @@ public class Generators {
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
-
+		generator.addProvider(new BlockStates(generator, event.getExistingFileHelper()));
 		LootGenerator lootGenerator = new LootGenerator(generator);
 		LootTables.register(lootGenerator);
 		generator.addProvider(lootGenerator);

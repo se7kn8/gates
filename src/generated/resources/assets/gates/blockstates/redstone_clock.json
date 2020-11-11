@@ -1,0 +1,99 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "gates:block/redstone_clock/redstone_clock"
+      }
+    },
+    {
+      "when": {
+        "clock_speed": "1",
+        "powered": "false"
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_1_off"
+      }
+    },
+    {
+      "when": {
+        "clock_speed": "1",
+        "powered": "true"
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_1_on"
+      }
+    },
+    {
+      "when": {
+        "clock_speed": "2",
+        "powered": "false"
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_2_off"
+      }
+    },
+    {
+      "when": {
+        "clock_speed": "2",
+        "powered": "true"
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_2_on"
+      }
+    },
+    {
+      "when": {
+        "clock_speed": "3",
+        "powered": "false"
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_3_off"
+      }
+    },
+    {
+      "when": {
+        "clock_speed": "3",
+        "powered": "true"
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_3_on"
+      }
+    },
+    {
+      "when": {
+        "clock_speed": "4",
+        "powered": "false"
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_4_off"
+      }
+    },
+    {
+      "when": {
+        "clock_speed": "4",
+        "powered": "true"
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_4_on"
+      }
+    },
+    {
+      "when": {
+        "clock_speed": "5",
+        "powered": "false"
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_5_off"
+      }
+    },
+    {
+      "when": {
+        "clock_speed": "5",
+        "powered": "true"
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_5_on"
+      }
+    }
+  ]
+}

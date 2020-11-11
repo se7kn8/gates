@@ -1,0 +1,25 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "gates:block/wireless/receiver"
+      }
+    },
+    {
+      "when": {
+        "power": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15"
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_on"
+      }
+    },
+    {
+      "when": {
+        "power": "0"
+      },
+      "apply": {
+        "model": "gates:block/torch/main_torch_off"
+      }
+    }
+  ]
+}

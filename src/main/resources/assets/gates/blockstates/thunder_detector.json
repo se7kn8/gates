@@ -1,6 +1,0 @@
-{
-  "variants": {
-    "inverted=false": { "model": "gates:block/sensor/thunder_detector" },
-    "inverted=true": { "model": "gates:block/sensor/thunder_detector_inverted" }
-  }
-}

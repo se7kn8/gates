@@ -2,6 +2,6 @@
   "parent": "gates:block/gate/basic_gate",
   "textures": {
     "top": "gates:block/advanced_redstone_clock_off",
-    "slap": "minecraft:block/gold_block"
+    "slab": "minecraft:block/gold_block"
   }
 }
