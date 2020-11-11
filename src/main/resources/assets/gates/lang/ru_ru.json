@@ -1,0 +1,42 @@
+{
+  "itemGroup.gates": "Элементы цепи",
+
+  "block.gates.redstone_block_off": "Редстоуновый блок (выключенный)",
+
+  "block.gates.and_gate": "Элемент И",
+  "block.gates.or_gate": "Элемент ИЛИ",
+  "block.gates.not_gate": "Элемент НЕ",
+  "block.gates.nand_gate": "Элемент НЕ-И",
+  "block.gates.nor_gate": "Элемент НЕ-ИЛИ",
+  "block.gates.xor_gate": "Элемент Исключающее ИЛИ",
+  "block.gates.xnor_gate": "Элемент Исключающее НЕ-ИЛИ",
+
+  "block.gates.receiver": "Приёмник сигнала",
+  "block.gates.transmitter": "Передатчик сигнала",
+  "block.gates.rain_detector": "Датчик дождя",
+  "block.gates.thunder_detector": "Датчик грозы",
+  "block.gates.slow_repeater": "Медленный повторитель",
+  "block.gates.fast_repeater": "Быстрый повторитель",
+
+  "block.gates.wireless_redstone_lamp": "Беспроводной редстоуновый фонарь",
+  "block.gates.rotary_switch": "Поворотный выключатель",
+  "block.gates.redstone_clock": "Генератор сигналов",
+  "block.gates.advanced_redstone_clock": "Улучшенный генератор сигналов",
+  "block.gates.rs_flip_flop": "RS-триггер",
+
+  "item.gates.redstone_torch_pearl": "Редстоуновый факел Эндера",
+  "item.gates.frequency_changer": "Устройство настройки частоты",
+  "item.gates.portable_redstone_transmitter": "Переносной передатчик сигнала",
+
+  "gui.gates.frequency": "Частота:",
+  "gui.gates.frequency_saved": "Запомнили частоту",
+  "gui.gates.current_frequency_stored": "Частота в памяти: {0}",
+  "gui.gates.frequency_cleared": "Забыли частоту",
+  "gui.gates.frequency_set": "Установили частоту",
+  "gui.gates.no_frequency": "Частота не установлена!",
+  "gui.gates.apply": "Применить",
+  "gui.gates.clock_time": "Время",
+  "gui.gates.clock_length": "Длительность",
+  "gui.gates.usage.portable_transmitter": "ПКМ: Активировать\nПрисесть+ПКМ: Настройка\n\nВнимание: На заданной частоте приоритет будет у блоков-передатчиков",
+  "gui.gates.usage.frequency_changer": "ПКМ по беспроводному блоку: настроить частоту\nБежать+ПКМ по беспроводному блоку: применение скопированной частоты\nПрисесть+ПКМ по беспроводному блоку: копирование его частоты\nПрисесть+ПКМ в воздухе: забыть частоту"
+}
