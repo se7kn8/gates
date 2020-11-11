@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -32,7 +31,9 @@ public class PortableRedstoneTransmitter extends Item {
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		tooltip.add(new TranslationTextComponent("gui.gates.usage.portable_transmitter"));
+		tooltip.add(new TranslationTextComponent("gui.gates.usage.portable_transmitter_1"));
+		tooltip.add(new TranslationTextComponent("gui.gates.usage.portable_transmitter_2"));
+		tooltip.add(new TranslationTextComponent("gui.gates.usage.portable_transmitter_3"));
 		if (stack.hasTag()) {
 			if (stack.getTag().contains("frequency")) {
 				tooltip.add(new TranslationTextComponent("gui.gates.current_frequency_stored", stack.getTag().getInt("frequency")));

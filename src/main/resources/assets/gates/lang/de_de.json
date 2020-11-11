@@ -43,6 +43,10 @@
   "gui.gates.clock_time": "Zeit",
   "gui.gates.clock_length": "Dauer",
 
-  "gui.gates.usage.portable_transmitter": "Recht-Klicke zum Aktivieren.\nUMSCHALT-Rechts-Klicke zum Konfigurieren.\nWarnung: Sender-Blöcke haben immer Vorrang auf einer Frequenz",
-  "gui.gates.usage.frequency_changer": "UMSCHALT-Rechts-Klicke auf ein kabellosen Block, um die Frequenz zu kopieren.\nRechts-Klicke auf einen kabellosen Block, um die gespeicherte Frequenz anzunehmen.\nUMSCHALT-Rechts-Klicke in die Luft, um die Frequenz zu löschen."
+  "gui.gates.usage.portable_transmitter_1": "Recht-Klicke zum Aktivieren.",
+  "gui.gates.usage.portable_transmitter_": "UMSCHALT-Rechts-Klicke zum Konfigurieren.",
+  "gui.gates.usage.portable_transmitter_3": "Warnung: Sender-Blöcke haben immer Vorrang auf einer Frequenz",
+  "gui.gates.usage.frequency_changer_1": "UMSCHALT-Rechts-Klicke auf einen kabellosen Block, um die Frequenz zu kopieren.",
+  "gui.gates.usage.frequency_changer_2": "Rechts-Klicke auf einen kabellosen Block, um die gespeicherte Frequenz anzunehmen.",
+  "gui.gates.usage.frequency_changer_3": "UMSCHALT-Rechts-Klicke in die Luft, um die Frequenz zu löschen."
 }

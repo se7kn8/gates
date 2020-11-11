@@ -1,6 +1,5 @@
 {
   "itemGroup.gates": "논리 게이트",
-
   "block.gates.and_gate": "AND 게이트",
   "block.gates.or_gate": "OR 게이트",
   "block.gates.not_gate": "NOT 게이트",
@@ -8,22 +7,16 @@
   "block.gates.nor_gate": "NOR 게이트",
   "block.gates.xor_gate": "XOR 게이트",
   "block.gates.xnor_gate": "XNOR 게이트",
-
   "block.gates.receiver": "레드스톤 수신기",
   "block.gates.transmitter": "레드스톤 전송기",
-
   "block.gates.rain_detector": "비 탐지기",
   "block.gates.thunder_detector": "천둥 탐지기",
-
   "block.gates.slow_repeater": "저속 레드스톤 중계기",
   "block.gates.fast_repeater": "고속 레드스톤 중계기",
-
   "block.gates.wireless_redstone_lamp": "무선 레드스톤 조명",
-
   "item.gates.redstone_torch_pearl": "레드스톤-엔더 횃불",
   "item.gates.frequency_changer": "주파수 도구",
   "item.gates.portable_redstone_transmitter": "휴대용 레드스톤 전송기",
-
   "gui.gates.frequency": "주파수:",
   "gui.gates.frequency_saved": "주파수가 저장되었습니다!",
   "gui.gates.current_frequency_stored": "저장된 주파수: {0}",
@@ -31,7 +24,10 @@
   "gui.gates.frequency_set": "주파수가 설정되었습니다!",
   "gui.gates.no_frequency": "주파수가 설정되지 않았습니다!",
   "gui.gates.apply": "적용",
-
-  "gui.gates.usage.portable_transmitter": "우클릭하여 활성화합니다.\nSHIFT-우클릭하여 구성합니다.\n경고: 전송기 블록은 항상 주파수에서 우선 순위를 가집니다.",
-  "gui.gates.usage.frequency_changer": "무선 블록에 SHIFT-우클릭하여 주파수를 복사합니다.\n우클릭하여 저장된 주파수를 무선 블록에 적용합니다.\nSHIFT-우클릭으로 저장된 주파수를 삭제합니다."
+  "gui.gates.usage.portable_transmitter_1": "우클릭하여 활성화합니다.",
+  "gui.gates.usage.portable_transmitter_2": "SHIFT-우클릭하여 구성합니다.",
+  "gui.gates.usage.portable_transmitter_3": "경고: 전송기 블록은 항상 주파수에서 우선 순위를 가집니다.",
+  "gui.gates.usage.frequency_changer_1": "무선 블록에 SHIFT-우클릭하여 주파수를 복사합니다.",
+  "gui.gates.usage.frequency_changer_2": "우클릭하여 저장된 주파수를 무선 블록에 적용합니다.",
+  "gui.gates.usage.frequency_changer_3": "SHIFT-우클릭으로 저장된 주파수를 삭제합니다."
 }

@@ -37,7 +37,9 @@ public class FrequencyChangerItem extends Item {
 				tooltip.add(new TranslationTextComponent("gui.gates.current_frequency_stored", stack.getTag().getInt("frequency")));
 			}
 		} else {
-			tooltip.add(new TranslationTextComponent("gui.gates.usage.frequency_changer"));
+			tooltip.add(new TranslationTextComponent("gui.gates.usage.frequency_changer_1"));
+			tooltip.add(new TranslationTextComponent("gui.gates.usage.frequency_changer_2"));
+			tooltip.add(new TranslationTextComponent("gui.gates.usage.frequency_changer_3"));
 		}
 	}
 

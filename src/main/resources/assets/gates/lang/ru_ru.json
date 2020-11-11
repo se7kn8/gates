@@ -37,6 +37,10 @@
   "gui.gates.apply": "Применить",
   "gui.gates.clock_time": "Время",
   "gui.gates.clock_length": "Длительность",
-  "gui.gates.usage.portable_transmitter": "ПКМ: Активировать\nПрисесть+ПКМ: Настройка\n\nВнимание: На заданной частоте приоритет будет у блоков-передатчиков",
-  "gui.gates.usage.frequency_changer": "ПКМ по беспроводному блоку: настроить частоту\nБежать+ПКМ по беспроводному блоку: применение скопированной частоты\nПрисесть+ПКМ по беспроводному блоку: копирование его частоты\nПрисесть+ПКМ в воздухе: забыть частоту"
+  "gui.gates.usage.portable_transmitter_1": "ПКМ: Активировать",
+  "gui.gates.usage.portable_transmitter_2": "Присесть+ПКМ: Настройка",
+  "gui.gates.usage.portable_transmitter_3": "Внимание: На заданной частоте приоритет будет у блоков-передатчиков",
+  "gui.gates.usage.frequency_changer_1": "ПКМ по беспроводному блоку: настроить частоту",
+  "gui.gates.usage.frequency_changer_2": "Бежать+ПКМ по беспроводному блоку: применение скопированной частоты",
+  "gui.gates.usage.frequency_changer_3": "Присесть+ПКМ в воздухе: забыть частоту"
 }

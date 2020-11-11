@@ -43,6 +43,10 @@
   "gui.gates.clock_time": "Time",
   "gui.gates.clock_length": "Duration",
 
-  "gui.gates.usage.portable_transmitter": "Right-Click to ac tivate.\nSHIFT-Right-Click to config.\nWarning: Transmitter blocks will always have priority on a frequency.",
-  "gui.gates.usage.frequency_changer": "SHIFT-Right-Click on a wireless block to copy the frequency.\nRight-Click to apply the saved frequency on a wireless block.\nSHIFT-Right-Click in the air to clear the saved frequency."
+  "gui.gates.usage.portable_transmitter_1": "Right-Click to activate.",
+  "gui.gates.usage.portable_transmitter_2": "SHIFT-Right-Click to config.",
+  "gui.gates.usage.portable_transmitter_3": "Warning: Transmitter blocks will always have priority on a frequency.",
+  "gui.gates.usage.frequency_changer_1": "SHIFT-Right-Click on a wireless block to copy the frequency.",
+  "gui.gates.usage.frequency_changer_2": "Right-Click to apply the saved frequency on a wireless block.",
+  "gui.gates.usage.frequency_changer_3": "SHIFT-Right-Click in the air to clear the saved frequency."
 }
