@@ -23,35 +23,35 @@ public class Recipes extends RecipeProvider {
 
 	@Override
 	protected void registerRecipes(@Nonnull Consumer<IFinishedRecipe> consumer) {
-		addRedstoneComponent(consumer, GatesBlocks.AND_GATE, Items.IRON_INGOT);
-		addRedstoneComponent(consumer, GatesBlocks.OR_GATE, Items.GOLD_INGOT);
-		addRedstoneComponent(consumer, GatesBlocks.XOR_GATE, Items.DIAMOND);
-		addRedstoneComponent(consumer, GatesBlocks.NAND_GATE, Items.REDSTONE);
-		addRedstoneComponent(consumer, GatesBlocks.NOR_GATE, Items.COAL);
-		addRedstoneComponent(consumer, GatesBlocks.XNOR_GATE, Items.EMERALD);
+		addRedstoneComponent(consumer, GatesBlocks.AND_GATE.get(), Items.IRON_INGOT);
+		addRedstoneComponent(consumer, GatesBlocks.OR_GATE.get(), Items.GOLD_INGOT);
+		addRedstoneComponent(consumer, GatesBlocks.XOR_GATE.get(), Items.DIAMOND);
+		addRedstoneComponent(consumer, GatesBlocks.NAND_GATE.get(), Items.REDSTONE);
+		addRedstoneComponent(consumer, GatesBlocks.NOR_GATE.get(), Items.COAL);
+		addRedstoneComponent(consumer, GatesBlocks.XNOR_GATE.get(), Items.EMERALD);
 
-		addShaped(consumer, GatesBlocks.NOT_GATE, Items.REDSTONE_TORCH, "   ", "A A", "BBB", i(Items.REDSTONE_TORCH), i(Items.STONE));
+		addShaped(consumer, GatesBlocks.NOT_GATE.get(), Items.REDSTONE_TORCH, "   ", "A A", "BBB", i(Items.REDSTONE_TORCH), i(Items.STONE));
 
-		addRedstoneComponent(consumer, GatesBlocks.RS_FLIP_FLOP, GatesBlocks.REDSTONE_BLOCK_OFF);
+		addRedstoneComponent(consumer, GatesBlocks.RS_FLIP_FLOP.get(), GatesBlocks.REDSTONE_BLOCK_OFF.get());
 
-		addShaped(consumer, GatesBlocks.WIRELESS_REDSTONE_RECEIVER, GatesItems.REDSTONE_TORCH_PEARL, " A ", "ABA", " A ", i(Items.REPEATER), i(GatesItems.REDSTONE_TORCH_PEARL));
-		addShaped(consumer, GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER, GatesItems.REDSTONE_TORCH_PEARL, " A ", "ABA", " A ", i(Items.COMPARATOR), i(GatesItems.REDSTONE_TORCH_PEARL));
-		addShaped(consumer, GatesBlocks.WIRELESS_REDSTONE_LAMP, GatesItems.REDSTONE_TORCH_PEARL, " A ", "ABA", " A ", i(Items.REDSTONE_LAMP), i(GatesItems.REDSTONE_TORCH_PEARL));
+		addShaped(consumer, GatesBlocks.WIRELESS_REDSTONE_RECEIVER.get(), GatesItems.REDSTONE_TORCH_PEARL.get(), " A ", "ABA", " A ", i(Items.REPEATER), i(GatesItems.REDSTONE_TORCH_PEARL.get()));
+		addShaped(consumer, GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER.get(), GatesItems.REDSTONE_TORCH_PEARL.get(), " A ", "ABA", " A ", i(Items.COMPARATOR), i(GatesItems.REDSTONE_TORCH_PEARL.get()));
+		addShaped(consumer, GatesBlocks.WIRELESS_REDSTONE_LAMP.get(), GatesItems.REDSTONE_TORCH_PEARL.get(), " A ", "ABA", " A ", i(Items.REDSTONE_LAMP), i(GatesItems.REDSTONE_TORCH_PEARL.get()));
 
-		addShaped(consumer, GatesBlocks.REDSTONE_CLOCK, Items.QUARTZ, " A ", "BCB", "DDD", i(Items.REDSTONE_TORCH), i(Items.REDSTONE), i(Tags.Items.GEMS_QUARTZ), i(Items.STONE));
-		addShaped(consumer, GatesBlocks.ADVANCED_REDSTONE_CLOCK, GatesBlocks.REDSTONE_CLOCK, " A ", "ABA", " A ", i(Items.CLOCK), i(GatesBlocks.REDSTONE_CLOCK));
+		addShaped(consumer, GatesBlocks.REDSTONE_CLOCK.get(), Items.QUARTZ, " A ", "BCB", "DDD", i(Items.REDSTONE_TORCH), i(Items.REDSTONE), i(Tags.Items.GEMS_QUARTZ), i(Items.STONE));
+		addShaped(consumer, GatesBlocks.ADVANCED_REDSTONE_CLOCK.get(), GatesBlocks.REDSTONE_CLOCK.get(), " A ", "ABA", " A ", i(Items.CLOCK), i(GatesBlocks.REDSTONE_CLOCK.get()));
 
-		addShaped(consumer, GatesBlocks.ROTARY_SWITCH, Items.LEVER, " A ", "ABA", " A ", i(Tags.Items.RODS_WOODEN), i(Items.LEVER));
+		addShaped(consumer, GatesBlocks.ROTARY_SWITCH.get(), Items.LEVER, " A ", "ABA", " A ", i(Tags.Items.RODS_WOODEN), i(Items.LEVER));
 
-		addShaped(consumer, GatesBlocks.THUNDER_DETECTOR, Items.WATER_BUCKET, "AAA", "BCB", "DDD", i(Tags.Items.GLASS), i(Items.LAPIS_LAZULI), i(Items.WATER_BUCKET), i(ItemTags.WOODEN_SLABS));
-		addShaped(consumer, GatesBlocks.RAIN_DETECTOR, Items.LAPIS_LAZULI, "AAA", "BBB", "CCC", i(Items.GLASS), i(Items.LAPIS_LAZULI), i(ItemTags.WOODEN_SLABS));
+		addShaped(consumer, GatesBlocks.THUNDER_DETECTOR.get(), Items.WATER_BUCKET, "AAA", "BCB", "DDD", i(Tags.Items.GLASS), i(Items.LAPIS_LAZULI), i(Items.WATER_BUCKET), i(ItemTags.WOODEN_SLABS));
+		addShaped(consumer, GatesBlocks.RAIN_DETECTOR.get(), Items.LAPIS_LAZULI, "AAA", "BBB", "CCC", i(Items.GLASS), i(Items.LAPIS_LAZULI), i(ItemTags.WOODEN_SLABS));
 
-		addShapeless(consumer, GatesBlocks.FAST_REPEATER, Items.REPEATER, i(Items.REPEATER), i(Items.GOLD_INGOT));
-		addShapeless(consumer, GatesBlocks.SLOW_REPEATER, Items.REPEATER, i(Items.REPEATER), i(Items.COAL));
-		addShapeless(consumer, GatesItems.FREQUENCY_CHANGER, GatesItems.REDSTONE_TORCH_PEARL, i(Tags.Items.SLIMEBALLS), i(GatesItems.REDSTONE_TORCH_PEARL), i(Items.PAPER));
-		addShapeless(consumer, GatesItems.PORTABLE_REDSTONE_TRANSMITTER, GatesItems.REDSTONE_TORCH_PEARL, i(Tags.Items.SLIMEBALLS), i(GatesItems.REDSTONE_TORCH_PEARL), i(ItemTags.BUTTONS));
-		addShapeless(consumer, GatesBlocks.REDSTONE_BLOCK_OFF, Items.REDSTONE_BLOCK, i(Items.REDSTONE_BLOCK), i(Items.REDSTONE_TORCH));
-		addShapeless(consumer, GatesItems.REDSTONE_TORCH_PEARL, Items.ENDER_PEARL, i(Tags.Items.SLIMEBALLS), i(Items.REDSTONE_TORCH), i(Tags.Items.ENDER_PEARLS));
+		addShapeless(consumer, GatesBlocks.FAST_REPEATER.get(), Items.REPEATER, i(Items.REPEATER), i(Items.GOLD_INGOT));
+		addShapeless(consumer, GatesBlocks.SLOW_REPEATER.get(), Items.REPEATER, i(Items.REPEATER), i(Items.COAL));
+		addShapeless(consumer, GatesItems.FREQUENCY_CHANGER.get(), GatesItems.REDSTONE_TORCH_PEARL.get(), i(Tags.Items.SLIMEBALLS), i(GatesItems.REDSTONE_TORCH_PEARL.get()), i(Items.PAPER));
+		addShapeless(consumer, GatesItems.PORTABLE_REDSTONE_TRANSMITTER.get(), GatesItems.REDSTONE_TORCH_PEARL.get(), i(Tags.Items.SLIMEBALLS), i(GatesItems.REDSTONE_TORCH_PEARL.get()), i(ItemTags.BUTTONS));
+		addShapeless(consumer, GatesBlocks.REDSTONE_BLOCK_OFF.get(), Items.REDSTONE_BLOCK, i(Items.REDSTONE_BLOCK), i(Items.REDSTONE_TORCH));
+		addShapeless(consumer, GatesItems.REDSTONE_TORCH_PEARL.get(), Items.ENDER_PEARL, i(Tags.Items.SLIMEBALLS), i(Items.REDSTONE_TORCH), i(Tags.Items.ENDER_PEARLS));
 
 	}
 

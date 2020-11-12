@@ -21,33 +21,33 @@ public class BlockStates extends BlockStateProvider {
 
 	@Override
 	protected void registerStatesAndModels() {
-		cubeAll(GatesBlocks.REDSTONE_BLOCK_OFF, modLoc("block/redstone_block_off"));
+		cubeAll(GatesBlocks.REDSTONE_BLOCK_OFF.get(), modLoc("block/redstone_block_off"));
 
-		gateModel(GatesBlocks.AND_GATE);
-		gateModel(GatesBlocks.OR_GATE);
-		gateModel(GatesBlocks.XOR_GATE);
-		gateModel(GatesBlocks.NAND_GATE);
-		gateModel(GatesBlocks.NOR_GATE);
-		gateModel(GatesBlocks.XNOR_GATE);
-		notGate(GatesBlocks.NOT_GATE);
+		gateModel(GatesBlocks.AND_GATE.get());
+		gateModel(GatesBlocks.OR_GATE.get());
+		gateModel(GatesBlocks.XOR_GATE.get());
+		gateModel(GatesBlocks.NAND_GATE.get());
+		gateModel(GatesBlocks.NOR_GATE.get());
+		gateModel(GatesBlocks.XNOR_GATE.get());
+		notGate(GatesBlocks.NOT_GATE.get());
 
-		detectorModel(GatesBlocks.RAIN_DETECTOR);
-		detectorModel(GatesBlocks.THUNDER_DETECTOR);
+		detectorModel(GatesBlocks.RAIN_DETECTOR.get());
+		detectorModel(GatesBlocks.THUNDER_DETECTOR.get());
 
-		wirelessRedstoneModel(GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER);
-		wirelessRedstoneModel(GatesBlocks.WIRELESS_REDSTONE_RECEIVER);
-		lamp(GatesBlocks.WIRELESS_REDSTONE_LAMP);
+		wirelessRedstoneModel(GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER.get());
+		wirelessRedstoneModel(GatesBlocks.WIRELESS_REDSTONE_RECEIVER.get());
+		lamp(GatesBlocks.WIRELESS_REDSTONE_LAMP.get());
 
-		redstoneClock(GatesBlocks.REDSTONE_CLOCK);
-		advancedRedstoneClock(GatesBlocks.ADVANCED_REDSTONE_CLOCK);
+		redstoneClock(GatesBlocks.REDSTONE_CLOCK.get());
+		advancedRedstoneClock(GatesBlocks.ADVANCED_REDSTONE_CLOCK.get());
 
-		rsFlipFlop(GatesBlocks.RS_FLIP_FLOP);
+		rsFlipFlop(GatesBlocks.RS_FLIP_FLOP.get());
 
-		rotarySwitch(GatesBlocks.ROTARY_SWITCH);
+		rotarySwitch(GatesBlocks.ROTARY_SWITCH.get());
 
 
-		repeater(GatesBlocks.FAST_REPEATER);
-		repeater(GatesBlocks.SLOW_REPEATER);
+		repeater(GatesBlocks.FAST_REPEATER.get());
+		repeater(GatesBlocks.SLOW_REPEATER.get());
 	}
 
 	private void cubeAll(Block b, ResourceLocation texture) {
@@ -268,9 +268,9 @@ public class BlockStates extends BlockStateProvider {
 		String name = block.getRegistryName().getPath();
 		String type;
 
-		if (block == GatesBlocks.FAST_REPEATER) {
+		if (block == GatesBlocks.FAST_REPEATER.get()) {
 			type = "fast";
-		} else if (block == GatesBlocks.SLOW_REPEATER) {
+		} else if (block == GatesBlocks.SLOW_REPEATER.get()) {
 			type = "slow";
 		} else {
 			type = "";

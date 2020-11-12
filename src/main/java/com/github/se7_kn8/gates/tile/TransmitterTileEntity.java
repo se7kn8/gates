@@ -29,7 +29,7 @@ public class TransmitterTileEntity extends TileEntity implements INamedContainer
 	private LazyOptional<IWirelessNode> wireless = LazyOptional.of(this::createWireless);
 
 	public TransmitterTileEntity() {
-		super(GatesBlocks.TRANSMITTER_TILE_ENTITY_TYPE);
+		super(GatesBlocks.TRANSMITTER_TILE_ENTITY_TYPE.get());
 	}
 
 	@Nonnull

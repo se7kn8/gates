@@ -17,9 +17,9 @@ public class ItemModels extends ItemModelProvider {
 
 	@Override
 	protected void registerModels() {
-		addSimpleItemModel(GatesItems.FREQUENCY_CHANGER);
-		addSimpleItemModel(GatesItems.PORTABLE_REDSTONE_TRANSMITTER);
-		addSimpleItemModel(GatesItems.REDSTONE_TORCH_PEARL);
+		addSimpleItemModel(GatesItems.FREQUENCY_CHANGER.get());
+		addSimpleItemModel(GatesItems.PORTABLE_REDSTONE_TRANSMITTER.get());
+		addSimpleItemModel(GatesItems.REDSTONE_TORCH_PEARL.get());
 
 	}
 

@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 public class CustomDetectorTile extends TileEntity implements ITickableTileEntity {
 
 	public CustomDetectorTile() {
-		super(GatesBlocks.RAIN_DETECTOR_TILE_ENTITY);
+		super(GatesBlocks.RAIN_DETECTOR_TILE_ENTITY.get());
 	}
 
 	@Override

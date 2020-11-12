@@ -29,7 +29,7 @@ public class RedstoneClockTileEntity extends TileEntity implements ITickableTile
 	private int clockTime = 12;
 
 	public RedstoneClockTileEntity() {
-		super(GatesBlocks.REDSTONE_CLOCK_TILE_ENTITY_TYPE);
+		super(GatesBlocks.REDSTONE_CLOCK_TILE_ENTITY_TYPE.get());
 	}
 
 	@Override

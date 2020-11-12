@@ -9,25 +9,25 @@ import net.minecraft.util.ResourceLocation;
 public class LootTables {
 
 	public static void register(LootGenerator generator) {
-		generateSelfDrop(generator, GatesBlocks.REDSTONE_BLOCK_OFF);
-		generateSelfDrop(generator, GatesBlocks.AND_GATE);
-		generateSelfDrop(generator, GatesBlocks.OR_GATE);
-		generateSelfDrop(generator, GatesBlocks.NAND_GATE);
-		generateSelfDrop(generator, GatesBlocks.NOR_GATE);
-		generateSelfDrop(generator, GatesBlocks.XOR_GATE);
-		generateSelfDrop(generator, GatesBlocks.XNOR_GATE);
-		generateSelfDrop(generator, GatesBlocks.NOT_GATE);
-		generateSelfDrop(generator, GatesBlocks.FAST_REPEATER);
-		generateSelfDrop(generator, GatesBlocks.SLOW_REPEATER);
-		generateSelfDrop(generator, GatesBlocks.WIRELESS_REDSTONE_RECEIVER);
-		generateSelfDrop(generator, GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER);
-		generateSelfDrop(generator, GatesBlocks.WIRELESS_REDSTONE_LAMP);
-		generateSelfDrop(generator, GatesBlocks.RAIN_DETECTOR);
-		generateSelfDrop(generator, GatesBlocks.THUNDER_DETECTOR);
-		generateSelfDrop(generator, GatesBlocks.REDSTONE_CLOCK);
-		generateSelfDrop(generator, GatesBlocks.ADVANCED_REDSTONE_CLOCK);
-		generateSelfDrop(generator, GatesBlocks.ROTARY_SWITCH);
-		generateSelfDrop(generator, GatesBlocks.RS_FLIP_FLOP);
+		generateSelfDrop(generator, GatesBlocks.REDSTONE_BLOCK_OFF.get());
+		generateSelfDrop(generator, GatesBlocks.AND_GATE.get());
+		generateSelfDrop(generator, GatesBlocks.OR_GATE.get());
+		generateSelfDrop(generator, GatesBlocks.NAND_GATE.get());
+		generateSelfDrop(generator, GatesBlocks.NOR_GATE.get());
+		generateSelfDrop(generator, GatesBlocks.XOR_GATE.get());
+		generateSelfDrop(generator, GatesBlocks.XNOR_GATE.get());
+		generateSelfDrop(generator, GatesBlocks.NOT_GATE.get());
+		generateSelfDrop(generator, GatesBlocks.FAST_REPEATER.get());
+		generateSelfDrop(generator, GatesBlocks.SLOW_REPEATER.get());
+		generateSelfDrop(generator, GatesBlocks.WIRELESS_REDSTONE_RECEIVER.get());
+		generateSelfDrop(generator, GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER.get());
+		generateSelfDrop(generator, GatesBlocks.WIRELESS_REDSTONE_LAMP.get());
+		generateSelfDrop(generator, GatesBlocks.RAIN_DETECTOR.get());
+		generateSelfDrop(generator, GatesBlocks.THUNDER_DETECTOR.get());
+		generateSelfDrop(generator, GatesBlocks.REDSTONE_CLOCK.get());
+		generateSelfDrop(generator, GatesBlocks.ADVANCED_REDSTONE_CLOCK.get());
+		generateSelfDrop(generator, GatesBlocks.ROTARY_SWITCH.get());
+		generateSelfDrop(generator, GatesBlocks.RS_FLIP_FLOP.get());
 	}
 
 	private static void generateSelfDrop(LootGenerator generator, Block block) {

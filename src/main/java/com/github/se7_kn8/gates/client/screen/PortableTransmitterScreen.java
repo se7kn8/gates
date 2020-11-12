@@ -10,8 +10,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.Item;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -37,7 +37,8 @@ public class PortableTransmitterScreen extends ContainerScreen<PortableRedstoneT
 
 		this.addButton(new Button(this.width / 2 - 40, this.height / 2, 80, 20, new TranslationTextComponent("gui.gates.apply"), button -> {
 			if (!frequencyField.getText().trim().equals("")) {
-				Hand hand = Minecraft.getInstance().player.getHeldItem(Hand.MAIN_HAND).getItem() == GatesItems.PORTABLE_REDSTONE_TRANSMITTER ? Hand.MAIN_HAND : Hand.OFF_HAND;
+				Item item = Minecraft.getInstance().player.getHeldItem(Hand.MAIN_HAND).getItem();
+				Hand hand = item == GatesItems.PORTABLE_REDSTONE_TRANSMITTER.get() ? Hand.MAIN_HAND : Hand.OFF_HAND;
 				PacketHandler.MOD_CHANNEL.sendToServer(new UpdatePortableTransmitterPacket(Integer.parseInt(frequencyField.getText()), hand));
 				Minecraft.getInstance().player.closeScreen();
 			}

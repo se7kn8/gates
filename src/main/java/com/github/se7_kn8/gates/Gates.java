@@ -27,7 +27,7 @@ public class Gates {
 	public static ItemGroup GATES_ITEM_GROUP = new ItemGroup("gates") {
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(GatesBlocks.XNOR_GATE);
+			return new ItemStack(GatesBlocks.XNOR_GATE.get());
 		}
 
 	};
@@ -35,6 +35,9 @@ public class Gates {
 	public Gates() {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+		GatesBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		GatesBlocks.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+		GatesItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -47,24 +50,24 @@ public class Gates {
 		ScreenManager.registerFactory(GatesContainers.FREQUENCY_CONTAINER_TYPE, FrequencyScreen::new);
 		ScreenManager.registerFactory(GatesContainers.PORTABLE_TRANSMITTER_CONTAINER_TYPE, PortableTransmitterScreen::new);
 		ScreenManager.registerFactory(GatesContainers.ADVANCED_REDSTONE_CLOCK_CONTAINER_TYPE, AdvancedRedstoneClockScreen::new);
-		RenderTypeLookup.setRenderLayer(GatesBlocks.AND_GATE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.OR_GATE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.XOR_GATE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.NAND_GATE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.NOR_GATE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.XNOR_GATE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.NOT_GATE, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.AND_GATE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.OR_GATE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.XOR_GATE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.NAND_GATE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.NOR_GATE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.XNOR_GATE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.NOT_GATE.get(), RenderType.getCutout());
 
-		RenderTypeLookup.setRenderLayer(GatesBlocks.FAST_REPEATER, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.SLOW_REPEATER, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.FAST_REPEATER.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.SLOW_REPEATER.get(), RenderType.getCutout());
 
-		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_RECEIVER, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_LAMP, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_RECEIVER.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.WIRELESS_REDSTONE_LAMP.get(), RenderType.getCutout());
 
 
-		RenderTypeLookup.setRenderLayer(GatesBlocks.REDSTONE_CLOCK, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(GatesBlocks.ADVANCED_REDSTONE_CLOCK, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.REDSTONE_CLOCK.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(GatesBlocks.ADVANCED_REDSTONE_CLOCK.get(), RenderType.getCutout());
 
 	}
 

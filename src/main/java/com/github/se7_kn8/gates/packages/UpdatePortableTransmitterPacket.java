@@ -34,7 +34,7 @@ public class UpdatePortableTransmitterPacket implements BasePacket {
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
 			ItemStack stack = ctx.get().getSender().getHeldItem(Hand.values()[hand]);
-			if (stack.getItem() == GatesItems.PORTABLE_REDSTONE_TRANSMITTER) {
+			if (stack.getItem() == GatesItems.PORTABLE_REDSTONE_TRANSMITTER.get()) {
 				if (!stack.hasTag()) {
 					stack.setTag(new CompoundNBT());
 				}

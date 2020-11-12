@@ -3,7 +3,6 @@ package com.github.se7_kn8.gates.tile;
 import com.github.se7_kn8.gates.GatesBlocks;
 import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import com.github.se7_kn8.gates.api.IWirelessNode;
-import com.github.se7_kn8.gates.block.wireless_redstone.ReceiverBlock;
 import com.github.se7_kn8.gates.container.FrequencyContainer;
 import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
 import net.minecraft.block.Block;
@@ -26,8 +25,6 @@ import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 public class ReceiverTileEntity extends TileEntity implements INamedContainerProvider {
 
@@ -38,7 +35,7 @@ public class ReceiverTileEntity extends TileEntity implements INamedContainerPro
 	private String translationKey = "block.gates.receiver";
 
 	public ReceiverTileEntity() {
-		super(GatesBlocks.RECEIVER_TILE_ENTITY_TYPE);
+		super(GatesBlocks.RECEIVER_TILE_ENTITY_TYPE.get());
 	}
 
 	public void setTranslationKey(String translationKey) {

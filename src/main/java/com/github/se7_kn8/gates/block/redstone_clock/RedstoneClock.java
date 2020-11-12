@@ -1,6 +1,5 @@
 package com.github.se7_kn8.gates.block.redstone_clock;
 
-import com.github.se7_kn8.gates.block.redstone_clock.RedstoneClockBaseBlock;
 import com.github.se7_kn8.gates.tile.RedstoneClockTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -22,9 +21,7 @@ public class RedstoneClock extends RedstoneClockBaseBlock {
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if (player.isAllowEdit()) {
-			if (worldIn.isRemote) {
-				return ActionResultType.SUCCESS;
-			} else {
+			if (!worldIn.isRemote) {
 				BlockState newBlockState = state.func_235896_a_(CLOCK_SPEED);
 				worldIn.setBlockState(pos, newBlockState);
 				TileEntity entity = worldIn.getTileEntity(pos);
@@ -34,8 +31,8 @@ public class RedstoneClock extends RedstoneClockBaseBlock {
 					clock.setClockLength(newBlockState.get(CLOCK_SPEED) * 2);
 					clock.resetClock();
 				}
-				return ActionResultType.SUCCESS;
 			}
+			return ActionResultType.SUCCESS;
 		}
 		return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
 	}
