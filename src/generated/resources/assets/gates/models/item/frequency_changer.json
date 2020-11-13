@@ -1,5 +1,24 @@
 {
   "parent": "minecraft:item/generated",
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        -45,
+        0,
+        0
+      ],
+      "translation": [
+        6,
+        0,
+        -7
+      ],
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    }
+  },
   "textures": {
     "layer0": "gates:item/frequency_changer"
   }
