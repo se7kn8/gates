@@ -28,6 +28,7 @@ public class LootTables {
 		generateSelfDrop(generator, GatesBlocks.ADVANCED_REDSTONE_CLOCK.get());
 		generateSelfDrop(generator, GatesBlocks.ROTARY_SWITCH.get());
 		generateSelfDrop(generator, GatesBlocks.RS_FLIP_FLOP.get());
+		generateSelfDrop(generator, GatesBlocks.WAXED_REDSTONE_WIRE.get());
 	}
 
 	private static void generateSelfDrop(LootGenerator generator, Block block) {

@@ -52,7 +52,7 @@ public class Recipes extends RecipeProvider {
 		addShapeless(consumer, GatesItems.PORTABLE_REDSTONE_TRANSMITTER.get(), GatesItems.REDSTONE_TORCH_PEARL.get(), i(Tags.Items.SLIMEBALLS), i(GatesItems.REDSTONE_TORCH_PEARL.get()), i(ItemTags.BUTTONS));
 		addShapeless(consumer, GatesBlocks.REDSTONE_BLOCK_OFF.get(), Items.REDSTONE_BLOCK, i(Items.REDSTONE_BLOCK), i(Items.REDSTONE_TORCH));
 		addShapeless(consumer, GatesItems.REDSTONE_TORCH_PEARL.get(), Items.ENDER_PEARL, i(Tags.Items.SLIMEBALLS), i(Items.REDSTONE_TORCH), i(Tags.Items.ENDER_PEARLS));
-
+		addShapeless(consumer, GatesBlocks.WAXED_REDSTONE_WIRE.get(), Items.HONEY_BOTTLE, i(Tags.Items.DUSTS_REDSTONE), i(Items.HONEY_BOTTLE));
 	}
 
 	private void addRedstoneComponent(Consumer<IFinishedRecipe> consumer, IItemProvider output, IItemProvider component) {

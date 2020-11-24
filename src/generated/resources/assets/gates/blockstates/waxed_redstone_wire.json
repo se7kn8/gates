@@ -1,0 +1,178 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "west": "none",
+        "east": "none",
+        "north": "none",
+        "south": "none"
+      },
+      "apply": {
+        "model": "gates:block/waxed_redstone/waxed_dust_dot"
+      }
+    },
+    {
+      "when": {
+        "west": "none",
+        "east": "none",
+        "north": "up|side",
+        "south": "up|side"
+      },
+      "apply": {
+        "model": "gates:block/waxed_dust_line0"
+      }
+    },
+    {
+      "when": {
+        "west": "up|side",
+        "east": "up|side",
+        "north": "none",
+        "south": "none"
+      },
+      "apply": {
+        "model": "gates:block/waxed_dust_line1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "west": "up|side",
+        "east": "up|side",
+        "north": "up|side",
+        "south": "up|side"
+      },
+      "apply": {
+        "model": "gates:block/waxed_redstone/waxed_dust_4side"
+      }
+    },
+    {
+      "when": {
+        "west": "none",
+        "east": "up|side",
+        "north": "up|side",
+        "south": "none"
+      },
+      "apply": {
+        "model": "gates:block/waxed_redstone/waxed_dust_2side"
+      }
+    },
+    {
+      "when": {
+        "west": "none",
+        "east": "up|side",
+        "north": "none",
+        "south": "up|side"
+      },
+      "apply": {
+        "model": "gates:block/waxed_redstone/waxed_dust_2side",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "west": "up|side",
+        "east": "none",
+        "north": "none",
+        "south": "up|side"
+      },
+      "apply": {
+        "model": "gates:block/waxed_redstone/waxed_dust_2side",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "west": "up|side",
+        "east": "none",
+        "north": "up|side",
+        "south": "none"
+      },
+      "apply": {
+        "model": "gates:block/waxed_redstone/waxed_dust_2side",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "west": "up|side",
+        "east": "up|side",
+        "north": "up|side",
+        "south": "none"
+      },
+      "apply": {
+        "model": "gates:block/waxed_redstone/waxed_dust_3side"
+      }
+    },
+    {
+      "when": {
+        "west": "none",
+        "east": "up|side",
+        "north": "up|side",
+        "south": "up|side"
+      },
+      "apply": {
+        "model": "gates:block/waxed_redstone/waxed_dust_3side",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "west": "up|side",
+        "east": "up|side",
+        "north": "none",
+        "south": "up|side"
+      },
+      "apply": {
+        "model": "gates:block/waxed_redstone/waxed_dust_3side",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "west": "up|side",
+        "east": "none",
+        "north": "up|side",
+        "south": "up|side"
+      },
+      "apply": {
+        "model": "gates:block/waxed_redstone/waxed_dust_3side",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "north": "up"
+      },
+      "apply": {
+        "model": "gates:block/waxed_dust_line_up0"
+      }
+    },
+    {
+      "when": {
+        "east": "up"
+      },
+      "apply": {
+        "model": "gates:block/waxed_dust_line_up1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "south": "up"
+      },
+      "apply": {
+        "model": "gates:block/waxed_dust_line_up0",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "west": "up"
+      },
+      "apply": {
+        "model": "gates:block/waxed_dust_line_up1",
+        "y": 270
+      }
+    }
+  ]
+}

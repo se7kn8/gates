@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "gates:waxed_redstone_wire"
+    ]
+  },
+  "criteria": {
+    "has_honey_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:honey_bottle"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "gates:waxed_redstone_wire"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_honey_bottle",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -55,6 +55,8 @@ public class GatesBlocks {
 
 	public static final RegistryObject<Block> RS_FLIP_FLOP = addBlock("rs_flip_flop", RSFlipFlop::new, Gates.GATES_ITEM_GROUP);
 
+	public static final RegistryObject<Block> WAXED_REDSTONE_WIRE = addBlock("waxed_redstone_wire", WaxedRedstone::new, Gates.GATES_ITEM_GROUP);
+
 	// TODO contains a log of bugs
 	//public static final Block D_FLIP_FLOP = addBlock("t_flip_flop", new TFlipFlop(), Gates.GATES_ITEM_GROUP);
 

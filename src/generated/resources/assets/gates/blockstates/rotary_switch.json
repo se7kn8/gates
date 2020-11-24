@@ -13,8 +13,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "0",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -25,8 +25,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "1",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -37,8 +37,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "2",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -49,8 +49,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "3",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -61,8 +61,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "4",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -73,8 +73,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "5",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -85,8 +85,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "6",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -97,8 +97,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "7",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -109,8 +109,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "8",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -121,8 +121,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "9",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -133,8 +133,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "10",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -145,8 +145,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "11",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -157,8 +157,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "12",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -169,8 +169,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "13",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -181,8 +181,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "14",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -193,8 +193,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "15",
+        "facing": "north",
         "face": "floor"
       },
       "apply": {
@@ -215,8 +215,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "0",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -226,8 +226,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "1",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -237,8 +237,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "2",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -248,8 +248,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "3",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -259,8 +259,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "4",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -270,8 +270,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "5",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -281,8 +281,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "6",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -292,8 +292,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "7",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -303,8 +303,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "8",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -314,8 +314,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "9",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -325,8 +325,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "10",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -336,8 +336,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "11",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -347,8 +347,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "12",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -358,8 +358,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "13",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -369,8 +369,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "14",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -380,8 +380,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "15",
+        "facing": "south",
         "face": "floor"
       },
       "apply": {
@@ -402,8 +402,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "0",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -414,8 +414,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "1",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -426,8 +426,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "2",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -438,8 +438,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "3",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -450,8 +450,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "4",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -462,8 +462,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "5",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -474,8 +474,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "6",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -486,8 +486,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "7",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -498,8 +498,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "8",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -510,8 +510,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "9",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -522,8 +522,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "10",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -534,8 +534,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "11",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -546,8 +546,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "12",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -558,8 +558,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "13",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -570,8 +570,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "14",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -582,8 +582,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "15",
+        "facing": "west",
         "face": "floor"
       },
       "apply": {
@@ -605,8 +605,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "0",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -617,8 +617,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "1",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -629,8 +629,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "2",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -641,8 +641,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "3",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -653,8 +653,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "4",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -665,8 +665,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "5",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -677,8 +677,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "6",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -689,8 +689,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "7",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -701,8 +701,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "8",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -713,8 +713,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "9",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -725,8 +725,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "10",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -737,8 +737,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "11",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -749,8 +749,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "12",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -761,8 +761,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "13",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -773,8 +773,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "14",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -785,8 +785,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "15",
+        "facing": "east",
         "face": "floor"
       },
       "apply": {
@@ -807,8 +807,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "0",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -818,8 +818,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "1",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -829,8 +829,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "2",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -840,8 +840,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "3",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -851,8 +851,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "4",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -862,8 +862,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "5",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -873,8 +873,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "6",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -884,8 +884,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "7",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -895,8 +895,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "8",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -906,8 +906,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "9",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -917,8 +917,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "10",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -928,8 +928,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "11",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -939,8 +939,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "12",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -950,8 +950,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "13",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -961,8 +961,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "14",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -972,8 +972,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "15",
+        "facing": "north",
         "face": "wall"
       },
       "apply": {
@@ -992,8 +992,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "0",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1002,8 +1002,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "1",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1012,8 +1012,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "2",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1022,8 +1022,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "3",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1032,8 +1032,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "4",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1042,8 +1042,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "5",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1052,8 +1052,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "6",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1062,8 +1062,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "7",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1072,8 +1072,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "8",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1082,8 +1082,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "9",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1092,8 +1092,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "10",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1102,8 +1102,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "11",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1112,8 +1112,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "12",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1122,8 +1122,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "13",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1132,8 +1132,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "14",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1142,8 +1142,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "15",
+        "facing": "south",
         "face": "wall"
       },
       "apply": {
@@ -1162,8 +1162,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "0",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1173,8 +1173,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "1",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1184,8 +1184,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "2",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1195,8 +1195,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "3",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1206,8 +1206,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "4",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1217,8 +1217,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "5",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1228,8 +1228,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "6",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1239,8 +1239,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "7",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1250,8 +1250,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "8",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1261,8 +1261,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "9",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1272,8 +1272,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "10",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1283,8 +1283,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "11",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1294,8 +1294,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "12",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1305,8 +1305,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "13",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1316,8 +1316,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "14",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1327,8 +1327,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "15",
+        "facing": "west",
         "face": "wall"
       },
       "apply": {
@@ -1348,8 +1348,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "0",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1359,8 +1359,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "1",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1370,8 +1370,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "2",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1381,8 +1381,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "3",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1392,8 +1392,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "4",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1403,8 +1403,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "5",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1414,8 +1414,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "6",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1425,8 +1425,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "7",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1436,8 +1436,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "8",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1447,8 +1447,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "9",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1458,8 +1458,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "10",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1469,8 +1469,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "11",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1480,8 +1480,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "12",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1491,8 +1491,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "13",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1502,8 +1502,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "14",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1513,8 +1513,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "15",
+        "facing": "east",
         "face": "wall"
       },
       "apply": {
@@ -1535,8 +1535,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "0",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1547,8 +1547,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "1",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1559,8 +1559,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "2",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1571,8 +1571,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "3",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1583,8 +1583,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "4",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1595,8 +1595,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "5",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1607,8 +1607,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "6",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1619,8 +1619,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "7",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1631,8 +1631,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "8",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1643,8 +1643,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "9",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1655,8 +1655,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "10",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1667,8 +1667,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "11",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1679,8 +1679,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "12",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1691,8 +1691,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "13",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1703,8 +1703,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "14",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1715,8 +1715,8 @@
     },
     {
       "when": {
-        "facing": "north",
         "power": "15",
+        "facing": "north",
         "face": "ceiling"
       },
       "apply": {
@@ -1737,8 +1737,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "0",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1748,8 +1748,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "1",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1759,8 +1759,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "2",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1770,8 +1770,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "3",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1781,8 +1781,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "4",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1792,8 +1792,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "5",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1803,8 +1803,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "6",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1814,8 +1814,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "7",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1825,8 +1825,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "8",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1836,8 +1836,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "9",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1847,8 +1847,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "10",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1858,8 +1858,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "11",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1869,8 +1869,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "12",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1880,8 +1880,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "13",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1891,8 +1891,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "14",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1902,8 +1902,8 @@
     },
     {
       "when": {
-        "facing": "south",
         "power": "15",
+        "facing": "south",
         "face": "ceiling"
       },
       "apply": {
@@ -1924,8 +1924,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "0",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -1936,8 +1936,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "1",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -1948,8 +1948,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "2",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -1960,8 +1960,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "3",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -1972,8 +1972,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "4",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -1984,8 +1984,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "5",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -1996,8 +1996,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "6",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -2008,8 +2008,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "7",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -2020,8 +2020,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "8",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -2032,8 +2032,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "9",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -2044,8 +2044,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "10",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -2056,8 +2056,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "11",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -2068,8 +2068,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "12",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -2080,8 +2080,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "13",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -2092,8 +2092,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "14",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -2104,8 +2104,8 @@
     },
     {
       "when": {
-        "facing": "west",
         "power": "15",
+        "facing": "west",
         "face": "ceiling"
       },
       "apply": {
@@ -2127,8 +2127,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "0",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2139,8 +2139,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "1",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2151,8 +2151,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "2",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2163,8 +2163,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "3",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2175,8 +2175,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "4",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2187,8 +2187,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "5",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2199,8 +2199,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "6",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2211,8 +2211,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "7",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2223,8 +2223,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "8",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2235,8 +2235,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "9",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2247,8 +2247,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "10",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2259,8 +2259,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "11",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2271,8 +2271,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "12",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2283,8 +2283,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "13",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2295,8 +2295,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "14",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {
@@ -2307,8 +2307,8 @@
     },
     {
       "when": {
-        "facing": "east",
         "power": "15",
+        "facing": "east",
         "face": "ceiling"
       },
       "apply": {

@@ -29,6 +29,8 @@
 
   "block.gates.rs_flip_flop": "RS Flip-Flop",
 
+  "block.gates.waxed_redstone_wire": "Waxed Redstone",
+
   "item.gates.redstone_torch_pearl": "Redstone-Ender Torch",
   "item.gates.frequency_changer": "Frequency Tool",
   "item.gates.portable_redstone_transmitter": "Portable Redstone Transmitter",

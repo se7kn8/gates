@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.state.properties.RedstoneSide;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.*;
@@ -45,9 +46,10 @@ public class BlockStates extends BlockStateProvider {
 
 		rotarySwitch(GatesBlocks.ROTARY_SWITCH.get());
 
-
 		repeater(GatesBlocks.FAST_REPEATER.get());
 		repeater(GatesBlocks.SLOW_REPEATER.get());
+
+		waxedRedstone(GatesBlocks.WAXED_REDSTONE_WIRE.get());
 	}
 
 	private void cubeAll(Block b, ResourceLocation texture) {
@@ -292,6 +294,47 @@ public class BlockStates extends BlockStateProvider {
 		});
 
 		simpleItem(name);
+	}
+
+	private void waxedRedstone(Block b) {
+		// FIXME still some rending issues with transparency
+		MultiPartBlockStateBuilder builder = getMultipartBuilder(b);
+
+		ModelFile dotModel = models().getExistingFile(modLoc("block/waxed_redstone/waxed_dust_dot"));
+		ModelFile lineModel = models().getExistingFile(modLoc("block/waxed_redstone/waxed_dust_side"));
+		ModelFile lineModel4 = models().getExistingFile(modLoc("block/waxed_redstone/waxed_dust_4side"));
+		ModelFile lineModel3 = models().getExistingFile(modLoc("block/waxed_redstone/waxed_dust_3side"));
+		ModelFile lineModel2 = models().getExistingFile(modLoc("block/waxed_redstone/waxed_dust_2side"));
+		ModelFile upModel = models().getExistingFile(modLoc("block/waxed_redstone/waxed_dust_side_up"));
+
+		ModelFile line0 = models().withExistingParent("waxed_dust_line0", lineModel.getLocation()).texture("line", mcLoc("block/redstone_dust_line0"));
+		ModelFile line1 = models().withExistingParent("waxed_dust_line1", lineModel.getLocation()).texture("line", mcLoc("block/redstone_dust_line1"));
+
+		ModelFile up0 = models().withExistingParent("waxed_dust_line_up0", upModel.getLocation()).texture("line", mcLoc("block/redstone_dust_line0"));
+		ModelFile up1 = models().withExistingParent("waxed_dust_line_up1", upModel.getLocation()).texture("line", mcLoc("block/redstone_dust_line1"));
+
+
+		builder.part().modelFile(dotModel).addModel().condition(WaxedRedstone.NORTH, RedstoneSide.NONE).condition(WaxedRedstone.EAST, RedstoneSide.NONE).condition(WaxedRedstone.SOUTH, RedstoneSide.NONE).condition(WaxedRedstone.WEST, RedstoneSide.NONE);
+		builder.part().modelFile(line0).addModel().condition(WaxedRedstone.NORTH, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.EAST, RedstoneSide.NONE).condition(WaxedRedstone.SOUTH, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.WEST, RedstoneSide.NONE);
+		builder.part().modelFile(line1).rotationY(90).addModel().condition(WaxedRedstone.NORTH, RedstoneSide.NONE).condition(WaxedRedstone.EAST, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.SOUTH, RedstoneSide.NONE).condition(WaxedRedstone.WEST, RedstoneSide.SIDE, RedstoneSide.UP);
+		builder.part().modelFile(lineModel4).addModel().condition(WaxedRedstone.NORTH, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.EAST, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.SOUTH, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.WEST, RedstoneSide.SIDE, RedstoneSide.UP);
+
+		builder.part().modelFile(lineModel2).rotationY(0).addModel().condition(WaxedRedstone.NORTH, RedstoneSide.UP, RedstoneSide.SIDE).condition(WaxedRedstone.EAST, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.SOUTH, RedstoneSide.NONE).condition(WaxedRedstone.WEST, RedstoneSide.NONE);
+		builder.part().modelFile(lineModel2).rotationY(90).addModel().condition(WaxedRedstone.NORTH, RedstoneSide.NONE).condition(WaxedRedstone.EAST, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.SOUTH, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.WEST, RedstoneSide.NONE);
+		builder.part().modelFile(lineModel2).rotationY(180).addModel().condition(WaxedRedstone.NORTH, RedstoneSide.NONE).condition(WaxedRedstone.EAST, RedstoneSide.NONE).condition(WaxedRedstone.SOUTH, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.WEST, RedstoneSide.SIDE, RedstoneSide.UP);
+		builder.part().modelFile(lineModel2).rotationY(270).addModel().condition(WaxedRedstone.NORTH, RedstoneSide.UP, RedstoneSide.SIDE).condition(WaxedRedstone.EAST, RedstoneSide.NONE).condition(WaxedRedstone.SOUTH, RedstoneSide.NONE).condition(WaxedRedstone.WEST, RedstoneSide.SIDE, RedstoneSide.UP);
+
+		builder.part().modelFile(lineModel3).rotationY(0).addModel().condition(WaxedRedstone.NORTH, RedstoneSide.UP, RedstoneSide.SIDE).condition(WaxedRedstone.EAST, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.SOUTH, RedstoneSide.NONE).condition(WaxedRedstone.WEST, RedstoneSide.SIDE, RedstoneSide.UP);
+		builder.part().modelFile(lineModel3).rotationY(90).addModel().condition(WaxedRedstone.NORTH, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.EAST, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.SOUTH, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.WEST, RedstoneSide.NONE);
+		builder.part().modelFile(lineModel3).rotationY(180).addModel().condition(WaxedRedstone.NORTH, RedstoneSide.NONE).condition(WaxedRedstone.EAST, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.SOUTH, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.WEST, RedstoneSide.SIDE, RedstoneSide.UP);
+		builder.part().modelFile(lineModel3).rotationY(270).addModel().condition(WaxedRedstone.NORTH, RedstoneSide.UP, RedstoneSide.SIDE).condition(WaxedRedstone.EAST, RedstoneSide.NONE).condition(WaxedRedstone.SOUTH, RedstoneSide.SIDE, RedstoneSide.UP).condition(WaxedRedstone.WEST, RedstoneSide.SIDE, RedstoneSide.UP);
+
+		builder.part().modelFile(up0).rotationY(0).addModel().condition(WaxedRedstone.NORTH, RedstoneSide.UP);
+		builder.part().modelFile(up1).rotationY(90).addModel().condition(WaxedRedstone.EAST, RedstoneSide.UP);
+		builder.part().modelFile(up0).rotationY(180).addModel().condition(WaxedRedstone.SOUTH, RedstoneSide.UP);
+		builder.part().modelFile(up1).rotationY(270).addModel().condition(WaxedRedstone.WEST, RedstoneSide.UP);
+
+		simpleItem(b.getRegistryName().getPath());
 	}
 
 }

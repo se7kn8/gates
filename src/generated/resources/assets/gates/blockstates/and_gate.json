@@ -51,8 +51,8 @@
     },
     {
       "when": {
-        "facing": "north",
-        "powered": "true"
+        "powered": "true",
+        "facing": "north"
       },
       "apply": {
         "model": "gates:block/torch/output_torch_on",
@@ -61,8 +61,8 @@
     },
     {
       "when": {
-        "facing": "north",
-        "powered": "false"
+        "powered": "false",
+        "facing": "north"
       },
       "apply": {
         "model": "gates:block/torch/output_torch_off",
@@ -115,8 +115,8 @@
     },
     {
       "when": {
-        "facing": "south",
-        "powered": "true"
+        "powered": "true",
+        "facing": "south"
       },
       "apply": {
         "model": "gates:block/torch/output_torch_on"
@@ -124,8 +124,8 @@
     },
     {
       "when": {
-        "facing": "south",
-        "powered": "false"
+        "powered": "false",
+        "facing": "south"
       },
       "apply": {
         "model": "gates:block/torch/output_torch_off"
@@ -182,8 +182,8 @@
     },
     {
       "when": {
-        "facing": "west",
-        "powered": "true"
+        "powered": "true",
+        "facing": "west"
       },
       "apply": {
         "model": "gates:block/torch/output_torch_on",
@@ -192,8 +192,8 @@
     },
     {
       "when": {
-        "facing": "west",
-        "powered": "false"
+        "powered": "false",
+        "facing": "west"
       },
       "apply": {
         "model": "gates:block/torch/output_torch_off",
@@ -251,8 +251,8 @@
     },
     {
       "when": {
-        "facing": "east",
-        "powered": "true"
+        "powered": "true",
+        "facing": "east"
       },
       "apply": {
         "model": "gates:block/torch/output_torch_on",
@@ -261,8 +261,8 @@
     },
     {
       "when": {
-        "facing": "east",
-        "powered": "false"
+        "powered": "false",
+        "facing": "east"
       },
       "apply": {
         "model": "gates:block/torch/output_torch_off",

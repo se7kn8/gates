@@ -29,6 +29,8 @@
 
   "block.gates.rs_flip_flop": "RS Flipflop",
 
+  "block.gates.waxed_redstone_wire": "Gewachster Redstone",
+
   "item.gates.redstone_torch_pearl": "Redstone-Ender Fackel",
   "item.gates.frequency_changer": "Frequenz Werkzeug",
   "item.gates.portable_redstone_transmitter": "Mitnehmbarer Redstone Sender",
@@ -44,7 +46,7 @@
   "gui.gates.clock_length": "Dauer",
 
   "gui.gates.usage.portable_transmitter_1": "Recht-Klicke zum Aktivieren.",
-  "gui.gates.usage.portable_transmitter_": "UMSCHALT-Rechts-Klicke zum Konfigurieren.",
+  "gui.gates.usage.portable_transmitter_2": "UMSCHALT-Rechts-Klicke zum Konfigurieren.",
   "gui.gates.usage.portable_transmitter_3": "Warnung: Sender-Blöcke haben immer Vorrang auf einer Frequenz",
   "gui.gates.usage.frequency_changer_1": "UMSCHALT-Rechts-Klicke auf einen kabellosen Block, um die Frequenz zu kopieren.",
   "gui.gates.usage.frequency_changer_2": "Rechts-Klicke auf einen kabellosen Block, um die gespeicherte Frequenz anzunehmen.",

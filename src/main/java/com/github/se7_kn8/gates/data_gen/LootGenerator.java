@@ -33,7 +33,7 @@ public class LootGenerator implements IDataProvider {
 	}
 
 	@Override
-	public void act(DirectoryCache cache) throws IOException {
+	public void act(DirectoryCache cache) {
 		Path outputFolder = this.dataGenerator.getOutputFolder();
 
 		ValidationTracker validator = new ValidationTracker(
@@ -46,9 +46,7 @@ public class LootGenerator implements IDataProvider {
 		});
 		Multimap<String, String> multimap = validator.getProblems();
 		if (!multimap.isEmpty()) {
-			multimap.forEach((id, value) -> {
-				Gates.LOGGER.warn("Found validation problem in " + id + ": " + value);
-			});
+			multimap.forEach((id, value) -> Gates.LOGGER.warn("Found validation problem in " + id + ": " + value));
 			throw new IllegalStateException("Failed to validate loot tables, see logs");
 		} else {
 			tables.forEach((resourceLocation, lootTable) -> {
