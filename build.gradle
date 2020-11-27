@@ -14,7 +14,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.6.4214141421421'
+version = '1.6.4'
 group = 'com.github.se7_kn8.gates'
 archivesBaseName = 'gates'
 
