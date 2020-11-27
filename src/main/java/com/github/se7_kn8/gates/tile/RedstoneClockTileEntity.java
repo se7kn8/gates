@@ -1,5 +1,6 @@
 package com.github.se7_kn8.gates.tile;
 
+import com.github.se7_kn8.gates.Gates;
 import com.github.se7_kn8.gates.GatesBlocks;
 import com.github.se7_kn8.gates.block.redstone_clock.RedstoneClock;
 import com.github.se7_kn8.gates.container.AdvancedRedstoneClockContainer;
@@ -20,10 +21,32 @@ import javax.annotation.Nullable;
 public class RedstoneClockTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
 
-	public static final int MIN_CLOCK_TIME = 2;
-	public static final int MAX_CLOCK_TIME = 72000;
-	public static final int MIN_CLOCK_LENGTH = 1;
-	public static final int MAX_CLOCK_LENGTH = 71000;
+	private static final int MIN_CLOCK_TIME;
+	private static final int MAX_CLOCK_TIME;
+	private static final int MIN_PULSE_LENGTH;
+	private static final int MAX_PULSE_LENGTH;
+
+	static {
+		int minClockCycleTicks = Gates.config.minClockTicks.get();
+		int maxClockCycleTicks = Gates.config.maxClockTicks.get();
+		int minClockPulseTicks = Gates.config.minClockPulseTicks.get();
+		int maxClockPulseTicks = Gates.config.maxClockPulseTicks.get();
+
+		if (minClockCycleTicks > maxClockCycleTicks) {
+			minClockCycleTicks = maxClockCycleTicks - 1;
+		}
+
+		if (minClockPulseTicks > maxClockPulseTicks) {
+			minClockCycleTicks = maxClockPulseTicks - 1;
+		}
+
+		MIN_CLOCK_TIME = minClockCycleTicks;
+		MAX_CLOCK_TIME = maxClockCycleTicks;
+
+		MIN_PULSE_LENGTH = minClockPulseTicks;
+		MAX_PULSE_LENGTH = maxClockPulseTicks;
+
+	}
 
 	private int clockLength = 6;
 	private int clockTime = 12;
@@ -95,10 +118,10 @@ public class RedstoneClockTileEntity extends TileEntity implements ITickableTile
 	}
 
 	public void setClockLength(int clockLength) {
-		if (clockLength < MIN_CLOCK_LENGTH) {
-			clockLength = MIN_CLOCK_LENGTH;
-		} else if (clockLength > MAX_CLOCK_LENGTH) {
-			clockLength = MAX_CLOCK_LENGTH;
+		if (clockLength < MIN_PULSE_LENGTH) {
+			clockLength = MIN_PULSE_LENGTH;
+		} else if (clockLength > MAX_PULSE_LENGTH) {
+			clockLength = MAX_PULSE_LENGTH;
 		}
 		this.clockLength = clockLength;
 		checkLengthTimeRelation();
@@ -114,7 +137,7 @@ public class RedstoneClockTileEntity extends TileEntity implements ITickableTile
 		checkLengthTimeRelation();
 	}
 
-	public void resetClock(){
+	public void resetClock() {
 		poweredTicks = 0;
 		remainingTicks = 0;
 	}

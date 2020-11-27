@@ -13,7 +13,9 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -27,6 +29,8 @@ public class Gates {
 
 	public static final String MODID = "gates";
 
+	public static final GatesConfig config = new GatesConfig();
+
 	public static ItemGroup GATES_ITEM_GROUP = new ItemGroup("gates") {
 		@Override
 		public ItemStack createIcon() {
@@ -39,6 +43,7 @@ public class Gates {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerColors);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Gates.config.defaultConfig);
 		GatesBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		GatesBlocks.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		GatesItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
