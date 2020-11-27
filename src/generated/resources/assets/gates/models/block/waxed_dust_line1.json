@@ -1,0 +1,6 @@
+{
+  "parent": "gates:block/waxed_redstone/waxed_dust_side",
+  "textures": {
+    "line": "minecraft:block/redstone_dust_line1"
+  }
+}
