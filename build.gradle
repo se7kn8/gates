@@ -4,6 +4,7 @@ buildscript {
         jcenter()
         mavenCentral()
         maven { url='https://dist.creeper.host/Sponge/maven' }
+        maven {url='https://repo.spongepowered.org/repository/maven-public'}
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
@@ -14,7 +15,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.6.4'
+version = '1.7.0'
 group = 'com.github.se7_kn8.gates'
 archivesBaseName = 'gates'
 
@@ -41,7 +42,7 @@ repositories {
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'snapshot', version: '20200916-1.16.2'
+    mappings channel: 'snapshot', version: '20201028-1.16.3'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -108,7 +109,7 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.3-34.1.0'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.0.46'
 
     // compileOnly fg.deobf("mezz.jei:jei-1.16.1:7.0.0.6:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.3:7.6.0.49")
