@@ -1,13 +1,12 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
-        jcenter()
         mavenCentral()
         maven { url='https://dist.creeper.host/Sponge/maven' }
         maven {url='https://repo.spongepowered.org/repository/maven-public'}
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
@@ -19,7 +18,7 @@ version = '1.7.1'
 group = 'com.github.se7_kn8.gates'
 archivesBaseName = 'gates'
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships java 8
 
 sourceSets {
     main {
@@ -109,7 +108,7 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.0.46'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.1.0'
 
     // compileOnly fg.deobf("mezz.jei:jei-1.16.1:7.0.0.6:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.3:7.6.0.49")
