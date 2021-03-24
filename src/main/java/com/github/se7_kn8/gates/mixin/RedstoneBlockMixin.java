@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import javax.annotation.Nullable;
 
 @Mixin(RedstoneWireBlock.class)
-public abstract class RedstoneBlockMixin implements IRedstoneWire{
+public abstract class RedstoneBlockMixin implements IRedstoneWire {
 
 	@Inject(at = @At("HEAD"), method = "canConnectTo", cancellable = true, remap = false)
 	private static void canConnectTo(BlockState blockState, IBlockReader world, BlockPos pos, @Nullable Direction side, CallbackInfoReturnable<Boolean> info) {
