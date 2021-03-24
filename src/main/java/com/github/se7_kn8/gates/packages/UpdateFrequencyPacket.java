@@ -32,8 +32,8 @@ public class UpdateFrequencyPacket implements BasePacket{
 	@Override
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
-			World world = ctx.get().getSender().world;
-			if (!world.isRemote) {
+			World world = ctx.get().getSender().level;
+			if (!world.isClientSide) {
 				CapabilityUtil.findWirelessCapability(world, pos, c->{
 					int newFrequency = this.frequency;
 

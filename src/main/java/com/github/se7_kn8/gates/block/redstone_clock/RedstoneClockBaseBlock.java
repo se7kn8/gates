@@ -24,6 +24,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class RedstoneClockBaseBlock extends ContainerBlock {
 
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
@@ -36,7 +38,7 @@ public class RedstoneClockBaseBlock extends ContainerBlock {
 	}
 
 	protected RedstoneClockBaseBlock() {
-		super(Properties.from(Blocks.REPEATER));
+		super(Properties.copy(Blocks.REPEATER));
 	}
 
 	@Override
@@ -45,38 +47,38 @@ public class RedstoneClockBaseBlock extends ContainerBlock {
 	}
 
 	@Override
-	public boolean canProvidePower(@Nonnull BlockState p_149744_1_) {
+	public boolean isSignalSource(@Nonnull BlockState p_149744_1_) {
 		return true;
 	}
 
 	@Override
-	public int getStrongPower(BlockState blockState, @Nonnull IBlockReader blockAccess, @Nonnull BlockPos pos, @Nonnull Direction side) {
-		return blockState.get(POWERED) ? 15 : 0;
+	public int getDirectSignal(BlockState blockState, @Nonnull IBlockReader blockAccess, @Nonnull BlockPos pos, @Nonnull Direction side) {
+		return blockState.getValue(POWERED) ? 15 : 0;
 	}
 
 	@Override
-	public int getWeakPower(BlockState blockState, @Nonnull IBlockReader blockAccess, @Nonnull BlockPos pos, @Nonnull Direction side) {
-		return blockState.get(POWERED) ? 15 : 0;
+	public int getSignal(BlockState blockState, @Nonnull IBlockReader blockAccess, @Nonnull BlockPos pos, @Nonnull Direction side) {
+		return blockState.getValue(POWERED) ? 15 : 0;
 	}
 
 	@Override
-	public BlockRenderType getRenderType(@Nonnull BlockState p_149645_1_) {
+	public BlockRenderType getRenderShape(@Nonnull BlockState p_149645_1_) {
 		return BlockRenderType.MODEL;
 	}
 
 	@Nullable
 	@Override
-	public TileEntity createNewTileEntity(@Nonnull IBlockReader worldIn) {
+	public TileEntity newBlockEntity(@Nonnull IBlockReader worldIn) {
 		return new RedstoneClockTileEntity();
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		if (stateIn.get(POWERED)) {
+		if (stateIn.getValue(POWERED)) {
 			double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
 			double d1 = (double) pos.getY() + 0.7D + (rand.nextDouble() - 0.5D) * 0.2D;
 			double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
-			worldIn.addParticle(RedstoneParticleData.REDSTONE_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			worldIn.addParticle(RedstoneParticleData.REDSTONE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 

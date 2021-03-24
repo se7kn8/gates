@@ -33,12 +33,12 @@ public class LootTables {
 
 	private static void generateSelfDrop(LootGenerator generator, Block block) {
 		ResourceLocation location = block.getLootTable();
-		LootTable table = LootTable.builder()
-				.setParameterSet(LootParameterSets.BLOCK)
-				.addLootPool(LootPool.builder()
-						.rolls(ConstantRange.of(1))
-						.addEntry(ItemLootEntry.builder(block))
-						.acceptCondition(SurvivesExplosion.builder())
+		LootTable table = LootTable.lootTable()
+				.setParamSet(LootParameterSets.BLOCK)
+				.withPool(LootPool.lootPool()
+						.setRolls(ConstantRange.exactly(1))
+						.add(ItemLootEntry.lootTableItem(block))
+						.when(SurvivesExplosion.survivesExplosion())
 				).build();
 		generator.add(location, table);
 	}

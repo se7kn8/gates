@@ -13,6 +13,8 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class TFlipFlop extends RedstoneDiodeBlock {
 
 	public static final BooleanProperty SET = BooleanProperty.create("set");
@@ -20,8 +22,8 @@ public class TFlipFlop extends RedstoneDiodeBlock {
 	public static final BooleanProperty SHOULD_CHANGE = BooleanProperty.create("should_change");
 
 	public TFlipFlop() {
-		super(Properties.from(Blocks.REPEATER));
-		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(POWERED, false).with(SET, false).with(SET2, false).with(SHOULD_CHANGE, false));
+		super(Properties.copy(Blocks.REPEATER));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(POWERED, false).setValue(SET, false).setValue(SET2, false).setValue(SHOULD_CHANGE, false));
 	}
 
 	@Override
@@ -30,37 +32,37 @@ public class TFlipFlop extends RedstoneDiodeBlock {
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(HORIZONTAL_FACING, POWERED, SET, SET2, SHOULD_CHANGE);
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+		builder.add(FACING, POWERED, SET, SET2, SHOULD_CHANGE);
 	}
 
 	@Override
 	public boolean canConnectRedstone(BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side) {
-		return side == state.get(TwoInputLogicGate.HORIZONTAL_FACING) || side == state.get(TwoInputLogicGate.HORIZONTAL_FACING).getOpposite();
+		return side == state.getValue(TwoInputLogicGate.FACING) || side == state.getValue(TwoInputLogicGate.FACING).getOpposite();
 	}
 
 	@Override
-	protected int calculateInputStrength(World worldIn, BlockPos pos, BlockState state) {
+	protected int getInputSignal(World worldIn, BlockPos pos, BlockState state) {
 		// weird function
-		Direction facing = state.get(TwoInputLogicGate.HORIZONTAL_FACING);
-		boolean oldSet = state.get(SET);
-		boolean set = getPowerOnSide(worldIn, pos.offset(facing), facing) > 0;
+		Direction facing = state.getValue(TwoInputLogicGate.FACING);
+		boolean oldSet = state.getValue(SET);
+		boolean set = getAlternateSignalAt(worldIn, pos.relative(facing), facing) > 0;
 
-		if (state.get(SHOULD_CHANGE)) {
-			worldIn.setBlockState(pos, state.with(SHOULD_CHANGE, false));
-			return state.get(POWERED) ? 0 : 15;
+		if (state.getValue(SHOULD_CHANGE)) {
+			worldIn.setBlockAndUpdate(pos, state.setValue(SHOULD_CHANGE, false));
+			return state.getValue(POWERED) ? 0 : 15;
 		}
 
 		if (oldSet != set) {
-			boolean changeEdge = state.get(SET2);
-			worldIn.setBlockState(pos, state.with(SET, set).with(SET2, !changeEdge));
-			if (!state.get(SET2)) {
+			boolean changeEdge = state.getValue(SET2);
+			worldIn.setBlockAndUpdate(pos, state.setValue(SET, set).setValue(SET2, !changeEdge));
+			if (!state.getValue(SET2)) {
 				System.out.println("PULSE  !!!!!!!!!!!!!");
-				worldIn.setBlockState(pos, state.with(SHOULD_CHANGE, true));
-				return state.get(POWERED) ? 0 : 15;
+				worldIn.setBlockAndUpdate(pos, state.setValue(SHOULD_CHANGE, true));
+				return state.getValue(POWERED) ? 0 : 15;
 			}
 		}
 
-		return state.get(POWERED) ? 15 : 0;
+		return state.getValue(POWERED) ? 15 : 0;
 	}
 }

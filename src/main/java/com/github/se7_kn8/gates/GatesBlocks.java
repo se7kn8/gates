@@ -27,7 +27,7 @@ public class GatesBlocks {
 	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, Gates.MODID);
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Gates.MODID);
 
-	public static final RegistryObject<Block> REDSTONE_BLOCK_OFF = addBlock("redstone_block_off", () -> new Block(Block.Properties.from(Blocks.REDSTONE_BLOCK)), Gates.GATES_ITEM_GROUP);
+	public static final RegistryObject<Block> REDSTONE_BLOCK_OFF = addBlock("redstone_block_off", () -> new Block(Block.Properties.copy(Blocks.REDSTONE_BLOCK)), Gates.GATES_ITEM_GROUP);
 
 	public static final RegistryObject<Block> AND_GATE = addBlock("and_gate", () -> new TwoInputLogicGate((x1, x2) -> x1 && x2), Gates.GATES_ITEM_GROUP);
 	public static final RegistryObject<Block> OR_GATE = addBlock("or_gate", () -> new TwoInputLogicGate((x1, x2) -> x1 || x2), Gates.GATES_ITEM_GROUP);
@@ -45,7 +45,7 @@ public class GatesBlocks {
 
 	public static final RegistryObject<Block> WIRELESS_REDSTONE_LAMP = addBlock("wireless_redstone_lamp", WirelessRedstoneLamp::new, Gates.GATES_ITEM_GROUP);
 
-	public static final RegistryObject<Block> RAIN_DETECTOR = addBlock("rain_detector", () -> new CustomDetector((blockState, world, blockPos) -> world.isRainingAt(blockPos.up(2)) ? 15 : 0), Gates.GATES_ITEM_GROUP);
+	public static final RegistryObject<Block> RAIN_DETECTOR = addBlock("rain_detector", () -> new CustomDetector((blockState, world, blockPos) -> world.isRainingAt(blockPos.above(2)) ? 15 : 0), Gates.GATES_ITEM_GROUP);
 	public static final RegistryObject<Block> THUNDER_DETECTOR = addBlock("thunder_detector", () -> new CustomDetector((blockState, world, blockPos) -> world.isThundering() ? 15 : 0), Gates.GATES_ITEM_GROUP);
 
 	public static final RegistryObject<Block> REDSTONE_CLOCK = addBlock("redstone_clock", RedstoneClock::new, Gates.GATES_ITEM_GROUP);
@@ -71,8 +71,8 @@ public class GatesBlocks {
 	private static <T extends Block> RegistryObject<T> addBlock(String name, Supplier<T> block, ItemGroup tab) {
 		RegistryObject<T> object = GatesBlocks.BLOCKS.register(name, block);
 		GatesItems.ITEMS.register(name, () -> {
-			BlockItem itemBlock = new BlockItem(object.get(), new Item.Properties().group(tab));
-			itemBlock.addToBlockToItemMap(Item.BLOCK_TO_ITEM, itemBlock);
+			BlockItem itemBlock = new BlockItem(object.get(), new Item.Properties().tab(tab));
+			itemBlock.registerBlocks(Item.BY_BLOCK, itemBlock);
 			return itemBlock;
 		});
 		return object;
@@ -86,7 +86,7 @@ public class GatesBlocks {
 			for (int i = 0; i < validBlocksSuppliers.length; i++) {
 				blocks[i] = validBlocksSuppliers[i].get();
 			}
-			return TileEntityType.Builder.create(tileEntitySupplier, blocks).build(null);
+			return TileEntityType.Builder.of(tileEntitySupplier, blocks).build(null);
 		});
 	}
 

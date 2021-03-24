@@ -30,25 +30,27 @@ import org.apache.http.impl.conn.Wire;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class ReceiverBlock extends ContainerBlock implements ReceiverTileEntity.IWirelessReceiver {
 
-	public static final VoxelShape SHAPE = VoxelShapes.or(Utils.GATE_SHAPE, Block.makeCuboidShape(7.0D, 0.0D, 7.0D, 9.0D, 10.0D, 9.0D));
+	public static final VoxelShape SHAPE = VoxelShapes.or(Utils.GATE_SHAPE, Block.box(7.0D, 0.0D, 7.0D, 9.0D, 10.0D, 9.0D));
 
-	public static IntegerProperty POWER = BlockStateProperties.POWER_0_15;
+	public static IntegerProperty POWER = BlockStateProperties.POWER;
 
 	public ReceiverBlock() {
-		super(Properties.from(Blocks.REPEATER));
-		this.setDefaultState(this.stateContainer.getBaseState().with(POWER, 0));
+		super(Properties.copy(Blocks.REPEATER));
+		this.registerDefaultState(this.stateDefinition.any().setValue(POWER, 0));
 	}
 
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		return WirelessRedstoneUtil.onBlockActivated(world, pos, player, hand);
 	}
 
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return hasSolidSideOnTop(worldIn, pos.down());
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		return canSupportRigidBlock(worldIn, pos.below());
 	}
 
 	@Override
@@ -57,31 +59,31 @@ public class ReceiverBlock extends ContainerBlock implements ReceiverTileEntity.
 	}
 
 	@Override
-	public BlockRenderType getRenderType(BlockState state) {
+	public BlockRenderType getRenderShape(BlockState state) {
 		return BlockRenderType.MODEL;
 	}
 
 	@Override
-	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+	public void onPlace(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
 		WirelessRedstoneUtil.onBlockAdded(state, worldIn, pos, oldState);
-		super.onBlockAdded(state, worldIn, pos, oldState, isMoving);
+		super.onPlace(state, worldIn, pos, oldState, isMoving);
 	}
 
 
 	@Override
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		WirelessRedstoneUtil.onReplace(state, worldIn, pos, newState);
-		super.onReplaced(state, worldIn, pos, newState, isMoving);
+		super.onRemove(state, worldIn, pos, newState, isMoving);
 	}
 
 	@Nullable
 	@Override
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
+	public TileEntity newBlockEntity(IBlockReader worldIn) {
 		return new ReceiverTileEntity();
 	}
 
 	@Override
-	public boolean canProvidePower(BlockState state) {
+	public boolean isSignalSource(BlockState state) {
 		return true;
 	}
 
@@ -91,32 +93,32 @@ public class ReceiverBlock extends ContainerBlock implements ReceiverTileEntity.
 	}
 
 	@Override
-	public int getStrongPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		return blockState.get(POWER);
+	public int getDirectSignal(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
+		return blockState.getValue(POWER);
 	}
 
 	@Override
-	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		return blockState.get(POWER);
+	public int getSignal(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
+		return blockState.getValue(POWER);
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(POWER);
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		if (stateIn.get(POWER) > 0) {
+		if (stateIn.getValue(POWER) > 0) {
 			double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
 			double d1 = (double) pos.getY() + 0.7D + (rand.nextDouble() - 0.5D) * 0.2D;
 			double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
-			worldIn.addParticle(RedstoneParticleData.REDSTONE_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			worldIn.addParticle(RedstoneParticleData.REDSTONE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
 	@Override
 	public void onPowerChange(World world, BlockPos pos, int newPower) {
-		world.setBlockState(pos, world.getBlockState(pos).with(ReceiverBlock.POWER, newPower));
+		world.setBlockAndUpdate(pos, world.getBlockState(pos).setValue(ReceiverBlock.POWER, newPower));
 	}
 }

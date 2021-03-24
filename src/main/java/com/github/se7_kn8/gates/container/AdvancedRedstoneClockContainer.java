@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 public class AdvancedRedstoneClockContainer extends BasicPlayerContainer {
 	public AdvancedRedstoneClockContainer(int windowId, World world, BlockPos pos, PlayerInventory inventory, PlayerEntity player) {
 		super(GatesContainers.ADVANCED_REDSTONE_CLOCK_CONTAINER_TYPE, windowId, world, pos, inventory, player);
-		trackInt(new IntReferenceHolder() {
+		addDataSlot(new IntReferenceHolder() {
 			@Override
 			public int get() {
 				return getClockTime();
@@ -22,7 +22,7 @@ public class AdvancedRedstoneClockContainer extends BasicPlayerContainer {
 				setClockTime(value);
 			}
 		});
-		trackInt(new IntReferenceHolder() {
+		addDataSlot(new IntReferenceHolder() {
 			@Override
 			public int get() {
 				return getClockLength();

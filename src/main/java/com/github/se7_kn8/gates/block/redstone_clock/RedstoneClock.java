@@ -15,30 +15,30 @@ import net.minecraft.world.World;
 public class RedstoneClock extends RedstoneClockBaseBlock {
 
 	public RedstoneClock() {
-		setDefaultState(this.stateContainer.getBaseState().with(POWERED, false).with(CLOCK_SPEED, 3));
+		registerDefaultState(this.stateDefinition.any().setValue(POWERED, false).setValue(CLOCK_SPEED, 3));
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (player.isAllowEdit()) {
-			if (!worldIn.isRemote) {
-				BlockState newBlockState = state.func_235896_a_(CLOCK_SPEED);
-				worldIn.setBlockState(pos, newBlockState);
-				TileEntity entity = worldIn.getTileEntity(pos);
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (player.mayBuild()) {
+			if (!worldIn.isClientSide) {
+				BlockState newBlockState = state.cycle(CLOCK_SPEED);
+				worldIn.setBlockAndUpdate(pos, newBlockState);
+				TileEntity entity = worldIn.getBlockEntity(pos);
 				if (entity instanceof RedstoneClockTileEntity) {
 					RedstoneClockTileEntity clock = (RedstoneClockTileEntity) entity;
-					clock.setClockTime(newBlockState.get(CLOCK_SPEED) * 4);
-					clock.setClockLength(newBlockState.get(CLOCK_SPEED) * 2);
+					clock.setClockTime(newBlockState.getValue(CLOCK_SPEED) * 4);
+					clock.setClockLength(newBlockState.getValue(CLOCK_SPEED) * 2);
 					clock.resetClock();
 				}
 			}
 			return ActionResultType.SUCCESS;
 		}
-		return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+		return super.use(state, worldIn, pos, player, handIn, hit);
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> p_206840_1_) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> p_206840_1_) {
 		p_206840_1_.add(POWERED, CLOCK_SPEED);
 	}
 }

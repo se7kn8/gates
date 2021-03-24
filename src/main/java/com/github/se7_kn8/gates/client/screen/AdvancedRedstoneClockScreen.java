@@ -34,11 +34,11 @@ public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedst
 		clockTimeField = new TextFieldWidget(this.font, this.width / 2 - 75, this.height / 2 - 50, 70, 20, new TranslationTextComponent("gui.gates.clock_time"));
 		clockLengthField = new TextFieldWidget(this.font, this.width / 2 + 5, this.height / 2 - 50, 70, 20, new TranslationTextComponent("gui.gates.clock_length"));
 
-		clockTimeField.setValidator(Utils.NUMBER_STRING_9_CHARACTERS);
-		clockLengthField.setValidator(Utils.NUMBER_STRING_9_CHARACTERS);
+		clockTimeField.setFilter(Utils.NUMBER_STRING_9_CHARACTERS);
+		clockLengthField.setFilter(Utils.NUMBER_STRING_9_CHARACTERS);
 
 		applyButton = this.addButton(new Button(this.width / 2, this.height / 2 - 25, 80, 20, new TranslationTextComponent("gui.gates.apply"), p_onPress_1_ -> {
-			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateRedstoneClockPacket(getTilePos(), Integer.parseInt(this.clockTimeField.getText()), Integer.parseInt(this.clockLengthField.getText())));
+			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateRedstoneClockPacket(getTilePos(), Integer.parseInt(this.clockTimeField.getValue()), Integer.parseInt(this.clockLengthField.getValue())));
 		}));
 
 		this.children.add(clockTimeField);
@@ -53,18 +53,18 @@ public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedst
 		this.clockLengthField.tick();
 		this.clockTimeField.tick();
 
-		int clockTime = this.getContainer().getClockTime();
-		int clockLength = this.getContainer().getClockLength();
+		int clockTime = this.getMenu().getClockTime();
+		int clockLength = this.getMenu().getClockLength();
 
 		boolean change = false;
 		boolean enableButton = true;
 
 		if (clockTime != this.lastClockTime) {
 			this.lastClockTime = clockTime;
-			this.clockTimeField.setText(String.valueOf(clockTime));
+			this.clockTimeField.setValue(String.valueOf(clockTime));
 		} else {
 			try {
-				change = clockTime != Integer.parseInt(this.clockTimeField.getText());
+				change = clockTime != Integer.parseInt(this.clockTimeField.getValue());
 			} catch (NumberFormatException e) {
 				// field is empty
 				enableButton = false;
@@ -73,10 +73,10 @@ public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedst
 
 		if (clockLength != this.lastClockLength) {
 			this.lastClockLength = clockLength;
-			this.clockLengthField.setText(String.valueOf(clockLength));
+			this.clockLengthField.setValue(String.valueOf(clockLength));
 		} else {
 			try {
-				change = change | (clockLength != Integer.parseInt(this.clockLengthField.getText()));
+				change = change | (clockLength != Integer.parseInt(this.clockLengthField.getValue()));
 			} catch (NumberFormatException e) {
 				// field is empty
 				enableButton = false;
@@ -96,12 +96,12 @@ public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedst
 
 	@Override
 	// mappings: drawGuiContainerForegroundLayer
-	protected void drawGuiContainerForegroundLayer(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
-		super.drawGuiContainerForegroundLayer(stack, mouseX, mouseY);
+	protected void renderLabels(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
+		super.renderLabels(stack, mouseX, mouseY);
 
 		// mappings: drawString
-		this.font.func_243248_b(stack, new TranslationTextComponent("gui.gates.clock_time"), 13, 20, 4210752);
-		this.font.func_243248_b(stack, new TranslationTextComponent("gui.gates.clock_length"), 94, 20, 4210752);
+		this.font.draw(stack, new TranslationTextComponent("gui.gates.clock_time"), 13, 20, 4210752);
+		this.font.draw(stack, new TranslationTextComponent("gui.gates.clock_length"), 94, 20, 4210752);
 	}
 
 }

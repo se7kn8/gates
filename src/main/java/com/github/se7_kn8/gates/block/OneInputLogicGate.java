@@ -20,9 +20,9 @@ public class OneInputLogicGate extends RedstoneDiodeBlock {
 	public static final BooleanProperty INPUT = BooleanProperty.create("input");
 
 	public OneInputLogicGate(Function<Boolean, Boolean> calculateOutputFunction) {
-		super(Block.Properties.from(Blocks.REPEATER));
+		super(Block.Properties.copy(Blocks.REPEATER));
 		this.calculateOutputFunction = calculateOutputFunction;
-		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(POWERED, false).with(INPUT, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(POWERED, false).setValue(INPUT, false));
 	}
 
 	@Override
@@ -31,21 +31,21 @@ public class OneInputLogicGate extends RedstoneDiodeBlock {
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(HORIZONTAL_FACING, POWERED, INPUT);
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+		builder.add(FACING, POWERED, INPUT);
 	}
 
 	@Override
 	public boolean canConnectRedstone(BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side) {
-		return side == state.get(TwoInputLogicGate.HORIZONTAL_FACING) || side == state.get(TwoInputLogicGate.HORIZONTAL_FACING).getOpposite();
+		return side == state.getValue(TwoInputLogicGate.FACING) || side == state.getValue(TwoInputLogicGate.FACING).getOpposite();
 	}
 
 	@Override
-	protected int calculateInputStrength(World world, BlockPos pos, BlockState state) {
-		Direction facing = state.get(TwoInputLogicGate.HORIZONTAL_FACING);
-		boolean firstInput = getPowerOnSide(world, pos.offset(facing), facing) > 0;
+	protected int getInputSignal(World world, BlockPos pos, BlockState state) {
+		Direction facing = state.getValue(TwoInputLogicGate.FACING);
+		boolean firstInput = getAlternateSignalAt(world, pos.relative(facing), facing) > 0;
 
-		world.setBlockState(pos, state.with(INPUT, firstInput));
+		world.setBlockAndUpdate(pos, state.setValue(INPUT, firstInput));
 		return calculateOutputFunction.apply(firstInput) ? 15 : 0;
 	}
 }

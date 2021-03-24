@@ -19,7 +19,7 @@ public abstract class BasicPlayerContainer extends Container {
 
 	public BasicPlayerContainer(ContainerType<?> type, int windowId, World world, BlockPos pos, PlayerInventory inventory, PlayerEntity player) {
 		super(type, windowId);
-		this.entity = world.getTileEntity(pos);
+		this.entity = world.getBlockEntity(pos);
 		this.playerEntity = player;
 
 		for (int x = 0; x < 9; ++x) {
@@ -43,12 +43,12 @@ public abstract class BasicPlayerContainer extends Container {
 
 	@Override
 	@Nonnull
-	public ItemStack transferStackInSlot(@Nonnull PlayerEntity playerIn, int index) {
+	public ItemStack quickMoveStack(@Nonnull PlayerEntity playerIn, int index) {
 		return ItemStack.EMPTY;
 	}
 
 	@Override
-	public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
+	public boolean stillValid(@Nonnull PlayerEntity playerIn) {
 		return true;
 	}
 }

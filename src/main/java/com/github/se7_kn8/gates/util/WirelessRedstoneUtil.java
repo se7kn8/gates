@@ -18,13 +18,13 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public class WirelessRedstoneUtil {
 
 	public static ActionResultType onBlockActivated(World world, BlockPos pos, PlayerEntity player, Hand hand) {
-		if (player.getHeldItem(hand).getItem() instanceof FrequencyChangerItem && player.getHeldItem(hand).hasTag() && player.getHeldItem(hand).getTag().contains("frequency")) {
+		if (player.getItemInHand(hand).getItem() instanceof FrequencyChangerItem && player.getItemInHand(hand).hasTag() && player.getItemInHand(hand).getTag().contains("frequency")) {
 			return ActionResultType.PASS;
 		}
-		if (!world.isRemote) {
-			TileEntity entity = world.getTileEntity(pos);
+		if (!world.isClientSide) {
+			TileEntity entity = world.getBlockEntity(pos);
 			if (entity instanceof ReceiverTileEntity) {
-				NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) entity, entity.getPos());
+				NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) entity, entity.getBlockPos());
 			}
 		}
 		return ActionResultType.SUCCESS;
@@ -34,7 +34,7 @@ public class WirelessRedstoneUtil {
 	 * Must be called before super.onBlockAdded
 	 */
 	public static void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState) {
-		if (!worldIn.isRemote && (state.getBlock() != oldState.getBlock())) {
+		if (!worldIn.isClientSide && (state.getBlock() != oldState.getBlock())) {
 			RedstoneReceiverWorldSavedData data = RedstoneReceiverWorldSavedData.get((ServerWorld) worldIn);
 			data.addNode(worldIn, pos);
 		}
@@ -44,7 +44,7 @@ public class WirelessRedstoneUtil {
 	 * Must be called before super.onReplace
 	 */
 	public static void onReplace(BlockState state, World worldIn, BlockPos pos, BlockState newState){
-		if (!worldIn.isRemote && (newState.getBlock() != state.getBlock())) {
+		if (!worldIn.isClientSide && (newState.getBlock() != state.getBlock())) {
 			RedstoneReceiverWorldSavedData.get((ServerWorld) worldIn).removeNode(worldIn, pos);
 		}
 	}

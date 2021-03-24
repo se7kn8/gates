@@ -26,23 +26,23 @@ public abstract class BasicPlayerScreen<T extends BasicPlayerContainer> extends 
 	public void render(@Nonnull MatrixStack stack, int mouseX, int mouseY, float ticks) {
 		this.renderBackground(stack);
 		super.render(stack, mouseX, mouseY, ticks);
-		this.renderHoveredTooltip(stack, mouseX, mouseY);
+		this.renderTooltip(stack, mouseX, mouseY);
 	}
 
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(@Nonnull MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
+	protected void renderBg(@Nonnull MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.minecraft.getTextureManager().bindTexture(background);
-		this.blit(stack, this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
+		this.minecraft.getTextureManager().bind(background);
+		this.blit(stack, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
 	}
 
 	public TileEntity getTile() {
-		return getContainer().getTile();
+		return getMenu().getTile();
 	}
 
 	public BlockPos getTilePos() {
-		return getTile().getPos();
+		return getTile().getBlockPos();
 	}
 
 }

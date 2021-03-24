@@ -25,12 +25,12 @@ import java.util.List;
 public class PortableRedstoneTransmitter extends Item {
 
 	public PortableRedstoneTransmitter() {
-		super(new Item.Properties().group(Gates.GATES_ITEM_GROUP).maxStackSize(1).rarity(Rarity.UNCOMMON));
+		super(new Item.Properties().tab(Gates.GATES_ITEM_GROUP).stacksTo(1).rarity(Rarity.UNCOMMON));
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
+	public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+		super.appendHoverText(stack, worldIn, tooltip, flagIn);
 		tooltip.add(new TranslationTextComponent("gui.gates.usage.portable_transmitter_1"));
 		tooltip.add(new TranslationTextComponent("gui.gates.usage.portable_transmitter_2"));
 		tooltip.add(new TranslationTextComponent("gui.gates.usage.portable_transmitter_3"));
@@ -42,12 +42,12 @@ public class PortableRedstoneTransmitter extends Item {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack stack = playerIn.getHeldItem(handIn);
+	public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+		ItemStack stack = playerIn.getItemInHand(handIn);
 
-		if (playerIn.isSneaking()) {
-			if (!worldIn.isRemote) {
-				playerIn.openContainer(new INamedContainerProvider() {
+		if (playerIn.isShiftKeyDown()) {
+			if (!worldIn.isClientSide) {
+				playerIn.openMenu(new INamedContainerProvider() {
 					@Override
 					public ITextComponent getDisplayName() {
 						return new TranslationTextComponent("item.gates.portable_redstone_transmitter");
@@ -60,7 +60,7 @@ public class PortableRedstoneTransmitter extends Item {
 					}
 				});
 			}
-			return ActionResult.resultSuccess(stack);
+			return ActionResult.success(stack);
 		}
 
 		if (!stack.hasTag()) {
@@ -68,8 +68,8 @@ public class PortableRedstoneTransmitter extends Item {
 		}
 
 		if (!stack.getTag().contains("frequency")) {
-			playerIn.sendStatusMessage(new TranslationTextComponent("gui.gates.no_frequency"), true);
-			return ActionResult.resultFail(stack);
+			playerIn.displayClientMessage(new TranslationTextComponent("gui.gates.no_frequency"), true);
+			return ActionResult.fail(stack);
 		}
 
 		int frequency = stack.getTag().getInt("frequency");
@@ -83,17 +83,17 @@ public class PortableRedstoneTransmitter extends Item {
 			update(worldIn, true, frequency);
 		}
 
-		return ActionResult.resultSuccess(stack);
+		return ActionResult.success(stack);
 	}
 
 	private void update(World world, boolean active, int frequency) {
-		if (!world.isRemote) {
+		if (!world.isClientSide) {
 			RedstoneReceiverWorldSavedData.get((ServerWorld) world).updateFrequency(world, frequency, active ? 15 : 0);
 		}
 	}
 
 	@Override
-	public boolean hasEffect(ItemStack stack) {
+	public boolean isFoil(ItemStack stack) {
 		return stack.hasTag() && stack.getTag().contains("active") && stack.getTag().getBoolean("active");
 	}
 

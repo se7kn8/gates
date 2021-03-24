@@ -31,7 +31,7 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 	private Set<BlockPos> transmitters = new HashSet<>();
 
 	@Override
-	public void read(CompoundNBT nbt) {
+	public void load(CompoundNBT nbt) {
 		receivers = loadBlockPosSet(nbt, "receivers");
 		transmitters = loadBlockPosSet(nbt, "transmitters");
 	}
@@ -55,7 +55,7 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 
 	@Override
 	@Nonnull
-	public CompoundNBT write(@Nonnull CompoundNBT compound) {
+	public CompoundNBT save(@Nonnull CompoundNBT compound) {
 		saveBlockPosSet(receivers, compound, "receivers");
 		saveBlockPosSet(transmitters, compound, "transmitters");
 		return compound;
@@ -76,7 +76,7 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 	public int getCurrentFrequencyValue(World world, int frequency) {
 		return transmitters
 				.stream()
-				.map(pos -> world.getTileEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).orElseThrow(IllegalStateException::new))
+				.map(pos -> world.getBlockEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).orElseThrow(IllegalStateException::new))
 				.filter(node -> node.getFrequency() == frequency)
 				.map(IWirelessNode::getPower)
 				.max(Integer::compareTo)
@@ -98,7 +98,7 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 		Set<BlockPos> receiversCopy = new HashSet<>(receivers);
 
 		receiversCopy.stream()
-				.map(pos -> world.getTileEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).orElseThrow(IllegalStateException::new))
+				.map(pos -> world.getBlockEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).orElseThrow(IllegalStateException::new))
 				.filter(node -> node.getFrequency() == frequency)
 				.forEach(node -> node.setPower(power));
 	}
@@ -159,6 +159,6 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 
 	@Nonnull
 	public static RedstoneReceiverWorldSavedData get(ServerWorld world) {
-		return world.getSavedData().getOrCreate(RedstoneReceiverWorldSavedData::new, DATA_NAME);
+		return world.getDataStorage().computeIfAbsent(RedstoneReceiverWorldSavedData::new, DATA_NAME);
 	}
 }

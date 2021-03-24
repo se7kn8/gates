@@ -27,32 +27,32 @@ public abstract class RedstoneBlockMixin implements IRedstoneWire{
 		}
 	}
 
-	@Inject(at = @At("HEAD"), method = "getPower", cancellable = true)
-	private void getPower(BlockState state, CallbackInfoReturnable<Integer> info) {
+	@Inject(at = @At("HEAD"), method = "getWireSignal", cancellable = true)
+	private void getWireSignal(BlockState state, CallbackInfoReturnable<Integer> info) {
 		if (state.getBlock() instanceof IRedstoneWire) {
-			info.setReturnValue(state.get(RedstoneWireBlock.POWER));
+			info.setReturnValue(state.getValue(RedstoneWireBlock.POWER));
 		}
 	}
 
-	@Inject(at = @At("HEAD"), method = "notifyWireNeighborsOfStateChange", cancellable = true)
+	@Inject(at = @At("HEAD"), method = "updateNeighborsOfNeighboringWires", cancellable = true)
 	private void notifyWireNeighborsOfStateChange(World world, BlockPos pos, CallbackInfo info) {
 		if (world.getBlockState(pos).getBlock() instanceof IRedstoneWire) {
-			world.notifyNeighborsOfStateChange(pos, ((RedstoneWireBlock) (Object) this));
+			world.updateNeighborsAt(pos, ((RedstoneWireBlock) (Object) this));
 
 			for (Direction direction : Direction.values()) {
-				world.notifyNeighborsOfStateChange(pos.offset(direction), ((RedstoneWireBlock) (Object) this));
+				world.updateNeighborsAt(pos.relative(direction), ((RedstoneWireBlock) (Object) this));
 			}
 			info.cancel();
 		}
 	}
 
-	@Redirect(method = "getStrongestSignal", at = @At(value = "FIELD", target = "net/minecraft/block/RedstoneWireBlock.canProvidePower:Z"), require = 2)
+	@Redirect(method = "calculateTargetStrength", at = @At(value = "FIELD", target = "net/minecraft/block/RedstoneWireBlock.shouldSignal:Z"), require = 2)
 	private void redirectPowerWrite(RedstoneWireBlock owner, boolean value) {
-		RedstoneHelper.canProvidePower = value;
+		RedstoneHelper.shouldSignal = value;
 	}
 
-	@Redirect(method = {"getWeakPower", "getStrongPower", "canProvidePower"}, at = @At(value = "FIELD", target = "net/minecraft/block/RedstoneWireBlock.canProvidePower:Z"), require = 3)
+	@Redirect(method = {"getDirectSignal", "getSignal", "isSignalSource"}, at = @At(value = "FIELD", target = "net/minecraft/block/RedstoneWireBlock.shouldSignal:Z"), require = 3)
 	private boolean redirectPowerRead(RedstoneWireBlock owner) {
-		return RedstoneHelper.canProvidePower;
+		return RedstoneHelper.shouldSignal;
 	}
 }

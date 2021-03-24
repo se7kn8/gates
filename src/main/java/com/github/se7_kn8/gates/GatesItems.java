@@ -13,7 +13,7 @@ public class GatesItems {
 
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Gates.MODID);
 
-	public static final RegistryObject<Item> REDSTONE_TORCH_PEARL = addItem("redstone_torch_pearl", () -> new Item(new Item.Properties().group(Gates.GATES_ITEM_GROUP)));
+	public static final RegistryObject<Item> REDSTONE_TORCH_PEARL = addItem("redstone_torch_pearl", () -> new Item(new Item.Properties().tab(Gates.GATES_ITEM_GROUP)));
 
 	public static final RegistryObject<Item> FREQUENCY_CHANGER = addItem("frequency_changer", FrequencyChangerItem::new);
 

@@ -22,17 +22,19 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class CustomDetector extends ContainerBlock {
 
-	public static final IntegerProperty POWER = BlockStateProperties.POWER_0_15;
+	public static final IntegerProperty POWER = BlockStateProperties.POWER;
 	public static final BooleanProperty INVERTED = BlockStateProperties.INVERTED;
-	public static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D);
+	public static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D);
 	private final TriFunction<BlockState, World, BlockPos, Integer> activateFunction;
 
 	public CustomDetector(TriFunction<BlockState, World, BlockPos, Integer> activateFunction) {
-		super(Properties.from(Blocks.DAYLIGHT_DETECTOR));
+		super(Properties.copy(Blocks.DAYLIGHT_DETECTOR));
 		this.activateFunction = activateFunction;
-		this.setDefaultState(this.stateContainer.getBaseState().with(INVERTED, false).with(POWER, 0));
+		this.registerDefaultState(this.stateDefinition.any().setValue(INVERTED, false).setValue(POWER, 0));
 	}
 
 	@Override
@@ -42,29 +44,29 @@ public class CustomDetector extends ContainerBlock {
 	}
 
 	@Override
-	public int getWeakPower(BlockState state, IBlockReader p_180656_2_, BlockPos p_180656_3_, Direction p_180656_4_) {
-		return state.get(POWER);
+	public int getSignal(BlockState state, IBlockReader p_180656_2_, BlockPos p_180656_3_, Direction p_180656_4_) {
+		return state.getValue(POWER);
 	}
 
 	public void updatePower(BlockState state, World world, BlockPos pos) {
 		int newPower = activateFunction.apply(state, world, pos);
 
-		if (state.get(INVERTED)) {
+		if (state.getValue(INVERTED)) {
 			newPower = 15 - newPower;
 		}
 
-		if (newPower != state.get(POWER)) {
-			world.setBlockState(pos, state.with(POWER, newPower));
+		if (newPower != state.getValue(POWER)) {
+			world.setBlockAndUpdate(pos, state.setValue(POWER, newPower));
 		}
 
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand p_220051_5_, BlockRayTraceResult p_220051_6_) {
-		if (player.isAllowEdit()) {
-			if (!world.isRemote()) {
-				BlockState newState = state.func_235896_a_(INVERTED);
-				world.setBlockState(pos, newState, 4);
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand p_220051_5_, BlockRayTraceResult p_220051_6_) {
+		if (player.mayBuild()) {
+			if (!world.isClientSide()) {
+				BlockState newState = state.cycle(INVERTED);
+				world.setBlock(pos, newState, 4);
 				updatePower(newState, world, pos);
 			}
 			return ActionResultType.SUCCESS;
@@ -74,24 +76,24 @@ public class CustomDetector extends ContainerBlock {
 
 	@Override
 	@Nonnull
-	public BlockRenderType getRenderType(BlockState p_149645_1_) {
+	public BlockRenderType getRenderShape(BlockState p_149645_1_) {
 		return BlockRenderType.MODEL;
 	}
 
 	@Override
-	public boolean canProvidePower(BlockState p_149744_1_) {
+	public boolean isSignalSource(BlockState p_149744_1_) {
 		return true;
 	}
 
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> p_206840_1_) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> p_206840_1_) {
 		p_206840_1_.add(POWER, INVERTED);
 	}
 
 	@Nullable
 	@Override
-	public TileEntity createNewTileEntity(@Nonnull IBlockReader worldIn) {
+	public TileEntity newBlockEntity(@Nonnull IBlockReader worldIn) {
 		return new CustomDetectorTile();
 	}
 }

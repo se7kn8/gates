@@ -24,50 +24,52 @@ import org.apache.http.impl.conn.Wire;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class WirelessRedstoneLamp extends ContainerBlock implements ReceiverTileEntity.IWirelessReceiver {
 
 	public static BooleanProperty LIT = BlockStateProperties.LIT;
 
 	public WirelessRedstoneLamp() {
-		super(Properties.from(Blocks.REDSTONE_LAMP));
-		this.setDefaultState(this.getDefaultState().with(LIT, false));
+		super(Properties.copy(Blocks.REDSTONE_LAMP));
+		this.registerDefaultState(this.defaultBlockState().setValue(LIT, false));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(LIT);
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		return WirelessRedstoneUtil.onBlockActivated(worldIn, pos, player, handIn);
 	}
 
 	@Override
-	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+	public void onPlace(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
 		WirelessRedstoneUtil.onBlockAdded(state, worldIn, pos, oldState);
-		super.onBlockAdded(state, worldIn, pos, oldState, isMoving);
+		super.onPlace(state, worldIn, pos, oldState, isMoving);
 	}
 
 	@Override
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		WirelessRedstoneUtil.onReplace(state, worldIn, pos, newState);
-		super.onReplaced(state, worldIn, pos, newState, isMoving);
+		super.onRemove(state, worldIn, pos, newState, isMoving);
 	}
 
 	@Override
-	public BlockRenderType getRenderType(BlockState state) {
+	public BlockRenderType getRenderShape(BlockState state) {
 		return BlockRenderType.MODEL;
 	}
 
 	@Override
 	public void onPowerChange(World world, BlockPos pos, int newPower) {
-		world.setBlockState(pos, world.getBlockState(pos).with(LIT, newPower > 0));
+		world.setBlockAndUpdate(pos, world.getBlockState(pos).setValue(LIT, newPower > 0));
 	}
 
 	@Nullable
 	@Override
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
+	public TileEntity newBlockEntity(IBlockReader worldIn) {
 		ReceiverTileEntity entity = new ReceiverTileEntity();
 		entity.setTranslationKey("gates.block.wireless_redstone_lamp");
 		return entity;

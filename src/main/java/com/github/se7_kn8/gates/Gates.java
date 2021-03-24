@@ -23,7 +23,7 @@ public class Gates {
 
 	public static ItemGroup GATES_ITEM_GROUP = new ItemGroup("gates") {
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return new ItemStack(GatesBlocks.XNOR_GATE.get());
 		}
 

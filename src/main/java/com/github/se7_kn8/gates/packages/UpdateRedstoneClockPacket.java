@@ -35,7 +35,7 @@ public class UpdateRedstoneClockPacket implements BasePacket {
 
 	@Override
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
-		TileEntity tile = ctx.get().getSender().world.getTileEntity(pos);
+		TileEntity tile = ctx.get().getSender().level.getBlockEntity(pos);
 		if (tile instanceof RedstoneClockTileEntity) {
 			RedstoneClockTileEntity redstoneClockTileEntity = (RedstoneClockTileEntity) tile;
 			redstoneClockTileEntity.setClockTime(clockTime);

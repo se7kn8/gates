@@ -33,16 +33,16 @@ public class LootGenerator implements IDataProvider {
 	}
 
 	@Override
-	public void act(DirectoryCache cache) {
+	public void run(DirectoryCache cache) {
 		Path outputFolder = this.dataGenerator.getOutputFolder();
 
 		ValidationTracker validator = new ValidationTracker(
-				LootParameterSets.GENERIC,
+				LootParameterSets.ALL_PARAMS,
 				resourceLocation -> null,
 				tables::get
 		);
 		tables.forEach((resourceLocation, lootTable) -> {
-			LootTableManager.validateLootTable(validator, resourceLocation, lootTable);
+			LootTableManager.validate(validator, resourceLocation, lootTable);
 		});
 		Multimap<String, String> multimap = validator.getProblems();
 		if (!multimap.isEmpty()) {
@@ -53,7 +53,7 @@ public class LootGenerator implements IDataProvider {
 				Path path1 = getPath(outputFolder, resourceLocation);
 
 				try {
-					IDataProvider.save(GSON, cache, LootTableManager.toJson(lootTable), path1);
+					IDataProvider.save(GSON, cache, LootTableManager.serialize(lootTable), path1);
 				} catch (IOException var6) {
 					Gates.LOGGER.error("Couldn't save loot table {}", path1, var6);
 				}

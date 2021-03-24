@@ -10,7 +10,7 @@ import javax.annotation.Nonnull;
 public class CapabilityUtil {
 
 	public static boolean findWirelessCapability(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NonNullConsumer<IWirelessNode> c) {
-		TileEntity entity = world.getTileEntity(pos);
+		TileEntity entity = world.getBlockEntity(pos);
 		if (entity != null) {
 			boolean isPresent = entity.getCapability(CapabilityWirelessNode.WIRELESS_NODE).isPresent();
 			if(isPresent){

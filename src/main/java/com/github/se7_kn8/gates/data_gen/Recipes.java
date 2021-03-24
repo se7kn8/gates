@@ -22,7 +22,7 @@ public class Recipes extends RecipeProvider {
 	}
 
 	@Override
-	protected void registerRecipes(@Nonnull Consumer<IFinishedRecipe> consumer) {
+	protected void buildShapelessRecipes(@Nonnull Consumer<IFinishedRecipe> consumer) {
 		addRedstoneComponent(consumer, GatesBlocks.AND_GATE.get(), Items.IRON_INGOT);
 		addRedstoneComponent(consumer, GatesBlocks.OR_GATE.get(), Items.GOLD_INGOT);
 		addRedstoneComponent(consumer, GatesBlocks.XOR_GATE.get(), Items.DIAMOND);
@@ -60,30 +60,30 @@ public class Recipes extends RecipeProvider {
 	}
 
 	private void addShaped(Consumer<IFinishedRecipe> consumer, IItemProvider output, IItemProvider requirement, String p1, String p2, String p3, Ingredient... ingredients) {
-		ShapedRecipeBuilder builder = ShapedRecipeBuilder.shapedRecipe(output, 1)
-				.patternLine(p1)
-				.patternLine(p2)
-				.patternLine(p3)
-				.addCriterion(genCriterionName(requirement), hasItem(requirement));
+		ShapedRecipeBuilder builder = ShapedRecipeBuilder.shaped(output, 1)
+				.pattern(p1)
+				.pattern(p2)
+				.pattern(p3)
+				.unlockedBy(genCriterionName(requirement), has(requirement));
 
 		int counter = 0;
 		String recipeChars = "ABCDEFGHI";
 		for (Ingredient ingredient : ingredients) {
-			builder.key(recipeChars.charAt(counter), ingredient);
+			builder.define(recipeChars.charAt(counter), ingredient);
 			counter++;
 		}
-		builder.build(consumer);
+		builder.save(consumer);
 	}
 
 	private void addShapeless(Consumer<IFinishedRecipe> consumer, IItemProvider output, IItemProvider requirement, Ingredient... ingredients) {
-		ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapelessRecipe(output, 1)
-				.addCriterion(genCriterionName(requirement), hasItem(requirement));
+		ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(output, 1)
+				.unlockedBy(genCriterionName(requirement), has(requirement));
 
 		for (Ingredient ingredient : ingredients) {
-			builder.addIngredient(ingredient);
+			builder.requires(ingredient);
 		}
 
-		builder.build(consumer);
+		builder.save(consumer);
 	}
 
 
@@ -92,15 +92,15 @@ public class Recipes extends RecipeProvider {
 	}
 
 	private Ingredient i(IItemProvider input) {
-		return Ingredient.fromItems(input);
+		return Ingredient.of(input);
 	}
 
 	private Ingredient i(ITag<Item> input) {
-		return Ingredient.fromTag(input);
+		return Ingredient.of(input);
 	}
 
 	private Ingredient i(ItemStack stack) {
-		return Ingredient.fromStacks(stack);
+		return Ingredient.of(stack);
 	}
 
 }

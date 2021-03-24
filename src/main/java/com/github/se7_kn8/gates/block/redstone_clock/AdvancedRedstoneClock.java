@@ -20,21 +20,21 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public class AdvancedRedstoneClock extends RedstoneClockBaseBlock {
 
 	public AdvancedRedstoneClock() {
-		setDefaultState(this.stateContainer.getBaseState().with(POWERED, false));
+		registerDefaultState(this.stateDefinition.any().setValue(POWERED, false));
 	}
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-		if (!world.isRemote) {
-			TileEntity entity = world.getTileEntity(pos);
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+		if (!world.isClientSide) {
+			TileEntity entity = world.getBlockEntity(pos);
 			if (entity instanceof RedstoneClockTileEntity) {
-				NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) entity, entity.getPos());
+				NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) entity, entity.getBlockPos());
 			}
 		}
 		return ActionResultType.SUCCESS;
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> container) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> container) {
 		container.add(POWERED);
 	}
 }

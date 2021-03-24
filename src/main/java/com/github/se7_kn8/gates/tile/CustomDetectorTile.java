@@ -14,11 +14,11 @@ public class CustomDetectorTile extends TileEntity implements ITickableTileEntit
 
 	@Override
 	public void tick() {
-		if (this.world != null && !this.world.isRemote && this.world.getGameTime() % 20 == 0) {
+		if (this.level != null && !this.level.isClientSide && this.level.getGameTime() % 20 == 0) {
 			if (this.getBlockState().getBlock() instanceof CustomDetector) {
 				Block block = this.getBlockState().getBlock();
 				if (block instanceof CustomDetector) {
-					((CustomDetector) block).updatePower(this.getBlockState(), this.world, this.pos);
+					((CustomDetector) block).updatePower(this.getBlockState(), this.level, this.worldPosition);
 				}
 			}
 		}

@@ -31,20 +31,20 @@ public class PortableTransmitterScreen extends ContainerScreen<PortableRedstoneT
 		super.init();
 
 		frequencyField = new TextFieldWidget(this.font, this.width / 2 - 35, this.height / 2 - 50, 70, 20, new TranslationTextComponent("gates.gui.transmitter"));
-		frequencyField.setValidator(s -> (s.matches("^[0-9]+$") || s.equals("")) && s.length() < 10);
+		frequencyField.setFilter(s -> (s.matches("^[0-9]+$") || s.equals("")) && s.length() < 10);
 
 		this.children.add(frequencyField);
 
 		this.addButton(new Button(this.width / 2 - 40, this.height / 2, 80, 20, new TranslationTextComponent("gui.gates.apply"), button -> {
-			if (!frequencyField.getText().trim().equals("")) {
-				Item item = Minecraft.getInstance().player.getHeldItem(Hand.MAIN_HAND).getItem();
+			if (!frequencyField.getValue().trim().equals("")) {
+				Item item = Minecraft.getInstance().player.getItemInHand(Hand.MAIN_HAND).getItem();
 				Hand hand = item == GatesItems.PORTABLE_REDSTONE_TRANSMITTER.get() ? Hand.MAIN_HAND : Hand.OFF_HAND;
-				PacketHandler.MOD_CHANNEL.sendToServer(new UpdatePortableTransmitterPacket(Integer.parseInt(frequencyField.getText()), hand));
-				Minecraft.getInstance().player.closeScreen();
+				PacketHandler.MOD_CHANNEL.sendToServer(new UpdatePortableTransmitterPacket(Integer.parseInt(frequencyField.getValue()), hand));
+				Minecraft.getInstance().player.closeContainer();
 			}
 		}));
 
-		this.setFocusedDefault(frequencyField);
+		this.setInitialFocus(frequencyField);
 
 	}
 
@@ -60,18 +60,18 @@ public class PortableTransmitterScreen extends ContainerScreen<PortableRedstoneT
 		super.render(stack, mouseX, mouseY, partialTicks);
 
 		this.frequencyField.render(stack, mouseX, mouseY, partialTicks);
-		this.renderHoveredTooltip(stack, mouseX, mouseY);
+		this.renderTooltip(stack, mouseX, mouseY);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(@Nonnull MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
-		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+	protected void renderBg(@Nonnull MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
+		GlStateManager._color4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
-		super.drawGuiContainerForegroundLayer(stack, mouseX, mouseY);
+	protected void renderLabels(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
+		super.renderLabels(stack, mouseX, mouseY);
 		// mappings: drawString
-		this.font.func_243248_b(stack, new TranslationTextComponent("gui.gates.frequency"), 40, 20, 14737632);
+		this.font.draw(stack, new TranslationTextComponent("gui.gates.frequency"), 40, 20, 14737632);
 	}
 }

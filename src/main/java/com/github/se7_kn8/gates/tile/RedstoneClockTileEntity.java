@@ -56,8 +56,8 @@ public class RedstoneClockTileEntity extends TileEntity implements ITickableTile
 	}
 
 	@Override
-	public void read(@Nonnull BlockState state, @Nonnull CompoundNBT compound) {
-		super.read(state, compound);
+	public void load(@Nonnull BlockState state, @Nonnull CompoundNBT compound) {
+		super.load(state, compound);
 		remainingTicks = compound.getInt("remaining");
 		poweredTicks = compound.getInt("powered");
 		clockLength = compound.getInt("clockLength");
@@ -65,12 +65,12 @@ public class RedstoneClockTileEntity extends TileEntity implements ITickableTile
 	}
 
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
+	public CompoundNBT save(CompoundNBT compound) {
 		compound.putInt("remaining", remainingTicks);
 		compound.putInt("powered", poweredTicks);
 		compound.putInt("clockLength", clockLength);
 		compound.putInt("clockTime", clockTime);
-		return super.write(compound);
+		return super.save(compound);
 	}
 
 	private int remainingTicks = 0;
@@ -79,9 +79,9 @@ public class RedstoneClockTileEntity extends TileEntity implements ITickableTile
 
 	@Override
 	public void tick() {
-		if (!world.isRemote) {
+		if (!level.isClientSide) {
 			if (remainingTicks <= 0) {
-				world.setBlockState(pos, world.getBlockState(pos).with(RedstoneClock.POWERED, true));
+				level.setBlockAndUpdate(worldPosition, level.getBlockState(worldPosition).setValue(RedstoneClock.POWERED, true));
 				poweredTicks = clockLength;
 
 				remainingTicks = clockTime;
@@ -89,8 +89,8 @@ public class RedstoneClockTileEntity extends TileEntity implements ITickableTile
 				remainingTicks--;
 			}
 			if (poweredTicks <= 0) {
-				if (world.getBlockState(pos).get(RedstoneClock.POWERED)) {
-					world.setBlockState(pos, world.getBlockState(pos).with(RedstoneClock.POWERED, false));
+				if (level.getBlockState(worldPosition).getValue(RedstoneClock.POWERED)) {
+					level.setBlockAndUpdate(worldPosition, level.getBlockState(worldPosition).setValue(RedstoneClock.POWERED, false));
 				}
 			} else {
 				poweredTicks--;
@@ -106,7 +106,7 @@ public class RedstoneClockTileEntity extends TileEntity implements ITickableTile
 	@Nullable
 	@Override
 	public Container createMenu(int windowId, PlayerInventory inventory, PlayerEntity player) {
-		return new AdvancedRedstoneClockContainer(windowId, world, pos, inventory, player);
+		return new AdvancedRedstoneClockContainer(windowId, level, worldPosition, inventory, player);
 	}
 
 	public int getClockLength() {

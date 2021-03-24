@@ -49,21 +49,21 @@ public class ReceiverTileEntity extends TileEntity implements INamedContainerPro
 			@Override
 			public void setFrequency(int newFrequency) {
 				super.setFrequency(newFrequency);
-				if (!world.isRemote) {
-					int newPower = RedstoneReceiverWorldSavedData.get((ServerWorld) world).getCurrentFrequencyValue(world, newFrequency);
+				if (!level.isClientSide) {
+					int newPower = RedstoneReceiverWorldSavedData.get((ServerWorld) level).getCurrentFrequencyValue(level, newFrequency);
 					setPower(newPower);
 				}
-				markDirty();
+				setChanged();
 			}
 
 			@Override
 			public void setPower(int newPower) {
 				super.setPower(newPower);
-				Block block = world.getBlockState(pos).getBlock();
+				Block block = level.getBlockState(worldPosition).getBlock();
 				if (block instanceof IWirelessReceiver) {
-					((IWirelessReceiver) block).onPowerChange(world, pos, newPower);
+					((IWirelessReceiver) block).onPowerChange(level, worldPosition, newPower);
 				}
-				markDirty();
+				setChanged();
 			}
 		};
 	}
@@ -79,19 +79,19 @@ public class ReceiverTileEntity extends TileEntity implements INamedContainerPro
 
 
 	@Override
-	public void read(BlockState state, CompoundNBT compound) {
-		super.read(state, compound);
+	public void load(BlockState state, CompoundNBT compound) {
+		super.load(state, compound);
 		CompoundNBT wirelessTag = compound.getCompound("wireless");
 		wireless.ifPresent(c -> ((INBTSerializable<CompoundNBT>) c).deserializeNBT(wirelessTag));
 	}
 
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
+	public CompoundNBT save(CompoundNBT compound) {
 		wireless.ifPresent(c -> {
 			CompoundNBT compoundNBT = ((INBTSerializable<CompoundNBT>) c).serializeNBT();
 			compound.put("wireless", compoundNBT);
 		});
-		return super.write(compound);
+		return super.save(compound);
 	}
 
 	@Override
@@ -102,6 +102,6 @@ public class ReceiverTileEntity extends TileEntity implements INamedContainerPro
 	@Nullable
 	@Override
 	public Container createMenu(int windowId, PlayerInventory inventory, PlayerEntity player) {
-		return new FrequencyContainer(windowId, world, pos, inventory, player);
+		return new FrequencyContainer(windowId, level, worldPosition, inventory, player);
 	}
 }

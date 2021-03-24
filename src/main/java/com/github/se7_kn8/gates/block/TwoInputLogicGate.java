@@ -22,9 +22,9 @@ public class TwoInputLogicGate extends RedstoneDiodeBlock {
 	public static final BooleanProperty RIGHT_INPUT = BooleanProperty.create("right");
 
 	public TwoInputLogicGate(BiFunction<Boolean, Boolean, Boolean> calculateOutputFunction) {
-		super(Block.Properties.from(Blocks.REPEATER));
+		super(Block.Properties.copy(Blocks.REPEATER));
 		this.calculateOutputFunction = calculateOutputFunction;
-		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(POWERED, false).with(LEFT_INPUT, false).with(RIGHT_INPUT, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(POWERED, false).setValue(LEFT_INPUT, false).setValue(RIGHT_INPUT, false));
 	}
 
 	@Override
@@ -33,22 +33,22 @@ public class TwoInputLogicGate extends RedstoneDiodeBlock {
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(HORIZONTAL_FACING, POWERED, LEFT_INPUT, RIGHT_INPUT);
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+		builder.add(FACING, POWERED, LEFT_INPUT, RIGHT_INPUT);
 	}
 
 	@Override
 	public boolean canConnectRedstone(BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side) {
-		return side == state.get(TwoInputLogicGate.HORIZONTAL_FACING) || side == state.get(TwoInputLogicGate.HORIZONTAL_FACING).rotateY() || side == state.get(TwoInputLogicGate.HORIZONTAL_FACING).rotateYCCW();
+		return side == state.getValue(TwoInputLogicGate.FACING) || side == state.getValue(TwoInputLogicGate.FACING).getClockWise() || side == state.getValue(TwoInputLogicGate.FACING).getCounterClockWise();
 	}
 
 	@Override
-	protected int calculateInputStrength(World world, BlockPos pos, BlockState state) {
-		Direction facing = state.get(TwoInputLogicGate.HORIZONTAL_FACING);
-		boolean firstInput = getPowerOnSide(world, pos.offset(facing.rotateYCCW()), facing.rotateYCCW()) > 0;
-		boolean secondInput = getPowerOnSide(world, pos.offset(facing.rotateY()), facing.rotateY()) > 0;
+	protected int getInputSignal(World world, BlockPos pos, BlockState state) {
+		Direction facing = state.getValue(TwoInputLogicGate.FACING);
+		boolean firstInput = getAlternateSignalAt(world, pos.relative(facing.getCounterClockWise()), facing.getCounterClockWise()) > 0;
+		boolean secondInput = getAlternateSignalAt(world, pos.relative(facing.getClockWise()), facing.getClockWise()) > 0;
 
-		world.setBlockState(pos, state.with(LEFT_INPUT, secondInput).with(RIGHT_INPUT, firstInput));
+		world.setBlockAndUpdate(pos, state.setValue(LEFT_INPUT, secondInput).setValue(RIGHT_INPUT, firstInput));
 
 		return calculateOutputFunction.apply(firstInput, secondInput) ? 15 : 0;
 	}

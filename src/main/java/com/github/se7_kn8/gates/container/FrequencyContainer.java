@@ -13,7 +13,7 @@ public class FrequencyContainer extends BasicPlayerContainer {
 
 	public FrequencyContainer(int windowId, World world, BlockPos pos, PlayerInventory inventory, PlayerEntity player) {
 		super(GatesContainers.FREQUENCY_CONTAINER_TYPE, windowId, world, pos, inventory, player);
-		trackInt(new IntReferenceHolder() {
+		addDataSlot(new IntReferenceHolder() {
 			@Override
 			public int get() {
 				return getFrequency();
