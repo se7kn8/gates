@@ -1,15 +1,15 @@
 package com.github.se7_kn8.gates;
 
 import com.github.se7_kn8.gates.block.*;
+import com.github.se7_kn8.gates.block.entity.CustomDetectorBlockEntity;
+import com.github.se7_kn8.gates.block.entity.ReceiverBlockEntity;
+import com.github.se7_kn8.gates.block.entity.RedstoneClockBlockEntity;
+import com.github.se7_kn8.gates.block.entity.TransmitterBlockEntity;
 import com.github.se7_kn8.gates.block.redstone_clock.AdvancedRedstoneClock;
 import com.github.se7_kn8.gates.block.redstone_clock.RedstoneClock;
 import com.github.se7_kn8.gates.block.wireless_redstone.ReceiverBlock;
 import com.github.se7_kn8.gates.block.wireless_redstone.TransmitterBlock;
 import com.github.se7_kn8.gates.block.wireless_redstone.WirelessRedstoneLamp;
-import com.github.se7_kn8.gates.tile.CustomDetectorTile;
-import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
-import com.github.se7_kn8.gates.tile.RedstoneClockBlockEntity;
-import com.github.se7_kn8.gates.tile.TransmitterTileEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -29,13 +29,13 @@ public class GatesBlocks {
 
 	public static final RegistryObject<Block> REDSTONE_BLOCK_OFF = addBlock("redstone_block_off", () -> new Block(Block.Properties.copy(Blocks.REDSTONE_BLOCK)), Gates.GATES_ITEM_GROUP);
 
-	public static final RegistryObject<Block> AND_GATE = addBlock("and_gate", () -> new TwoInputLogicGate((x1, x2) -> x1 && x2), Gates.GATES_ITEM_GROUP);
-	public static final RegistryObject<Block> OR_GATE = addBlock("or_gate", () -> new TwoInputLogicGate((x1, x2) -> x1 || x2), Gates.GATES_ITEM_GROUP);
-	public static final RegistryObject<Block> NAND_GATE = addBlock("nand_gate", () -> new TwoInputLogicGate((x1, x2) -> !(x1 && x2)), Gates.GATES_ITEM_GROUP);
-	public static final RegistryObject<Block> NOR_GATE = addBlock("nor_gate", () -> new TwoInputLogicGate((x1, x2) -> !(x1 || x2)), Gates.GATES_ITEM_GROUP);
-	public static final RegistryObject<Block> XOR_GATE = addBlock("xor_gate", () -> new TwoInputLogicGate((x1, x2) -> x1 ^ x2), Gates.GATES_ITEM_GROUP);
-	public static final RegistryObject<Block> XNOR_GATE = addBlock("xnor_gate", () -> new TwoInputLogicGate((x1, x2) -> !(x1 ^ x2)), Gates.GATES_ITEM_GROUP);
-	public static final RegistryObject<Block> NOT_GATE = addBlock("not_gate", () -> new OneInputLogicGate(x1 -> !x1), Gates.GATES_ITEM_GROUP);
+	public static final RegistryObject<Block> AND_GATE = addBlock("and_gate", () -> new TwoInputLogicGate(TwoInputLogicGate.AND_FUNCTION), Gates.GATES_ITEM_GROUP);
+	public static final RegistryObject<Block> OR_GATE = addBlock("or_gate", () -> new TwoInputLogicGate(TwoInputLogicGate.OR_FUNCTION), Gates.GATES_ITEM_GROUP);
+	public static final RegistryObject<Block> NAND_GATE = addBlock("nand_gate", () -> new TwoInputLogicGate(TwoInputLogicGate.NAND_FUNCTION), Gates.GATES_ITEM_GROUP);
+	public static final RegistryObject<Block> NOR_GATE = addBlock("nor_gate", () -> new TwoInputLogicGate(TwoInputLogicGate.NOR_FUNCTION), Gates.GATES_ITEM_GROUP);
+	public static final RegistryObject<Block> XOR_GATE = addBlock("xor_gate", () -> new TwoInputLogicGate(TwoInputLogicGate.XOR_FUNCTION), Gates.GATES_ITEM_GROUP);
+	public static final RegistryObject<Block> XNOR_GATE = addBlock("xnor_gate", () -> new TwoInputLogicGate(TwoInputLogicGate.XNOR_FUNCTION), Gates.GATES_ITEM_GROUP);
+	public static final RegistryObject<Block> NOT_GATE = addBlock("not_gate", () -> new OneInputLogicGate(OneInputLogicGate.NOT_FUNCTION), Gates.GATES_ITEM_GROUP);
 
 	public static final RegistryObject<Block> FAST_REPEATER = addBlock("fast_repeater", () -> new CustomRepeater(1), Gates.GATES_ITEM_GROUP);
 	public static final RegistryObject<Block> SLOW_REPEATER = addBlock("slow_repeater", () -> new CustomRepeater(4), Gates.GATES_ITEM_GROUP);
@@ -45,8 +45,8 @@ public class GatesBlocks {
 
 	public static final RegistryObject<Block> WIRELESS_REDSTONE_LAMP = addBlock("wireless_redstone_lamp", WirelessRedstoneLamp::new, Gates.GATES_ITEM_GROUP);
 
-	public static final RegistryObject<Block> RAIN_DETECTOR = addBlock("rain_detector", () -> new CustomDetector((blockState, world, blockPos) -> world.isRainingAt(blockPos.above(2)) ? 15 : 0), Gates.GATES_ITEM_GROUP);
-	public static final RegistryObject<Block> THUNDER_DETECTOR = addBlock("thunder_detector", () -> new CustomDetector((blockState, world, blockPos) -> world.isThundering() ? 15 : 0), Gates.GATES_ITEM_GROUP);
+	public static final RegistryObject<Block> RAIN_DETECTOR = addBlock("rain_detector", () -> new CustomDetector(CustomDetector.RAIN_DETECTOR_FUNCTION), Gates.GATES_ITEM_GROUP);
+	public static final RegistryObject<Block> THUNDER_DETECTOR = addBlock("thunder_detector", () -> new CustomDetector(CustomDetector.THUNDER_DETECTOR_FUNCTION), Gates.GATES_ITEM_GROUP);
 
 	public static final RegistryObject<Block> REDSTONE_CLOCK = addBlock("redstone_clock", RedstoneClock::new, Gates.GATES_ITEM_GROUP);
 	public static final RegistryObject<Block> ADVANCED_REDSTONE_CLOCK = addBlock("advanced_redstone_clock", AdvancedRedstoneClock::new, Gates.GATES_ITEM_GROUP);
@@ -55,17 +55,16 @@ public class GatesBlocks {
 
 	public static final RegistryObject<Block> RS_FLIP_FLOP = addBlock("rs_flip_flop", RSFlipFlop::new, Gates.GATES_ITEM_GROUP);
 
-	// TODO not finished yet
 	public static final RegistryObject<Block> WAXED_REDSTONE_WIRE = addBlock("waxed_redstone_wire", WaxedRedstone::new, Gates.GATES_ITEM_GROUP);
 
 	// TODO contains a log of bugs
 	//public static final Block D_FLIP_FLOP = addBlock("t_flip_flop", new TFlipFlop(), Gates.GATES_ITEM_GROUP);
 
-	public static final RegistryObject<BlockEntityType<CustomDetectorTile>> RAIN_DETECTOR_TILE_ENTITY = addTileEntity("rain_detector", CustomDetectorTile::new, RAIN_DETECTOR, THUNDER_DETECTOR);
+	public static final RegistryObject<BlockEntityType<CustomDetectorBlockEntity>> CUSTOM_DETECTOR_BLOCK_ENTITY_TYPE = addTileEntity("custom_detector", CustomDetectorBlockEntity::new, RAIN_DETECTOR, THUNDER_DETECTOR);
 
-	public static final RegistryObject<BlockEntityType<ReceiverTileEntity>> RECEIVER_TILE_ENTITY_TYPE = addTileEntity("receiver", ReceiverTileEntity::new, WIRELESS_REDSTONE_RECEIVER);
-	public static final RegistryObject<BlockEntityType<TransmitterTileEntity>> TRANSMITTER_TILE_ENTITY_TYPE = addTileEntity("transmitter", TransmitterTileEntity::new, WIRELESS_REDSTONE_TRANSMITTER, WIRELESS_REDSTONE_LAMP);
-	public static final RegistryObject<BlockEntityType<RedstoneClockBlockEntity>> REDSTONE_CLOCK_TILE_ENTITY_TYPE = addTileEntity("redstone_clock", RedstoneClockBlockEntity::new, REDSTONE_CLOCK, ADVANCED_REDSTONE_CLOCK);
+	public static final RegistryObject<BlockEntityType<ReceiverBlockEntity>> RECEIVER_BLOCK_ENTITY_TYPE = addTileEntity("receiver", ReceiverBlockEntity::new, WIRELESS_REDSTONE_RECEIVER);
+	public static final RegistryObject<BlockEntityType<TransmitterBlockEntity>> TRANSMITTER_BLOCK_ENTITY_TYPE = addTileEntity("transmitter", TransmitterBlockEntity::new, WIRELESS_REDSTONE_TRANSMITTER, WIRELESS_REDSTONE_LAMP);
+	public static final RegistryObject<BlockEntityType<RedstoneClockBlockEntity>> REDSTONE_CLOCK_BLOCK_ENTITY_TYPE = addTileEntity("redstone_clock", RedstoneClockBlockEntity::new, REDSTONE_CLOCK, ADVANCED_REDSTONE_CLOCK);
 
 
 	private static <T extends Block> RegistryObject<T> addBlock(String name, Supplier<T> block, CreativeModeTab tab) {

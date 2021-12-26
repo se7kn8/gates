@@ -1,6 +1,6 @@
 package com.github.se7_kn8.gates.block.wireless_redstone;
 
-import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
+import com.github.se7_kn8.gates.block.entity.ReceiverBlockEntity;
 import com.github.se7_kn8.gates.util.Utils;
 import com.github.se7_kn8.gates.util.WirelessRedstoneUtil;
 import net.minecraft.core.BlockPos;
@@ -31,7 +31,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ReceiverBlock extends BaseEntityBlock implements ReceiverTileEntity.IWirelessReceiver {
+public class ReceiverBlock extends BaseEntityBlock implements ReceiverBlockEntity.IWirelessReceiver {
 
 	public static final VoxelShape SHAPE = Shapes.or(Utils.GATE_SHAPE, Block.box(7.0D, 0.0D, 7.0D, 9.0D, 10.0D, 9.0D));
 
@@ -78,7 +78,7 @@ public class ReceiverBlock extends BaseEntityBlock implements ReceiverTileEntity
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-		return new ReceiverTileEntity(pPos, pState);
+		return new ReceiverBlockEntity(pPos, pState);
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package com.github.se7_kn8.gates.block.wireless_redstone;
 
-import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
+import com.github.se7_kn8.gates.block.entity.ReceiverBlockEntity;
 import com.github.se7_kn8.gates.util.WirelessRedstoneUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -20,7 +20,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 
-public class WirelessRedstoneLamp extends BaseEntityBlock implements ReceiverTileEntity.IWirelessReceiver {
+public class WirelessRedstoneLamp extends BaseEntityBlock implements ReceiverBlockEntity.IWirelessReceiver {
 
 	public static BooleanProperty LIT = BlockStateProperties.LIT;
 
@@ -64,7 +64,7 @@ public class WirelessRedstoneLamp extends BaseEntityBlock implements ReceiverTil
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-		ReceiverTileEntity entity = new ReceiverTileEntity(pPos, pState);
+		ReceiverBlockEntity entity = new ReceiverBlockEntity(pPos, pState);
 		entity.setTranslationKey("gates.block.wireless_redstone_lamp");
 		return entity;
 	}

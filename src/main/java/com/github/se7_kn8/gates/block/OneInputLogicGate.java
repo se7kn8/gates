@@ -17,6 +17,9 @@ import java.util.function.Function;
 
 public class OneInputLogicGate extends DiodeBlock {
 	private Function<Boolean, Boolean> calculateOutputFunction;
+
+	public static final Function<Boolean, Boolean> NOT_FUNCTION = x1 -> !x1;
+
 	public static final BooleanProperty INPUT = BooleanProperty.create("input");
 
 	public OneInputLogicGate(Function<Boolean, Boolean> calculateOutputFunction) {

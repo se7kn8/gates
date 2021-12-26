@@ -1,6 +1,6 @@
 package com.github.se7_kn8.gates.block.redstone_clock;
 
-import com.github.se7_kn8.gates.tile.RedstoneClockBlockEntity;
+import com.github.se7_kn8.gates.block.entity.RedstoneClockBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;

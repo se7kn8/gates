@@ -1,4 +1,4 @@
-package com.github.se7_kn8.gates.tile;
+package com.github.se7_kn8.gates.block.entity;
 
 import com.github.se7_kn8.gates.Gates;
 import com.github.se7_kn8.gates.GatesBlocks;
@@ -80,7 +80,7 @@ public class RedstoneClockBlockEntity extends BlockEntity implements MenuProvide
 	private int clockTime = 12;
 
 	public RedstoneClockBlockEntity(BlockPos pos, BlockState state) {
-		super(GatesBlocks.REDSTONE_CLOCK_TILE_ENTITY_TYPE.get(), pos, state);
+		super(GatesBlocks.REDSTONE_CLOCK_BLOCK_ENTITY_TYPE.get(), pos, state);
 	}
 
 	private int remainingTicks = 0;

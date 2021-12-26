@@ -1,8 +1,8 @@
 package com.github.se7_kn8.gates.block.wireless_redstone;
 
 import com.github.se7_kn8.gates.api.CapabilityUtil;
+import com.github.se7_kn8.gates.block.entity.TransmitterBlockEntity;
 import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
-import com.github.se7_kn8.gates.tile.TransmitterTileEntity;
 import com.github.se7_kn8.gates.util.Utils;
 import com.github.se7_kn8.gates.util.WirelessRedstoneUtil;
 import net.minecraft.core.BlockPos;
@@ -95,7 +95,7 @@ public class TransmitterBlock extends BaseEntityBlock {
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-		return new TransmitterTileEntity(pPos, pState);
+		return new TransmitterBlockEntity(pPos, pState);
 	}
 
 	@Override

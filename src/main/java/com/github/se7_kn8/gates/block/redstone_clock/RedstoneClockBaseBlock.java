@@ -1,7 +1,7 @@
 package com.github.se7_kn8.gates.block.redstone_clock;
 
 import com.github.se7_kn8.gates.GatesBlocks;
-import com.github.se7_kn8.gates.tile.RedstoneClockBlockEntity;
+import com.github.se7_kn8.gates.block.entity.RedstoneClockBlockEntity;
 import com.github.se7_kn8.gates.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -75,7 +75,7 @@ public class RedstoneClockBaseBlock extends BaseEntityBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, GatesBlocks.REDSTONE_CLOCK_TILE_ENTITY_TYPE.get(), RedstoneClockBlockEntity::clockTick);
+		return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, GatesBlocks.REDSTONE_CLOCK_BLOCK_ENTITY_TYPE.get(), RedstoneClockBlockEntity::clockTick);
 	}
 
 	@OnlyIn(Dist.CLIENT)

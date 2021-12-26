@@ -22,6 +22,14 @@ public class TwoInputLogicGate extends DiodeBlock {
 	public static final BooleanProperty LEFT_INPUT = BooleanProperty.create("left");
 	public static final BooleanProperty RIGHT_INPUT = BooleanProperty.create("right");
 
+	public static final BiFunction<Boolean, Boolean, Boolean> AND_FUNCTION = (x, y) -> x && y;
+	public static final BiFunction<Boolean, Boolean, Boolean> OR_FUNCTION = (x, y) -> x || y;
+	public static final BiFunction<Boolean, Boolean, Boolean> NAND_FUNCTION = (x, y) -> !(x && y);
+	public static final BiFunction<Boolean, Boolean, Boolean> NOR_FUNCTION = (x, y) -> !(x || y);
+	public static final BiFunction<Boolean, Boolean, Boolean> XOR_FUNCTION = (x, y) -> x ^ y;
+	public static final BiFunction<Boolean, Boolean, Boolean> XNOR_FUNCTION = (x, y) -> x == y;
+
+
 	public TwoInputLogicGate(BiFunction<Boolean, Boolean, Boolean> calculateOutputFunction) {
 		super(Block.Properties.copy(Blocks.REPEATER));
 		this.calculateOutputFunction = calculateOutputFunction;

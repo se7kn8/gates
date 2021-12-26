@@ -1,6 +1,6 @@
 package com.github.se7_kn8.gates.packages;
 
-import com.github.se7_kn8.gates.tile.RedstoneClockBlockEntity;
+import com.github.se7_kn8.gates.block.entity.RedstoneClockBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.block.entity.BlockEntity;

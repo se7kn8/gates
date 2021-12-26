@@ -1,7 +1,7 @@
 package com.github.se7_kn8.gates.block;
 
 import com.github.se7_kn8.gates.GatesBlocks;
-import com.github.se7_kn8.gates.tile.CustomDetectorTile;
+import com.github.se7_kn8.gates.block.entity.CustomDetectorBlockEntity;
 import com.github.se7_kn8.gates.util.TriFunction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -33,6 +33,10 @@ public class CustomDetector extends BaseEntityBlock {
 	public static final IntegerProperty POWER = BlockStateProperties.POWER;
 	public static final BooleanProperty INVERTED = BlockStateProperties.INVERTED;
 	public static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D);
+
+	public static final TriFunction<BlockState, Level, BlockPos, Integer> RAIN_DETECTOR_FUNCTION = (blockState, level, blockPos) -> level.isRainingAt(blockPos.above(2)) ? 15 : 0;
+	public static final TriFunction<BlockState, Level, BlockPos, Integer> THUNDER_DETECTOR_FUNCTION = (blockState, level, blockPos) -> level.isThundering() ? 15 : 0;
+
 	private final TriFunction<BlockState, Level, BlockPos, Integer> activateFunction;
 
 	public CustomDetector(TriFunction<BlockState, Level, BlockPos, Integer> activateFunction) {
@@ -51,7 +55,7 @@ public class CustomDetector extends BaseEntityBlock {
 		return pState.getValue(POWER);
 	}
 
-	private static void tickEntity(Level level, BlockPos pos, BlockState state, CustomDetectorTile tile) {
+	private static void tickEntity(Level level, BlockPos pos, BlockState state, CustomDetectorBlockEntity tile) {
 		if (level.getGameTime() % 20 == 0) {
 			Block block = state.getBlock();
 			if (block instanceof CustomDetector) {
@@ -109,12 +113,12 @@ public class CustomDetector extends BaseEntityBlock {
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-		return new CustomDetectorTile(pPos, pState);
+		return new CustomDetectorBlockEntity(pPos, pState);
 	}
 
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return !pLevel.isClientSide ? createTickerHelper(pBlockEntityType, GatesBlocks.RAIN_DETECTOR_TILE_ENTITY.get(), CustomDetector::tickEntity) : null;
+		return !pLevel.isClientSide ? createTickerHelper(pBlockEntityType, GatesBlocks.CUSTOM_DETECTOR_BLOCK_ENTITY_TYPE.get(), CustomDetector::tickEntity) : null;
 	}
 }

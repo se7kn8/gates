@@ -1,7 +1,7 @@
 package com.github.se7_kn8.gates.container;
 
 import com.github.se7_kn8.gates.GatesContainers;
-import com.github.se7_kn8.gates.tile.RedstoneClockBlockEntity;
+import com.github.se7_kn8.gates.block.entity.RedstoneClockBlockEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
