@@ -1,30 +1,31 @@
 package com.github.se7_kn8.gates.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.RedstoneDiodeBlock;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DiodeBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.BiFunction;
 
-public class TwoInputLogicGate extends RedstoneDiodeBlock {
+public class TwoInputLogicGate extends DiodeBlock {
 
-	private BiFunction<Boolean, Boolean, Boolean> calculateOutputFunction;
+	private final BiFunction<Boolean, Boolean, Boolean> calculateOutputFunction;
 	public static final BooleanProperty LEFT_INPUT = BooleanProperty.create("left");
 	public static final BooleanProperty RIGHT_INPUT = BooleanProperty.create("right");
 
 	public TwoInputLogicGate(BiFunction<Boolean, Boolean, Boolean> calculateOutputFunction) {
-		super(Block.Properties.from(Blocks.REPEATER));
+		super(Block.Properties.copy(Blocks.REPEATER));
 		this.calculateOutputFunction = calculateOutputFunction;
-		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(POWERED, false).with(LEFT_INPUT, false).with(RIGHT_INPUT, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(POWERED, false).setValue(LEFT_INPUT, false).setValue(RIGHT_INPUT, false));
 	}
 
 	@Override
@@ -32,23 +33,24 @@ public class TwoInputLogicGate extends RedstoneDiodeBlock {
 		return 0;
 	}
 
+
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(HORIZONTAL_FACING, POWERED, LEFT_INPUT, RIGHT_INPUT);
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		builder.add(FACING, POWERED, LEFT_INPUT, RIGHT_INPUT);
 	}
 
 	@Override
-	public boolean canConnectRedstone(BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side) {
-		return side == state.get(TwoInputLogicGate.HORIZONTAL_FACING) || side == state.get(TwoInputLogicGate.HORIZONTAL_FACING).rotateY() || side == state.get(TwoInputLogicGate.HORIZONTAL_FACING).rotateYCCW();
+	public boolean canConnectRedstone(BlockState state, BlockGetter world, BlockPos pos, @Nullable Direction side) {
+		return side == state.getValue(FACING) || side == state.getValue(FACING).getClockWise() || side == state.getValue(FACING).getCounterClockWise();
 	}
 
 	@Override
-	protected int calculateInputStrength(World world, BlockPos pos, BlockState state) {
-		Direction facing = state.get(TwoInputLogicGate.HORIZONTAL_FACING);
-		boolean firstInput = getPowerOnSide(world, pos.offset(facing.rotateYCCW()), facing.rotateYCCW()) > 0;
-		boolean secondInput = getPowerOnSide(world, pos.offset(facing.rotateY()), facing.rotateY()) > 0;
+	protected int getInputSignal(Level level, BlockPos pos, BlockState state) {
+		Direction facing = state.getValue(FACING);
+		boolean firstInput = getAlternateSignalAt(level, pos.relative(facing.getCounterClockWise()), facing.getCounterClockWise()) > 0;
+		boolean secondInput = getAlternateSignalAt(level, pos.relative(facing.getClockWise()), facing.getClockWise()) > 0;
 
-		world.setBlockState(pos, state.with(LEFT_INPUT, secondInput).with(RIGHT_INPUT, firstInput));
+		level.setBlockAndUpdate(pos, state.setValue(LEFT_INPUT, secondInput).setValue(RIGHT_INPUT, firstInput));
 
 		return calculateOutputFunction.apply(firstInput, secondInput) ? 15 : 0;
 	}

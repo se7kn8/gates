@@ -1,12 +1,16 @@
 package com.github.se7_kn8.gates.data_gen;
 
 import com.github.se7_kn8.gates.GatesBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.loot.*;
-import net.minecraft.loot.conditions.SurvivesExplosion;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
-public class LootTables {
+public class LootTablesGenerator {
 
 	public static void register(LootGenerator generator) {
 		generateSelfDrop(generator, GatesBlocks.REDSTONE_BLOCK_OFF.get());
@@ -33,12 +37,12 @@ public class LootTables {
 
 	private static void generateSelfDrop(LootGenerator generator, Block block) {
 		ResourceLocation location = block.getLootTable();
-		LootTable table = LootTable.builder()
-				.setParameterSet(LootParameterSets.BLOCK)
-				.addLootPool(LootPool.builder()
-						.rolls(ConstantRange.of(1))
-						.addEntry(ItemLootEntry.builder(block))
-						.acceptCondition(SurvivesExplosion.builder())
+		LootTable table = LootTable.lootTable()
+				.setParamSet(LootContextParamSets.BLOCK)
+				.withPool(LootPool.lootPool()
+						.setRolls(ConstantValue.exactly(1))
+						.add(LootItem.lootTableItem(block))
+						.when(ExplosionCondition.survivesExplosion())
 				).build();
 		generator.add(location, table);
 	}

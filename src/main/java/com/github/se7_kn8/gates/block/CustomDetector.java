@@ -1,97 +1,120 @@
 package com.github.se7_kn8.gates.block;
 
+import com.github.se7_kn8.gates.GatesBlocks;
 import com.github.se7_kn8.gates.tile.CustomDetectorTile;
 import com.github.se7_kn8.gates.util.TriFunction;
-import net.minecraft.block.*;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class CustomDetector extends ContainerBlock {
+public class CustomDetector extends BaseEntityBlock {
 
-	public static final IntegerProperty POWER = BlockStateProperties.POWER_0_15;
+	public static final IntegerProperty POWER = BlockStateProperties.POWER;
 	public static final BooleanProperty INVERTED = BlockStateProperties.INVERTED;
-	public static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D);
-	private final TriFunction<BlockState, World, BlockPos, Integer> activateFunction;
+	public static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D);
+	private final TriFunction<BlockState, Level, BlockPos, Integer> activateFunction;
 
-	public CustomDetector(TriFunction<BlockState, World, BlockPos, Integer> activateFunction) {
-		super(Properties.from(Blocks.DAYLIGHT_DETECTOR));
+	public CustomDetector(TriFunction<BlockState, Level, BlockPos, Integer> activateFunction) {
+		super(Properties.copy(Blocks.DAYLIGHT_DETECTOR));
 		this.activateFunction = activateFunction;
-		this.setDefaultState(this.stateContainer.getBaseState().with(INVERTED, false).with(POWER, 0));
+		this.registerDefaultState(this.stateDefinition.any().setValue(INVERTED, false).setValue(POWER, 0));
 	}
 
 	@Override
-	@Nonnull
-	public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
+	public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
 		return SHAPE;
 	}
 
 	@Override
-	public int getWeakPower(BlockState state, IBlockReader p_180656_2_, BlockPos p_180656_3_, Direction p_180656_4_) {
-		return state.get(POWER);
+	public int getSignal(BlockState pState, BlockGetter pLevel, BlockPos pPos, Direction pDirection) {
+		return pState.getValue(POWER);
 	}
 
-	public void updatePower(BlockState state, World world, BlockPos pos) {
-		int newPower = activateFunction.apply(state, world, pos);
+	private static void tickEntity(Level level, BlockPos pos, BlockState state, CustomDetectorTile tile) {
+		if (level.getGameTime() % 20 == 0) {
+			Block block = state.getBlock();
+			if (block instanceof CustomDetector) {
+				((CustomDetector) block).updatePower(state, level, pos);
 
-		if (state.get(INVERTED)) {
+			}
+		}
+	}
+
+	public void updatePower(BlockState state, Level level, BlockPos pos) {
+		int newPower = activateFunction.apply(state, level, pos);
+
+		if (state.getValue(INVERTED)) {
 			newPower = 15 - newPower;
 		}
 
-		if (newPower != state.get(POWER)) {
-			world.setBlockState(pos, state.with(POWER, newPower));
+		if (newPower != state.getValue(POWER)) {
+			level.setBlockAndUpdate(pos, state.setValue(POWER, newPower));
 		}
 
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand p_220051_5_, BlockRayTraceResult p_220051_6_) {
-		if (player.isAllowEdit()) {
-			if (!world.isRemote()) {
-				BlockState newState = state.func_235896_a_(INVERTED);
-				world.setBlockState(pos, newState, 4);
-				updatePower(newState, world, pos);
+	public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+		if (pPlayer.mayBuild()) {
+			if (pLevel.isClientSide) {
+				return InteractionResult.SUCCESS;
+			} else {
+				BlockState newState = pState.cycle(INVERTED);
+				pLevel.setBlock(pPos, newState, 4);
+				updatePower(pState, pLevel, pPos);
+				return InteractionResult.CONSUME;
 			}
-			return ActionResultType.SUCCESS;
 		}
-		return ActionResultType.PASS;
+		return InteractionResult.PASS;
 	}
 
 	@Override
-	@Nonnull
-	public BlockRenderType getRenderType(BlockState p_149645_1_) {
-		return BlockRenderType.MODEL;
+	public RenderShape getRenderShape(BlockState pState) {
+		return RenderShape.MODEL;
 	}
 
+
 	@Override
-	public boolean canProvidePower(BlockState p_149744_1_) {
+	public boolean isSignalSource(BlockState pState) {
 		return true;
 	}
 
-
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> p_206840_1_) {
-		p_206840_1_.add(POWER, INVERTED);
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+		pBuilder.add(POWER, INVERTED);
+	}
+
+
+	@Nullable
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+		return new CustomDetectorTile(pPos, pState);
 	}
 
 	@Nullable
 	@Override
-	public TileEntity createNewTileEntity(@Nonnull IBlockReader worldIn) {
-		return new CustomDetectorTile();
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+		return !pLevel.isClientSide ? createTickerHelper(pBlockEntityType, GatesBlocks.RAIN_DETECTOR_TILE_ENTITY.get(), CustomDetector::tickEntity) : null;
 	}
 }

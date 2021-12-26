@@ -3,21 +3,21 @@ package com.github.se7_kn8.gates.item;
 import com.github.se7_kn8.gates.Gates;
 import com.github.se7_kn8.gates.container.PortableRedstoneTransmitterContainer;
 import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -25,77 +25,78 @@ import java.util.List;
 public class PortableRedstoneTransmitter extends Item {
 
 	public PortableRedstoneTransmitter() {
-		super(new Item.Properties().group(Gates.GATES_ITEM_GROUP).maxStackSize(1).rarity(Rarity.UNCOMMON));
+		super(new Item.Properties().tab(Gates.GATES_ITEM_GROUP).stacksTo(1).rarity(Rarity.UNCOMMON));
 	}
 
+
 	@Override
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
-		tooltip.add(new TranslationTextComponent("gui.gates.usage.portable_transmitter_1"));
-		tooltip.add(new TranslationTextComponent("gui.gates.usage.portable_transmitter_2"));
-		tooltip.add(new TranslationTextComponent("gui.gates.usage.portable_transmitter_3"));
-		if (stack.hasTag()) {
-			if (stack.getTag().contains("frequency")) {
-				tooltip.add(new TranslationTextComponent("gui.gates.current_frequency_stored", stack.getTag().getInt("frequency")));
+	public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+		super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+		pTooltipComponents.add(new TranslatableComponent("gui.gates.usage.portable_transmitter_1"));
+		pTooltipComponents.add(new TranslatableComponent("gui.gates.usage.portable_transmitter_2"));
+		pTooltipComponents.add(new TranslatableComponent("gui.gates.usage.portable_transmitter_3"));
+		if (pStack.hasTag()) {
+			if (pStack.getTag().contains("frequency")) {
+				pTooltipComponents.add(new TranslatableComponent("gui.gates.current_frequency_stored", pStack.getTag().getInt("frequency")));
 			}
 		}
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack stack = playerIn.getHeldItem(handIn);
+	public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+		ItemStack stack = pPlayer.getItemInHand(pUsedHand);
 
-		if (playerIn.isSneaking()) {
-			if (!worldIn.isRemote) {
-				playerIn.openContainer(new INamedContainerProvider() {
-					@Override
-					public ITextComponent getDisplayName() {
-						return new TranslationTextComponent("item.gates.portable_redstone_transmitter");
-					}
-
+		if (pPlayer.isShiftKeyDown()) {
+			if (!pLevel.isClientSide) {
+				pPlayer.openMenu(new MenuProvider() {
 					@Nullable
 					@Override
-					public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
-						return new PortableRedstoneTransmitterContainer(p_createMenu_1_);
+					public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
+						return new PortableRedstoneTransmitterContainer(pContainerId);
+					}
+
+					@Override
+					public Component getDisplayName() {
+						return new TranslatableComponent("item.gates.portable_redstone_transmitter");
 					}
 				});
 			}
-			return ActionResult.resultSuccess(stack);
+			return InteractionResultHolder.success(stack);
 		}
 
 		if (!stack.hasTag()) {
-			stack.setTag(new CompoundNBT());
+			stack.setTag(new CompoundTag());
 		}
 
 		if (!stack.getTag().contains("frequency")) {
-			playerIn.sendStatusMessage(new TranslationTextComponent("gui.gates.no_frequency"), true);
-			return ActionResult.resultFail(stack);
+			pPlayer.displayClientMessage(new TranslatableComponent("gui.gates.no_frequency"), true);
+			return InteractionResultHolder.fail(stack);
 		}
 
 		int frequency = stack.getTag().getInt("frequency");
 
-		if (stack.getTag().contains("active"))  {
+		if (stack.getTag().contains("active")) {
 			boolean active = !stack.getTag().getBoolean("active");
 			stack.getTag().putBoolean("active", active);
-			update(worldIn, active, frequency);
+			update(pLevel, active, frequency);
 		} else {
 			stack.getTag().putBoolean("active", true);
-			update(worldIn, true, frequency);
+			update(pLevel, true, frequency);
 		}
 
-		return ActionResult.resultSuccess(stack);
+		return InteractionResultHolder.success(stack);
 	}
 
-	private void update(World world, boolean active, int frequency) {
-		if (!world.isRemote) {
-			RedstoneReceiverWorldSavedData.get((ServerWorld) world).updateFrequency(world, frequency, active ? 15 : 0);
+
+	private void update(Level level, boolean active, int frequency) {
+		if (!level.isClientSide) {
+			RedstoneReceiverWorldSavedData.get((ServerLevel) level).updateFrequency(level, frequency, active ? 15 : 0);
 		}
 	}
+
 
 	@Override
-	public boolean hasEffect(ItemStack stack) {
+	public boolean isFoil(ItemStack stack) {
 		return stack.hasTag() && stack.getTag().contains("active") && stack.getTag().getBoolean("active");
 	}
-
-
 }

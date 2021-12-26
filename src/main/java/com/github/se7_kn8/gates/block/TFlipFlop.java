@@ -1,5 +1,5 @@
 package com.github.se7_kn8.gates.block;
-
+/*
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -64,3 +64,4 @@ public class TFlipFlop extends RedstoneDiodeBlock {
 		return state.get(POWERED) ? 15 : 0;
 	}
 }
+*/

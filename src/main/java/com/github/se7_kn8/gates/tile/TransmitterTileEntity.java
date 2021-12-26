@@ -4,59 +4,41 @@ import com.github.se7_kn8.gates.GatesBlocks;
 import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import com.github.se7_kn8.gates.api.IWirelessNode;
 import com.github.se7_kn8.gates.block.wireless_redstone.TransmitterBlock;
-import com.github.se7_kn8.gates.container.FrequencyContainer;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.server.ServerWorld;
+import com.github.se7_kn8.gates.container.FrequencyMenu;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TransmitterTileEntity extends TileEntity implements INamedContainerProvider {
+public class TransmitterTileEntity extends BlockEntity implements MenuProvider {
 
-	private LazyOptional<IWirelessNode> wireless = LazyOptional.of(this::createWireless);
 
-	public TransmitterTileEntity() {
-		super(GatesBlocks.TRANSMITTER_TILE_ENTITY_TYPE.get());
+	public TransmitterTileEntity(BlockPos pos, BlockState state) {
+		super(GatesBlocks.TRANSMITTER_TILE_ENTITY_TYPE.get(), pos, state);
 	}
 
+	private final LazyOptional<IWirelessNode> wireless = LazyOptional.of(this::createWireless);
+
 	@Nonnull
-	private IWirelessNode createWireless() {
-		return new CapabilityWirelessNode.WirelessNodeImpl(1, IWirelessNode.Types.TRANSMITTER) {
-			@Override
-			public void setPower(int newPower) {
-				super.setPower(newPower);
-				markDirty();
-			}
-
-			@Override
-			public void setFrequency(int newFrequency) {
-				int oldFrequency = this.getFrequency();
-				super.setFrequency(newFrequency);
-
-				if (!world.isRemote) {
-
-					Block block = world.getBlockState(pos).getBlock();
-					if (block instanceof TransmitterBlock) {
-						((TransmitterBlock) block).updateFrequency((ServerWorld) world, pos, oldFrequency);
-					}
-				}
-
-				markDirty();
-			}
-		};
+	@Override
+	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap) {
+		if (cap == CapabilityWirelessNode.WIRELESS_NODE) {
+			return wireless.cast();
+		}
+		return super.getCapability(cap);
 	}
 
 	@Nonnull
@@ -68,31 +50,53 @@ public class TransmitterTileEntity extends TileEntity implements INamedContainer
 		return super.getCapability(cap, side);
 	}
 
-	@Override
-	public void read(BlockState state, CompoundNBT compound) {
-		super.read(state, compound);
-		CompoundNBT wirelessTag = compound.getCompound("wireless");
-		wireless.ifPresent(c -> ((INBTSerializable<CompoundNBT>) c).deserializeNBT(wirelessTag));
+	@Nonnull
+	private IWirelessNode createWireless() {
+		return new CapabilityWirelessNode.WirelessNodeImpl(1, IWirelessNode.Types.TRANSMITTER) {
+			@Override
+			public void setPower(int newPower) {
+				super.setPower(newPower);
+				setChanged();
+			}
+
+			@Override
+			public void setFrequency(int newFrequency) {
+				int oldFrequency = this.getFrequency();
+				super.setFrequency(newFrequency);
+
+				if (!level.isClientSide) {
+					if (level.getBlockState(getBlockPos()).getBlock() instanceof TransmitterBlock block) {
+						block.updateFrequency((ServerLevel) level, getBlockPos(), oldFrequency);
+					}
+				}
+				setChanged();
+			}
+		};
 	}
 
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		wireless.ifPresent(c -> {
-			CompoundNBT compoundNBT = ((INBTSerializable<CompoundNBT>) c).serializeNBT();
-			compound.put("wireless", compoundNBT);
-		});
-		return super.write(compound);
+	public void load(CompoundTag pTag) {
+		super.load(pTag);
+		CompoundTag tag = pTag.getCompound("wireless");
+		wireless.ifPresent(c -> ((CapabilityWirelessNode.WirelessNodeImpl) c).deserializeNBT(tag));
+	}
+
+	@Override
+	public CompoundTag save(CompoundTag pTag) {
+		wireless.ifPresent(c -> pTag.put("wireless", ((CapabilityWirelessNode.WirelessNodeImpl) c).serializeNBT()));
+		return super.save(pTag);
 	}
 
 	@Override
 	@Nonnull
-	public ITextComponent getDisplayName() {
-		return new TranslationTextComponent("block.gates.transmitter");
+	public Component getDisplayName() {
+		return new TranslatableComponent("block.gates.transmitter");
 	}
 
 	@Nullable
 	@Override
-	public Container createMenu(int windowId, @Nonnull PlayerInventory inventory, @Nonnull PlayerEntity player) {
-		return new FrequencyContainer(windowId, world, pos, inventory, player);
+	public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
+		return new FrequencyMenu(pContainerId, pInventory, ((CapabilityWirelessNode.WirelessNodeImpl) wireless.orElseGet(this::createWireless)).dataAccess);
 	}
+
 }

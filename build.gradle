@@ -1,16 +1,19 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url = 'https://maven.parchmentmc.org' }
+        maven { url = 'https://dist.creeper.host/Sponge/maven' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public' }
         mavenCentral()
-        maven { url='https://dist.creeper.host/Sponge/maven' }
-        maven {url='https://repo.spongepowered.org/repository/maven-public'}
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath 'org.parchmentmc:librarian:1.+'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
@@ -18,7 +21,8 @@ version = '1.7.1'
 group = 'com.github.se7_kn8.gates'
 archivesBaseName = 'gates'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships java 8
+// Mojang ships Java 16 to end users in 1.17+ instead of Java 8 in 1.16 or lower, so your mod should target Java 16.
+java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 
 sourceSets {
     main {
@@ -41,7 +45,7 @@ repositories {
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'snapshot', version: '20201028-1.16.3'
+    mappings channel: 'parchment', version: '2021.12.12-1.17.1'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -50,7 +54,7 @@ minecraft {
     runs {
         client {
             property 'mixin.env.disableRefMap', 'true'
-            arg "-mixin.config="+archivesBaseName+".mixins.json"
+            arg "-mixin.config=" + archivesBaseName + ".mixins.json"
             workingDirectory project.file('run')
 
             // Recommended logging data for a userdev environment
@@ -69,8 +73,8 @@ minecraft {
         server {
             property 'mixin.env.disableRefMap', 'true'
             workingDirectory project.file('run')
-            
-            arg "-mixin.config="+archivesBaseName+".mixins.json"
+
+            arg "-mixin.config=" + archivesBaseName + ".mixins.json"
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'REGISTRIES'
@@ -87,8 +91,8 @@ minecraft {
         data {
             property 'mixin.env.disableRefMap', 'true'
             workingDirectory project.file('run')
-            
-            arg "-mixin.config="+archivesBaseName+".mixins.json"
+
+            arg "-mixin.config=" + archivesBaseName + ".mixins.json"
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -108,10 +112,10 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.1.0'
+    minecraft 'net.minecraftforge:forge:1.17.1-37.1.1'
 
-    // compileOnly fg.deobf("mezz.jei:jei-1.16.1:7.0.0.6:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.16.3:7.6.0.49")
+    compileOnly fg.deobf("mezz.jei:jei-1.17.1:8.3.0.49:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.17.1:8.3.0.49")
 
 }
 
@@ -125,7 +129,7 @@ jar {
                 "Implementation-Version"  : "${version}",
                 "Implementation-Vendor"   : "SE7-KN8",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs": "gates.mixins.json"
+                "MixinConfigs"            : "gates.mixins.json"
         ])
     }
 }

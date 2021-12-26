@@ -1,49 +1,51 @@
 package com.github.se7_kn8.gates.block;
 
-import net.minecraft.block.*;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 
-public class WaxedRedstone extends RedstoneWireBlock implements IWaterLoggable {
+public class WaxedRedstone extends RedStoneWireBlock implements SimpleWaterloggedBlock {
 
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	public WaxedRedstone() {
-		super(Properties.from(Blocks.REDSTONE_WIRE).sound(SoundType.HONEY));
-		this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false));
+		super(Properties.copy(Blocks.REDSTONE_WIRE).sound(SoundType.HONEY_BLOCK));
+		this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false));
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		BlockState state = super.getStateForPlacement(context);
-		FluidState fluidState = context.getWorld().getFluidState(context.getPos());
-		return state.with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+		FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+		return state.setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
 	}
 
 	@Override
 	public FluidState getFluidState(BlockState state) {
-		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		super.fillStateContainer(builder);
-		builder.add(WATERLOGGED);
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+		super.createBlockStateDefinition(pBuilder);
+		pBuilder.add(WATERLOGGED);
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (stateIn.get(WATERLOGGED)) {
-			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+	public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+		if (pState.getValue(WATERLOGGED)) {
+			pLevel.getLiquidTicks().scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
 		}
-		BlockState state = super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
-		return state.with(WATERLOGGED, worldIn.getFluidState(currentPos).getFluid() == Fluids.WATER);
+
+		BlockState state = super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+		return state.setValue(WATERLOGGED, pLevel.getFluidState(pCurrentPos).getType() == Fluids.WATER);
 	}
 }

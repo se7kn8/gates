@@ -5,13 +5,13 @@ import com.github.se7_kn8.gates.GatesBlocks;
 import com.github.se7_kn8.gates.block.*;
 import com.github.se7_kn8.gates.block.redstone_clock.AdvancedRedstoneClock;
 import com.github.se7_kn8.gates.block.redstone_clock.RedstoneClock;
-import net.minecraft.block.Block;
+import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.state.properties.AttachFace;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.state.properties.RedstoneSide;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.RedstoneSide;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -74,7 +74,7 @@ public class BlockStates extends BlockStateProvider {
 		VariantBlockStateBuilder builder = getVariantBuilder(b);
 		ModelFile detector = models().withExistingParent("block/sensor/" + name, modLoc("block/sensor/basic_detector")).texture("top", modLoc("block/" + name + "_top"));
 		ModelFile detector_inverted = models().withExistingParent("block/sensor/" + name + "_inverted", modLoc("block/sensor/basic_detector")).texture("top", modLoc("block/" + name + "_top_inverted"));
-		builder.forAllStatesExcept(blockState -> ConfiguredModel.builder().modelFile(blockState.get(CustomDetector.INVERTED) ? detector_inverted : detector).build(), CustomDetector.POWER);
+		builder.forAllStatesExcept(blockState -> ConfiguredModel.builder().modelFile(blockState.getValue(CustomDetector.INVERTED) ? detector_inverted : detector).build(), CustomDetector.POWER);
 		simpleBlockItem(b, detector);
 	}
 
@@ -90,15 +90,15 @@ public class BlockStates extends BlockStateProvider {
 		ModelFile outputTorchOn = getTorchModel("output_torch", true);
 		ModelFile outputTorchOff = getTorchModel("output_torch", false);
 
-		for (Direction dir : TwoInputLogicGate.HORIZONTAL_FACING.getAllowedValues()) {
-			int yRot = (int) dir.getHorizontalAngle();
-			builder.part().modelFile(baseModel).rotationY(yRot).addModel().condition(TwoInputLogicGate.HORIZONTAL_FACING, dir);
-			builder.part().modelFile(leftTorchOn).rotationY(yRot).addModel().condition(TwoInputLogicGate.HORIZONTAL_FACING, dir).condition(TwoInputLogicGate.LEFT_INPUT, true);
-			builder.part().modelFile(leftTorchOff).rotationY(yRot).addModel().condition(TwoInputLogicGate.HORIZONTAL_FACING, dir).condition(TwoInputLogicGate.LEFT_INPUT, false);
-			builder.part().modelFile(rightTorchOn).rotationY(yRot).addModel().condition(TwoInputLogicGate.HORIZONTAL_FACING, dir).condition(TwoInputLogicGate.RIGHT_INPUT, true);
-			builder.part().modelFile(rightTorchOff).rotationY(yRot).addModel().condition(TwoInputLogicGate.HORIZONTAL_FACING, dir).condition(TwoInputLogicGate.RIGHT_INPUT, false);
-			builder.part().modelFile(outputTorchOn).rotationY(yRot).addModel().condition(TwoInputLogicGate.HORIZONTAL_FACING, dir).condition(TwoInputLogicGate.POWERED, true);
-			builder.part().modelFile(outputTorchOff).rotationY(yRot).addModel().condition(TwoInputLogicGate.HORIZONTAL_FACING, dir).condition(TwoInputLogicGate.POWERED, false);
+		for (Direction dir : TwoInputLogicGate.FACING.getPossibleValues()) {
+			int yRot = (int) dir.toYRot();
+			builder.part().modelFile(baseModel).rotationY(yRot).addModel().condition(TwoInputLogicGate.FACING, dir);
+			builder.part().modelFile(leftTorchOn).rotationY(yRot).addModel().condition(TwoInputLogicGate.FACING, dir).condition(TwoInputLogicGate.LEFT_INPUT, true);
+			builder.part().modelFile(leftTorchOff).rotationY(yRot).addModel().condition(TwoInputLogicGate.FACING, dir).condition(TwoInputLogicGate.LEFT_INPUT, false);
+			builder.part().modelFile(rightTorchOn).rotationY(yRot).addModel().condition(TwoInputLogicGate.FACING, dir).condition(TwoInputLogicGate.RIGHT_INPUT, true);
+			builder.part().modelFile(rightTorchOff).rotationY(yRot).addModel().condition(TwoInputLogicGate.FACING, dir).condition(TwoInputLogicGate.RIGHT_INPUT, false);
+			builder.part().modelFile(outputTorchOn).rotationY(yRot).addModel().condition(TwoInputLogicGate.FACING, dir).condition(TwoInputLogicGate.POWERED, true);
+			builder.part().modelFile(outputTorchOff).rotationY(yRot).addModel().condition(TwoInputLogicGate.FACING, dir).condition(TwoInputLogicGate.POWERED, false);
 		}
 
 		simpleItem(name);
@@ -115,13 +115,13 @@ public class BlockStates extends BlockStateProvider {
 		ModelFile outputTorchOff = getTorchModel("output_torch", false);
 
 
-		for (Direction dir : OneInputLogicGate.HORIZONTAL_FACING.getAllowedValues()) {
-			int yRot = (int) dir.getHorizontalAngle();
-			builder.part().modelFile(baseModel).rotationY(yRot).addModel().condition(OneInputLogicGate.HORIZONTAL_FACING, dir);
-			builder.part().modelFile(inputTorchOn).rotationY(yRot).addModel().condition(OneInputLogicGate.HORIZONTAL_FACING, dir).condition(OneInputLogicGate.INPUT, true);
-			builder.part().modelFile(inputTorchOff).rotationY(yRot).addModel().condition(OneInputLogicGate.HORIZONTAL_FACING, dir).condition(OneInputLogicGate.INPUT, false);
-			builder.part().modelFile(outputTorchOn).rotationY(yRot).addModel().condition(OneInputLogicGate.HORIZONTAL_FACING, dir).condition(OneInputLogicGate.POWERED, true);
-			builder.part().modelFile(outputTorchOff).rotationY(yRot).addModel().condition(OneInputLogicGate.HORIZONTAL_FACING, dir).condition(OneInputLogicGate.POWERED, false);
+		for (Direction dir : OneInputLogicGate.FACING.getPossibleValues()) {
+			int yRot = (int) dir.toYRot();
+			builder.part().modelFile(baseModel).rotationY(yRot).addModel().condition(OneInputLogicGate.FACING, dir);
+			builder.part().modelFile(inputTorchOn).rotationY(yRot).addModel().condition(OneInputLogicGate.FACING, dir).condition(OneInputLogicGate.INPUT, true);
+			builder.part().modelFile(inputTorchOff).rotationY(yRot).addModel().condition(OneInputLogicGate.FACING, dir).condition(OneInputLogicGate.INPUT, false);
+			builder.part().modelFile(outputTorchOn).rotationY(yRot).addModel().condition(OneInputLogicGate.FACING, dir).condition(OneInputLogicGate.POWERED, true);
+			builder.part().modelFile(outputTorchOff).rotationY(yRot).addModel().condition(OneInputLogicGate.FACING, dir).condition(OneInputLogicGate.POWERED, false);
 		}
 
 		simpleItem(name);
@@ -135,8 +135,8 @@ public class BlockStates extends BlockStateProvider {
 		ModelFile mainTorchOff = getTorchModel("main_torch", false);
 
 		builder.part().modelFile(baseModel).addModel();
-		builder.part().modelFile(mainTorchOn).addModel().condition(BlockStateProperties.POWER_0_15, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
-		builder.part().modelFile(mainTorchOff).addModel().condition(BlockStateProperties.POWER_0_15, 0);
+		builder.part().modelFile(mainTorchOn).addModel().condition(BlockStateProperties.POWER, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+		builder.part().modelFile(mainTorchOff).addModel().condition(BlockStateProperties.POWER, 0);
 		simpleItem(name);
 	}
 
@@ -188,8 +188,8 @@ public class BlockStates extends BlockStateProvider {
 		builder.part().modelFile(mainTorch1On).addModel().condition(AdvancedRedstoneClock.POWERED, true);
 		builder.part().modelFile(mainTorch5Off).addModel().condition(AdvancedRedstoneClock.POWERED, false);
 
-		for (Direction dir : BlockStateProperties.HORIZONTAL_FACING.getAllowedValues()) {
-			int yRot = (int) dir.getHorizontalAngle();
+		for (Direction dir : BlockStateProperties.HORIZONTAL_FACING.getPossibleValues()) {
+			int yRot = (int) dir.toYRot();
 			builder.part().modelFile(inputTorchOn).rotationY(yRot).addModel().condition(AdvancedRedstoneClock.POWERED, true);
 			builder.part().modelFile(inputTorchOff).rotationY(yRot).addModel().condition(AdvancedRedstoneClock.POWERED, false);
 		}
@@ -207,9 +207,9 @@ public class BlockStates extends BlockStateProvider {
 		builder.part().modelFile(smallRedstoneBlockOn).addModel().condition(RSFlipFlop.POWERED, true);
 		builder.part().modelFile(smallRedstoneBlockOff).addModel().condition(RSFlipFlop.POWERED, false);
 
-		for (Direction dir : RSFlipFlop.HORIZONTAL_FACING.getAllowedValues()) {
-			int yRot = (int) dir.getHorizontalAngle();
-			builder.part().modelFile(baseModel).rotationY(yRot).addModel().condition(RSFlipFlop.HORIZONTAL_FACING, dir);
+		for (Direction dir : RSFlipFlop.FACING.getPossibleValues()) {
+			int yRot = (int) dir.toYRot();
+			builder.part().modelFile(baseModel).rotationY(yRot).addModel().condition(RSFlipFlop.FACING, dir);
 		}
 
 		simpleItem(b.getRegistryName().getPath());
@@ -234,30 +234,30 @@ public class BlockStates extends BlockStateProvider {
 		}
 		MultiPartBlockStateBuilder builder = getMultipartBuilder(b);
 
-		for (AttachFace face : RotarySwitch.FACE.getAllowedValues()) {
-			for (Direction dir : RotarySwitch.HORIZONTAL_FACING.getAllowedValues()) {
-				int yRot = (int) dir.getHorizontalAngle();
+		for (AttachFace face : RotarySwitch.FACE.getPossibleValues()) {
+			for (Direction dir : RotarySwitch.FACING.getPossibleValues()) {
+				int yRot = (int) dir.toYRot();
 				switch (face) {
 					case WALL:
-						builder.part().modelFile(base).rotationY(yRot).addModel().condition(RotarySwitch.FACE, face).condition(RotarySwitch.HORIZONTAL_FACING, dir);
+						builder.part().modelFile(base).rotationY(yRot).addModel().condition(RotarySwitch.FACE, face).condition(RotarySwitch.FACING, dir);
 						break;
 					case FLOOR:
-						builder.part().modelFile(base).rotationX(90).rotationY(yRot).addModel().condition(RotarySwitch.FACE, face).condition(RotarySwitch.HORIZONTAL_FACING, dir);
+						builder.part().modelFile(base).rotationX(90).rotationY(yRot).addModel().condition(RotarySwitch.FACE, face).condition(RotarySwitch.FACING, dir);
 						break;
 					case CEILING:
-						builder.part().modelFile(base).rotationX(270).rotationY(yRot).addModel().condition(RotarySwitch.FACE, face).condition(RotarySwitch.HORIZONTAL_FACING, dir);
+						builder.part().modelFile(base).rotationX(270).rotationY(yRot).addModel().condition(RotarySwitch.FACE, face).condition(RotarySwitch.FACING, dir);
 						break;
 				}
-				for (int power : RotarySwitch.POWER.getAllowedValues()) {
+				for (int power : RotarySwitch.POWER.getPossibleValues()) {
 					switch (face) {
 						case WALL:
-							builder.part().modelFile(models[power]).rotationY(yRot).addModel().condition(RotarySwitch.FACE, face).condition(RotarySwitch.HORIZONTAL_FACING, dir).condition(RotarySwitch.POWER, power);
+							builder.part().modelFile(models[power]).rotationY(yRot).addModel().condition(RotarySwitch.FACE, face).condition(RotarySwitch.FACING, dir).condition(RotarySwitch.POWER, power);
 							break;
 						case FLOOR:
-							builder.part().modelFile(models[power]).rotationX(90).rotationY(yRot).addModel().condition(RotarySwitch.FACE, face).condition(RotarySwitch.HORIZONTAL_FACING, dir).condition(RotarySwitch.POWER, power);
+							builder.part().modelFile(models[power]).rotationX(90).rotationY(yRot).addModel().condition(RotarySwitch.FACE, face).condition(RotarySwitch.FACING, dir).condition(RotarySwitch.POWER, power);
 							break;
 						case CEILING:
-							builder.part().modelFile(models[power]).rotationX(270).rotationY(yRot).addModel().condition(RotarySwitch.FACE, face).condition(RotarySwitch.HORIZONTAL_FACING, dir).condition(RotarySwitch.POWER, power);
+							builder.part().modelFile(models[power]).rotationX(270).rotationY(yRot).addModel().condition(RotarySwitch.FACE, face).condition(RotarySwitch.FACING, dir).condition(RotarySwitch.POWER, power);
 							break;
 					}
 				}
@@ -281,16 +281,16 @@ public class BlockStates extends BlockStateProvider {
 		VariantBlockStateBuilder builder = getVariantBuilder(block);
 
 		builder.forAllStates(blockState -> {
-			String path = "block/repeater/" + type + "/repeater_" + blockState.get(CustomRepeater.DELAY) + "tick";
-			if (blockState.get(CustomRepeater.POWERED)) {
+			String path = "block/repeater/" + type + "/repeater_" + blockState.getValue(CustomRepeater.DELAY) + "tick";
+			if (blockState.getValue(CustomRepeater.POWERED)) {
 				path = path + "_on";
 			}
-			if (blockState.get(CustomRepeater.LOCKED)) {
+			if (blockState.getValue(CustomRepeater.LOCKED)) {
 				path = path + "_locked";
 			}
 			ModelFile model = models().getExistingFile(modLoc(path));
 
-			return ConfiguredModel.builder().modelFile(model).rotationY((int) blockState.get(CustomRepeater.HORIZONTAL_FACING).getHorizontalAngle()).build();
+			return ConfiguredModel.builder().modelFile(model).rotationY((int) blockState.getValue(CustomRepeater.FACING).toYRot()).build();
 		});
 
 		simpleItem(name);

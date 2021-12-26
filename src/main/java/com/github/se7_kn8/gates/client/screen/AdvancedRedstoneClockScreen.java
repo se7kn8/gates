@@ -1,70 +1,70 @@
 package com.github.se7_kn8.gates.client.screen;
 
 import com.github.se7_kn8.gates.PacketHandler;
-import com.github.se7_kn8.gates.container.AdvancedRedstoneClockContainer;
+import com.github.se7_kn8.gates.container.AdvancedRedstoneClockMenu;
 import com.github.se7_kn8.gates.packages.UpdateRedstoneClockPacket;
 import com.github.se7_kn8.gates.util.Utils;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.entity.player.Inventory;
 
 import javax.annotation.Nonnull;
 
-public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedstoneClockContainer> {
+public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedstoneClockMenu> {
 
 	private Button applyButton;
-	private TextFieldWidget clockTimeField;
-	private TextFieldWidget clockLengthField;
+	private EditBox clockBox;
+	private EditBox clockLengthBox;
 
 	private int lastClockTime;
 	private int lastClockLength;
 
-	public AdvancedRedstoneClockScreen(AdvancedRedstoneClockContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+
+	public AdvancedRedstoneClockScreen(AdvancedRedstoneClockMenu screenContainer, Inventory inv, Component titleIn) {
 		super(screenContainer, inv, titleIn);
 	}
+
 
 	@Override
 	protected void init() {
 		super.init();
 
-		clockTimeField = new TextFieldWidget(this.font, this.width / 2 - 75, this.height / 2 - 50, 70, 20, new TranslationTextComponent("gui.gates.clock_time"));
-		clockLengthField = new TextFieldWidget(this.font, this.width / 2 + 5, this.height / 2 - 50, 70, 20, new TranslationTextComponent("gui.gates.clock_length"));
+		clockBox = new EditBox(this.font, this.width / 2 - 75, this.height / 2 - 50, 70, 20, new TranslatableComponent("gui.gates.clock_time"));
+		clockLengthBox = new EditBox(this.font, this.width / 2 + 5, this.height / 2 - 50, 70, 20, new TranslatableComponent("gui.gates.clock_length"));
 
-		clockTimeField.setValidator(Utils.NUMBER_STRING_9_CHARACTERS);
-		clockLengthField.setValidator(Utils.NUMBER_STRING_9_CHARACTERS);
+		clockBox.setFilter(Utils.NUMBER_STRING_9_CHARACTERS);
+		clockLengthBox.setFilter(Utils.NUMBER_STRING_9_CHARACTERS);
 
-		applyButton = this.addButton(new Button(this.width / 2, this.height / 2 - 25, 80, 20, new TranslationTextComponent("gui.gates.apply"), p_onPress_1_ -> {
-			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateRedstoneClockPacket(getTilePos(), Integer.parseInt(this.clockTimeField.getText()), Integer.parseInt(this.clockLengthField.getText())));
+		applyButton = this.addRenderableWidget(new Button(this.width / 2, this.height / 2 - 25, 80, 20, new TranslatableComponent("gui.gates.apply"), p_onPress_1_ -> {
+			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateRedstoneClockPacket(lastBlockPos, Integer.parseInt(this.clockBox.getValue()), Integer.parseInt(this.clockLengthBox.getValue())));
 		}));
 
-		this.children.add(clockTimeField);
-		this.children.add(clockLengthField);
+		this.addWidget(clockBox);
+		this.addWidget(clockLengthBox);
 
-		this.applyButton.visible = false;
+		this.applyButton.visible = true;
 	}
 
 	@Override
-	public void tick() {
-		super.tick();
-		this.clockLengthField.tick();
-		this.clockTimeField.tick();
+	public void containerTick() {
+		this.clockLengthBox.tick();
+		this.clockBox.tick();
 
-		int clockTime = this.getContainer().getClockTime();
-		int clockLength = this.getContainer().getClockLength();
+		int clockTime = this.getMenu().getClockTime();
+		int clockLength = this.getMenu().getClockLength();
 
 		boolean change = false;
 		boolean enableButton = true;
 
 		if (clockTime != this.lastClockTime) {
 			this.lastClockTime = clockTime;
-			this.clockTimeField.setText(String.valueOf(clockTime));
+			this.clockBox.setValue(String.valueOf(clockTime));
 		} else {
 			try {
-				change = clockTime != Integer.parseInt(this.clockTimeField.getText());
+				change = clockTime != Integer.parseInt(this.clockBox.getValue());
 			} catch (NumberFormatException e) {
 				// field is empty
 				enableButton = false;
@@ -73,10 +73,10 @@ public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedst
 
 		if (clockLength != this.lastClockLength) {
 			this.lastClockLength = clockLength;
-			this.clockLengthField.setText(String.valueOf(clockLength));
+			this.clockLengthBox.setValue(String.valueOf(clockLength));
 		} else {
 			try {
-				change = change | (clockLength != Integer.parseInt(this.clockLengthField.getText()));
+				change = change | (clockLength != Integer.parseInt(this.clockLengthBox.getValue()));
 			} catch (NumberFormatException e) {
 				// field is empty
 				enableButton = false;
@@ -87,21 +87,20 @@ public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedst
 	}
 
 	@Override
-	public void render(@Nonnull MatrixStack stack, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull PoseStack stack, int mouseX, int mouseY, float partialTicks) {
 		super.render(stack, mouseX, mouseY, partialTicks);
 
-		this.clockTimeField.render(stack, mouseX, mouseY, partialTicks);
-		this.clockLengthField.render(stack, mouseX, mouseY, partialTicks);
+		this.clockBox.render(stack, mouseX, mouseY, partialTicks);
+		this.clockLengthBox.render(stack, mouseX, mouseY, partialTicks);
 	}
 
-	@Override
-	// mappings: drawGuiContainerForegroundLayer
-	protected void drawGuiContainerForegroundLayer(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
-		super.drawGuiContainerForegroundLayer(stack, mouseX, mouseY);
 
-		// mappings: drawString
-		this.font.func_243248_b(stack, new TranslationTextComponent("gui.gates.clock_time"), 13, 20, 4210752);
-		this.font.func_243248_b(stack, new TranslationTextComponent("gui.gates.clock_length"), 94, 20, 4210752);
+	@Override
+	protected void renderLabels(@Nonnull PoseStack stack, int mouseX, int mouseY) {
+		super.renderLabels(stack, mouseX, mouseY);
+
+		this.font.draw(stack, new TranslatableComponent("gui.gates.clock_time"), 13, 20, 4210752);
+		this.font.draw(stack, new TranslatableComponent("gui.gates.clock_length"), 94, 20, 4210752);
 	}
 
 }

@@ -1,11 +1,11 @@
 package com.github.se7_kn8.gates.block;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.RepeaterBlock;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RepeaterBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 
@@ -14,17 +14,17 @@ public class CustomRepeater extends RepeaterBlock {
 	private final int factor;
 
 	public CustomRepeater(int delayFactor) {
-		super(Properties.from(Blocks.REPEATER));
+		super(Properties.copy(Blocks.REPEATER));
 		this.factor = delayFactor;
 	}
 
 	@Override
-	protected int getDelay(BlockState p_196346_1_) {
-		return p_196346_1_.get(DELAY) * factor;
+	protected int getDelay(BlockState state) {
+		return state.getValue(DELAY) * factor;
 	}
 
 	@Override
-	public boolean canConnectRedstone(BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side) {
-		return side == state.get(HORIZONTAL_FACING) || side == state.get(HORIZONTAL_FACING).getOpposite();
+	public boolean canConnectRedstone(BlockState state, BlockGetter world, BlockPos pos, @Nullable Direction side) {
+		return side == state.getValue(FACING) || side == state.getValue(FACING).getOpposite();
 	}
 }

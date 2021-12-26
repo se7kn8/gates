@@ -4,12 +4,12 @@ package com.github.se7_kn8.gates.data_gen;
 import com.github.se7_kn8.gates.Gates;
 import com.github.se7_kn8.gates.GatesItems;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 
 
 public class ItemModels extends ItemModelProvider {

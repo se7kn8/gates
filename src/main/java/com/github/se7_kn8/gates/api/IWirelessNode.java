@@ -2,6 +2,10 @@ package com.github.se7_kn8.gates.api;
 
 public interface IWirelessNode {
 
+	int FREQUENCY_INDEX = 0;
+	int POWER_INDEX = 1;
+	int TYPE_INDEX = 2;
+
 	enum Types {
 		NOOP,
 		TRANSMITTER,

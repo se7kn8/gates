@@ -2,73 +2,69 @@ package com.github.se7_kn8.gates.block.wireless_redstone;
 
 import com.github.se7_kn8.gates.tile.ReceiverTileEntity;
 import com.github.se7_kn8.gates.util.WirelessRedstoneUtil;
-import net.minecraft.block.*;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import org.apache.http.impl.conn.Wire;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
-public class WirelessRedstoneLamp extends ContainerBlock implements ReceiverTileEntity.IWirelessReceiver {
+public class WirelessRedstoneLamp extends BaseEntityBlock implements ReceiverTileEntity.IWirelessReceiver {
 
 	public static BooleanProperty LIT = BlockStateProperties.LIT;
 
 	public WirelessRedstoneLamp() {
-		super(Properties.from(Blocks.REDSTONE_LAMP));
-		this.setDefaultState(this.getDefaultState().with(LIT, false));
+		super(Properties.copy(Blocks.REDSTONE_LAMP));
+		this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(LIT);
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+		pBuilder.add(LIT);
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		return WirelessRedstoneUtil.onBlockActivated(worldIn, pos, player, handIn);
+	public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+		return WirelessRedstoneUtil.use(pLevel, pPos, pPlayer, pHand);
 	}
 
 	@Override
-	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
-		WirelessRedstoneUtil.onBlockAdded(state, worldIn, pos, oldState);
-		super.onBlockAdded(state, worldIn, pos, oldState, isMoving);
+	public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pIsMoving) {
+		WirelessRedstoneUtil.onPlace(pState, pLevel, pPos, pOldState);
+		super.onPlace(pState, pLevel, pPos, pOldState, pIsMoving);
 	}
 
 	@Override
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		WirelessRedstoneUtil.onReplace(state, worldIn, pos, newState);
-		super.onReplaced(state, worldIn, pos, newState, isMoving);
+	public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+		WirelessRedstoneUtil.onRemove(pState, pLevel, pPos, pNewState);
+		super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
 	}
 
 	@Override
-	public BlockRenderType getRenderType(BlockState state) {
-		return BlockRenderType.MODEL;
+	public RenderShape getRenderShape(BlockState pState) {
+		return RenderShape.MODEL;
 	}
 
 	@Override
-	public void onPowerChange(World world, BlockPos pos, int newPower) {
-		world.setBlockState(pos, world.getBlockState(pos).with(LIT, newPower > 0));
+	public void onPowerChange(Level level, BlockPos pos, int newPower) {
+		level.setBlockAndUpdate(pos, level.getBlockState(pos).setValue(LIT, newPower > 0));
 	}
 
 	@Nullable
 	@Override
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
-		ReceiverTileEntity entity = new ReceiverTileEntity();
+	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+		ReceiverTileEntity entity = new ReceiverTileEntity(pPos, pState);
 		entity.setTranslationKey("gates.block.wireless_redstone_lamp");
 		return entity;
 	}

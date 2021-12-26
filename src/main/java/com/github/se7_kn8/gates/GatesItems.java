@@ -2,8 +2,8 @@ package com.github.se7_kn8.gates;
 
 import com.github.se7_kn8.gates.item.FrequencyChangerItem;
 import com.github.se7_kn8.gates.item.PortableRedstoneTransmitter;
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -13,7 +13,7 @@ public class GatesItems {
 
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Gates.MODID);
 
-	public static final RegistryObject<Item> REDSTONE_TORCH_PEARL = addItem("redstone_torch_pearl", () -> new Item(new Item.Properties().group(Gates.GATES_ITEM_GROUP)));
+	public static final RegistryObject<Item> REDSTONE_TORCH_PEARL = addItem("redstone_torch_pearl", () -> new Item(new Item.Properties().tab(Gates.GATES_ITEM_GROUP)));
 
 	public static final RegistryObject<Item> FREQUENCY_CHANGER = addItem("frequency_changer", FrequencyChangerItem::new);
 

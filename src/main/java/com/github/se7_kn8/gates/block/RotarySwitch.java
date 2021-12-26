@@ -1,46 +1,50 @@
 package com.github.se7_kn8.gates.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalFaceBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.AttachFace;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class RotarySwitch extends HorizontalFaceBlock {
+public class RotarySwitch extends FaceAttachedHorizontalDirectionalBlock {
 
-	public static final IntegerProperty POWER = BlockStateProperties.POWER_0_15;
+	public static final IntegerProperty POWER = BlockStateProperties.POWER;
 
-	protected static final VoxelShape LEVER_NORTH_AABB = Block.makeCuboidShape(5.0D, 4.0D, 10.0D, 11.0D, 12.0D, 16.0D);
-	protected static final VoxelShape LEVER_SOUTH_AABB = Block.makeCuboidShape(5.0D, 4.0D, 0.0D, 11.0D, 12.0D, 6.0D);
-	protected static final VoxelShape LEVER_WEST_AABB = Block.makeCuboidShape(10.0D, 4.0D, 5.0D, 16.0D, 12.0D, 11.0D);
-	protected static final VoxelShape LEVER_EAST_AABB = Block.makeCuboidShape(0.0D, 4.0D, 5.0D, 6.0D, 12.0D, 11.0D);
-	protected static final VoxelShape FLOOR_Z_SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 4.0D, 11.0D, 6.0D, 12.0D);
-	protected static final VoxelShape FLOOR_X_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 5.0D, 12.0D, 6.0D, 11.0D);
-	protected static final VoxelShape CEILING_Z_SHAPE = Block.makeCuboidShape(5.0D, 10.0D, 4.0D, 11.0D, 16.0D, 12.0D);
-	protected static final VoxelShape CEILING_X_SHAPE = Block.makeCuboidShape(4.0D, 10.0D, 5.0D, 12.0D, 16.0D, 11.0D);
+	protected static final VoxelShape LEVER_NORTH_AABB = Block.box(5.0D, 4.0D, 10.0D, 11.0D, 12.0D, 16.0D);
+	protected static final VoxelShape LEVER_SOUTH_AABB = Block.box(5.0D, 4.0D, 0.0D, 11.0D, 12.0D, 6.0D);
+	protected static final VoxelShape LEVER_WEST_AABB = Block.box(10.0D, 4.0D, 5.0D, 16.0D, 12.0D, 11.0D);
+	protected static final VoxelShape LEVER_EAST_AABB = Block.box(0.0D, 4.0D, 5.0D, 6.0D, 12.0D, 11.0D);
+	protected static final VoxelShape FLOOR_Z_SHAPE = Block.box(5.0D, 0.0D, 4.0D, 11.0D, 6.0D, 12.0D);
+	protected static final VoxelShape FLOOR_X_SHAPE = Block.box(4.0D, 0.0D, 5.0D, 12.0D, 6.0D, 11.0D);
+	protected static final VoxelShape CEILING_Z_SHAPE = Block.box(5.0D, 10.0D, 4.0D, 11.0D, 16.0D, 12.0D);
+	protected static final VoxelShape CEILING_X_SHAPE = Block.box(4.0D, 10.0D, 5.0D, 12.0D, 16.0D, 11.0D);
 
 
 	public RotarySwitch() {
-		super(Properties.from(Blocks.LEVER));
-		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(POWER, 0).with(FACE, AttachFace.WALL));
+		super(Properties.copy(Blocks.LEVER));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(POWER, 0).setValue(FACE, AttachFace.WALL));
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		switch(state.get(FACE)) {
+	public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+		switch (pState.getValue(FACE)) {
 			case FLOOR:
-				switch(state.get(HORIZONTAL_FACING).getAxis()) {
+				switch (pState.getValue(FACING).getAxis()) {
 					case X:
 						return FLOOR_X_SHAPE;
 					case Z:
@@ -48,7 +52,7 @@ public class RotarySwitch extends HorizontalFaceBlock {
 						return FLOOR_Z_SHAPE;
 				}
 			case WALL:
-				switch(state.get(HORIZONTAL_FACING)) {
+				switch (pState.getValue(FACING)) {
 					case EAST:
 						return LEVER_EAST_AABB;
 					case WEST:
@@ -61,7 +65,7 @@ public class RotarySwitch extends HorizontalFaceBlock {
 				}
 			case CEILING:
 			default:
-				switch(state.get(HORIZONTAL_FACING).getAxis()) {
+				switch (pState.getValue(FACING).getAxis()) {
 					case X:
 						return CEILING_X_SHAPE;
 					case Z:
@@ -72,48 +76,47 @@ public class RotarySwitch extends HorizontalFaceBlock {
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (!worldIn.isRemote) {
+	public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+		if (!pLevel.isClientSide()) {
 			BlockState newState;
-			if (player.isSneaking()) {
-				int power = state.get(POWER);
+			if (pPlayer.isShiftKeyDown()) {
+				int power = pState.getValue(POWER);
 				if (power == 0) {
 					power = 16;
 				}
 				power -= 1;
-				newState = state.with(POWER, power);
+				newState = pState.setValue(POWER, power);
 			} else {
-				newState = state.func_235896_a_(POWER);
+				newState = pState.cycle(POWER);
 			}
-			worldIn.playSound(null, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 0.3F, 0.6f);
-			worldIn.setBlockState(pos, newState);
-			worldIn.notifyNeighborsOfStateChange(pos, this);
-			worldIn.notifyNeighborsOfStateChange(pos.offset(getFacing(newState).getOpposite()), this);
+			pLevel.playSound(null, pPos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, 0.6f);
+			pLevel.setBlockAndUpdate(pPos, newState);
+			pLevel.updateNeighborsAt(pPos, this);
+			pLevel.updateNeighborsAt(pPos.relative(getConnectedDirection(newState).getOpposite()), this);
 		}
-		return ActionResultType.SUCCESS;
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override
-	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		return blockState.get(POWER);
+	public int getSignal(BlockState pState, BlockGetter pLevel, BlockPos pPos, Direction pDirection) {
+		return pState.getValue(POWER);
 	}
 
 	@Override
-	public int getStrongPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		if (getFacing(blockState) == side) {
-			return blockState.get(POWER);
+	public int getDirectSignal(BlockState pState, BlockGetter pLevel, BlockPos pPos, Direction pDirection) {
+		if (getConnectedDirection(pState) == pDirection) {
+			return pState.getValue(POWER);
 		}
 		return 0;
 	}
 
 	@Override
-	public boolean canProvidePower(BlockState state) {
+	public boolean isSignalSource(BlockState pState) {
 		return true;
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(FACE, HORIZONTAL_FACING, POWER);
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+		pBuilder.add(FACE, FACING, POWER);
 	}
-
 }

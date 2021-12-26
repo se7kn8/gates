@@ -1,8 +1,7 @@
 package com.github.se7_kn8.gates;
 
-import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -21,9 +20,9 @@ public class Gates {
 
 	public static final GatesConfig config = new GatesConfig();
 
-	public static ItemGroup GATES_ITEM_GROUP = new ItemGroup("gates") {
+	public static CreativeModeTab GATES_ITEM_GROUP = new CreativeModeTab("gates") {
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return new ItemStack(GatesBlocks.XNOR_GATE.get());
 		}
 
@@ -40,7 +39,6 @@ public class Gates {
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
-		CapabilityWirelessNode.register();
 		event.enqueueWork(PacketHandler::init);
 	}
 }

@@ -2,17 +2,20 @@ package com.github.se7_kn8.gates.data_gen;
 
 import com.github.se7_kn8.gates.GatesBlocks;
 import com.github.se7_kn8.gates.GatesItems;
-import net.minecraft.data.*;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 
-import javax.annotation.Nonnull;
 import java.util.function.Consumer;
 
 public class Recipes extends RecipeProvider {
@@ -22,7 +25,7 @@ public class Recipes extends RecipeProvider {
 	}
 
 	@Override
-	protected void registerRecipes(@Nonnull Consumer<IFinishedRecipe> consumer) {
+	protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
 		addRedstoneComponent(consumer, GatesBlocks.AND_GATE.get(), Items.IRON_INGOT);
 		addRedstoneComponent(consumer, GatesBlocks.OR_GATE.get(), Items.GOLD_INGOT);
 		addRedstoneComponent(consumer, GatesBlocks.XOR_GATE.get(), Items.DIAMOND);
@@ -55,52 +58,52 @@ public class Recipes extends RecipeProvider {
 		addShapeless(consumer, GatesBlocks.WAXED_REDSTONE_WIRE.get(), Items.HONEY_BOTTLE, i(Tags.Items.DUSTS_REDSTONE), i(Items.HONEY_BOTTLE));
 	}
 
-	private void addRedstoneComponent(Consumer<IFinishedRecipe> consumer, IItemProvider output, IItemProvider component) {
+	private void addRedstoneComponent(Consumer<FinishedRecipe> consumer, ItemLike output, ItemLike component) {
 		addShaped(consumer, output, component, " A ", "ABA", "CCC", i(Items.REDSTONE_TORCH), i(component), i(Items.STONE));
 	}
 
-	private void addShaped(Consumer<IFinishedRecipe> consumer, IItemProvider output, IItemProvider requirement, String p1, String p2, String p3, Ingredient... ingredients) {
-		ShapedRecipeBuilder builder = ShapedRecipeBuilder.shapedRecipe(output, 1)
-				.patternLine(p1)
-				.patternLine(p2)
-				.patternLine(p3)
-				.addCriterion(genCriterionName(requirement), hasItem(requirement));
+	private void addShaped(Consumer<FinishedRecipe> consumer, ItemLike output, ItemLike requirement, String p1, String p2, String p3, Ingredient... ingredients) {
+		ShapedRecipeBuilder builder = ShapedRecipeBuilder.shaped(output, 1)
+				.pattern(p1)
+				.pattern(p2)
+				.pattern(p3)
+				.unlockedBy(genCriterionName(requirement), has(requirement));
 
 		int counter = 0;
 		String recipeChars = "ABCDEFGHI";
 		for (Ingredient ingredient : ingredients) {
-			builder.key(recipeChars.charAt(counter), ingredient);
+			builder.define(recipeChars.charAt(counter), ingredient);
 			counter++;
 		}
-		builder.build(consumer);
+		builder.save(consumer);
 	}
 
-	private void addShapeless(Consumer<IFinishedRecipe> consumer, IItemProvider output, IItemProvider requirement, Ingredient... ingredients) {
-		ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapelessRecipe(output, 1)
-				.addCriterion(genCriterionName(requirement), hasItem(requirement));
+	private void addShapeless(Consumer<FinishedRecipe> consumer, ItemLike output, ItemLike requirement, Ingredient... ingredients) {
+		ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(output, 1)
+				.unlockedBy(genCriterionName(requirement), has(requirement));
 
 		for (Ingredient ingredient : ingredients) {
-			builder.addIngredient(ingredient);
+			builder.requires(ingredient);
 		}
 
-		builder.build(consumer);
+		builder.save(consumer);
 	}
 
 
-	private String genCriterionName(IItemProvider input) {
+	private String genCriterionName(ItemLike input) {
 		return "has_" + input.asItem().getRegistryName().getPath();
 	}
 
-	private Ingredient i(IItemProvider input) {
-		return Ingredient.fromItems(input);
+	private Ingredient i(ItemLike input) {
+		return Ingredient.of(input);
 	}
 
-	private Ingredient i(ITag<Item> input) {
-		return Ingredient.fromTag(input);
+	private Ingredient i(Tag<Item> input) {
+		return Ingredient.of(input);
 	}
 
 	private Ingredient i(ItemStack stack) {
-		return Ingredient.fromStacks(stack);
+		return Ingredient.of(stack);
 	}
 
 }

@@ -2,23 +2,22 @@ package com.github.se7_kn8.gates.item;
 
 import com.github.se7_kn8.gates.Gates;
 import com.github.se7_kn8.gates.api.CapabilityUtil;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.item.Rarity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -26,75 +25,74 @@ public class FrequencyChangerItem extends Item {
 
 
 	public FrequencyChangerItem() {
-		super(new Item.Properties().group(Gates.GATES_ITEM_GROUP).maxStackSize(1).rarity(Rarity.UNCOMMON));
+		super(new Item.Properties().tab(Gates.GATES_ITEM_GROUP).stacksTo(1).rarity(Rarity.UNCOMMON));
 	}
 
+
 	@Override
-	public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
-		super.addInformation(stack, world, tooltip, flag);
-		if (stack.hasTag()) {
-			if (stack.getTag().contains("frequency")) {
-				tooltip.add(new TranslationTextComponent("gui.gates.current_frequency_stored", stack.getTag().getInt("frequency")));
+	public void appendHoverText(ItemStack pStack, @Nullable net.minecraft.world.level.Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+		super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+		if (pStack.hasTag()) {
+			if (pStack.getTag().contains("frequency")) {
+				pTooltipComponents.add(new TranslatableComponent("gui.gates.current_frequency_stored", pStack.getTag().getInt("frequency")));
 			}
 		} else {
-			tooltip.add(new TranslationTextComponent("gui.gates.usage.frequency_changer_1"));
-			tooltip.add(new TranslationTextComponent("gui.gates.usage.frequency_changer_2"));
-			tooltip.add(new TranslationTextComponent("gui.gates.usage.frequency_changer_3"));
+			pTooltipComponents.add(new TranslatableComponent("gui.gates.usage.frequency_changer_1"));
+			pTooltipComponents.add(new TranslatableComponent("gui.gates.usage.frequency_changer_2"));
+			pTooltipComponents.add(new TranslatableComponent("gui.gates.usage.frequency_changer_3"));
 		}
 	}
 
 	@Override
-	@Nonnull
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack stack = playerIn.getHeldItem(handIn);
+	public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+		ItemStack stack = pPlayer.getItemInHand(pUsedHand);
 
-		if (playerIn.isSneaking()) {
-			stack.setTag(new CompoundNBT());
-			if (worldIn.isRemote) {
-				playerIn.sendStatusMessage(new TranslationTextComponent("gui.gates.frequency_cleared"), true);
+		if (pPlayer.isShiftKeyDown()) {
+			stack.setTag(new CompoundTag());
+			if (pLevel.isClientSide) {
+				pPlayer.displayClientMessage(new TranslatableComponent("gui.gates.frequency_cleared"), true);
 			}
-			return ActionResult.resultSuccess(stack);
+			return InteractionResultHolder.success(stack);
 		}
 
-		return ActionResult.resultPass(stack);
+		return InteractionResultHolder.pass(stack);
 	}
 
+
 	@Override
-	@Nonnull
-	public ActionResultType onItemUse(ItemUseContext ctx) {
-		ItemStack stack = ctx.getItem();
+	public InteractionResult useOn(UseOnContext pContext) {
+		ItemStack stack = pContext.getItemInHand();
 
 
 		if (!stack.hasTag()) {
-			stack.setTag(new CompoundNBT());
+			stack.setTag(new CompoundTag());
 		}
 
-		CompoundNBT stackNBT = stack.getTag();
+		CompoundTag stackNBT = stack.getTag();
 
-		if (ctx.hasSecondaryUseForPlayer()) {
-			if (CapabilityUtil.findWirelessCapability(ctx.getWorld(), ctx.getPos(), c -> stackNBT.putInt("frequency", c.getFrequency()))) {
-				if (ctx.getWorld().isRemote) {
-					ctx.getPlayer().sendStatusMessage(new TranslationTextComponent("gui.gates.frequency_saved"), true);
+		if (pContext.isSecondaryUseActive()) {
+			if (CapabilityUtil.findWirelessCapability(pContext.getLevel(), pContext.getClickedPos(), c -> stackNBT.putInt("frequency", c.getFrequency()))) {
+				if (pContext.getLevel().isClientSide) {
+					pContext.getPlayer().displayClientMessage(new TranslatableComponent("gui.gates.frequency_saved"), true);
 				}
-				return ActionResultType.SUCCESS;
+				return InteractionResult.SUCCESS;
 			}
 		} else {
 			if (stackNBT.contains("frequency")) {
-				if (CapabilityUtil.findWirelessCapability(ctx.getWorld(), ctx.getPos(), c -> c.setFrequency(stackNBT.getInt("frequency")))) {
-					if (ctx.getWorld().isRemote) {
-						ctx.getPlayer().sendStatusMessage(new TranslationTextComponent("gui.gates.frequency_set"), true);
+				if (CapabilityUtil.findWirelessCapability(pContext.getLevel(), pContext.getClickedPos(), c -> c.setFrequency(stackNBT.getInt("frequency")))) {
+					if (pContext.getLevel().isClientSide) {
+						pContext.getPlayer().displayClientMessage(new TranslatableComponent("gui.gates.frequency_set"), true);
 					}
-					return ActionResultType.SUCCESS;
+					return InteractionResult.SUCCESS;
 				}
 			}
 		}
 
-		return ActionResultType.FAIL;
+		return InteractionResult.FAIL;
 	}
 
-
 	@Override
-	public boolean doesSneakBypassUse(ItemStack stack, IWorldReader world, BlockPos pos, PlayerEntity player) {
+	public boolean doesSneakBypassUse(ItemStack stack, LevelReader world, BlockPos pos, Player player) {
 		return false;
 	}
 }

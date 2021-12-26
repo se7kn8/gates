@@ -1,10 +1,10 @@
 package com.github.se7_kn8.gates.packages;
 
-import com.github.se7_kn8.gates.tile.RedstoneClockTileEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.network.NetworkEvent;
+import com.github.se7_kn8.gates.tile.RedstoneClockBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -20,14 +20,14 @@ public class UpdateRedstoneClockPacket implements BasePacket {
 		this.clockLength = clockLength;
 	}
 
-	public UpdateRedstoneClockPacket(PacketBuffer buffer) {
+	public UpdateRedstoneClockPacket(FriendlyByteBuf buffer) {
 		this.pos = buffer.readBlockPos();
 		this.clockTime = buffer.readInt();
 		this.clockLength = buffer.readInt();
 	}
 
 	@Override
-	public void encode(PacketBuffer buffer) {
+	public void encode(FriendlyByteBuf buffer) {
 		buffer.writeBlockPos(pos);
 		buffer.writeInt(clockTime);
 		buffer.writeInt(clockLength);
@@ -35,12 +35,11 @@ public class UpdateRedstoneClockPacket implements BasePacket {
 
 	@Override
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
-		TileEntity tile = ctx.get().getSender().world.getTileEntity(pos);
-		if (tile instanceof RedstoneClockTileEntity) {
-			RedstoneClockTileEntity redstoneClockTileEntity = (RedstoneClockTileEntity) tile;
-			redstoneClockTileEntity.setClockTime(clockTime);
-			redstoneClockTileEntity.setClockLength(clockLength);
-			redstoneClockTileEntity.resetClock();
+		BlockEntity entity = ctx.get().getSender().level.getBlockEntity(pos);
+		if (entity instanceof RedstoneClockBlockEntity redstoneClockBlockEntity) {
+			redstoneClockBlockEntity.setClockTime(clockTime);
+			redstoneClockBlockEntity.setClockLength(clockLength);
+			redstoneClockBlockEntity.resetClock();
 		}
 	}
 }

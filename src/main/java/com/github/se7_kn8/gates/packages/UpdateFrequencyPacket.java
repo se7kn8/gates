@@ -1,10 +1,10 @@
 package com.github.se7_kn8.gates.packages;
 
 import com.github.se7_kn8.gates.api.CapabilityUtil;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -18,13 +18,13 @@ public class UpdateFrequencyPacket implements BasePacket{
 		this.frequency = frequency;
 	}
 
-	public UpdateFrequencyPacket(PacketBuffer buffer) {
+	public UpdateFrequencyPacket(FriendlyByteBuf buffer) {
 		this.pos = buffer.readBlockPos();
 		this.frequency = buffer.readInt();
 	}
 
 	@Override
-	public void encode(PacketBuffer buffer) {
+	public void encode(FriendlyByteBuf buffer) {
 		buffer.writeBlockPos(this.pos);
 		buffer.writeInt(this.frequency);
 	}
@@ -32,9 +32,9 @@ public class UpdateFrequencyPacket implements BasePacket{
 	@Override
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
-			World world = ctx.get().getSender().world;
-			if (!world.isRemote) {
-				CapabilityUtil.findWirelessCapability(world, pos, c->{
+			Level level = ctx.get().getSender().level;
+			if (!level.isClientSide) {
+				CapabilityUtil.findWirelessCapability(level, pos, c->{
 					int newFrequency = this.frequency;
 
 					if (newFrequency < c.getMinFrequency()) {

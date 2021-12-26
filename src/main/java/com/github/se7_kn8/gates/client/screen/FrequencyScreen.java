@@ -1,68 +1,66 @@
 package com.github.se7_kn8.gates.client.screen;
 
 import com.github.se7_kn8.gates.PacketHandler;
-import com.github.se7_kn8.gates.container.FrequencyContainer;
+import com.github.se7_kn8.gates.container.FrequencyMenu;
 import com.github.se7_kn8.gates.packages.UpdateFrequencyPacket;
 import com.github.se7_kn8.gates.util.Utils;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.entity.player.Inventory;
 
 import javax.annotation.Nonnull;
 
-public class FrequencyScreen extends BasicPlayerScreen<FrequencyContainer> {
+public class FrequencyScreen extends BasicPlayerScreen<FrequencyMenu> {
 
-	private TextFieldWidget frequencyField;
+	private EditBox frequencyBox;
 	private Button applyButton;
 
 	private int lastValue;
 
-	public FrequencyScreen(FrequencyContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+	public FrequencyScreen(FrequencyMenu screenContainer, Inventory inv, Component titleIn) {
 		super(screenContainer, inv, titleIn);
 	}
 
 	@Override
 	protected void init() {
 		super.init();
-		frequencyField = new TextFieldWidget(this.font, this.width / 2 - 35, this.height / 2 - 50, 70, 20, new TranslationTextComponent("gui.gates.frequency"));
-		frequencyField.setValidator(Utils.NUMBER_STRING_9_CHARACTERS);
+		frequencyBox = new EditBox(this.font, this.width / 2 - 35, this.height / 2 - 50, 70, 20, new TranslatableComponent("gui.gates.frequency"));
+		frequencyBox.setFilter(Utils.NUMBER_STRING_9_CHARACTERS);
 
-		this.addButton(new Button(this.width / 2 - 75, this.height / 2 - 50, 40, 20, new StringTextComponent("<-"), p_onPress_1_ -> {
-			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(getTilePos(), getContainer().getFrequency() - 1));
+		this.addWidget(new Button(this.width / 2 - 75, this.height / 2 - 50, 40, 20, new TextComponent("<-"), p_onPress_1_ -> {
+			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(lastBlockPos, getMenu().getFrequency() - 1));
 		}));
 
-		this.addButton(new Button(this.width / 2 + 35, this.height / 2 - 50, 40, 20, new StringTextComponent("->"), p_onPress_1_ -> {
-			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(getTilePos(), getContainer().getFrequency() + 1));
+		this.addWidget(new Button(this.width / 2 + 35, this.height / 2 - 50, 40, 20, new TextComponent("->"), p_onPress_1_ -> {
+			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(lastBlockPos, getMenu().getFrequency() + 1));
 		}));
 
-		applyButton = this.addButton(new Button(this.width / 2, this.height / 2 - 25, 80, 20, new TranslationTextComponent("gui.gates.apply"), p_onPress_1_ -> {
-			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(getTilePos(), Integer.parseInt(this.frequencyField.getText())));
+		applyButton = this.addRenderableWidget(new Button(this.width / 2, this.height / 2 - 25, 80, 20, new TranslatableComponent("gui.gates.apply"), p_onPress_1_ -> {
+			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(lastBlockPos, Integer.parseInt(this.frequencyBox.getValue())));
 		}));
 
-		this.children.add(frequencyField);
+		this.addWidget(frequencyBox);
 
-		this.setFocusedDefault(frequencyField);
+		this.setInitialFocus(frequencyBox);
 
 		this.applyButton.visible = false;
 	}
 
 
 	@Override
-	public void tick() {
-		super.tick();
-		this.frequencyField.tick();
-		int freq = this.getContainer().getFrequency();
+	public void containerTick() {
+		this.frequencyBox.tick();
+		int freq = this.getMenu().getFrequency();
 		if (freq != lastValue) {
 			lastValue = freq;
-			this.frequencyField.setText(String.valueOf(freq));
+			this.frequencyBox.setValue(String.valueOf(freq));
 		} else {
 			try {
-				this.applyButton.visible = freq != Integer.parseInt(this.frequencyField.getText());
+				this.applyButton.visible = freq != Integer.parseInt(this.frequencyBox.getValue());
 			} catch (NumberFormatException e) {
 				// field is empty
 				this.applyButton.visible = false;
@@ -71,19 +69,17 @@ public class FrequencyScreen extends BasicPlayerScreen<FrequencyContainer> {
 	}
 
 	@Override
-	public void render(@Nonnull MatrixStack stack, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull PoseStack stack, int mouseX, int mouseY, float partialTicks) {
 		super.render(stack, mouseX, mouseY, partialTicks);
 
-		this.frequencyField.render(stack, mouseX, mouseY, partialTicks);
+		this.frequencyBox.render(stack, mouseX, mouseY, partialTicks);
 	}
 
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(@Nonnull MatrixStack stack, int mouseX, int mouseY) {
-		super.drawGuiContainerForegroundLayer(stack, mouseX, mouseY);
-		// mappings: drawString
-		this.font.func_243248_b(stack, new TranslationTextComponent("gui.gates.frequency"), 40, 20, 4210752);
+	protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
+		super.renderLabels(pPoseStack, pMouseX, pMouseY);
+		this.font.draw(pPoseStack, new TranslatableComponent("gui.gates.frequency"), 40, 20, 4210752);
 	}
-
 
 }

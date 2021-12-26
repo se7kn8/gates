@@ -4,44 +4,39 @@ import com.github.se7_kn8.gates.Gates;
 import com.github.se7_kn8.gates.api.CapabilityUtil;
 import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import com.github.se7_kn8.gates.api.IWirelessNode;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraft.world.storage.WorldSavedData;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.saveddata.SavedData;
 
-import javax.annotation.Nonnull;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RedstoneReceiverWorldSavedData extends WorldSavedData {
+public class RedstoneReceiverWorldSavedData extends SavedData {
 
 	public static final String DATA_NAME = Gates.MODID + "_wireless_network";
 
+	private final Set<BlockPos> receivers;
+	private final Set<BlockPos> transmitters;
+
+	public RedstoneReceiverWorldSavedData(CompoundTag compound) {
+		receivers = loadBlockPosSet(compound, "receivers");
+		transmitters = loadBlockPosSet(compound, "transmitters");
+	}
+
 	public RedstoneReceiverWorldSavedData() {
-		super(RedstoneReceiverWorldSavedData.DATA_NAME);
+		receivers = new HashSet<>();
+		transmitters = new HashSet<>();
 	}
 
-	public RedstoneReceiverWorldSavedData(String s) {
-		super(s);
-	}
-
-	private Set<BlockPos> receivers = new HashSet<>();
-	private Set<BlockPos> transmitters = new HashSet<>();
-
-	@Override
-	public void read(CompoundNBT nbt) {
-		receivers = loadBlockPosSet(nbt, "receivers");
-		transmitters = loadBlockPosSet(nbt, "transmitters");
-	}
-
-	public Set<BlockPos> loadBlockPosSet(CompoundNBT compound, String name) {
-		ListNBT list = compound.getList(name, 10/*NBT-ID for CompoundNBT*/);
+	public Set<BlockPos> loadBlockPosSet(CompoundTag compound, String name) {
+		ListTag list = compound.getList(name, 10/*NBT-ID for CompoundNBT*/);
 		Set<BlockPos> pos = new HashSet<>();
 
 		for (int i = 0; i < list.size(); i++) {
-			CompoundNBT entry = (CompoundNBT) list.get(i);
+			CompoundTag entry = (CompoundTag) list.get(i);
 
 			int x = entry.getInt("x");
 			int y = entry.getInt("y");
@@ -54,17 +49,16 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 	}
 
 	@Override
-	@Nonnull
-	public CompoundNBT write(@Nonnull CompoundNBT compound) {
+	public CompoundTag save(CompoundTag compound) {
 		saveBlockPosSet(receivers, compound, "receivers");
 		saveBlockPosSet(transmitters, compound, "transmitters");
 		return compound;
 	}
 
-	public void saveBlockPosSet(Set<BlockPos> set, CompoundNBT compound, String name) {
-		ListNBT list = new ListNBT();
+	public void saveBlockPosSet(Set<BlockPos> set, CompoundTag compound, String name) {
+		ListTag list = new ListTag();
 		for (BlockPos pos : set) {
-			CompoundNBT entry = new CompoundNBT();
+			CompoundTag entry = new CompoundTag();
 			entry.putInt("x", pos.getX());
 			entry.putInt("y", pos.getY());
 			entry.putInt("z", pos.getZ());
@@ -73,22 +67,22 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 		compound.put(name, list);
 	}
 
-	public int getCurrentFrequencyValue(World world, int frequency) {
+	public int getCurrentFrequencyValue(Level level, int frequency) {
 		return transmitters
 				.stream()
-				.map(pos -> world.getTileEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).orElseThrow(IllegalStateException::new))
+				.map(pos -> level.getBlockEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).orElseThrow(IllegalStateException::new))
 				.filter(node -> node.getFrequency() == frequency)
 				.map(IWirelessNode::getPower)
 				.max(Integer::compareTo)
 				.orElse(0);
 	}
 
-	public void updateFrequency(World world, int frequency){
-		int power = getCurrentFrequencyValue(world, frequency);
-		updateFrequency(world, frequency, power);
+	public void updateFrequency(Level level, int frequency) {
+		int power = getCurrentFrequencyValue(level, frequency);
+		updateFrequency(level, frequency, power);
 	}
 
-	public void updateFrequency(World world, int frequency, int power) {
+	public void updateFrequency(Level level, int frequency, int power) {
 		/* TODO
 		 *
 		 * this is necessary because the receivers are changing their blockstates which result in adding/removing elements to the set
@@ -98,16 +92,16 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 		Set<BlockPos> receiversCopy = new HashSet<>(receivers);
 
 		receiversCopy.stream()
-				.map(pos -> world.getTileEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).orElseThrow(IllegalStateException::new))
+				.map(pos -> level.getBlockEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).orElseThrow(IllegalStateException::new))
 				.filter(node -> node.getFrequency() == frequency)
 				.forEach(node -> node.setPower(power));
 	}
 
-	public void addNode(World world, BlockPos pos) {
-		CapabilityUtil.findWirelessCapability(world, pos, c -> {
+	public void addNode(Level level, BlockPos pos) {
+		CapabilityUtil.findWirelessCapability(level, pos, c -> {
 			switch (c.getType()) {
 				case RECEIVER:
-					c.setPower(this.getCurrentFrequencyValue(world, c.getFrequency()));
+					c.setPower(this.getCurrentFrequencyValue(level, c.getFrequency()));
 					addReceiver(pos);
 					break;
 				case TRANSMITTER:
@@ -118,10 +112,10 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 	}
 
 	/**
-	 * Must be called before the tile entity is removed from the world
+	 * Must be called before the tile entity is removed from the level
 	 */
-	public void removeNode(World world, BlockPos pos) {
-		CapabilityUtil.findWirelessCapability(world, pos, c -> {
+	public void removeNode(Level level, BlockPos pos) {
+		CapabilityUtil.findWirelessCapability(level, pos, c -> {
 			switch (c.getType()) {
 				case RECEIVER:
 					removeReceiver(pos);
@@ -157,8 +151,7 @@ public class RedstoneReceiverWorldSavedData extends WorldSavedData {
 		}
 	}
 
-	@Nonnull
-	public static RedstoneReceiverWorldSavedData get(ServerWorld world) {
-		return world.getSavedData().getOrCreate(RedstoneReceiverWorldSavedData::new, DATA_NAME);
+	public static RedstoneReceiverWorldSavedData get(ServerLevel level) {
+		return level.getDataStorage().computeIfAbsent(RedstoneReceiverWorldSavedData::new, RedstoneReceiverWorldSavedData::new, DATA_NAME);
 	}
 }

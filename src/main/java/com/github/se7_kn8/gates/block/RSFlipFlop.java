@@ -1,27 +1,27 @@
 package com.github.se7_kn8.gates.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.RedstoneDiodeBlock;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DiodeBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 
 import javax.annotation.Nullable;
 
-public class RSFlipFlop extends RedstoneDiodeBlock {
+public class RSFlipFlop extends DiodeBlock {
 
 	public RSFlipFlop() {
-		super(Properties.from(Blocks.REPEATER));
-		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(POWERED, false));
+		super(Properties.copy(Blocks.REPEATER));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(POWERED, false));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(HORIZONTAL_FACING, POWERED);
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+		pBuilder.add(FACING, POWERED);
 	}
 
 	@Override
@@ -30,31 +30,30 @@ public class RSFlipFlop extends RedstoneDiodeBlock {
 	}
 
 	@Override
-	public boolean canConnectRedstone(BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side) {
-		return side == state.get(TwoInputLogicGate.HORIZONTAL_FACING) || side == state.get(TwoInputLogicGate.HORIZONTAL_FACING).rotateY() || side == state.get(TwoInputLogicGate.HORIZONTAL_FACING).rotateYCCW();
+	public boolean canConnectRedstone(BlockState state, BlockGetter world, BlockPos pos, @Nullable Direction side) {
+		return side == state.getValue(FACING) || side == state.getValue(FACING).getClockWise() || side == state.getValue(FACING).getCounterClockWise();
 	}
 
 	@Override
-	protected int calculateInputStrength(World world, BlockPos pos, BlockState state) {
-		Direction facing = state.get(TwoInputLogicGate.HORIZONTAL_FACING);
-		boolean set = getPowerOnSide(world, pos.offset(facing.rotateYCCW()), facing.rotateYCCW()) > 0;
-		boolean reset = getPowerOnSide(world, pos.offset(facing.rotateY()), facing.rotateY()) > 0;
+	protected int getInputSignal(Level pLevel, BlockPos pPos, BlockState pState) {
+		Direction facing = pState.getValue(FACING);
+		boolean set = getAlternateSignalAt(pLevel, pPos.relative(facing.getCounterClockWise()), facing.getCounterClockWise()) > 0;
+		boolean reset = getAlternateSignalAt(pLevel, pPos.relative(facing.getClockWise()), facing.getClockWise()) > 0;
 
-		if(set && reset){
+		if (set && reset) {
 			return 0;
 		}
 
-		if (set && !state.get(POWERED)) {
+		if (set && !pState.getValue(POWERED)) {
 			//world.setBlockState(pos, state.with(SET, true));
 			return 15;
 		}
 
-		if (reset && state.get(POWERED)) {
+		if (reset && pState.getValue(POWERED)) {
 			//world.setBlockState(pos, state.with(SET, false));
 			return 0;
 		}
 
-		return state.get(POWERED) ? 15 : 0;
+		return pState.getValue(POWERED) ? 15 : 0;
 	}
-
 }

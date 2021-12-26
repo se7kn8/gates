@@ -1,18 +1,41 @@
 package com.github.se7_kn8.gates.api;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.util.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.util.INBTSerializable;
-
-import javax.annotation.Nullable;
 
 public class CapabilityWirelessNode {
 
-	public static class WirelessNodeImpl implements IWirelessNode, INBTSerializable<CompoundNBT> {
+	public static class WirelessNodeImpl implements IWirelessNode, INBTSerializable<CompoundTag> {
+
+		public ContainerData dataAccess = new ContainerData() {
+			@Override
+			public int get(int pIndex) {
+				return switch (pIndex) {
+					case FREQUENCY_INDEX -> frequency;
+					case POWER_INDEX -> power;
+					case TYPE_INDEX -> type.ordinal();
+					default -> 0;
+				};
+			}
+
+			@Override
+			public void set(int pIndex, int pValue) {
+				switch (pIndex) {
+					case FREQUENCY_INDEX -> frequency = pValue;
+					case POWER_INDEX -> power = pValue;
+					case TYPE_INDEX -> type = Types.values()[pValue];
+				}
+			}
+
+			@Override
+			public int getCount() {
+				return 3;
+			}
+		};
 
 		int frequency;
 		int power;
@@ -49,8 +72,8 @@ public class CapabilityWirelessNode {
 		}
 
 		@Override
-		public CompoundNBT serializeNBT() {
-			CompoundNBT nbt = new CompoundNBT();
+		public CompoundTag serializeNBT() {
+			CompoundTag nbt = new CompoundTag();
 			nbt.putInt("frequency", frequency);
 			nbt.putInt("power", power);
 			nbt.putString("type", type.name());
@@ -58,34 +81,20 @@ public class CapabilityWirelessNode {
 		}
 
 		@Override
-		public void deserializeNBT(CompoundNBT nbt) {
+		public void deserializeNBT(CompoundTag nbt) {
 			frequency = nbt.getInt("frequency");
 			power = nbt.getInt("power");
 			String typeString = nbt.getString("type");
 			if (!typeString.equals("")) {
 				type = Types.valueOf(typeString);
 			} else {
-				type= Types.NOOP;
+				type = Types.NOOP;
 			}
 		}
+
+
 	}
 
-	@CapabilityInject(IWirelessNode.class)
-	public static Capability<IWirelessNode> WIRELESS_NODE = null;
-
-	public static void register() {
-		CapabilityManager.INSTANCE.register(IWirelessNode.class, new Capability.IStorage<IWirelessNode>() {
-			@Nullable
-			@Override
-			public INBT writeNBT(Capability<IWirelessNode> capability, IWirelessNode instance, Direction side) {
-				return ((WirelessNodeImpl) instance).serializeNBT();
-			}
-
-			@Override
-			public void readNBT(Capability<IWirelessNode> capability, IWirelessNode instance, Direction side, INBT nbt) {
-				((WirelessNodeImpl) instance).deserializeNBT((CompoundNBT) nbt);
-			}
-		}, () -> new WirelessNodeImpl(0, IWirelessNode.Types.NOOP));
-	}
-
+	public static final Capability<IWirelessNode> WIRELESS_NODE = CapabilityManager.get(new CapabilityToken<>() {
+	});
 }

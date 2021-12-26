@@ -1,4 +1,8 @@
 {
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "#block"
+	},
 	"elements": [
 		{
 			"from": [4, 2, 4],

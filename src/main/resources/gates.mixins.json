@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "com.github.se7_kn8.gates.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_16",
   "refmap": "gates.refmap.json",
   "mixins": [
     "RedstoneBlockMixin"
