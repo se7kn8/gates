@@ -1,0 +1,54 @@
+{
+  "itemGroup.gates": "Porte logiche",
+
+  "block.gates.redstone_block_off": "Blocco di redstone (Off)",
+
+  "block.gates.and_gate": "Porta logica AND",
+  "block.gates.or_gate": "Porta logica OR",
+  "block.gates.not_gate": "Porta logica NOT",
+  "block.gates.nand_gate": "Porta logica Not-AND (NAND)",
+  "block.gates.nor_gate": "Porta logica Not-OR (NOR)",
+  "block.gates.xor_gate": "Porta logica eXclusive-OR (XOR)",
+  "block.gates.xnor_gate": "Porta logica eXclusive-Not-OR (XNOR)",
+
+  "block.gates.receiver": "Ricevitore di redstone",
+  "block.gates.transmitter": "Trasmettitore di redstone",
+
+  "block.gates.rain_detector": "Rilevatore di pioggia",
+  "block.gates.thunder_detector": "Rilevatore di tuoni",
+
+  "block.gates.slow_repeater": "Ripetitore di redstone lento",
+  "block.gates.fast_repeater": "Ripetitore di redstone veloce",
+
+  "block.gates.wireless_redstone_lamp": "Lampada di redstone senza fili",
+
+  "block.gates.rotary_switch": "Interruttore rotante",
+
+  "block.gates.redstone_clock": "Clock di redstone",
+  "block.gates.advanced_redstone_clock": "Clock di redstone avanzato",
+
+  "block.gates.rs_flip_flop": "Flip-Flop RS",
+
+  "block.gates.waxed_redstone_wire": "Redstone cerata",
+
+  "item.gates.redstone_torch_pearl": "Torcia di redstone-ender",
+  "item.gates.frequency_changer": "Strumento di frequenza",
+  "item.gates.portable_redstone_transmitter": "Trasmettitore di redstone portatile",
+
+  "gui.gates.frequency": "Frequenza:",
+  "gui.gates.frequency_saved": "Frequenza salvata!",
+  "gui.gates.current_frequency_stored": "Frequenza memorizzata: {0}",
+  "gui.gates.frequency_cleared": "Frequenza cancellata!",
+  "gui.gates.frequency_set": "Imposta la frequenza!",
+  "gui.gates.no_frequency": "Nessuna frequenza impostata!",
+  "gui.gates.apply": "Applica",
+  "gui.gates.clock_time": "Tempo",
+  "gui.gates.clock_length": "Durata",
+
+  "gui.gates.usage.portable_transmitter_1": "Tasto destro per attivare.",
+  "gui.gates.usage.portable_transmitter_2": "SHIFT-Tasto destro per configurare.",
+  "gui.gates.usage.portable_transmitter_3": "Attenzione: Il blocco Trasmettitore e Trasmettitore portatile possono sovrapporsi a vicenda quando utilizzati sulla stessa frequenza",
+  "gui.gates.usage.frequency_changer_1": "SHIFT-Tasto destro su un blocco senza fili per copiare la frequenza.",
+  "gui.gates.usage.frequency_changer_2": "Tasto destro per applicare la frequenza salvata su un blocco senza fili.",
+  "gui.gates.usage.frequency_changer_3": "SHIFT-Tasto destro in aria per cancellare la frequenza salvata."
+}
