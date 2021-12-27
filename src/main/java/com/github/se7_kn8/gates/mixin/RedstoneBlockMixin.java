@@ -18,13 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(RedStoneWireBlock.class)
 public abstract class RedstoneBlockMixin implements IRedstoneWire {
 
-	@Inject(at = @At("HEAD"), method = "shouldConnectTo(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;)Z", cancellable = true, remap = false)
-	private static void canConnectTo(BlockState blockState, Direction side, CallbackInfoReturnable<Boolean> info) {
-		if (blockState.getBlock() instanceof IRedstoneWire) {
-			info.setReturnValue(true);
-		}
-	}
-
 	@Inject(at = @At("HEAD"), method = "getWireSignal", cancellable = true)
 	private void getPower(BlockState state, CallbackInfoReturnable<Integer> info) {
 		if (state.getBlock() instanceof IRedstoneWire) {
