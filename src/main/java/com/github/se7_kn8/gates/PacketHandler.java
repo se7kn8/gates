@@ -4,8 +4,8 @@ import com.github.se7_kn8.gates.packages.UpdateFrequencyPacket;
 import com.github.se7_kn8.gates.packages.UpdatePortableTransmitterPacket;
 import com.github.se7_kn8.gates.packages.UpdateRedstoneClockPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fmllegacy.network.NetworkRegistry;
-import net.minecraftforge.fmllegacy.network.simple.SimpleChannel;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 public class PacketHandler {
 	private static final String VERSION = "1";

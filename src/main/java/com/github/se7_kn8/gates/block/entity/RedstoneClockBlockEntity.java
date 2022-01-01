@@ -96,12 +96,12 @@ public class RedstoneClockBlockEntity extends BlockEntity implements MenuProvide
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag pTag) {
+	protected void saveAdditional(CompoundTag pTag) {
 		pTag.putInt("remaining", remainingTicks);
 		pTag.putInt("powered", poweredTicks);
 		pTag.putInt("clockLength", clockLength);
 		pTag.putInt("clockTime", clockTime);
-		return super.save(pTag);
+		super.saveAdditional(pTag);
 	}
 
 	public static void clockTick(Level pLevel, BlockPos pPos, BlockState pState, RedstoneClockBlockEntity pBlockEntity) {

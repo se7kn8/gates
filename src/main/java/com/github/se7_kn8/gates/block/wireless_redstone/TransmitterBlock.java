@@ -116,7 +116,7 @@ public class TransmitterBlock extends BaseEntityBlock {
 	@Override
 	public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pBlock, BlockPos pFromPos, boolean pIsMoving) {
 		if (!pLevel.getBlockTicks().hasScheduledTick(pPos, this)) {
-			pLevel.getBlockTicks().scheduleTick(pPos, this, 5);
+			pLevel.scheduleTick(pPos, this, 5);
 		}
 	}
 

@@ -93,9 +93,9 @@ public class ReceiverBlockEntity extends BlockEntity implements MenuProvider {
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag pTag) {
+	protected void saveAdditional(CompoundTag pTag) {
 		wireless.ifPresent(c -> pTag.put("wireless", ((CapabilityWirelessNode.WirelessNodeImpl) c).serializeNBT()));
-		return super.save(pTag);
+		super.saveAdditional(pTag);
 	}
 
 	@Override
