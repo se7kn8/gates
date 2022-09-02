@@ -13,6 +13,7 @@ public class Generators {
 	public static void gatherData(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
 		generator.addProvider(event.includeServer(), new BlockStates(generator, event.getExistingFileHelper()));
+		generator.addProvider(event.includeServer(), new BlockTags(generator, event.getExistingFileHelper()));
 		generator.addProvider(event.includeServer(), new LootTables(generator));
 		generator.addProvider(event.includeServer(), new Recipes(generator));
 

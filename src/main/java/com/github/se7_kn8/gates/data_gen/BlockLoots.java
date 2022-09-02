@@ -40,6 +40,8 @@ public class BlockLoots implements Consumer<BiConsumer<ResourceLocation, LootTab
 		generateSelfDrop(GatesBlocks.ROTARY_SWITCH.get());
 		generateSelfDrop(GatesBlocks.RS_FLIP_FLOP.get());
 		generateSelfDrop(GatesBlocks.WAXED_REDSTONE_WIRE.get());
+		generateSelfDrop(GatesBlocks.IRON_FENCE.get());
+		generateSelfDrop(GatesBlocks.IRON_FENCE_GATE.get());
 	}
 
 	private void generateSelfDrop(Block block) {

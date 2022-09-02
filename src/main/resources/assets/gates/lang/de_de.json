@@ -3,6 +3,9 @@
 
   "block.gates.redstone_block_off": "Redstone Block (Aus)",
 
+  "block.gates.iron_fence": "Eisenzaun",
+  "block.gates.iron_fence_gate": "Eisenzauntor",
+
   "block.gates.and_gate": "UND Gatter",
   "block.gates.or_gate": "ODER Gatter",
   "block.gates.not_gate": "NICHT Gatter",

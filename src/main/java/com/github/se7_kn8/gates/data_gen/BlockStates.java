@@ -9,6 +9,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.RedstoneSide;
@@ -24,6 +26,7 @@ public class BlockStates extends BlockStateProvider {
 	@Override
 	protected void registerStatesAndModels() {
 		cubeAll(GatesBlocks.REDSTONE_BLOCK_OFF, modLoc("block/redstone_block_off"));
+		simpleFence(GatesBlocks.IRON_FENCE, GatesBlocks.IRON_FENCE_GATE, mcLoc("block/iron_block"));
 
 		gateModel(GatesBlocks.AND_GATE);
 		gateModel(GatesBlocks.OR_GATE);
@@ -56,6 +59,14 @@ public class BlockStates extends BlockStateProvider {
 	private void cubeAll(RegistryObject<Block> b, ResourceLocation texture) {
 		simpleBlock(b.get());
 		simpleBlockItem(b.get(), models().cubeAll(b.getId().getPath(), texture));
+	}
+
+	private void simpleFence(RegistryObject<Block> fence, RegistryObject<Block> gate, ResourceLocation texture) {
+		fenceBlock((FenceBlock) fence.get(), texture);
+		itemModels().fenceInventory(fence.getId().getPath(), texture);
+
+		fenceGateBlock((FenceGateBlock) gate.get(), texture);
+		itemModels().fenceGate(gate.getId().getPath(), texture);
 	}
 
 	private void simpleItem(String name) {

@@ -15,8 +15,10 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -28,6 +30,8 @@ public class GatesBlocks {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Gates.MODID);
 
 	public static final RegistryObject<Block> REDSTONE_BLOCK_OFF = addBlock("redstone_block_off", () -> new Block(Block.Properties.copy(Blocks.REDSTONE_BLOCK)), Gates.GATES_ITEM_GROUP);
+	public static final RegistryObject<Block> IRON_FENCE = addBlock("iron_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR)), Gates.GATES_ITEM_GROUP);
+	public static final RegistryObject<Block> IRON_FENCE_GATE = addBlock("iron_fence_gate", () -> new MetalFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR)), Gates.GATES_ITEM_GROUP);
 
 	public static final RegistryObject<Block> AND_GATE = addBlock("and_gate", () -> new TwoInputLogicGate(TwoInputLogicGate.AND_FUNCTION), Gates.GATES_ITEM_GROUP);
 	public static final RegistryObject<Block> OR_GATE = addBlock("or_gate", () -> new TwoInputLogicGate(TwoInputLogicGate.OR_FUNCTION), Gates.GATES_ITEM_GROUP);
