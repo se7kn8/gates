@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.RedstoneSide;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 
 public class BlockStates extends BlockStateProvider {
 	public BlockStates(DataGenerator gen, ExistingFileHelper exFileHelper) {
@@ -22,39 +23,39 @@ public class BlockStates extends BlockStateProvider {
 
 	@Override
 	protected void registerStatesAndModels() {
-		cubeAll(GatesBlocks.REDSTONE_BLOCK_OFF.get(), modLoc("block/redstone_block_off"));
+		cubeAll(GatesBlocks.REDSTONE_BLOCK_OFF, modLoc("block/redstone_block_off"));
 
-		gateModel(GatesBlocks.AND_GATE.get());
-		gateModel(GatesBlocks.OR_GATE.get());
-		gateModel(GatesBlocks.XOR_GATE.get());
-		gateModel(GatesBlocks.NAND_GATE.get());
-		gateModel(GatesBlocks.NOR_GATE.get());
-		gateModel(GatesBlocks.XNOR_GATE.get());
-		notGate(GatesBlocks.NOT_GATE.get());
+		gateModel(GatesBlocks.AND_GATE);
+		gateModel(GatesBlocks.OR_GATE);
+		gateModel(GatesBlocks.XOR_GATE);
+		gateModel(GatesBlocks.NAND_GATE);
+		gateModel(GatesBlocks.NOR_GATE);
+		gateModel(GatesBlocks.XNOR_GATE);
+		notGate(GatesBlocks.NOT_GATE);
 
-		detectorModel(GatesBlocks.RAIN_DETECTOR.get());
-		detectorModel(GatesBlocks.THUNDER_DETECTOR.get());
+		detectorModel(GatesBlocks.RAIN_DETECTOR);
+		detectorModel(GatesBlocks.THUNDER_DETECTOR);
 
-		wirelessRedstoneModel(GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER.get());
-		wirelessRedstoneModel(GatesBlocks.WIRELESS_REDSTONE_RECEIVER.get());
-		lamp(GatesBlocks.WIRELESS_REDSTONE_LAMP.get());
+		wirelessRedstoneModel(GatesBlocks.WIRELESS_REDSTONE_TRANSMITTER);
+		wirelessRedstoneModel(GatesBlocks.WIRELESS_REDSTONE_RECEIVER);
+		lamp(GatesBlocks.WIRELESS_REDSTONE_LAMP);
 
-		redstoneClock(GatesBlocks.REDSTONE_CLOCK.get());
-		advancedRedstoneClock(GatesBlocks.ADVANCED_REDSTONE_CLOCK.get());
+		redstoneClock(GatesBlocks.REDSTONE_CLOCK);
+		advancedRedstoneClock(GatesBlocks.ADVANCED_REDSTONE_CLOCK);
 
-		rsFlipFlop(GatesBlocks.RS_FLIP_FLOP.get());
+		rsFlipFlop(GatesBlocks.RS_FLIP_FLOP);
 
-		rotarySwitch(GatesBlocks.ROTARY_SWITCH.get());
+		rotarySwitch(GatesBlocks.ROTARY_SWITCH);
 
-		repeater(GatesBlocks.FAST_REPEATER.get());
-		repeater(GatesBlocks.SLOW_REPEATER.get());
+		repeater(GatesBlocks.FAST_REPEATER);
+		repeater(GatesBlocks.SLOW_REPEATER);
 
-		waxedRedstone(GatesBlocks.WAXED_REDSTONE_WIRE.get());
+		waxedRedstone(GatesBlocks.WAXED_REDSTONE_WIRE);
 	}
 
-	private void cubeAll(Block b, ResourceLocation texture) {
-		simpleBlock(b);
-		simpleBlockItem(b, models().cubeAll(b.getRegistryName().getPath(), texture));
+	private void cubeAll(RegistryObject<Block> b, ResourceLocation texture) {
+		simpleBlock(b.get());
+		simpleBlockItem(b.get(), models().cubeAll(b.getId().getPath(), texture));
 	}
 
 	private void simpleItem(String name) {
@@ -69,19 +70,19 @@ public class BlockStates extends BlockStateProvider {
 		}
 	}
 
-	private void detectorModel(Block b) {
-		String name = b.getRegistryName().getPath();
-		VariantBlockStateBuilder builder = getVariantBuilder(b);
+	private void detectorModel(RegistryObject<Block> b) {
+		String name = b.getId().getPath();
+		VariantBlockStateBuilder builder = getVariantBuilder(b.get());
 		ModelFile detector = models().withExistingParent("block/sensor/" + name, modLoc("block/sensor/basic_detector")).texture("top", modLoc("block/" + name + "_top"));
 		ModelFile detector_inverted = models().withExistingParent("block/sensor/" + name + "_inverted", modLoc("block/sensor/basic_detector")).texture("top", modLoc("block/" + name + "_top_inverted"));
 		builder.forAllStatesExcept(blockState -> ConfiguredModel.builder().modelFile(blockState.getValue(CustomDetector.INVERTED) ? detector_inverted : detector).build(), CustomDetector.POWER);
-		simpleBlockItem(b, detector);
+		simpleBlockItem(b.get(), detector);
 	}
 
-	private void gateModel(Block b) {
-		MultiPartBlockStateBuilder builder = getMultipartBuilder(b);
+	private void gateModel(RegistryObject<Block> b) {
+		MultiPartBlockStateBuilder builder = getMultipartBuilder(b.get());
 
-		String name = b.getRegistryName().getPath();
+		String name = b.getId().getPath();
 		ModelFile baseModel = models().withExistingParent("block/gate/" + name, modLoc("block/gate/basic_gate")).texture("top", modLoc("block/" + name));
 		ModelFile leftTorchOn = getTorchModel("left_torch", true);
 		ModelFile leftTorchOff = getTorchModel("left_torch", false);
@@ -104,10 +105,10 @@ public class BlockStates extends BlockStateProvider {
 		simpleItem(name);
 	}
 
-	private void notGate(Block b) {
-		MultiPartBlockStateBuilder builder = getMultipartBuilder(b);
+	private void notGate(RegistryObject<Block> b) {
+		MultiPartBlockStateBuilder builder = getMultipartBuilder(b.get());
 
-		String name = b.getRegistryName().getPath();
+		String name = b.getId().getPath();
 		ModelFile baseModel = models().withExistingParent("block/gate/" + name, modLoc("block/gate/basic_gate")).texture("top", modLoc("block/" + name));
 		ModelFile inputTorchOn = getTorchModel("input_torch", true);
 		ModelFile inputTorchOff = getTorchModel("input_torch", false);
@@ -127,9 +128,9 @@ public class BlockStates extends BlockStateProvider {
 		simpleItem(name);
 	}
 
-	private void wirelessRedstoneModel(Block b) {
-		MultiPartBlockStateBuilder builder = getMultipartBuilder(b);
-		String name = b.getRegistryName().getPath();
+	private void wirelessRedstoneModel(RegistryObject<Block> b) {
+		MultiPartBlockStateBuilder builder = getMultipartBuilder(b.get());
+		String name = b.getId().getPath();
 		ModelFile baseModel = models().withExistingParent("block/wireless/" + name, modLoc("block/gate/basic_gate")).texture("top", modLoc("block/" + name));
 		ModelFile mainTorchOn = getTorchModel("main_torch", true);
 		ModelFile mainTorchOff = getTorchModel("main_torch", false);
@@ -140,8 +141,8 @@ public class BlockStates extends BlockStateProvider {
 		simpleItem(name);
 	}
 
-	private void redstoneClock(Block b) {
-		MultiPartBlockStateBuilder builder = getMultipartBuilder(b);
+	private void redstoneClock(RegistryObject<Block> b) {
+		MultiPartBlockStateBuilder builder = getMultipartBuilder(b.get());
 
 		ModelFile mainTorch1On = getTorchModel("main_torch_1", true);
 		ModelFile mainTorch1Off = getTorchModel("main_torch_1", false);
@@ -167,11 +168,11 @@ public class BlockStates extends BlockStateProvider {
 		builder.part().modelFile(mainTorch5Off).addModel().condition(RedstoneClock.CLOCK_SPEED, 5).condition(RedstoneClock.POWERED, false);
 		builder.part().modelFile(mainTorch5On).addModel().condition(RedstoneClock.CLOCK_SPEED, 5).condition(RedstoneClock.POWERED, true);
 
-		simpleItem(b.getRegistryName().getPath());
+		simpleItem(b.getId().getPath());
 	}
 
-	private void advancedRedstoneClock(Block b) {
-		MultiPartBlockStateBuilder builder = getMultipartBuilder(b);
+	private void advancedRedstoneClock(RegistryObject<Block> b) {
+		MultiPartBlockStateBuilder builder = getMultipartBuilder(b.get());
 
 		ModelFile inputTorchOn = getTorchModel("input_torch", true);
 		ModelFile inputTorchOff = getTorchModel("input_torch", false);
@@ -194,11 +195,11 @@ public class BlockStates extends BlockStateProvider {
 			builder.part().modelFile(inputTorchOff).rotationY(yRot).addModel().condition(AdvancedRedstoneClock.POWERED, false);
 		}
 
-		simpleItem(b.getRegistryName().getPath());
+		simpleItem(b.getId().getPath());
 	}
 
-	private void rsFlipFlop(Block b) {
-		MultiPartBlockStateBuilder builder = getMultipartBuilder(b);
+	private void rsFlipFlop(RegistryObject<Block> b) {
+		MultiPartBlockStateBuilder builder = getMultipartBuilder(b.get());
 
 		ModelFile baseModel = models().withExistingParent("block/rs_flip_flop", modLoc("block/gate/basic_gate")).texture("top", modLoc("block/nor_gate"));
 		ModelFile smallRedstoneBlockOn = models().withExistingParent("block/redstone_block/small_redstone_block_on", modLoc("block/redstone_block/small_redstone_block")).texture("block", mcLoc("block/redstone_block"));
@@ -212,27 +213,27 @@ public class BlockStates extends BlockStateProvider {
 			builder.part().modelFile(baseModel).rotationY(yRot).addModel().condition(RSFlipFlop.FACING, dir);
 		}
 
-		simpleItem(b.getRegistryName().getPath());
+		simpleItem(b.getId().getPath());
 	}
 
-	private void lamp(Block b) {
-		String name = b.getRegistryName().getPath();
-		VariantBlockStateBuilder builder = getVariantBuilder(b);
+	private void lamp(RegistryObject<Block> b) {
+		String name = b.getId().getPath();
+		VariantBlockStateBuilder builder = getVariantBuilder(b.get());
 		ModelFile powered = models().withExistingParent("block/" + name + "_on", mcLoc("block/cube_all")).texture("all", modLoc("block/" + name + "_on"));
 		ModelFile unpowered = models().withExistingParent("block/" + name + "_off", mcLoc("block/cube_all")).texture("all", modLoc("block/" + name + "_off"));
 		builder.partialState().with(BlockStateProperties.LIT, true).addModels(new ConfiguredModel(powered));
 		builder.partialState().with(BlockStateProperties.LIT, false).addModels(new ConfiguredModel(unpowered));
 
-		simpleBlockItem(b, unpowered);
+		simpleBlockItem(b.get(), unpowered);
 	}
 
-	private void rotarySwitch(Block b) {
+	private void rotarySwitch(RegistryObject<Block> b) {
 		ModelFile base = models().getExistingFile(modLoc("block/rotary_switch/rotary_switch_base"));
 		ModelFile[] models = new ModelFile[16];
 		for (int i = 0; i < models.length; i++) {
 			models[i] = models().getExistingFile(modLoc("block/rotary_switch/switch_" + i));
 		}
-		MultiPartBlockStateBuilder builder = getMultipartBuilder(b);
+		MultiPartBlockStateBuilder builder = getMultipartBuilder(b.get());
 
 		for (AttachFace face : RotarySwitch.FACE.getPossibleValues()) {
 			for (Direction dir : RotarySwitch.FACING.getPossibleValues()) {
@@ -263,22 +264,22 @@ public class BlockStates extends BlockStateProvider {
 				}
 			}
 		}
-		simpleItem(b.getRegistryName().getPath());
+		simpleItem(b.getId().getPath());
 	}
 
-	private void repeater(Block block) {
-		String name = block.getRegistryName().getPath();
+	private void repeater(RegistryObject<Block> b) {
+		String name = b.getId().getPath();
 		String type;
 
-		if (block == GatesBlocks.FAST_REPEATER.get()) {
+		if (b == GatesBlocks.FAST_REPEATER) {
 			type = "fast";
-		} else if (block == GatesBlocks.SLOW_REPEATER.get()) {
+		} else if (b == GatesBlocks.SLOW_REPEATER) {
 			type = "slow";
 		} else {
 			type = "";
 		}
 
-		VariantBlockStateBuilder builder = getVariantBuilder(block);
+		VariantBlockStateBuilder builder = getVariantBuilder(b.get());
 
 		builder.forAllStates(blockState -> {
 			String path = "block/repeater/" + type + "/repeater_" + blockState.getValue(CustomRepeater.DELAY) + "tick";
@@ -296,9 +297,9 @@ public class BlockStates extends BlockStateProvider {
 		simpleItem(name);
 	}
 
-	private void waxedRedstone(Block b) {
+	private void waxedRedstone(RegistryObject<Block> b) {
 		// FIXME still some rending issues with transparency
-		MultiPartBlockStateBuilder builder = getMultipartBuilder(b);
+		MultiPartBlockStateBuilder builder = getMultipartBuilder(b.get());
 
 		ModelFile dotModel = models().getExistingFile(modLoc("block/waxed_redstone/waxed_dust_dot"));
 		ModelFile lineModel = models().getExistingFile(modLoc("block/waxed_redstone/waxed_dust_side"));
@@ -334,7 +335,7 @@ public class BlockStates extends BlockStateProvider {
 		builder.part().modelFile(up0).rotationY(180).addModel().condition(WaxedRedstone.SOUTH, RedstoneSide.UP);
 		builder.part().modelFile(up1).rotationY(270).addModel().condition(WaxedRedstone.WEST, RedstoneSide.UP);
 
-		simpleItem(b.getRegistryName().getPath());
+		simpleItem(b.getId().getPath());
 	}
 
 }

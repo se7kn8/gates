@@ -24,7 +24,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.function.Supplier;
 
 public class GatesBlocks {
-	public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Gates.MODID);
+	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Gates.MODID);
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Gates.MODID);
 
 	public static final RegistryObject<Block> REDSTONE_BLOCK_OFF = addBlock("redstone_block_off", () -> new Block(Block.Properties.copy(Blocks.REDSTONE_BLOCK)), Gates.GATES_ITEM_GROUP);
@@ -60,11 +60,11 @@ public class GatesBlocks {
 	// TODO contains a log of bugs
 	//public static final Block D_FLIP_FLOP = addBlock("t_flip_flop", new TFlipFlop(), Gates.GATES_ITEM_GROUP);
 
-	public static final RegistryObject<BlockEntityType<CustomDetectorBlockEntity>> CUSTOM_DETECTOR_BLOCK_ENTITY_TYPE = addTileEntity("custom_detector", CustomDetectorBlockEntity::new, RAIN_DETECTOR, THUNDER_DETECTOR);
+	public static final RegistryObject<BlockEntityType<CustomDetectorBlockEntity>> CUSTOM_DETECTOR_BLOCK_ENTITY_TYPE = addBlockEntity("custom_detector", CustomDetectorBlockEntity::new, RAIN_DETECTOR, THUNDER_DETECTOR);
 
-	public static final RegistryObject<BlockEntityType<ReceiverBlockEntity>> RECEIVER_BLOCK_ENTITY_TYPE = addTileEntity("receiver", ReceiverBlockEntity::new, WIRELESS_REDSTONE_RECEIVER);
-	public static final RegistryObject<BlockEntityType<TransmitterBlockEntity>> TRANSMITTER_BLOCK_ENTITY_TYPE = addTileEntity("transmitter", TransmitterBlockEntity::new, WIRELESS_REDSTONE_TRANSMITTER, WIRELESS_REDSTONE_LAMP);
-	public static final RegistryObject<BlockEntityType<RedstoneClockBlockEntity>> REDSTONE_CLOCK_BLOCK_ENTITY_TYPE = addTileEntity("redstone_clock", RedstoneClockBlockEntity::new, REDSTONE_CLOCK, ADVANCED_REDSTONE_CLOCK);
+	public static final RegistryObject<BlockEntityType<ReceiverBlockEntity>> RECEIVER_BLOCK_ENTITY_TYPE = addBlockEntity("receiver", ReceiverBlockEntity::new, WIRELESS_REDSTONE_RECEIVER);
+	public static final RegistryObject<BlockEntityType<TransmitterBlockEntity>> TRANSMITTER_BLOCK_ENTITY_TYPE = addBlockEntity("transmitter", TransmitterBlockEntity::new, WIRELESS_REDSTONE_TRANSMITTER, WIRELESS_REDSTONE_LAMP);
+	public static final RegistryObject<BlockEntityType<RedstoneClockBlockEntity>> REDSTONE_CLOCK_BLOCK_ENTITY_TYPE = addBlockEntity("redstone_clock", RedstoneClockBlockEntity::new, REDSTONE_CLOCK, ADVANCED_REDSTONE_CLOCK);
 
 
 	private static <T extends Block> RegistryObject<T> addBlock(String name, Supplier<T> block, CreativeModeTab tab) {
@@ -78,14 +78,14 @@ public class GatesBlocks {
 	}
 
 	@SafeVarargs
-	private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> addTileEntity(String name, BlockEntityType.BlockEntitySupplier<T> tileEntitySupplier, Supplier<? extends Block>... validBlocksSuppliers) {
-		return GatesBlocks.TILE_ENTITIES.register(name, () -> {
+	private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> addBlockEntity(String name, BlockEntityType.BlockEntitySupplier<T> blockEntitySupplier, Supplier<? extends Block>... validBlocksSuppliers) {
+		return GatesBlocks.BLOCK_ENTITY_TYPES.register(name, () -> {
 
 			Block[] blocks = new Block[validBlocksSuppliers.length];
 			for (int i = 0; i < validBlocksSuppliers.length; i++) {
 				blocks[i] = validBlocksSuppliers[i].get();
 			}
-			return BlockEntityType.Builder.of(tileEntitySupplier, blocks).build(null);
+			return BlockEntityType.Builder.of(blockEntitySupplier, blocks).build(null);
 		});
 	}
 

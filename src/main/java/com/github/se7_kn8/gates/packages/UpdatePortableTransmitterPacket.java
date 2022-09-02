@@ -41,6 +41,7 @@ public class UpdatePortableTransmitterPacket implements BasePacket {
 				stack.getTag().putInt("frequency", newFrequency);
 			}
 		});
+		ctx.get().setPacketHandled(true);
 	}
 
 }

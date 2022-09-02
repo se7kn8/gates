@@ -3,6 +3,7 @@ package com.github.se7_kn8.gates.packages;
 import com.github.se7_kn8.gates.block.entity.RedstoneClockBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -35,11 +36,18 @@ public class UpdateRedstoneClockPacket implements BasePacket {
 
 	@Override
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
-		BlockEntity entity = ctx.get().getSender().level.getBlockEntity(pos);
-		if (entity instanceof RedstoneClockBlockEntity redstoneClockBlockEntity) {
-			redstoneClockBlockEntity.setClockTime(clockTime);
-			redstoneClockBlockEntity.setClockLength(clockLength);
-			redstoneClockBlockEntity.resetClock();
-		}
+		ctx.get().enqueueWork(()->{
+			Level level = ctx.get().getSender().level;
+
+			if(!level.isClientSide){
+				BlockEntity entity = level.getBlockEntity(pos);
+				if(entity instanceof RedstoneClockBlockEntity redstoneClockBlockEntity) {
+					redstoneClockBlockEntity.setClockTime(clockTime);
+					redstoneClockBlockEntity.setClockLength(clockLength);
+					redstoneClockBlockEntity.resetClock();
+				}
+			}
+		});
+		ctx.get().setPacketHandled(true);
 	}
 }

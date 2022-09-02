@@ -9,7 +9,8 @@ public interface IWirelessNode {
 	enum Types {
 		NOOP,
 		TRANSMITTER,
-		RECEIVER
+		RECEIVER,
+		INVALID,
 	}
 
 	int getFrequency();

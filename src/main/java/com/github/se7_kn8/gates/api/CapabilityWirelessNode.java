@@ -1,5 +1,6 @@
 package com.github.se7_kn8.gates.api;
 
+import com.github.se7_kn8.gates.Gates;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraftforge.common.capabilities.Capability;
@@ -42,6 +43,9 @@ public class CapabilityWirelessNode {
 		Types type;
 
 		public WirelessNodeImpl(int frequency, Types type) {
+			if(type == Types.INVALID) {
+				Gates.LOGGER.warn("Creating dummy wireless node. Could be a corrupted world.");
+			}
 			this.frequency = frequency;
 			this.type = type;
 		}

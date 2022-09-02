@@ -6,7 +6,7 @@
 # The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
 modLoader="javafml" #mandatory
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[37,)" #mandatory (37 is current forge version)
+loaderVersion="[43,)" #mandatory (43 is current forge version)
 # A URL to refer people to when problems occur with this mod
 issueTrackerURL="https://github.com/SE7-KN8/gates/issues/" #optional
 license="The MIT License (MIT)"
@@ -27,7 +27,7 @@ displayURL="https://github.com/SE7-KN8/gates/" #optional
 # A text field displayed in the mod UI
 credits="Thanks to Forge" #optional
 # A text field displayed in the mod UI
-authors="SE7-KN8" #optional
+authors="se7kn8" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 A mod about redstone gates. And other redstone stuff.
@@ -39,7 +39,7 @@ A mod about redstone gates. And other redstone stuff.
     # Does this dependency have to exist - if not, ordering below must be specified
     mandatory=true #mandatory
     # The version range of the dependency
-    versionRange="[37.1.1,)" #mandatory
+    versionRange="[43,)" #mandatory
     # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
     ordering="NONE"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
@@ -48,6 +48,6 @@ A mod about redstone gates. And other redstone stuff.
 [[dependencies.gates]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.17.1,)"
+    versionRange="[1.19,)"
     ordering="NONE"
     side="BOTH"

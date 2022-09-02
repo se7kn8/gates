@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " A ",
-    "ABA",
-    " A "
-  ],
   "key": {
     "A": {
       "item": "minecraft:redstone_lamp"
@@ -13,6 +8,11 @@
       "item": "gates:redstone_torch_pearl"
     }
   },
+  "pattern": [
+    " A ",
+    "ABA",
+    " A "
+  ],
   "result": {
     "item": "gates:wireless_redstone_lamp"
   }

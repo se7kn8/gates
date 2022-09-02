@@ -8,7 +8,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -91,14 +91,14 @@ public class Recipes extends RecipeProvider {
 
 
 	private String genCriterionName(ItemLike input) {
-		return "has_" + input.asItem().getRegistryName().getPath();
+		return "has_" + input.asItem();
 	}
 
 	private Ingredient i(ItemLike input) {
 		return Ingredient.of(input);
 	}
 
-	private Ingredient i(Tag<Item> input) {
+	private Ingredient i(TagKey<Item> input) {
 		return Ingredient.of(input);
 	}
 

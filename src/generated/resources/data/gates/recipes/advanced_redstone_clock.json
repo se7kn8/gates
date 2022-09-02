@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " A ",
-    "ABA",
-    " A "
-  ],
   "key": {
     "A": {
       "item": "minecraft:clock"
@@ -13,6 +8,11 @@
       "item": "gates:redstone_clock"
     }
   },
+  "pattern": [
+    " A ",
+    "ABA",
+    " A "
+  ],
   "result": {
     "item": "gates:advanced_redstone_clock"
   }

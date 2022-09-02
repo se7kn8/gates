@@ -1,5 +1,6 @@
 {
     "ambientocclusion": false,
+    "render_type": "cutout",
     "textures": {
         "particle": "gates:block/fast_repeater_on",
         "slab": "block/smooth_stone",

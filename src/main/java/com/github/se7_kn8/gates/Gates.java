@@ -32,8 +32,9 @@ public class Gates {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Gates.config.defaultConfig);
 		GatesBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-		GatesBlocks.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+		GatesBlocks.BLOCK_ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		GatesItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		GatesMenus.MENU_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MinecraftForge.EVENT_BUS.register(this);
 		MinecraftForge.EVENT_BUS.register(GatesBlocks.class);
 	}

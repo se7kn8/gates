@@ -1,4 +1,4 @@
-buildscript {
+/*buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url = 'https://maven.parchmentmc.org' }
@@ -15,7 +15,14 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
+apply plugin: 'maven-publish'*/
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
+}
 
 version = '1.7.2'
 group = 'com.github.se7_kn8.gates'
@@ -45,7 +52,7 @@ repositories {
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'parchment', version: '2021.12.19-1.18.1'
+    mappings channel: 'parchment', version: '2022.08.10-1.19.2'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -62,6 +69,9 @@ minecraft {
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+            
+            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+            property 'forge.enabledGameTestNamespaces', 'gates'
 
             mods {
                 gates {
@@ -82,12 +92,32 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
+            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+            property 'forge.enabledGameTestNamespaces', 'gates'
+
             mods {
                 gates {
                     source sourceSets.main
                 }
             }
         }
+
+        gameTestServer {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            property 'forge.enabledGameTestNamespaces', 'gates'
+
+            mods {
+                gates {
+                    source sourceSets.main
+                }
+            }            
+        }
+
         data {
             property 'mixin.env.disableRefMap', 'true'
             workingDirectory project.file('run')
@@ -112,38 +142,40 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.1-39.0.9'
+    minecraft 'net.minecraftforge:forge:1.19.2-43.1.1'
 
-    compileOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.1.48:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.1.48")
+    //compileOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.1.48:api")
+    //runtimeOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.1.48")
 
-    annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 jar {
     manifest {
         attributes([
                 "Specification-Title"     : "Gates",
-                "Specification-Vendor"    : "SE7-KN8",
+                "Specification-Vendor"    : "se7kn8",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : "${version}",
-                "Implementation-Vendor"   : "SE7-KN8",
+                "Implementation-Vendor"   : "se7kn8",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 "MixinConfigs"            : "gates.mixins.json"
         ])
     }
 }
-
+/*
 def reobfFile = file("$buildDir/reobfJar/output.jar")
 def reobfArtifact = artifacts.add('default', reobfFile) {
     type 'jar'
     builtBy 'reobfJar'
-}
+}*/
+jar.finalizedBy('reobfJar')
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifact reobfArtifact
+            artifact jar
         }
     }
     repositories {
@@ -153,8 +185,10 @@ publishing {
     }
 }
 
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
 
-apply plugin: 'org.spongepowered.mixin'
 
 mixin {
     add sourceSets.main, "gates.refmap.json"

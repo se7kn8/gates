@@ -1,11 +1,10 @@
 package com.github.se7_kn8.gates.item;
 
 import com.github.se7_kn8.gates.Gates;
-import com.github.se7_kn8.gates.container.PortableRedstoneTransmitterContainer;
 import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
+import com.github.se7_kn8.gates.menu.PortableRedstoneTransmitterMenu;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -32,12 +31,12 @@ public class PortableRedstoneTransmitter extends Item {
 	@Override
 	public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
 		super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-		pTooltipComponents.add(new TranslatableComponent("gui.gates.usage.portable_transmitter_1"));
-		pTooltipComponents.add(new TranslatableComponent("gui.gates.usage.portable_transmitter_2"));
-		pTooltipComponents.add(new TranslatableComponent("gui.gates.usage.portable_transmitter_3"));
+		pTooltipComponents.add(Component.translatable("gui.gates.usage.portable_transmitter_1"));
+		pTooltipComponents.add(Component.translatable("gui.gates.usage.portable_transmitter_2"));
+		pTooltipComponents.add(Component.translatable("gui.gates.usage.portable_transmitter_3"));
 		if (pStack.hasTag()) {
 			if (pStack.getTag().contains("frequency")) {
-				pTooltipComponents.add(new TranslatableComponent("gui.gates.current_frequency_stored", pStack.getTag().getInt("frequency")));
+				pTooltipComponents.add(Component.translatable("gui.gates.current_frequency_stored", pStack.getTag().getInt("frequency")));
 			}
 		}
 	}
@@ -52,12 +51,12 @@ public class PortableRedstoneTransmitter extends Item {
 					@Nullable
 					@Override
 					public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-						return new PortableRedstoneTransmitterContainer(pContainerId);
+						return new PortableRedstoneTransmitterMenu(pContainerId);
 					}
 
 					@Override
 					public Component getDisplayName() {
-						return new TranslatableComponent("item.gates.portable_redstone_transmitter");
+						return Component.translatable("item.gates.portable_redstone_transmitter");
 					}
 				});
 			}
@@ -69,7 +68,7 @@ public class PortableRedstoneTransmitter extends Item {
 		}
 
 		if (!stack.getTag().contains("frequency")) {
-			pPlayer.displayClientMessage(new TranslatableComponent("gui.gates.no_frequency"), true);
+			pPlayer.displayClientMessage(Component.translatable("gui.gates.no_frequency"), true);
 			return InteractionResultHolder.fail(stack);
 		}
 

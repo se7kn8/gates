@@ -3,11 +3,10 @@ package com.github.se7_kn8.gates.block.entity;
 import com.github.se7_kn8.gates.Gates;
 import com.github.se7_kn8.gates.GatesBlocks;
 import com.github.se7_kn8.gates.block.redstone_clock.RedstoneClock;
-import com.github.se7_kn8.gates.container.AdvancedRedstoneClockMenu;
+import com.github.se7_kn8.gates.menu.AdvancedRedstoneClockMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -169,6 +168,6 @@ public class RedstoneClockBlockEntity extends BlockEntity implements MenuProvide
 
 	@Override
 	public Component getDisplayName() {
-		return new TranslatableComponent("block.gates.advanced_redstone_clock");
+		return Component.translatable("block.gates.advanced_redstone_clock");
 	}
 }

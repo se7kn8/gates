@@ -1,5 +1,6 @@
 {
 	"ambientocclusion": false,
+	"render_type": "translucent",
 	"textures": {
 		"wax": "block/honey_block_top",
 		"particle": "block/redstone_dust_line0"

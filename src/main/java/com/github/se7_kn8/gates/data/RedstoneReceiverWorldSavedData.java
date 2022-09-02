@@ -7,11 +7,13 @@ import com.github.se7_kn8.gates.api.IWirelessNode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class RedstoneReceiverWorldSavedData extends SavedData {
@@ -35,8 +37,8 @@ public class RedstoneReceiverWorldSavedData extends SavedData {
 		ListTag list = compound.getList(name, 10/*NBT-ID for CompoundNBT*/);
 		Set<BlockPos> pos = new HashSet<>();
 
-		for (int i = 0; i < list.size(); i++) {
-			CompoundTag entry = (CompoundTag) list.get(i);
+		for (Tag tag : list) {
+			CompoundTag entry = (CompoundTag) tag;
 
 			int x = entry.getInt("x");
 			int y = entry.getInt("y");
@@ -70,7 +72,8 @@ public class RedstoneReceiverWorldSavedData extends SavedData {
 	public int getCurrentFrequencyValue(Level level, int frequency) {
 		return transmitters
 				.stream()
-				.map(pos -> level.getBlockEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).orElseThrow(IllegalStateException::new))
+				.filter(Objects::nonNull)
+				.map(pos -> level.getBlockEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).orElseGet(() -> new CapabilityWirelessNode.WirelessNodeImpl(-1, IWirelessNode.Types.INVALID)))
 				.filter(node -> node.getFrequency() == frequency)
 				.map(IWirelessNode::getPower)
 				.max(Integer::compareTo)
@@ -92,7 +95,9 @@ public class RedstoneReceiverWorldSavedData extends SavedData {
 		Set<BlockPos> receiversCopy = new HashSet<>(receivers);
 
 		receiversCopy.stream()
-				.map(pos -> level.getBlockEntity(pos).getCapability(CapabilityWirelessNode.WIRELESS_NODE).orElseThrow(IllegalStateException::new))
+				.map(level::getBlockEntity)
+				.filter(Objects::nonNull)
+				.map(blockEntity -> blockEntity.getCapability(CapabilityWirelessNode.WIRELESS_NODE).orElseGet(() -> new CapabilityWirelessNode.WirelessNodeImpl(-1, IWirelessNode.Types.NOOP)))
 				.filter(node -> node.getFrequency() == frequency)
 				.forEach(node -> node.setPower(power));
 	}
@@ -100,13 +105,11 @@ public class RedstoneReceiverWorldSavedData extends SavedData {
 	public void addNode(Level level, BlockPos pos) {
 		CapabilityUtil.findWirelessCapability(level, pos, c -> {
 			switch (c.getType()) {
-				case RECEIVER:
+				case RECEIVER -> {
 					c.setPower(this.getCurrentFrequencyValue(level, c.getFrequency()));
 					addReceiver(pos);
-					break;
-				case TRANSMITTER:
-					addTransmitter(pos);
-					break;
+				}
+				case TRANSMITTER -> addTransmitter(pos);
 			}
 		});
 	}
@@ -117,12 +120,8 @@ public class RedstoneReceiverWorldSavedData extends SavedData {
 	public void removeNode(Level level, BlockPos pos) {
 		CapabilityUtil.findWirelessCapability(level, pos, c -> {
 			switch (c.getType()) {
-				case RECEIVER:
-					removeReceiver(pos);
-					break;
-				case TRANSMITTER:
-					removeTransmitter(pos);
-					break;
+				case RECEIVER -> removeReceiver(pos);
+				case TRANSMITTER -> removeTransmitter(pos);
 			}
 		});
 	}

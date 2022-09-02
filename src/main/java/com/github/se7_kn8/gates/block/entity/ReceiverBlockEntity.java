@@ -3,13 +3,12 @@ package com.github.se7_kn8.gates.block.entity;
 import com.github.se7_kn8.gates.GatesBlocks;
 import com.github.se7_kn8.gates.api.CapabilityWirelessNode;
 import com.github.se7_kn8.gates.api.IWirelessNode;
-import com.github.se7_kn8.gates.container.FrequencyMenu;
 import com.github.se7_kn8.gates.data.RedstoneReceiverWorldSavedData;
+import com.github.se7_kn8.gates.menu.FrequencyMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -100,7 +99,7 @@ public class ReceiverBlockEntity extends BlockEntity implements MenuProvider {
 
 	@Override
 	public Component getDisplayName() {
-		return new TranslatableComponent(translationKey);
+		return Component.translatable(translationKey);
 	}
 
 	@Nullable

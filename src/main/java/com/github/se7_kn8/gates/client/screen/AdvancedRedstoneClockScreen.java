@@ -1,14 +1,13 @@
 package com.github.se7_kn8.gates.client.screen;
 
 import com.github.se7_kn8.gates.PacketHandler;
-import com.github.se7_kn8.gates.container.AdvancedRedstoneClockMenu;
+import com.github.se7_kn8.gates.menu.AdvancedRedstoneClockMenu;
 import com.github.se7_kn8.gates.packages.UpdateRedstoneClockPacket;
 import com.github.se7_kn8.gates.util.Utils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Inventory;
 
 import javax.annotation.Nonnull;
@@ -32,13 +31,13 @@ public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedst
 	protected void init() {
 		super.init();
 
-		clockBox = new EditBox(this.font, this.width / 2 - 75, this.height / 2 - 50, 70, 20, new TranslatableComponent("gui.gates.clock_time"));
-		clockLengthBox = new EditBox(this.font, this.width / 2 + 5, this.height / 2 - 50, 70, 20, new TranslatableComponent("gui.gates.clock_length"));
+		clockBox = new EditBox(this.font, this.width / 2 - 75, this.height / 2 - 50, 70, 20, Component.translatable("gui.gates.clock_time"));
+		clockLengthBox = new EditBox(this.font, this.width / 2 + 5, this.height / 2 - 50, 70, 20, Component.translatable("gui.gates.clock_length"));
 
 		clockBox.setFilter(Utils.NUMBER_STRING_9_CHARACTERS);
 		clockLengthBox.setFilter(Utils.NUMBER_STRING_9_CHARACTERS);
 
-		applyButton = this.addRenderableWidget(new Button(this.width / 2, this.height / 2 - 25, 80, 20, new TranslatableComponent("gui.gates.apply"), p_onPress_1_ -> {
+		applyButton = this.addRenderableWidget(new Button(this.width / 2, this.height / 2 - 25, 80, 20, Component.translatable("gui.gates.apply"), p_onPress_1_ -> {
 			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateRedstoneClockPacket(lastBlockPos, Integer.parseInt(this.clockBox.getValue()), Integer.parseInt(this.clockLengthBox.getValue())));
 		}));
 
@@ -95,12 +94,15 @@ public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedst
 	}
 
 
+	private static final Component componentClockTime = Component.translatable("gui.gates.clock_time");
+	private static final Component componentClockLength = Component.translatable("gui.gates.clock_length");
+
 	@Override
 	protected void renderLabels(@Nonnull PoseStack stack, int mouseX, int mouseY) {
 		super.renderLabels(stack, mouseX, mouseY);
 
-		this.font.draw(stack, new TranslatableComponent("gui.gates.clock_time"), 13, 20, 4210752);
-		this.font.draw(stack, new TranslatableComponent("gui.gates.clock_length"), 94, 20, 4210752);
+		this.font.draw(stack,  componentClockTime, 13, 20, 4210752);
+		this.font.draw(stack, componentClockLength, 94, 20, 4210752);
 	}
 
 }

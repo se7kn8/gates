@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AAA",
-    "BBB",
-    "CCC"
-  ],
   "key": {
     "A": {
       "item": "minecraft:glass"
@@ -16,6 +11,11 @@
       "tag": "minecraft:wooden_slabs"
     }
   },
+  "pattern": [
+    "AAA",
+    "BBB",
+    "CCC"
+  ],
   "result": {
     "item": "gates:rain_detector"
   }

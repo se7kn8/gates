@@ -1,6 +1,6 @@
-package com.github.se7_kn8.gates.container;
+package com.github.se7_kn8.gates.menu;
 
-import com.github.se7_kn8.gates.GatesContainers;
+import com.github.se7_kn8.gates.GatesMenus;
 import com.github.se7_kn8.gates.api.IWirelessNode;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -18,7 +18,7 @@ public class FrequencyMenu extends AbstractContainerMenu {
 	}
 
 	public FrequencyMenu(int id, Inventory inventory, ContainerData data) {
-		super(GatesContainers.FREQUENCY_MENU_TYPE, id);
+		super(GatesMenus.FREQUENCY_MENU_TYPE.get(), id);
 		this.data = data;
 
 		this.addDataSlots(data);

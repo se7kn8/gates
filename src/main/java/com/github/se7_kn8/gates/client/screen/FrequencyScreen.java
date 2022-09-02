@@ -1,15 +1,13 @@
 package com.github.se7_kn8.gates.client.screen;
 
 import com.github.se7_kn8.gates.PacketHandler;
-import com.github.se7_kn8.gates.container.FrequencyMenu;
+import com.github.se7_kn8.gates.menu.FrequencyMenu;
 import com.github.se7_kn8.gates.packages.UpdateFrequencyPacket;
 import com.github.se7_kn8.gates.util.Utils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Inventory;
 
 import javax.annotation.Nonnull;
@@ -28,18 +26,19 @@ public class FrequencyScreen extends BasicPlayerScreen<FrequencyMenu> {
 	@Override
 	protected void init() {
 		super.init();
-		frequencyBox = new EditBox(this.font, this.width / 2 - 35, this.height / 2 - 50, 70, 20, new TranslatableComponent("gui.gates.frequency"));
+
+		frequencyBox = new EditBox(this.font, this.width / 2 - 35, this.height / 2 - 50, 70, 20, Component.translatable("gui.gates.frequency"));
 		frequencyBox.setFilter(Utils.NUMBER_STRING_9_CHARACTERS);
 
-		this.addWidget(new Button(this.width / 2 - 75, this.height / 2 - 50, 40, 20, new TextComponent("<-"), p_onPress_1_ -> {
+		this.addWidget(new Button(this.width / 2 - 75, this.height / 2 - 50, 40, 20, Component.literal("<-"), p_onPress_1_ -> {
 			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(lastBlockPos, getMenu().getFrequency() - 1));
 		}));
 
-		this.addWidget(new Button(this.width / 2 + 35, this.height / 2 - 50, 40, 20, new TextComponent("->"), p_onPress_1_ -> {
+		this.addWidget(new Button(this.width / 2 + 35, this.height / 2 - 50, 40, 20, Component.literal("->"), p_onPress_1_ -> {
 			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(lastBlockPos, getMenu().getFrequency() + 1));
 		}));
 
-		applyButton = this.addRenderableWidget(new Button(this.width / 2, this.height / 2 - 25, 80, 20, new TranslatableComponent("gui.gates.apply"), p_onPress_1_ -> {
+		applyButton = this.addRenderableWidget(new Button(this.width / 2, this.height / 2 - 25, 80, 20, Component.translatable("gui.gates.apply"), p_onPress_1_ -> {
 			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(lastBlockPos, Integer.parseInt(this.frequencyBox.getValue())));
 		}));
 
@@ -75,11 +74,12 @@ public class FrequencyScreen extends BasicPlayerScreen<FrequencyMenu> {
 		this.frequencyBox.render(stack, mouseX, mouseY, partialTicks);
 	}
 
+	private static final Component COMPONENT_FREQUENCY = Component.translatable("gui.gates.frequency");
 
 	@Override
 	protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
 		super.renderLabels(pPoseStack, pMouseX, pMouseY);
-		this.font.draw(pPoseStack, new TranslatableComponent("gui.gates.frequency"), 40, 20, 4210752);
+		this.font.draw(pPoseStack, COMPONENT_FREQUENCY, 40, 20, 4210752);
 	}
 
 }

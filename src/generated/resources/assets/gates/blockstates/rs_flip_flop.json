@@ -1,54 +1,54 @@
 {
   "multipart": [
     {
-      "when": {
-        "powered": "true"
-      },
       "apply": {
         "model": "gates:block/redstone_block/small_redstone_block_on"
+      },
+      "when": {
+        "powered": "true"
       }
     },
     {
-      "when": {
-        "powered": "false"
-      },
       "apply": {
         "model": "gates:block/redstone_block/small_redstone_block_off"
+      },
+      "when": {
+        "powered": "false"
       }
     },
     {
-      "when": {
-        "facing": "north"
-      },
       "apply": {
         "model": "gates:block/rs_flip_flop",
         "y": 180
+      },
+      "when": {
+        "facing": "north"
       }
     },
     {
-      "when": {
-        "facing": "south"
-      },
       "apply": {
         "model": "gates:block/rs_flip_flop"
+      },
+      "when": {
+        "facing": "south"
       }
     },
     {
-      "when": {
-        "facing": "west"
-      },
       "apply": {
         "model": "gates:block/rs_flip_flop",
         "y": 90
+      },
+      "when": {
+        "facing": "west"
       }
     },
     {
-      "when": {
-        "facing": "east"
-      },
       "apply": {
         "model": "gates:block/rs_flip_flop",
         "y": 270
+      },
+      "when": {
+        "facing": "east"
       }
     }
   ]

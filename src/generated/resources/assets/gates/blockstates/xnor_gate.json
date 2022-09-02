@@ -1,272 +1,272 @@
 {
   "multipart": [
     {
-      "when": {
-        "facing": "north"
-      },
       "apply": {
         "model": "gates:block/gate/xnor_gate",
         "y": 180
+      },
+      "when": {
+        "facing": "north"
       }
     },
     {
-      "when": {
-        "facing": "north",
-        "left": "true"
-      },
       "apply": {
         "model": "gates:block/torch/left_torch_on",
         "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "left": "true"
       }
     },
     {
-      "when": {
-        "facing": "north",
-        "left": "false"
-      },
       "apply": {
         "model": "gates:block/torch/left_torch_off",
         "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "left": "false"
       }
     },
     {
-      "when": {
-        "right": "true",
-        "facing": "north"
-      },
       "apply": {
         "model": "gates:block/torch/right_torch_on",
         "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "right": "true"
       }
     },
     {
-      "when": {
-        "right": "false",
-        "facing": "north"
-      },
       "apply": {
         "model": "gates:block/torch/right_torch_off",
         "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "right": "false"
       }
     },
     {
-      "when": {
-        "powered": "true",
-        "facing": "north"
-      },
       "apply": {
         "model": "gates:block/torch/output_torch_on",
         "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "powered": "true"
       }
     },
     {
-      "when": {
-        "powered": "false",
-        "facing": "north"
-      },
       "apply": {
         "model": "gates:block/torch/output_torch_off",
         "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "powered": "false"
       }
     },
     {
-      "when": {
-        "facing": "south"
-      },
       "apply": {
         "model": "gates:block/gate/xnor_gate"
+      },
+      "when": {
+        "facing": "south"
       }
     },
     {
-      "when": {
-        "facing": "south",
-        "left": "true"
-      },
       "apply": {
         "model": "gates:block/torch/left_torch_on"
+      },
+      "when": {
+        "facing": "south",
+        "left": "true"
       }
     },
     {
+      "apply": {
+        "model": "gates:block/torch/left_torch_off"
+      },
       "when": {
         "facing": "south",
         "left": "false"
-      },
-      "apply": {
-        "model": "gates:block/torch/left_torch_off"
       }
     },
     {
-      "when": {
-        "right": "true",
-        "facing": "south"
-      },
       "apply": {
         "model": "gates:block/torch/right_torch_on"
+      },
+      "when": {
+        "facing": "south",
+        "right": "true"
       }
     },
     {
-      "when": {
-        "right": "false",
-        "facing": "south"
-      },
       "apply": {
         "model": "gates:block/torch/right_torch_off"
+      },
+      "when": {
+        "facing": "south",
+        "right": "false"
       }
     },
     {
-      "when": {
-        "powered": "true",
-        "facing": "south"
-      },
       "apply": {
         "model": "gates:block/torch/output_torch_on"
+      },
+      "when": {
+        "facing": "south",
+        "powered": "true"
       }
     },
     {
-      "when": {
-        "powered": "false",
-        "facing": "south"
-      },
       "apply": {
         "model": "gates:block/torch/output_torch_off"
+      },
+      "when": {
+        "facing": "south",
+        "powered": "false"
       }
     },
     {
-      "when": {
-        "facing": "west"
-      },
       "apply": {
         "model": "gates:block/gate/xnor_gate",
         "y": 90
+      },
+      "when": {
+        "facing": "west"
       }
     },
     {
-      "when": {
-        "facing": "west",
-        "left": "true"
-      },
       "apply": {
         "model": "gates:block/torch/left_torch_on",
         "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "left": "true"
       }
     },
     {
-      "when": {
-        "facing": "west",
-        "left": "false"
-      },
       "apply": {
         "model": "gates:block/torch/left_torch_off",
         "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "left": "false"
       }
     },
     {
-      "when": {
-        "right": "true",
-        "facing": "west"
-      },
       "apply": {
         "model": "gates:block/torch/right_torch_on",
         "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "right": "true"
       }
     },
     {
-      "when": {
-        "right": "false",
-        "facing": "west"
-      },
       "apply": {
         "model": "gates:block/torch/right_torch_off",
         "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "right": "false"
       }
     },
     {
-      "when": {
-        "powered": "true",
-        "facing": "west"
-      },
       "apply": {
         "model": "gates:block/torch/output_torch_on",
         "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "powered": "true"
       }
     },
     {
-      "when": {
-        "powered": "false",
-        "facing": "west"
-      },
       "apply": {
         "model": "gates:block/torch/output_torch_off",
         "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "powered": "false"
       }
     },
     {
-      "when": {
-        "facing": "east"
-      },
       "apply": {
         "model": "gates:block/gate/xnor_gate",
         "y": 270
+      },
+      "when": {
+        "facing": "east"
       }
     },
     {
-      "when": {
-        "facing": "east",
-        "left": "true"
-      },
       "apply": {
         "model": "gates:block/torch/left_torch_on",
         "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "left": "true"
       }
     },
     {
-      "when": {
-        "facing": "east",
-        "left": "false"
-      },
       "apply": {
         "model": "gates:block/torch/left_torch_off",
         "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "left": "false"
       }
     },
     {
-      "when": {
-        "right": "true",
-        "facing": "east"
-      },
       "apply": {
         "model": "gates:block/torch/right_torch_on",
         "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "right": "true"
       }
     },
     {
-      "when": {
-        "right": "false",
-        "facing": "east"
-      },
       "apply": {
         "model": "gates:block/torch/right_torch_off",
         "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "right": "false"
       }
     },
     {
-      "when": {
-        "powered": "true",
-        "facing": "east"
-      },
       "apply": {
         "model": "gates:block/torch/output_torch_on",
         "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "powered": "true"
       }
     },
     {
-      "when": {
-        "powered": "false",
-        "facing": "east"
-      },
       "apply": {
         "model": "gates:block/torch/output_torch_off",
         "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "powered": "false"
       }
     }
   ]

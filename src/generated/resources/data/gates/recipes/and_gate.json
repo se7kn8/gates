@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " A ",
-    "ABA",
-    "CCC"
-  ],
   "key": {
     "A": {
       "item": "minecraft:redstone_torch"
@@ -16,6 +11,11 @@
       "item": "minecraft:stone"
     }
   },
+  "pattern": [
+    " A ",
+    "ABA",
+    "CCC"
+  ],
   "result": {
     "item": "gates:and_gate"
   }
