@@ -64,8 +64,6 @@ public class WirelessRedstoneLamp extends BaseEntityBlock implements ReceiverBlo
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-		ReceiverBlockEntity entity = new ReceiverBlockEntity(pPos, pState);
-		entity.setTranslationKey("gates.block.wireless_redstone_lamp");
-		return entity;
+		return new ReceiverBlockEntity(pPos, pState);
 	}
 }

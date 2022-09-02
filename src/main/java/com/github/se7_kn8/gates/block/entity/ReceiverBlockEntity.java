@@ -30,14 +30,8 @@ public class ReceiverBlockEntity extends BlockEntity implements MenuProvider {
 		void onPowerChange(Level level, BlockPos pos, int newPower);
 	}
 
-	private String translationKey = "block.gates.receiver";
-
 	public ReceiverBlockEntity(BlockPos pos, BlockState state) {
 		super(GatesBlocks.RECEIVER_BLOCK_ENTITY_TYPE.get(), pos, state);
-	}
-
-	public void setTranslationKey(String translationKey) {
-		this.translationKey = translationKey;
 	}
 
 	private LazyOptional<IWirelessNode> wireless = LazyOptional.of(this::createWireless);
@@ -99,7 +93,7 @@ public class ReceiverBlockEntity extends BlockEntity implements MenuProvider {
 
 	@Override
 	public Component getDisplayName() {
-		return Component.translatable(translationKey);
+		return this.getBlockState().getBlock().getName();
 	}
 
 	@Nullable

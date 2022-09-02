@@ -10,8 +10,6 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-import javax.annotation.Nonnull;
-
 public class FrequencyScreen extends BasicPlayerScreen<FrequencyMenu> {
 
 	private EditBox frequencyBox;
@@ -30,11 +28,11 @@ public class FrequencyScreen extends BasicPlayerScreen<FrequencyMenu> {
 		frequencyBox = new EditBox(this.font, this.width / 2 - 35, this.height / 2 - 50, 70, 20, Component.translatable("gui.gates.frequency"));
 		frequencyBox.setFilter(Utils.NUMBER_STRING_9_CHARACTERS);
 
-		this.addWidget(new Button(this.width / 2 - 75, this.height / 2 - 50, 40, 20, Component.literal("<-"), p_onPress_1_ -> {
+		this.addRenderableWidget(new Button(this.width / 2 - 75, this.height / 2 - 50, 40, 20, Component.literal("<-"), p_onPress_1_ -> {
 			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(lastBlockPos, getMenu().getFrequency() - 1));
 		}));
 
-		this.addWidget(new Button(this.width / 2 + 35, this.height / 2 - 50, 40, 20, Component.literal("->"), p_onPress_1_ -> {
+		this.addRenderableWidget(new Button(this.width / 2 + 35, this.height / 2 - 50, 40, 20, Component.literal("->"), p_onPress_1_ -> {
 			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(lastBlockPos, getMenu().getFrequency() + 1));
 		}));
 
@@ -42,7 +40,7 @@ public class FrequencyScreen extends BasicPlayerScreen<FrequencyMenu> {
 			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateFrequencyPacket(lastBlockPos, Integer.parseInt(this.frequencyBox.getValue())));
 		}));
 
-		this.addWidget(frequencyBox);
+		this.addRenderableWidget(frequencyBox);
 
 		this.setInitialFocus(frequencyBox);
 
@@ -65,13 +63,6 @@ public class FrequencyScreen extends BasicPlayerScreen<FrequencyMenu> {
 				this.applyButton.visible = false;
 			}
 		}
-	}
-
-	@Override
-	public void render(@Nonnull PoseStack stack, int mouseX, int mouseY, float partialTicks) {
-		super.render(stack, mouseX, mouseY, partialTicks);
-
-		this.frequencyBox.render(stack, mouseX, mouseY, partialTicks);
 	}
 
 	private static final Component COMPONENT_FREQUENCY = Component.translatable("gui.gates.frequency");

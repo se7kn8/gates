@@ -49,6 +49,9 @@ public class Recipes extends RecipeProvider {
 		addShaped(consumer, GatesBlocks.THUNDER_DETECTOR.get(), Items.WATER_BUCKET, "AAA", "BCB", "DDD", i(Tags.Items.GLASS), i(Items.LAPIS_LAZULI), i(Items.WATER_BUCKET), i(ItemTags.WOODEN_SLABS));
 		addShaped(consumer, GatesBlocks.RAIN_DETECTOR.get(), Items.LAPIS_LAZULI, "AAA", "BBB", "CCC", i(Items.GLASS), i(Items.LAPIS_LAZULI), i(ItemTags.WOODEN_SLABS));
 
+		addShaped(consumer, GatesBlocks.IRON_FENCE.get(), 27, Items.IRON_INGOT, "   ", "ABA", "ABA", i(Tags.Items.STORAGE_BLOCKS_IRON), i(Tags.Items.INGOTS_IRON));
+		addShaped(consumer, GatesBlocks.IRON_FENCE_GATE.get(), 9, Items.IRON_INGOT, "   ", "BAB", "BAB", i(Tags.Items.STORAGE_BLOCKS_IRON), i(Tags.Items.INGOTS_IRON));
+
 		addShapeless(consumer, GatesBlocks.FAST_REPEATER.get(), Items.REPEATER, i(Items.REPEATER), i(Items.GOLD_INGOT));
 		addShapeless(consumer, GatesBlocks.SLOW_REPEATER.get(), Items.REPEATER, i(Items.REPEATER), i(Items.COAL));
 		addShapeless(consumer, GatesItems.FREQUENCY_CHANGER.get(), GatesItems.REDSTONE_TORCH_PEARL.get(), i(Tags.Items.SLIMEBALLS), i(GatesItems.REDSTONE_TORCH_PEARL.get()), i(Items.PAPER));
@@ -63,7 +66,10 @@ public class Recipes extends RecipeProvider {
 	}
 
 	private void addShaped(Consumer<FinishedRecipe> consumer, ItemLike output, ItemLike requirement, String p1, String p2, String p3, Ingredient... ingredients) {
-		ShapedRecipeBuilder builder = ShapedRecipeBuilder.shaped(output, 1)
+		addShaped(consumer, output, 1,requirement, p1, p2, p3, ingredients);
+	}
+	private void addShaped(Consumer<FinishedRecipe> consumer, ItemLike output, int outputCount, ItemLike requirement, String p1, String p2, String p3, Ingredient... ingredients) {
+		ShapedRecipeBuilder builder = ShapedRecipeBuilder.shaped(output, outputCount)
 				.pattern(p1)
 				.pattern(p2)
 				.pattern(p3)

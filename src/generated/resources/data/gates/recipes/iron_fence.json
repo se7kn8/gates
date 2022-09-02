@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "tag": "forge:storage_blocks/iron"
+    },
+    "B": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "pattern": [
+    "   ",
+    "ABA",
+    "ABA"
+  ],
+  "result": {
+    "count": 27,
+    "item": "gates:iron_fence"
+  }
+}

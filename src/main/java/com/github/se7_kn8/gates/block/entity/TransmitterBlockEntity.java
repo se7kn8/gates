@@ -89,7 +89,7 @@ public class TransmitterBlockEntity extends BlockEntity implements MenuProvider 
 	@Override
 	@Nonnull
 	public Component getDisplayName() {
-		return Component.translatable("block.gates.transmitter");
+		return this.getBlockState().getBlock().getName();
 	}
 
 	@Nullable

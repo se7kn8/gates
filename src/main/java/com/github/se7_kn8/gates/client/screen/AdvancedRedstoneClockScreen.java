@@ -41,8 +41,8 @@ public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedst
 			PacketHandler.MOD_CHANNEL.sendToServer(new UpdateRedstoneClockPacket(lastBlockPos, Integer.parseInt(this.clockBox.getValue()), Integer.parseInt(this.clockLengthBox.getValue())));
 		}));
 
-		this.addWidget(clockBox);
-		this.addWidget(clockLengthBox);
+		this.addRenderableWidget(clockBox);
+		this.addRenderableWidget(clockLengthBox);
 
 		this.applyButton.visible = true;
 	}
@@ -84,15 +84,6 @@ public class AdvancedRedstoneClockScreen extends BasicPlayerScreen<AdvancedRedst
 
 		this.applyButton.visible = change && enableButton;
 	}
-
-	@Override
-	public void render(@Nonnull PoseStack stack, int mouseX, int mouseY, float partialTicks) {
-		super.render(stack, mouseX, mouseY, partialTicks);
-
-		this.clockBox.render(stack, mouseX, mouseY, partialTicks);
-		this.clockLengthBox.render(stack, mouseX, mouseY, partialTicks);
-	}
-
 
 	private static final Component componentClockTime = Component.translatable("gui.gates.clock_time");
 	private static final Component componentClockLength = Component.translatable("gui.gates.clock_length");

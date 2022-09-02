@@ -32,7 +32,7 @@ public class PortableTransmitterScreen extends AbstractContainerScreen<PortableR
 		frequencyField = new EditBox(this.font, this.width / 2 - 35, this.height / 2 - 50, 70, 20, Component.translatable("gates.gui.transmitter"));
 		frequencyField.setFilter(s -> (s.matches("^[0-9]+$") || s.equals("")) && s.length() < 10);
 
-		this.addWidget(frequencyField);
+		this.addRenderableWidget(frequencyField);
 
 		this.addRenderableWidget(new Button(this.width / 2 - 40, this.height / 2, 80, 20, Component.translatable("gui.gates.apply"), button -> {
 			if (!frequencyField.getValue().trim().equals("")) {
@@ -57,7 +57,6 @@ public class PortableTransmitterScreen extends AbstractContainerScreen<PortableR
 	public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
 		this.renderBackground(pPoseStack);
 		super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		this.frequencyField.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 	}
 
 	@Override
