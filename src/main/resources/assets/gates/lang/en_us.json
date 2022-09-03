@@ -53,5 +53,13 @@
   "gui.gates.usage.portable_transmitter_3": "Warning: Transmitter block and the portable transmitter can overwrite each other when using on the same frequency",
   "gui.gates.usage.frequency_changer_1": "SHIFT-Right-Click on a wireless block to copy the frequency.",
   "gui.gates.usage.frequency_changer_2": "Right-Click to apply the saved frequency on a wireless block.",
-  "gui.gates.usage.frequency_changer_3": "SHIFT-Right-Click in the air to clear the saved frequency."
+  "gui.gates.usage.frequency_changer_3": "SHIFT-Right-Click in the air to clear the saved frequency.",
+
+  "info.gates.output": "Output",
+  "info.gates.input": "Input",
+  "info.gates.set": "Set",
+  "info.gates.reset": "Reset",
+  "info.gates.lock": "Lock",
+  "info.gates.result": "Result",
+  "info.gates.secondary_input": "Secondary Input"
 }

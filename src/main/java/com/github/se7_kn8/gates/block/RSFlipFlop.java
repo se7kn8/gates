@@ -1,5 +1,7 @@
 package com.github.se7_kn8.gates.block;
 
+import com.github.se7_kn8.gates.api.IHighlightInfoBlock;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -12,7 +14,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 
 import javax.annotation.Nullable;
 
-public class RSFlipFlop extends DiodeBlock {
+public class RSFlipFlop extends DiodeBlock implements IHighlightInfoBlock {
 
 	public RSFlipFlop() {
 		super(Properties.copy(Blocks.REPEATER));
@@ -55,5 +57,20 @@ public class RSFlipFlop extends DiodeBlock {
 		}
 
 		return pState.getValue(POWERED) ? 15 : 0;
+	}
+
+	@Override
+	public Direction getHighlightFacing(BlockState state) {
+		return state.getValue(FACING);
+	}
+
+	@Override
+	public String getHighlightInfo(BlockState state, Direction direction) {
+		return switch (direction) {
+			case NORTH -> I18n.get("info.gates.output");
+			case WEST -> I18n.get("info.gates.reset");
+			case EAST -> I18n.get("info.gates.set");
+			default -> "";
+		};
 	}
 }

@@ -1,8 +1,10 @@
 package com.github.se7_kn8.gates.block.redstone_clock;
 
 import com.github.se7_kn8.gates.GatesBlocks;
+import com.github.se7_kn8.gates.api.IHighlightInfoBlock;
 import com.github.se7_kn8.gates.block.entity.RedstoneClockBlockEntity;
 import com.github.se7_kn8.gates.util.Utils;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -26,7 +28,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
-public class RedstoneClockBaseBlock extends BaseEntityBlock {
+public class RedstoneClockBaseBlock extends BaseEntityBlock implements IHighlightInfoBlock {
 
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
@@ -89,4 +91,13 @@ public class RedstoneClockBaseBlock extends BaseEntityBlock {
 		}
 	}
 
+	@Override
+	public Direction getHighlightFacing(BlockState state) {
+		return Direction.NORTH;
+	}
+
+	@Override
+	public String getHighlightInfo(BlockState state, Direction direction) {
+		return I18n.get("info.gates.output");
+	}
 }

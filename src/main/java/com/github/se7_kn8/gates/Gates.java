@@ -2,7 +2,6 @@ package com.github.se7_kn8.gates;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -35,8 +34,6 @@ public class Gates {
 		GatesBlocks.BLOCK_ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		GatesItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		GatesMenus.MENU_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-		MinecraftForge.EVENT_BUS.register(this);
-		MinecraftForge.EVENT_BUS.register(GatesBlocks.class);
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {

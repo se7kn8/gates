@@ -1,5 +1,8 @@
-package com.github.se7_kn8.gates;
+package com.github.se7_kn8.gates.client;
 
+import com.github.se7_kn8.gates.Gates;
+import com.github.se7_kn8.gates.GatesBlocks;
+import com.github.se7_kn8.gates.GatesMenus;
 import com.github.se7_kn8.gates.client.screen.AdvancedRedstoneClockScreen;
 import com.github.se7_kn8.gates.client.screen.FrequencyScreen;
 import com.github.se7_kn8.gates.client.screen.PortableTransmitterScreen;

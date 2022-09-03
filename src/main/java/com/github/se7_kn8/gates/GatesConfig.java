@@ -12,6 +12,8 @@ public class GatesConfig {
 	public final ForgeConfigSpec.IntValue minClockPulseTicks;
 	public final ForgeConfigSpec.IntValue maxClockPulseTicks;
 
+	public final ForgeConfigSpec.BooleanValue renderInfoHighlights;
+
 	GatesConfig() {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 		minClockTicks = builder.comment("Min ticks for one clock cycle").defineInRange("min_clock_ticks", 2, 2, Integer.MAX_VALUE);
@@ -19,6 +21,8 @@ public class GatesConfig {
 
 		minClockPulseTicks = builder.comment("Min ticks for one clock pulse").defineInRange("min_clock_pulse_ticks", 1, 1, Integer.MAX_VALUE);
 		maxClockPulseTicks = builder.comment("Max ticks for one clock pulse. Needs to be higher than min_clock_pulse_ticks").defineInRange("max_clock_pluse_ticks", 71000, 2, Integer.MAX_VALUE);
+
+		renderInfoHighlights = builder.comment("Render lable for input/outputs on redstone blocks. Settings does only affect client side.").define("render_redstone_info_highlights", true);
 
 		defaultConfig = builder.build();
 	}

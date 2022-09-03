@@ -1,8 +1,10 @@
 package com.github.se7_kn8.gates.block.wireless_redstone;
 
+import com.github.se7_kn8.gates.api.IHighlightInfoBlock;
 import com.github.se7_kn8.gates.block.entity.ReceiverBlockEntity;
 import com.github.se7_kn8.gates.util.Utils;
 import com.github.se7_kn8.gates.util.WirelessRedstoneUtil;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -31,7 +33,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
-public class ReceiverBlock extends BaseEntityBlock implements ReceiverBlockEntity.IWirelessReceiver {
+public class ReceiverBlock extends BaseEntityBlock implements ReceiverBlockEntity.IWirelessReceiver, IHighlightInfoBlock {
 
 	public static final VoxelShape SHAPE = Shapes.or(Utils.GATE_SHAPE, Block.box(7.0D, 0.0D, 7.0D, 9.0D, 10.0D, 9.0D));
 
@@ -120,5 +122,15 @@ public class ReceiverBlock extends BaseEntityBlock implements ReceiverBlockEntit
 	@Override
 	public void onPowerChange(Level level, BlockPos pos, int newPower) {
 		level.setBlockAndUpdate(pos, level.getBlockState(pos).setValue(ReceiverBlock.POWER, newPower));
+	}
+
+	@Override
+	public Direction getHighlightFacing(BlockState state) {
+		return Direction.NORTH;
+	}
+
+	@Override
+	public String getHighlightInfo(BlockState state, Direction direction) {
+		return I18n.get("info.gates.output");
 	}
 }

@@ -1,5 +1,7 @@
 package com.github.se7_kn8.gates.block;
 
+import com.github.se7_kn8.gates.api.IHighlightInfoBlock;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -15,7 +17,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-public class OneInputLogicGate extends DiodeBlock {
+public class OneInputLogicGate extends DiodeBlock implements IHighlightInfoBlock {
 	private Function<Boolean, Boolean> calculateOutputFunction;
 
 	public static final Function<Boolean, Boolean> NOT_FUNCTION = x1 -> !x1;
@@ -50,5 +52,19 @@ public class OneInputLogicGate extends DiodeBlock {
 
 		pLevel.setBlockAndUpdate(pPos, pState.setValue(INPUT, firstInput));
 		return calculateOutputFunction.apply(firstInput) ? 15 : 0;
+	}
+
+	@Override
+	public Direction getHighlightFacing(BlockState state) {
+		return state.getValue(FACING);
+	}
+
+	@Override
+	public String getHighlightInfo(BlockState state, Direction direction) {
+		return switch (direction) {
+			case NORTH -> I18n.get("info.gates.output");
+			case SOUTH -> I18n.get("info.gates.input");
+			default -> "";
+		};
 	}
 }
