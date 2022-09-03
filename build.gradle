@@ -6,7 +6,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
 }
 
-version = '1.7.2'
+version = '1.8.0'
 group = 'com.github.se7_kn8.gates'
 archivesBaseName = 'gates'
 
